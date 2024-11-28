@@ -22,7 +22,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
+        'rfid_number',
         'name',
+        'username',
         'email',
         'password',
     ];
@@ -45,4 +47,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function membershipDetails()
+    {
+        return $this->belongsTo(MembershipDetails::class, 'rfid_number', 'rfid_number');
+    }
 }

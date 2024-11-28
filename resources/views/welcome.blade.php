@@ -18,66 +18,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="{{asset('css/gym.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('css/gym.css')}}"> --}}
+    @vite(['resources/js/app.js', 'resources/css/app.css', 'resources/css/gym.css'])
+
 </head>
 
 <body class="antialiased">
     <div
         class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-        {{-- @if (Route::has('login'))
-            <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-                @auth
-                    <a href="{{ url('/home') }}"
-                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
-                @else
-                    <a href="{{ route('login') }}"
-                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
-                        in</a>
 
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                            class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                    @endif
-                @endauth
-            </div>
-        @endif --}}
-
-        <header class="header-area header-sticky">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <nav class="main-nav">
-                            <!-- ***** Logo Start ***** -->
-                            <a href="index.html" class="logo">{BRA<em>ND</em>}</a>
-                            <!-- ***** Logo End ***** -->
-                            <!-- ***** Menu Start ***** -->
-                            <ul class="nav">
-                                <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                                <li class="scroll-to-section"><a href="#features">About</a></li>
-                                <li class="scroll-to-section"><a href="#contact-us">Contact</a></li>
-                                <li class="main-button"><a href="{{ route('register') }}" >Sign In</a></li>
-                                {{-- <li class="main-button"><a href="{{ route('login') }}" >Login</a></li> --}}
-                            </ul>
-                            <a class='menu-trigger'>
-                                <span>Menu</span>
-                            </a>
-                            <!-- ***** Menu End ***** -->
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </header>
+        @include('layouts.navbar')
         <!-- ***** Header Area End ***** -->
 
         <!-- ***** Main Banner Area Start ***** -->
         <div class="main-banner" id="top">
             <video autoplay muted loop id="bg-video">
-                <source src="{{asset('img/gym-video.mp4')}}" type="video/mp4" />
+                <source src="{{ asset('img/gym-video.mp4') }}" type="video/mp4" />
             </video>
 
             <div class="video-overlay header-text">
                 <div class="caption">
-                    <h6>work harder, get stronger</h6>
+                    <h6>work <em class="text-accent">harder</em>, get <em class="text-accent">stronger</em></h6>
                     <h2>easy with our <em>gym</em></h2>
                     <div class="main-button scroll-to-section">
                         <a href="#features">Become a member</a>
@@ -94,7 +55,7 @@
                     <div class="col-lg-6 offset-lg-3">
                         <div class="section-heading">
                             <h2>Choose <em>Program</em></h2>
-                            <img src="{{asset('img/line-dec.png')}}" alt="waves">
+                            <img src="{{ asset('img/line-dec.png') }}" alt="waves">
                             <p>{* BRAND* } gyms and fitness centers.</p>
                         </div>
                     </div>
@@ -102,31 +63,37 @@
                         <ul class="features-items">
                             <li class="feature-item">
                                 <div class="left-icon">
-                                    <img src="{{asset('img/features-first-icon.png')}}" alt="First One">
+                                    <img src="{{ asset('img/features-first-icon.png') }}" alt="First One">
                                 </div>
                                 <div class="right-content">
                                     <h4>Basic Fitness</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus voluptatum, molestiae maxime voluptas explicabo nam harum ullam dolorum, quidem sit praesentium ea illo inventore aut nisi expedita. Earum, deleniti cum!</p>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus voluptatum,
+                                        molestiae maxime voluptas explicabo nam harum ullam dolorum, quidem sit
+                                        praesentium ea illo inventore aut nisi expedita. Earum, deleniti cum!</p>
                                     <a href="#" class="text-button">Discover More</a>
                                 </div>
                             </li>
                             <li class="feature-item">
                                 <div class="left-icon">
-                                    <img src="{{asset('img/features-first-icon.png')}}" alt="second one">
+                                    <img src="{{ asset('img/features-first-icon.png') }}" alt="second one">
                                 </div>
                                 <div class="right-content">
                                     <h4>New Gym Training</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum commodi minima, modi labore sint aspernatur, nesciunt iure, deserunt at eius perferendis! Iste ea iusto incidunt eligendi consequatur quidem consequuntur expedita.</p>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum commodi minima,
+                                        modi labore sint aspernatur, nesciunt iure, deserunt at eius perferendis! Iste
+                                        ea iusto incidunt eligendi consequatur quidem consequuntur expedita.</p>
                                     <a href="#" class="text-button">Discover More</a>
                                 </div>
                             </li>
                             <li class="feature-item">
                                 <div class="left-icon">
-                                    <img src="{{asset('img/features-first-icon.png')}}" alt="third gym training">
+                                    <img src="{{ asset('img/features-first-icon.png') }}" alt="third gym training">
                                 </div>
                                 <div class="right-content">
                                     <h4>Basic Muscle Course</h4>
-                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum eveniet corporis ullam repellendus nam nobis distinctio magni porro adipisci, illum facilis ratione explicabo, ea delectus, quod sequi nemo architecto officia?</p>
+                                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum eveniet
+                                        corporis ullam repellendus nam nobis distinctio magni porro adipisci, illum
+                                        facilis ratione explicabo, ea delectus, quod sequi nemo architecto officia?</p>
                                     <a href="#" class="text-button">Discover More</a>
                                 </div>
                             </li>
@@ -136,31 +103,38 @@
                         <ul class="features-items">
                             <li class="feature-item">
                                 <div class="left-icon">
-                                    <img src="{{asset('img/features-first-icon.png')}}" alt="fourth muscle">
+                                    <img src="{{ asset('img/features-first-icon.png') }}" alt="fourth muscle">
                                 </div>
                                 <div class="right-content">
                                     <h4>Advanced Muscle Course</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod praesentium nemo eligendi magnam quam quaerat sed voluptatem, reprehenderit voluptatibus voluptate, totam excepturi veniam reiciendis rerum ducimus ullam quos aspernatur. Consequatur.</p>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod praesentium nemo
+                                        eligendi magnam quam quaerat sed voluptatem, reprehenderit voluptatibus
+                                        voluptate, totam excepturi veniam reiciendis rerum ducimus ullam quos
+                                        aspernatur. Consequatur.</p>
                                     <a href="#" class="text-button">Discover More</a>
                                 </div>
                             </li>
                             <li class="feature-item">
                                 <div class="left-icon">
-                                    <img src="{{asset('img/features-first-icon.png')}}" alt="training fifth">
+                                    <img src="{{ asset('img/features-first-icon.png') }}" alt="training fifth">
                                 </div>
                                 <div class="right-content">
                                     <h4>Yoga Training</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores, neque dicta quas reiciendis sit tempora? Doloremque quasi mollitia amet sed placeat sit laboriosam tempore! Corrupti ullam deserunt sunt eaque. Itaque.</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores, neque dicta
+                                        quas reiciendis sit tempora? Doloremque quasi mollitia amet sed placeat sit
+                                        laboriosam tempore! Corrupti ullam deserunt sunt eaque. Itaque.</p>
                                     <a href="#" class="text-button">Discover More</a>
                                 </div>
                             </li>
                             <li class="feature-item">
                                 <div class="left-icon">
-                                    <img src="{{asset('img/features-first-icon.png')}}" alt="gym training">
+                                    <img src="{{ asset('img/features-first-icon.png') }}" alt="gym training">
                                 </div>
                                 <div class="right-content">
                                     <h4>Body Building Course</h4>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora porro atque nostrum quos ut, corrupti in iste totam adipisci maiores consequatur numquam id veniam voluptatum odit, quam ea maxime eveniet.</p>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora porro atque
+                                        nostrum quos ut, corrupti in iste totam adipisci maiores consequatur numquam id
+                                        veniam voluptatum odit, quam ea maxime eveniet.</p>
                                     <a href="#" class="text-button">Discover More</a>
                                 </div>
                             </li>
@@ -197,7 +171,7 @@
                     <div class="col-lg-6 offset-lg-3">
                         <div class="section-heading">
                             <h2>Our <em>Classes</em></h2>
-                            <img src="{{asset('img/line-dec.png')}}" alt="">
+                            <img src="{{ asset('img/line-dec.png') }}" alt="">
                             <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor,
                                 ultricies fermentum massa consequat eu.</p>
                         </div>
@@ -206,13 +180,17 @@
                 <div class="row" id="tabs">
                     <div class="col-lg-4">
                         <ul>
-                            <li><a href='#tabs-1'><img src="{{asset('img/tabs-first-icon.png')}}" alt="">First
+                            <li><a href='#tabs-1'><img src="{{ asset('img/tabs-first-icon.png') }}"
+                                        alt="">First
                                     Training Class</a></li>
-                            <li><a href='#tabs-2'><img src="{{asset('img/tabs-first-icon.png')}}" alt="">Second
+                            <li><a href='#tabs-2'><img src="{{ asset('img/tabs-first-icon.png') }}"
+                                        alt="">Second
                                     Training Class</a></a></li>
-                            <li><a href='#tabs-3'><img src="{{asset('img/tabs-first-icon.png')}}" alt="">Third
+                            <li><a href='#tabs-3'><img src="{{ asset('img/tabs-first-icon.png') }}"
+                                        alt="">Third
                                     Training Class</a></a></li>
-                            <li><a href='#tabs-4'><img src="{{asset('img/tabs-first-icon.png')}}" alt="">Fourth
+                            <li><a href='#tabs-4'><img src="{{ asset('img/tabs-first-icon.png') }}"
+                                        alt="">Fourth
                                     Training Class</a></a></li>
                             <div class="main-rounded-button"><a href="#">View All Schedules</a></div>
                         </ul>
@@ -220,7 +198,7 @@
                     <div class="col-lg-8">
                         <section class='tabs-content'>
                             <article id='tabs-1'>
-                                <img src="{{asset('img/training-image-01.jpg')}}" alt="First Class">
+                                <img src="{{ asset('img/training-image-01.jpg') }}" alt="First Class">
                                 <h4>First Training Class</h4>
                                 <p>Phasellus convallis mauris sed elementum vulputate. Donec posuere leo sed dui
                                     eleifend hendrerit. Sed suscipit suscipit erat, sed vehicula ligula. Aliquam ut sem
@@ -231,7 +209,7 @@
                                 </div>
                             </article>
                             <article id='tabs-2'>
-                                <img src="{{asset('img/training-image-02.jpg')}}" alt="Second Training">
+                                <img src="{{ asset('img/training-image-02.jpg') }}" alt="Second Training">
                                 <h4>Second Training Class</h4>
                                 <p>Integer dapibus, est vel dapibus mattis, sem mauris luctus leo, ac pulvinar quam
                                     tortor a velit. Praesent ultrices erat ante, in ultricies augue ultricies faucibus.
@@ -243,7 +221,7 @@
                                 </div>
                             </article>
                             <article id='tabs-3'>
-                                <img src="{{asset('img/training-image-03.jpg')}}" alt="Third Class">
+                                <img src="{{ asset('img/training-image-03.jpg') }}" alt="Third Class">
                                 <h4>Third Training Class</h4>
                                 <p>Fusce laoreet malesuada rhoncus. Donec ultricies diam tortor, id auctor neque posuere
                                     sit amet. Aliquam pharetra, augue vel cursus porta, nisi tortor vulputate sapien, id
@@ -254,7 +232,7 @@
                                 </div>
                             </article>
                             <article id='tabs-4'>
-                                <img src="{{asset('img/training-image-04.jpg')}}" alt="Fourth Training">
+                                <img src="{{ asset('img/training-image-04.jpg') }}" alt="Fourth Training">
                                 <h4>Fourth Training Class</h4>
                                 <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
                                     egestas. Aenean ultrices elementum odio ac tempus. Etiam eleifend orci lectus, eget
@@ -344,7 +322,7 @@
                     <div class="col-lg-6 offset-lg-3">
                         <div class="section-heading">
                             <h2>Expert <em>Trainers</em></h2>
-                            <img src="{{asset('img/line-dec.png')}}" alt="">
+                            <img src="{{ asset('img/line-dec.png') }}" alt="">
                             <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor,
                                 ultricies fermentum massa consequat eu.</p>
                         </div>
@@ -354,7 +332,7 @@
                     <div class="col-lg-4">
                         <div class="trainer-item">
                             <div class="image-thumb">
-                                <img src="{{asset('img/first-trainer.jpg')}}" alt="">
+                                <img src="{{ asset('img/first-trainer.jpg') }}" alt="">
                             </div>
                             <div class="down-content">
                                 <span>Strength Trainer</span>
@@ -373,7 +351,7 @@
                     <div class="col-lg-4">
                         <div class="trainer-item">
                             <div class="image-thumb">
-                                <img src="{{asset('img/second-trainer.jpg')}}" alt="">
+                                <img src="{{ asset('img/second-trainer.jpg') }}" alt="">
                             </div>
                             <div class="down-content">
                                 <span>Muscle Trainer</span>
@@ -392,7 +370,7 @@
                     <div class="col-lg-4">
                         <div class="trainer-item">
                             <div class="image-thumb">
-                                <img src="{{asset('img/third-trainer.jpg')}}" alt="">
+                                <img src="{{ asset('img/third-trainer.jpg') }}" alt="">
                             </div>
                             <div class="down-content">
                                 <span>Power Trainer</span>
@@ -419,15 +397,14 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-xs-12">
                         <div id="map">
-                            <iframe
-                                src="https://maps.google.com/maps?e=UTF8&iwloc=&output=embed"
-                                width="100%" height="600px" frameborder="0" style="border:0"
-                                allowfullscreen></iframe>
+                            <iframe src="https://maps.google.com/maps?e=UTF8&iwloc=&output=embed" width="100%"
+                                height="600px" frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-xs-12">
                         <div class="contact-form">
                             <form id="contact" action="" method="post">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <fieldset>
@@ -472,23 +449,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        {{-- <p>Copyright &copy; 2020 Training Studio
-
-                            - Designed by <a rel="nofollow" href="https://templatemo.com" class="tm-text-link"
-                                target="_parent">TemplateMo</a><br>
-
-                            Distributed by <a rel="nofollow" href="https://themewagon.com" class="tm-text-link"
-                                target="_blank">ThemeWagon</a>
-
-                        </p> --}}
-
-
-
+                        <p>Copyright &copy; <a href="">2024 AJ DIA Fitness Gym</a></p>
                     </div>
                 </div>
             </div>
         </footer>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
     </script>
@@ -496,19 +464,8 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
 
-    <!-- jQuery -->
-    <script src="{{asset('js/jquery-2.1.0.min.js')}}"></script>
 
-    <!-- Plugins -->
-    <script src="{{asset('js/scrollreveal.min.js')}}"></script>
-    <script src="{{asset('js/waypoints.min.js')}}"></script>
-    <script src="{{asset('js/jquery.counterup.min.js')}}"></script>
-    <script src="{{asset('js/imgfix.min.js')}}"></script>
-    <script src="{{asset('js/mixitup.js')}}"></script>
-    <script src="{{asset('js/accordions.js')}}"></script>
-
-    <!-- Global Init -->
-    <script src="{{asset('js/custom.js')}}"></script>
+    @vite(['resources/js/scrollreveal.min.js', 'resources/js/jquery.counterup.min.js', 'resources/js/imgfix.min.js', 'resources/js/mixitup.js', 'resources/js/accordions.js', 'resources/js/custom.js'])
 </body>
 
 </html>

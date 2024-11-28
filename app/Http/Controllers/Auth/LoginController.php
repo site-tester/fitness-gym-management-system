@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -20,12 +21,19 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->hasRole('admin')) {
+            return redirect()->route('backpack.dashboard'); // Redirect to admin dashboard
+        } elseif ($user->hasRole('trainer')) {
+            return redirect()->route('trainer.dashboard'); // Redirect to trainer dashboard
+        } elseif ($user->hasRole('member')) {
+            return redirect()->route('landing'); // Redirect to member dashboard
+        }
+
+        // Default redirection if no role is matched
+        return redirect()->route('home'); // Or wherever you want to send them
+    }
 
     /**
      * Create a new controller instance.

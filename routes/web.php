@@ -1,6 +1,13 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\TrainerController;
+use App\Http\Controllers\AttendanceController;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +20,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [Controller::class, 'index'])->name('landing');
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/about', function(){
+    return view('about');
+})->name('about.us');
+Route::get('/contact-us', function(){
+    return view('contact_us');
+})->name('contact.us');
+Route::post('/contact-us/send', [Controller::class, 'sendContactUs'])->name('send.contact.us');
+// Route::get('/book-now', function(){
+//     return view('book_now');
+// })->name('book.now');
+
+Route::middleware(['verified'])->group(function () {
+    Route::get('/profile', [HomeController::class, 'viewProfile'])->name('profile');
+    Route::post('/update-profile', [HomeController::class, 'updateProfile'])->name('profile.update');
+    Route::get('/book-now', [HomeController::class, 'bookNow'])->name('book.now');
+    Route::post('/booking', [HomeController::class, 'bookNowPost'])->name('book.now.post');
+    Route::get('/booked', [HomeController::class, 'bookedNow'])->name('booked.now');
+});
+
+Route::post('/attendance/register', [AttendanceController::class, 'register'])->name('attendance.register');
+
+/** CATCH-ALL ROUTE for Backpack/PageManager - needs to be at the end of your routes.php file  **/
+// Route::get('{page}/{subs?}', ['uses' => '\App\Http\Controllers\PageController@index'])
+//     ->where(['page' => '^(((?=(?!admin))(?=(?!\/)).))*$', 'subs' => '.*']);

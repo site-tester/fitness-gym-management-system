@@ -63,7 +63,7 @@ return [
     'home_link' => '',
 
     // Menu logo. You can replace this with an <img> tag if you have a logo.
-    'project_logo' => 'Gym',
+    'project_logo' => '<img class="img-fluid" src="../resources/img/Logo.jpg" alt="" width="100">',
 
     // Show / hide breadcrumbs on admin panel pages.
     'breadcrumbs' => true,
@@ -76,7 +76,7 @@ return [
     'developer_name' => null,
 
     // Developer website. Link in footer. Type false if you want to hide it.
-    'developer_link' => 'http://tabacitu.ro',
+    'developer_link' => false,
 
     // Show powered by Laravel Backpack in the footer? true/false
     'show_powered_by' => false,

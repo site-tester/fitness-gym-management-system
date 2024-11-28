@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\UserRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class UserCrudController
@@ -14,8 +16,10 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class UserCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation { update as traitUpdate;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
@@ -26,7 +30,7 @@ class UserCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\User::class);
+        CRUD::setModel(User::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/user');
         CRUD::setEntityNameStrings('user', 'users');
     }
@@ -39,12 +43,69 @@ class UserCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
+        $show = request()->get('show');
 
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
+
+        if ($show == 'Client') {
+            $this->crud->query->whereHas('roles', function ($query) {
+                $query->where('name', 'member'); // Adjust 'Normal User' to your exact role name
+            });
+            CRUD::setRoute(config('backpack.base.route_prefix') . '/user?show=Client');
+            CRUD::setEntityNameStrings('client', 'clients');
+            CRUD::setOperationSetting('showEntryCount', false);
+            CRUD::removeButton('create');
+            $this->data['breadcrumbs'] = [
+                trans('backpack::base.dashboard') => backpack_url('dashboard'),
+                'Manage Users' => false,
+                'Clients' => false,
+            ];
+
+            $this->crud->addColumn([
+                'name' => 'name', // assumes you have a name field in your User model
+                'label' => 'Name',
+                'type' => 'text',
+            ]);
+
+            $this->crud->addColumn([
+                'name' => 'email',
+                'label' => 'Email',
+                'type' => 'email',
+            ]);
+
+            // Add related Membership Details columns
+            $this->crud->addColumn([
+                'name' => 'rfid_number', // rfid_card from MembershipDetail
+                'label' => 'RFID Card',
+                'type' => 'text',
+            ]);
+
+        }
+
+        if ($show == 'Trainer') {
+            $this->crud->query->whereHas('roles', function ($query) {
+                $query->where('name', 'trainer'); // Adjust 'Normal User' to your exact role name
+            });
+
+            // Apply a filter to the query based on the status
+            CRUD::setEntityNameStrings('trainer', 'trainers');
+            CRUD::setOperationSetting('showEntryCount', false);
+            CRUD::removeAllButtons();
+            $this->data['breadcrumbs'] = [
+                trans('backpack::base.dashboard') => backpack_url('dashboard'),
+                'Manage Users' => false,
+                'Trainers' => false,
+            ];
+
+            $this->crud->setColumns([
+                [
+                    'name' => 'name',
+                    'label' => 'Name',
+                ]
+            ]);
+
+
+
+        }
     }
 
     /**
@@ -55,15 +116,44 @@ class UserCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        // CRUD::setFromDb(); // set fields from db columns.
+        CRUD::addfield([
+            'name' => 'rfid_number',
+            'type' => 'text',
+            'label' => 'RFID Number',
+            'attributes' => [
+                'id' => 'rfid-input',
+                'autocomplete' => 'off',
+            ],
+        ]);
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
-        CRUD::field('name')->validationRules('required|min:5');
-        CRUD::field('email')->validationRules('required|email|unique:users,email');
-        CRUD::field('password')->validationRules('required');
+        // CRUD::addfield([
+        //     'name' => 'user_type',
+        //     'label' => 'User type',
+        //     'type' => 'select_from_array',
+        //     'options' => [
+        //         'client' => 'Client',
+        //         'trainer' => 'Trainer',
+        //     ],
+        //     'allows_multiple' => false,
+        // ]);
+
+        CRUD::addfield([
+            'name' => 'name',
+            'label' => 'Full Name',
+            'type' => 'text',
+        ]);
+
+        CRUD::addfield([
+            'name' => 'email',
+            'label' => 'Email Address',
+            'type' => 'email',
+        ]);
+
+        CRUD::addfield([
+            'name' => 'password',
+            'label' => 'Password',
+            'type' => 'password'
+        ]);
     }
 
     /**
@@ -74,9 +164,43 @@ class UserCrudController extends CrudController
      */
     protected function setupUpdateOperation()
     {
-        // $this->setupCreateOperation();
-        CRUD::field('name')->validationRules('required|min:5');
-        CRUD::field('email')->validationRules('required|email|unique:users,email,' . CRUD::getCurrentEntryId());
-        CRUD::field('password')->hint('Type a password to change it.');
+        $this->setupCreateOperation();
+        CRUD::addField([
+            'name' => 'password',
+            'type' => 'password',
+            'label' => 'Password',
+            'hint' => 'Leave empty if you don’t want to change the password',
+        ]);
+        // CRUD::field('name')->validationRules('required|min:5');
+        // CRUD::field('email')->validationRules('required|email|unique:users,email,' . CRUD::getCurrentEntryId());
+        // CRUD::field('password')->hint('Type a password to change it.');
+    }
+
+    public function store()
+    {
+        $request = $this->crud->validateRequest();
+
+        // Hash the password if it's provided
+        if ($request->filled('password')) {
+            $request->merge(['password' => Hash::make($request->password)]);
+        }
+
+        return $this->traitStore();
+    }
+
+    public function update()
+    {
+        $request = $this->crud->validateRequest();
+
+
+        // Only hash and update the password if it is provided (non-empty)
+        if ($request->filled('password')) {
+            $request->merge(['password' => Hash::make($request->password)]);
+        } else {
+            // Remove password field from the request to avoid updating it
+            $request->request->remove('password');
+        }
+
+        return $this->traitUpdate();
     }
 }
