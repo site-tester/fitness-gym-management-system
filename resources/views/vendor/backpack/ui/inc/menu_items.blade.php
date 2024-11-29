@@ -21,7 +21,7 @@
 
 <x-backpack::menu-dropdown title="Payments" icon="la la-wallet">
     <x-backpack::menu-dropdown-item title='*Payments*' icon='la la-money-bill' :link="backpack_url('')" />
-    <x-backpack::menu-dropdown-item title='*Payment Methods*' icon='la la-credit-card' :link="backpack_url('payment-method')" />
+    <x-backpack::menu-dropdown-item title='Payment Methods' icon='la la-credit-card' :link="backpack_url('payment-method')" />
 </x-backpack::menu-dropdown>
 
 <x-backpack::menu-dropdown title="Manage GYM" icon="la la-dumbbell">
@@ -29,12 +29,8 @@
     <x-backpack::menu-dropdown-item title="Service" icon="la la-hard-hat" :link="backpack_url('service')" />
     <x-backpack::menu-dropdown-item title="Service Categories" icon="la la-clipboard-list" :link="backpack_url('service-category')" />
     <x-backpack::menu-dropdown-header title="Inventories" />
-    <x-backpack::menu-dropdown-item title='Inventory' icon='la la-boxes' :link="backpack_url('')" />
+    <x-backpack::menu-dropdown-item title='Inventory' icon='la la-boxes' :link="backpack_url('inventory')" />
     <x-backpack::menu-dropdown-item title="Equipment" icon="la la-box" :link="backpack_url('equipment-inventory')" />
 </x-backpack::menu-dropdown>
 
 <x-backpack::menu-item title="Contact Us Inbox" icon="la la-inbox" :link="backpack_url('contactus-inbox')" />
-
-
-
-<x-backpack::menu-item title="Inventories" icon="la la-question" :link="backpack_url('inventory')" />

@@ -29,6 +29,12 @@ Route::group([
     Route::crud('payment-method', 'PaymentMethodCrudController');
     Route::crud('equipment-inventory', 'EquipmentInventoryCrudController');
     Route::crud('inventory', 'InventoryCrudController');
+    Route::delete('membership-detail/{id}', 'MembershipDetailCrudController@deleteMember')
+    ->name('membership-detail.destroy.client');
+    Route::get('generate-card/{id}', 'MembershipDetailCrudController@generateCard')
+    ->name('generate-card');
+    Route::delete('trainer-detail/{id}', 'TrainerDetailCrudController@deleteTrainer')
+    ->name('trainer-detail.destroy.client');
 }); // this should be the absolute last line of this file
 
 /**

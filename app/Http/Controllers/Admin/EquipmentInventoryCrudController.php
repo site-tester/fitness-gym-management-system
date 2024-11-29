@@ -21,7 +21,7 @@ class EquipmentInventoryCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,7 +33,7 @@ class EquipmentInventoryCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -49,7 +49,7 @@ class EquipmentInventoryCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -62,11 +62,53 @@ class EquipmentInventoryCrudController extends CrudController
          * Fields can be defined using the fluent syntax:
          * - CRUD::field('price')->type('number');
          */
+        CRUD::addField([
+            'name' => 'category',
+            'label' => 'Category',
+            'type' => 'select_from_array',
+            'options' => [
+                'cardio_equipment' => 'Cardio Equipment',
+                'strength_equipment' => 'Strength Equipment',
+                'free_weight' => 'Free Weight',
+                'machine' => 'Machine',
+                'flexibility_and_mobility_tool' => 'Flexibility and Mobility Tool',
+                'functional_training' => 'Functional Training',
+                'group_exercise_equipment' => 'Group Exercise Equipment',
+                'recovery_tool' => 'Recovery Tools',
+                'accessory' => 'Accessories',
+            ],
+            'allows_multiple' => false, // Set to true if you want to allow multiple selections
+        ]);
+
+        CRUD::addField([
+            'name' => 'condition',
+            'label' => 'Condition',
+            'type' => 'select_from_array',
+            'options' => [
+                'new' => 'New',
+                'good' => 'Good',
+                'needs_repair' => 'Needs Repair',
+                'out_of_order' => 'Out of Order',
+            ],
+            'allows_multiple' => false, // Set to true if you want to allow multiple selections
+        ]);
+
+        CRUD::addField([
+            'name' => 'usage_frequency',
+            'label' => 'Usage Frequency',
+            'type' => 'select_from_array',
+            'options' => [
+                'high' => 'High',
+                'medium' => 'Medium',
+                'low' => 'Low',
+            ],
+            'allows_multiple' => false, // Set to true if you want to allow multiple selections
+        ]);
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

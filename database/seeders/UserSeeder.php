@@ -113,8 +113,8 @@ class UserSeeder extends Seeder
                 'average_rating' => 4.5, // Add average_rating
                 'profile_picture' => 'trainer1.jpg', // Add profile_picture
                 'bio' => 'Certified personal trainer with 5 years of experience.', // Add bio
-                'facebook_link' => json_encode(['url' => 'https://facebook.com/trainer1']), // Add facebook_link
-                'twitter_link' => json_encode(['url' => 'https://twitter.com/trainer1']), // Add twitter_link
+                'facebook_link' => 'https://facebook.com/trainer1', // Add facebook_link
+                'twitter_link' => 'https://twitter.com/trainer1', // Add twitter_link
             ],
             [
                 'name' => 'Trainer 2',
@@ -134,8 +134,8 @@ class UserSeeder extends Seeder
                 'average_rating' => 4.8,
                 'profile_picture' => 'trainer2.jpg',
                 'bio' => 'Certified yoga instructor specializing in Vinyasa flow.',
-                'facebook_link' => json_encode(['url' => 'https://facebook.com/trainer2']),
-                'twitter_link' => json_encode(['url' => 'https://twitter.com/trainer2']),
+                'facebook_link' => 'https://facebook.com/trainer2',
+                'twitter_link' => 'https://twitter.com/trainer2',
             ],
             [
                 'name' => 'Trainer 3',
@@ -155,8 +155,8 @@ class UserSeeder extends Seeder
                 'average_rating' => 4.2,
                 'profile_picture' => 'trainer3.jpg',
                 'bio' => 'Experienced group fitness trainer with a passion for high-energy workouts.',
-                'facebook_link' => json_encode(['url' => 'https://facebook.com/trainer3']),
-                'twitter_link' => json_encode(['url' => 'https://twitter.com/trainer3']),
+                'facebook_link' => 'https://facebook.com/trainer3',
+                'twitter_link' => 'https://twitter.com/trainer3',
             ]
         ];
 

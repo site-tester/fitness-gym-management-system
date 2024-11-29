@@ -5,6 +5,7 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -15,6 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use CrudTrait;
     use HasRoles;
     use HasApiTokens, HasFactory, Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -50,6 +52,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function membershipDetails()
     {
-        return $this->belongsTo(MembershipDetails::class, 'rfid_number', 'rfid_number');
+        return $this->belongsTo(MembershipDetail::class, 'rfid_number', 'rfid_number');
     }
 }

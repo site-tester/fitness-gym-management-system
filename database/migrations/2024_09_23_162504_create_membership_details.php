@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('membership_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained('users')->onDelete('cascade');
+            $table->string('client_id');
             $table->string('rfid_number')->nullable();
             $table->string('phone');
             $table->string('address');
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('guardian');
             $table->string('membership_type')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

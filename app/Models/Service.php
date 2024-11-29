@@ -35,7 +35,10 @@ class Service extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
+    public function category()
+    {
+        return $this->belongsTo(ServiceCategory::class, 'category_id');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

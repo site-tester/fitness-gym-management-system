@@ -21,7 +21,7 @@ class InventoryCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,7 +33,7 @@ class InventoryCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -49,7 +49,7 @@ class InventoryCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -62,11 +62,36 @@ class InventoryCrudController extends CrudController
          * Fields can be defined using the fluent syntax:
          * - CRUD::field('price')->type('number');
          */
+
+         CRUD::addField([
+            'name' => 'status',
+            'label' => 'Status',
+            'type' => 'select_from_array',
+            'options' => [
+                'in_stock' => 'In Stock',
+                'out_of_stock' => 'Out of Stock',
+                'ordered' => 'Ordered',
+            ],
+            'allows_multiple' => false, // Set to true if you want to allow multiple selections
+        ]);
+
+        CRUD::addField([
+            'name' => 'category',
+            'label' => 'Category',
+            'type' => 'select_from_array',
+            'options' => [
+                'consumable' => 'Consumable',
+                'office_supply' => 'Office Supply',
+                'maintenance_supply' => 'Maintenance Supply',
+                'retail_item' => 'Retail Item',
+            ],
+            'allows_multiple' => false, // Set to true if you want to allow multiple selections
+        ]);
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
