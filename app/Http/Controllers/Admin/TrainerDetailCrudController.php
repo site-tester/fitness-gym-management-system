@@ -428,7 +428,9 @@ class TrainerDetailCrudController extends CrudController
             'label' => 'Availability',
             'type' => 'textarea',
             'hint' => 'Enter availability in format: {"Day": "Time"}. If multiple days: {"Day1": "Time1", "Day2": "Time2", ...}. eg. {"Monday": "10:00 AM - 2:00 PM"}',
-            'value' => $this->crud->getCurrentEntry()->availability ? json_decode($this->crud->getCurrentEntry()->availability, true) : 'No Entered Availability',
+            'value' => $this->crud->getCurrentEntry()->availability
+                ? json_encode(json_decode($this->crud->getCurrentEntry()->availability, true), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+                : 'No Entered Availability',
         ]);
         CRUD::addField([
             'name' => 'bio',

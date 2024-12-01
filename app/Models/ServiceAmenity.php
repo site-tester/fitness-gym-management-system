@@ -6,7 +6,7 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class ServiceAmenity extends Model
 {
     use CrudTrait;
     use HasFactory;
@@ -17,7 +17,7 @@ class Service extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'services';
+    protected $table = 'service_amenity';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
@@ -35,22 +35,7 @@ class Service extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function category()
-    {
-        return $this->belongsTo(ServiceCategory::class, 'category_id');
-    }
-    public function trainer()
-    {
-        return $this->belongsTo(User::class, 'trainer_id');
-    }
-    public function paymentMethod()
-    {
-        return $this->belongsTo(PaymentMethod::class, 'payment_method');
-    }
-    public function amenities()
-    {
-        return $this->belongsToMany(Amenity::class, 'service_amenity');
-    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

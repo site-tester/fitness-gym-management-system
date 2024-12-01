@@ -36,6 +36,8 @@ Route::group([
     Route::delete('trainer-detail/{id}', 'TrainerDetailCrudController@deleteTrainer')
     ->name('trainer-detail.destroy.client');
     Route::crud('payment', 'PaymentCrudController');
+    Route::crud('service-amenity', 'ServiceAmenityCrudController');
+    Route::crud('amenity', 'AmenityCrudController');
 }); // this should be the absolute last line of this file
 
 /**

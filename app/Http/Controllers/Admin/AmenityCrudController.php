@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\PaymentMethodRequest;
+use App\Http\Requests\AmenityRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class PaymentMethodCrudController
+ * Class AmenityCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class PaymentMethodCrudController extends CrudController
+class AmenityCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class PaymentMethodCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\PaymentMethod::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/payment-method');
-        CRUD::setEntityNameStrings('payment method', 'payment methods');
+        CRUD::setModel(\App\Models\Amenity::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/amenity');
+        CRUD::setEntityNameStrings('amenity', 'amenities');
     }
 
     /**
@@ -45,15 +45,6 @@ class PaymentMethodCrudController extends CrudController
          * Columns can be defined using the fluent syntax:
          * - CRUD::column('price')->type('number');
          */
-        CRUD::addColumn([
-            'name' => 'category',
-            'label' => 'Category',
-            'type' => 'closure',
-            'function' => function ($entry) {
-                return ucfirst(str_replace('_', ' ', $entry->category));
-            },
-        ]);
-
     }
 
     /**
@@ -64,7 +55,7 @@ class PaymentMethodCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(PaymentMethodRequest::class);
+        CRUD::setValidation(AmenityRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
 
         /**
@@ -72,21 +63,17 @@ class PaymentMethodCrudController extends CrudController
          * - CRUD::field('price')->type('number');
          */
         CRUD::addField([
-            'name' => 'qr_path',
-            'label' => 'QR Code Upload',
-            'type' => 'text',
-            // 'withFiles' => true,
+            'name' => 'class',
+            'label' => 'Class',
+            'hint' => '<a href="https://icons.getbootstrap.com/">Use the Bootstrap Icons for class.</a>',
         ]);
-        CRUD::addField([
-            'name' => 'category',
-            'label' => 'Category',
-            'type' => 'select_from_array',
-            'options' => [
-                'walk_in' => 'Walk-In',
-                'ewallet' => 'E-Wallet',
-                'bank_transfer' => 'Bank Transfer',
-            ],
-            'allows_multiple' => false,
+        CRUD::addColumn([
+            'label' => 'Services',
+            'type' => 'select_multiple',
+            'name' => 'services', // the relationship name
+            'entity' => 'services', // the related model
+            'attribute' => 'name', // attribute shown in the list
+            'model' => 'App\Models\Service', // fully qualified class name of the related model
         ]);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactusInbox;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,8 +17,8 @@ class Controller extends BaseController
     public function index()
     {
         $trainers = User::role('trainer')->get();
-
-        return view('homepage', compact('trainers'));
+        $services = Service::with('amenities')->get();
+        return view('homepage', compact('trainers', 'services'));
     }
 
     public function sendContactUs(Request $request){

@@ -54,4 +54,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(MembershipDetail::class, 'rfid_number', 'rfid_number');
     }
+    public function trainerDetails()
+    {
+        return $this->belongsTo(TrainerDetail::class, 'id', 'user_id');
+    }
 }

@@ -27,12 +27,37 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading">
-                        <h2>Choose <em>Program</em></h2>
+                        <h2><em>Services</em></h2>
                         <img src="{{ asset('img/line-dec.png') }}" alt="waves">
-                        <p>{* BRAND* } gyms and fitness centers.</p>
                     </div>
                 </div>
-                <div class="col-lg-6">
+
+                <ul class="features-items row">
+                    @foreach ($services as $service)
+                        <li class="feature-item col-6">
+                            <div class="left-icon">
+                                <img src="{{ asset('img/features-first-icon.png') }}" alt="First One">
+                            </div>
+                            <div class="right-content">
+                                <h4>{{ $service->name }}</h4>
+                                <div>
+                                    <p>{{ $service->description }}</p>
+                                    <p>Inclusions:
+                                        @foreach ($service->amenities as $amenity)
+                                            {!! $amenity->class !!} {{ $amenity->name }}
+                                            @if (!$loop->last)
+                                                ,
+                                            @endif
+                                        @endforeach
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+
+
+                {{-- <div class="col-lg-6">
                     <ul class="features-items">
                         <li class="feature-item">
                             <div class="left-icon">
@@ -112,7 +137,7 @@
                             </div>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -291,7 +316,7 @@
         // dd($trainers);
     @endphp
     <!-- ***** Testimonials Starts ***** -->
-    @if($trainers->isNotEmpty())
+    @if ($trainers->isNotEmpty())
         <section class="section" id="trainers">
             <div class="container">
                 <div class="row">
@@ -305,8 +330,33 @@
                     </div>
                 </div>
                 <div class="row">
+                    @foreach ($trainers as $trainer)
+                        <div class="col-lg-4">
+                            <div class="trainer-item">
+                                <div class="image-thumb">
+                                    <img src="{{ asset('storage/' . $trainer->trainerDetails->profile_picture) }}"
+                                        alt="">
+                                </div>
+                                <div class="down-content">
+                                    <span>{{ ucwords($trainer->trainerDetails->trainer_type) }}</span>
+                                    <h4>{{ $trainer->name }}</h4>
+                                    <p>{{ $trainer->trainerDetails->bio }}</p>
+                                    <ul class="social-icons">
+                                        @if ($trainer->trainerDetails->facebook_link)
+                                            <li><a href="{{ $trainer->trainerDetails->facebook_link }}"><i
+                                                        class="fa fa-facebook"></i></a></li>
+                                        @endif
+                                        @if ($trainer->trainerDetails->twitter_link)
+                                            <li><a href="{{ $trainer->trainerDetails->twitter_link }}"><i
+                                                        class="fa fa-twitter"></i></a></li>
+                                        @endif
 
-                    <div class="col-lg-4">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    {{-- <div class="col-lg-4">
                         <div class="trainer-item">
                             <div class="image-thumb">
                                 <img src="{{ asset('img/first-trainer.jpg') }}" alt="">
@@ -322,7 +372,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </section>

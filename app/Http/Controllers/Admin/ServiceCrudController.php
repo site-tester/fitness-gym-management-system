@@ -62,6 +62,14 @@ class ServiceCrudController extends CrudController
          * Columns can be defined using the fluent syntax:
          * - CRUD::column('price')->type('number');
          */
+        CRUD::addColumn([
+            'label' => 'Amenities',
+            'type' => 'select_multiple',
+            'name' => 'amenities', // the relationship name
+            'entity' => 'amenities', // the related model
+            'attribute' => 'name', // attribute shown in the list
+            'model' => 'App\Models\Amenity', // fully qualified class name of the related model
+        ]);
     }
 
     /**
@@ -96,7 +104,15 @@ class ServiceCrudController extends CrudController
          * Fields can be defined using the fluent syntax:
          * - CRUD::field('price')->type('number');
          */
-
+        CRUD::addField([
+            'label' => 'Amenities',
+            'type' => 'select_multiple',
+            'name' => 'amenities', // the relationship name in the model
+            'entity' => 'amenities', // the related model
+            'attribute' => 'name', // attribute shown in the select dropdown
+            'model' => 'App\Models\Amenity', // fully qualified class name of the related model
+            'pivot' => true, // required for many-to-many relationships
+        ]);
     }
 
     /**

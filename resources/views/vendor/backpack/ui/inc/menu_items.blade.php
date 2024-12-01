@@ -11,9 +11,11 @@
 {{-- End Notification --}}
 
 <x-backpack::menu-dropdown title="Manage Users" icon="la la-user">
+    <x-backpack::menu-dropdown-header title="Client" />
     <x-backpack::menu-dropdown-item title="Client Details" icon="la la-user" :link="backpack_url('membership-detail')" />
-    <x-backpack::menu-dropdown-item title="Trainer Details" icon="la la-user" :link="backpack_url('trainer-detail')" />
     <x-backpack::menu-dropdown-item title="Add Client Details" icon="la la-user-plus" :link="backpack_url('membership-detail/create')" />
+    <x-backpack::menu-dropdown-header title="Trainer" />
+    <x-backpack::menu-dropdown-item title="Trainer Details" icon="la la-user" :link="backpack_url('trainer-detail')" />
     <x-backpack::menu-dropdown-item title="Add Trainer Details" icon="la la-user-plus" :link="backpack_url('trainer-detail/create')" />
 </x-backpack::menu-dropdown>
 
@@ -28,6 +30,7 @@
     <x-backpack::menu-dropdown-header title="Services" />
     <x-backpack::menu-dropdown-item title="Service" icon="la la-hard-hat" :link="backpack_url('service')" />
     <x-backpack::menu-dropdown-item title="Service Categories" icon="la la-clipboard-list" :link="backpack_url('service-category')" />
+    <x-backpack::menu-dropdown-item title="Service Amenities" icon="la la-puzzle-piece" :link="backpack_url('amenity')" />
     <x-backpack::menu-dropdown-header title="Inventories" />
     <x-backpack::menu-dropdown-item title='Inventory' icon='la la-boxes' :link="backpack_url('inventory')" />
     <x-backpack::menu-dropdown-item title="Equipment" icon="la la-box" :link="backpack_url('equipment-inventory')" />
@@ -35,4 +38,3 @@
 
 <x-backpack::menu-item title="Contact Us Inbox" icon="la la-inbox" :link="backpack_url('contactus-inbox')" />
 
-{{-- <x-backpack::menu-item title="Payments" icon="la la-question" :link="backpack_url('payment')" /> --}}
