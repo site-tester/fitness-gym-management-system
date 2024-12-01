@@ -59,7 +59,7 @@
                                 Clients
                             </div>
                             <div class="text-secondary">
-                                163 Members
+                                {{ $clientCount }} Members
                             </div>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                                 Trainers
                             </div>
                             <div class="text-secondary">
-                                163 Active Trainers
+                                {{ $trainerCount }} Trainers
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                                 Payment
                             </div>
                             <div class="text-secondary">
-                                163 Pending Payments
+                                {{ $pendingPaymentCount }} Pending Payments
                             </div>
                         </div>
                     </div>
@@ -172,22 +172,12 @@
 
     <div class="row mb-3">
         <div class="col">
+
             <div class="row mb-2">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h3 class="card-title">Active Clients</h3>
-                            <div class="ms-auto">
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle text-secondary" href="#" data-bs-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">Last 7 days</a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item active" href="#">Last 7 days</a>
-                                        <a class="dropdown-item" href="#">Last 30 days</a>
-                                        <a class="dropdown-item" href="#">Last 3 months</a>
-                                    </div>
-                                </div>
-                            </div>
+                            <h3 class="card-title">Bookings this Week</h3>
                         </div>
                         <div class="row">
                             <div class="col " style="position: relative; height:20vh;">
@@ -211,10 +201,10 @@
                                 <h4 class="card-title h4 text-center">Age</h4>
                                 <canvas id="ageChart"></canvas>
                             </div>
-                            <div class="col">
-                                <h4 class="card-title h4 text-center">Membership</h4>
-                                <canvas id="memChart"></canvas>
-                            </div>
+                            {{-- <div class="col">
+                                <h4 class="card-title h4 text-center">Services</h4>
+                                <canvas id="serviceBookingChart"></canvas>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -239,16 +229,28 @@
                             @else
                                 @foreach ($memberAttendance as $member)
                                     <div>
+                                        @php
+                                            $time_in = \Carbon\Carbon::parse($member->time_in);
+                                            $time_out = \Carbon\Carbon::parse($member->time_out);
+                                        @endphp
                                         <div class="row">
-                                            <div class="col-auto">
+                                            {{-- <div class="col-auto">
                                                 <span class="avatar">test</span>
-                                            </div>
+                                            </div> --}}
                                             <div class="col">
                                                 <div class="">
-                                                    <strong>Date: {{ $member->timelog_date }}</strong> <br>
                                                     <strong>Name: {{ $member->user->name }}</strong>
+                                                    <br>
+                                                    <strong>Date: {{ $member->timelog_date }}</strong>
                                                 </div>
-                                                <div class="text-secondary">{{ $member->time_out ? $member->timeout: $member->time_in }}</div>
+                                                <div class="text-secondary">
+                                                    @if ($member->time_in)
+                                                        <p class="mb-0">Time-In: {{ $time_in->format('h:i A') }}</p>
+                                                    @endif
+                                                    @if ($member->time_out)
+                                                        <p class="mb-0">Time-Out: {{ $time_out->format('h:i A') }}</p>
+                                                    @endif
+                                                </div>
                                             </div>
                                             {{-- <div class="col-auto align-self-center">
                                                 <div class="badge bg-primary"></div>
@@ -305,96 +307,180 @@
 
     <script>
         // Active Clients Chart
-        var clientsChart = document.getElementById('clientsChart').getContext('2d');
-        var myChart = new Chart(clientsChart, {
-            type: 'line', // or 'line', 'pie', etc.
-            data: {
-                labels: ['May', 'June'],
-                datasets: [{
-                    label: '# of Members',
-                    data: [2, 3],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+        // Call the function to display the client bookings chart
+        fetchClientBookingsByDay('clientsChart', '/client-bookings-by-day');
+        fetchGenderStatsForChart();
+        fetchAgeStatsForChart('ageChart', '/age-stats');
+        // fetchServiceBookingStatsForChart('serviceBookingChart', '/service-booking-stats');
+
+        function fetchClientBookingsByDay(chartId, url) {
+            var chartCanvas = document.getElementById(chartId).getContext('2d');
+
+            // Use AJAX to fetch the client booking data
+            $.ajax({
+                url: url, // The URL will be passed when calling the function
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Prepare the labels (days of the week) and data (booking counts)
+                    var days = Object.keys(data); // ['Sunday', 'Monday', ...]
+                    var bookings = Object.values(data); // [Booking count for Sunday, Monday, ...]
+
+                    // Create the line chart
+                    new Chart(chartCanvas, {
+                        type: 'line', // Use a line chart to show bookings over the week
+                        data: {
+                            labels: days, // Days of the week as labels
+                            datasets: [{
+                                label: '# of Clients Booked',
+                                data: bookings, // Number of bookings for each day
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                fill: true,
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            maintainAspectRatio: false,
+                        }
+                    });
                 },
-                maintainAspectRatio: false,
-            }
-        });
-
-        // Total Clients Category Chart: Gender
-        var genderChart = document.getElementById('genderChart').getContext('2d');
-        var myChart = new Chart(genderChart, {
-            type: 'pie', // or 'line', 'pie', etc.
-            data: {
-                labels: ['May', 'June'],
-                datasets: [{
-                    label: '# of Members',
-                    data: [2, 3],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+                error: function() {
+                    console.error('Error fetching client booking data');
                 }
-            }
-        });
+            });
+        }
 
-        // Total Clients Category Chart: Age
-        var ageChart = document.getElementById('ageChart').getContext('2d');
-        var myChart = new Chart(ageChart, {
-            type: 'pie', // or 'line', 'pie', etc.
-            data: {
-                labels: ['January', 'June'],
-                datasets: [{
-                    label: '# of Members',
-                    data: [12, 3],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
 
-        // Total Clients Category Chart: Membership
-        var memChart = document.getElementById('memChart').getContext('2d');
-        var myChart = new Chart(memChart, {
-            type: 'pie', // or 'line', 'pie', etc.
-            data: {
-                labels: ['March', 'April'],
-                datasets: [{
-                    label: '# of Members',
-                    data: [3, 15],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+        // Use AJAX to fetch gender stats data from the backend
+        function fetchGenderStatsForChart() {
+            var chartCanvas = document.getElementById('genderChart').getContext('2d');
+
+            // Use AJAX to fetch gender stats data from the backend
+            $.ajax({
+                url: '/gender-stats', // The URL will be passed when calling the function
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Prepare the labels and data for the chart
+                    var genders = data.map(item => item.gender);
+                    var counts = data.map(item => item.count);
+
+                    // Create the chart
+                    new Chart(chartCanvas, {
+                        type: 'pie', // Change to 'pie' chart for gender distribution
+                        data: {
+                            labels: genders, // Gender labels (e.g., Male, Female)
+                            datasets: [{
+                                label: '# of Members',
+                                data: counts, // Count of each gender
+                                backgroundColor: ['rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)'
+                                ], // Different colors for each gender
+                                borderColor: ['rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            maintainAspectRatio: true,
+                        }
+                    });
+                },
+                error: function() {
+                    console.error('Error fetching gender data');
                 }
-            }
-        });
+            });
+        }
+
+        function fetchAgeStatsForChart(chartId, url) {
+            var chartCanvas = document.getElementById(chartId).getContext('2d');
+
+            // Use AJAX to fetch age stats data from the backend
+            $.ajax({
+                url: url, // The URL will be passed when calling the function
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Prepare the labels (age ranges) and data (user count in each range)
+                    var ageRanges = Object.keys(data); // ['18-24', '25-34', ...]
+                    var counts = Object.values(data); // [count in 18-24, count in 25-34, ...]
+
+                    // Create the chart
+                    new Chart(chartCanvas, {
+                        type: 'pie', // Use a bar chart for age ranges
+                        data: {
+                            labels: ageRanges, // Age ranges as labels
+                            datasets: [{
+                                label: '# of Members',
+                                data: counts, // User count in each age range
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            maintainAspectRatio: true,
+                        }
+                    });
+                },
+                error: function() {
+                    console.error('Error fetching age data');
+                }
+            });
+        }
+
+        function fetchServiceBookingStatsForChart(chartId, url) {
+            var chartCanvas = document.getElementById(chartId).getContext('2d');
+
+            // Use AJAX to fetch the service booking data
+            $.ajax({
+                url: url, // The URL will be passed when calling the function
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Prepare the labels (service names) and data (booking counts)
+                    var services = Object.keys(data); // [Service 1, Service 2, ...]
+                    var bookings = Object.values(data); // [Booking count 1, count 2, ...]
+
+                    // Create the chart
+                    new Chart(chartCanvas, {
+                        type: 'bar', // Use a bar chart to compare service bookings
+                        data: {
+                            labels: services, // Service names as labels
+                            datasets: [{
+                                label: '# of Bookings',
+                                data: bookings, // Number of bookings for each service
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            maintainAspectRatio: true,
+                        }
+                    });
+                },
+                error: function() {
+                    console.error('Error fetching service booking data');
+                }
+            });
+        }
     </script>
 @endsection

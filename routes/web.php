@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CustomDashboardController;
 use App\Http\Controllers\BookNowController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
@@ -53,6 +54,15 @@ Route::middleware(['verified'])->group(function () {
 });
 
 Route::post('/attendance/register', [AttendanceController::class, 'register'])->name('attendance.register');
+
+Route::get('/gender-stats', [CustomDashboardController::class, 'getGenderStats']);
+Route::get('/age-stats', [CustomDashboardController::class, 'getAgeStats']);
+Route::get('/service-booking-stats', [CustomDashboardController::class, 'getServiceBookingStats']);
+Route::get('/client-bookings-by-day', [CustomDashboardController::class, 'getClientBookingsByDay']);
+
+
+
+
 
 /** CATCH-ALL ROUTE for Backpack/PageManager - needs to be at the end of your routes.php file  **/
 // Route::get('{page}/{subs?}', ['uses' => '\App\Http\Controllers\PageController@index'])

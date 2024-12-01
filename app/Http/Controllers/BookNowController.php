@@ -21,7 +21,7 @@ class BookNowController extends Controller
 
     public function getServiceDetails($serviceId)
     {
-        $service = Service::find($serviceId);
+        $service = Service::with('amenities')->find($serviceId);
 
         if (!$service) {
             return response()->json(['error' => 'Service not found'], 404);
@@ -33,6 +33,7 @@ class BookNowController extends Controller
             'name' => $service->name,
             'price' => $service->price,
             'trainer' => $trainer ? $trainer->name : 'No trainer assigned',
+            'amenities' => $service->amenities,
         ]);
     }
 

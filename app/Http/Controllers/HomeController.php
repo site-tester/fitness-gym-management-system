@@ -99,7 +99,7 @@ class HomeController extends Controller
         $profile = MembershipDetail::where('client_id', '=', Auth::user()->id)->firstOrFail();
         $serviceCategories = ServiceCategory::all();
         $paymentMethods = PaymentMethod::all();
-        
+
         return view('book_now', compact('profile','serviceCategories', 'paymentMethods'));
     }
 

@@ -41,6 +41,7 @@ class AttendanceController extends Controller
             MemberVisit::create([
                 'client_rfid_id' => $user->rfid_number,
                 'timelog_date' => now(), // Assuming this is the time-in field
+                'time_in' => now(),
             ]);
 
             // Redirect back with a success message for time in

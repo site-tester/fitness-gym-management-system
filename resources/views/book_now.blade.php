@@ -324,9 +324,13 @@
                                             </div>
                                         </div>
                                         {{-- Below id the service description --}}
-                                        <div id="servDescription" class="mt-3 mx-5 px-3 border rounded">
-                                            <p class="text-center mb-0">Select a service to view its details.</p>
+                                        <div class="mt-3 mx-5 px-3 py-3 border rounded">
+                                            <div id="servDescription">
+                                                <p class="text-center mb-0">Select a service to view its details.</p>
+                                            </div>
+                                            <div id="amenitiesList"></div>
                                         </div>
+
                                     </div>
                                 </div>
 
@@ -422,28 +426,32 @@
                                             Arrival</label>
                                     </div> --}}
                                     @foreach ($paymentMethods as $paymentMethod)
-                                    <div class="q-box__question">
-                                        <input checked class="form-check-input question__input" id="q_1_no_{{$paymentMethod->id}}"
-                                            name="payment_method" type="radio" value="{{$paymentMethod->id}}">
-                                        <label class="form-check-label question__label" for="q_1_no_{{$paymentMethod->id}}">
-                                            {{$paymentMethod->name}}
-                                            <br>
-                                            <p>
-                                                <small>
-                                                    {{$paymentMethod->description}}
-                                                </small>
-                                            </p>
-                                        </label>
-                                    </div>
+                                        <div class="q-box__question">
+                                            <input checked class="form-check-input question__input"
+                                                id="q_1_no_{{ $paymentMethod->id }}" name="payment_method"
+                                                type="radio" value="{{ $paymentMethod->id }}">
+                                            <label class="form-check-label question__label"
+                                                for="q_1_no_{{ $paymentMethod->id }}">
+                                                {{ $paymentMethod->name }}
+                                                <br>
+                                                <p>
+                                                    <small>
+                                                        {{ $paymentMethod->description }}
+                                                    </small>
+                                                </p>
+                                            </label>
+                                        </div>
                                     @endforeach
                                 </div>
 
-                                <div class="step">
-                                    <div class="mt-1">
+                                <div class="step ">
+                                    <div class="mt-1 ">
                                         <div class="closing-text p-5 text-center">
-                                            <h4>You are about to submit your Booking</h4>
-                                            <p>Please review all the details carefully.</p>
-                                            <p>Click the Submit button to proceed.</p>
+                                            <div class="">
+                                                <h4>You are about to Book.</h4>
+                                                <p>Please review all the details carefully.</p>
+                                                <p>Click the Submit button to proceed.</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -517,7 +525,7 @@
                         dataType: 'json',
                         success: function(data) {
                             $('#servDescription').html(`
-                                <h4 class="mb-1">Details</h4>
+                                <h5 class="mb-1">Details</h5>
                                 <div class="ms-2">
                                 <h6><strong>Service:</strong> ${data.name}</h6>
                                     <p class="mb-0"><strong>Trainer:</strong> ${data.trainer}</p>
@@ -528,11 +536,27 @@
                             $('#summaryServPrice').text(`₱${data.price}`);
                             $('#summarySubTotal').text(`₱${data.price}`);
                             $('#summaryTotal').text(`₱${data.price}`);
+
+                            if (data.amenities && data.amenities.length > 0) {
+                                let amenitiesList = '<h6>Amenities Included:</h6><ul>';
+                                data.amenities.forEach(function(amenity) {
+                                    amenitiesList += `<li>${amenity.name}</li>`;
+                                });
+                                amenitiesList += '</ul>';
+                                $('#amenitiesList').html(
+                                    amenitiesList
+                                ); // Add the amenities to a div with ID 'amenitiesList'
+                            } else {
+                                $('#amenitiesList').html(
+                                    '<p>No amenities available for this service.</p>');
+                            }
                         },
                         error: function() {
                             $('#servDescription').html(
                                 '<p class="text-danger">Error fetching service details.</p>'
                             );
+                            $('#amenitiesList').html(
+                                '<p class="text-danger">Error fetching amenities.</p>');
                         }
                     });
                 } else {
