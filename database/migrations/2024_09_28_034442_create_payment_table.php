@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('booking_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->foreignId('client_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->string('payment_method_id'); // Payment Method Type
-            $table->string('membership_type')->nullable(); // Member / Non-member
-            $table->decimal('amount', 8, 2); // Payment amount
-            $table->string('reference_number')->nullable(); //QR Reference number
-            $table->enum('status', ['pending', 'confirmed', 'failed'])->default('pending');
-            $table->timestamp('payment_date')->nullable();
+            $table->string('user_id')->nullable(); // Foreign key to users table
+            $table->string('reservation_id')->nullable(); // Foreign key to reservations table
+            $table->string('payment_method'); // Payment method used
+            $table->string('amount'); // Payment amount
+            $table->string('currency', 10)->default('PHP'); // Currency of the payment
+            $table->string('payment_status')->default('Pending'); // Status of the payment
+            $table->string('transaction_id')->nullable(); // Transaction ID from payment gateway
+            $table->timestamp('payment_date')->nullable(); // Date and time of the payment
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('payment');
+        Schema::dropIfExists('payments');
     }
 };

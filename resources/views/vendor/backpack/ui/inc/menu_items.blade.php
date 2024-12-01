@@ -20,7 +20,7 @@
 <x-backpack::menu-item title="Bookings" icon="la la-book" :link="backpack_url('reservation')" />
 
 <x-backpack::menu-dropdown title="Payments" icon="la la-wallet">
-    <x-backpack::menu-dropdown-item title='*Payments*' icon='la la-money-bill' :link="backpack_url('')" />
+    <x-backpack::menu-dropdown-item title='Payments' icon='la la-money-bill' :link="backpack_url('payment')" />
     <x-backpack::menu-dropdown-item title='Payment Methods' icon='la la-credit-card' :link="backpack_url('payment-method')" />
 </x-backpack::menu-dropdown>
 
@@ -34,3 +34,5 @@
 </x-backpack::menu-dropdown>
 
 <x-backpack::menu-item title="Contact Us Inbox" icon="la la-inbox" :link="backpack_url('contactus-inbox')" />
+
+{{-- <x-backpack::menu-item title="Payments" icon="la la-question" :link="backpack_url('payment')" /> --}}

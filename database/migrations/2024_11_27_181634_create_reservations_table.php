@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('payment_method');
             $table->string('total_amount');
+            $table->string('status')->default('Pending Approval');
             $table->timestamps();
         });
     }

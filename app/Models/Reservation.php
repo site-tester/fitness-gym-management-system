@@ -50,6 +50,14 @@ class Reservation extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_name_id');
+    }
+    public function serviceCategory()
+    {
+        return $this->belongsTo(ServiceCategory::class, 'service_category_id');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

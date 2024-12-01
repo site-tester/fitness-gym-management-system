@@ -39,6 +39,23 @@ class ServiceCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+
+        CRUD::addColumn([
+            'name' => 'category_id',
+            'label' => 'Service Category',
+            'entity' => 'category',
+            'model' => 'App\Models\ServiceCategory',
+            'attribute' => 'name',
+            'pivot' => false,
+        ]);
+        CRUD::addColumn([
+            'name' => 'trainer_id',
+            'label' => 'Trainer',
+            'entity' => 'trainer',
+            'model' => 'App\Models\User',
+            'attribute' => 'name',
+            'pivot' => false,
+        ]);
         CRUD::setFromDb(); // set columns from db columns.
 
         /**
@@ -56,12 +73,7 @@ class ServiceCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(ServiceRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
         CRUD::addField([
             'name' => 'category_id',
             'label' => 'Service Category',
@@ -70,6 +82,21 @@ class ServiceCrudController extends CrudController
             'attribute' => 'name',
             'pivot' => false,
         ]);
+        CRUD::addField([
+            'name' => 'trainer_id',
+            'label' => 'Trainer',
+            'entity' => 'trainer',
+            'model' => 'App\Models\User',
+            'attribute' => 'name',
+            'pivot' => false,
+        ]);
+        CRUD::setFromDb(); // set fields from db columns.
+
+        /**
+         * Fields can be defined using the fluent syntax:
+         * - CRUD::field('price')->type('number');
+         */
+
     }
 
     /**

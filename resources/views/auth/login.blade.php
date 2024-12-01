@@ -27,7 +27,7 @@
 @endsection
 
 @section('content')
-    <div class="container login position-absolute top-50 top-md-75 start-50 translate-middle mt-5">
+    <div class="container login  mt-5">
         <div class="row justify-content-center m-auto">
             <div class="col col-md-8">
                 <div class="card mb-5" style="min-height: 400px">
@@ -56,8 +56,9 @@
                                         <span class="input-group-text" id="basic-addon1"><i
                                                 class="bi bi-person-fill"></i></span>
                                         <input id="email" type="email"
-                                            class="form-control rounded-end @error('email') is-invalid @enderror" name="email"
-                                            value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
+                                            class="form-control rounded-end @error('email') is-invalid @enderror"
+                                            name="email" value="{{ old('email') }}" required autocomplete="email"
+                                            autofocus placeholder="Email">
 
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -84,10 +85,11 @@
                                         class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label> --}}
 
                                     <div class="col input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-shield-lock"></i></span>
+                                        <span class="input-group-text" id="basic-addon1"><i
+                                                class="bi bi-shield-lock"></i></span>
                                         <input id="password" type="password"
-                                            class="form-control rounded-end @error('password') is-invalid @enderror" name="password"
-                                            required autocomplete="current-password" placeholder="Password">
+                                            class="form-control rounded-end @error('password') is-invalid @enderror"
+                                            name="password" required autocomplete="current-password" placeholder="Password">
 
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
@@ -95,18 +97,6 @@
                                             </span>
                                         @enderror
                                     </div>
-
-                                    {{-- <div class="col-md-6">
-                                        <input id="password" type="password"
-                                            class="form-control @error('password') is-invalid @enderror" name="password"
-                                            required autocomplete="current-password">
-
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div> --}}
                                 </div>
 
                                 <div class="row mb-4 justify-content-center">

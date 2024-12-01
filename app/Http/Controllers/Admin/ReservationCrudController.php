@@ -50,18 +50,19 @@ class ReservationCrudController extends CrudController
         CRUD::addColumn([
             'name' => 'service_name_id',
             'label' => 'Service',
-            'type' => 'closure',
-            'function' => function ($entry) {
-                return ucwords($entry->service_name_id);
-            },
+            'entity' => 'service',
+            'model' => 'App\Models\Service',
+            'attribute' => 'name',
+            'pivot' => false,
+
         ]);
         CRUD::addColumn([
             'name' => 'service_category_id',
             'label' => 'Service Category',
-            'type' => 'closure',
-            'function' => function ($entry) {
-                return ucwords($entry->service_category_id);
-            },
+            'entity' => 'serviceCategory',
+            'model' => 'App\Models\ServiceCategory',
+            'attribute' => 'name',
+            'pivot' => false,
         ]);
         CRUD::addColumn([
             'name' => 'reservation_date',
@@ -87,7 +88,7 @@ class ReservationCrudController extends CrudController
                 return ucwords($entry->payment_method);
             },
         ]);
-         // set columns from db columns.
+        // set columns from db columns.
 
         /**
          * Columns can be defined using the fluent syntax:
@@ -104,12 +105,43 @@ class ReservationCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(ReservationRequest::class);
+        CRUD::addField([
+            'name' => 'status',
+            'label' => 'Status',
+            'type' => 'select_from_array',
+            'options' => [
+                'Pending Approval' => 'Pending Approval',
+                'Approved' => 'Approved',
+            ],
+            'allows_multiple' => false,
+        ]);
         CRUD::setFromDb(); // set fields from db columns.
 
         /**
          * Fields can be defined using the fluent syntax:
          * - CRUD::field('price')->type('number');
          */
+        CRUD::addField([
+            'name' => 'user_id',
+            'label' => 'Client ID',
+        ]);
+        CRUD::addField([
+            'name' => 'service_name_id',
+            'label' => 'Service Name',
+            'entity' => 'service',
+            'model' => 'App\Models\Service',
+            'attribute' => 'name',
+            'pivot' => false,
+        ]);
+        CRUD::addField([
+            'name' => 'service_category_id',
+            'label' => 'Service Category',
+            'entity' => 'serviceCategory',
+            'model' => 'App\Models\ServiceCategory',
+            'attribute' => 'name',
+            'pivot' => false,
+        ]);
+
     }
 
     /**
@@ -121,5 +153,99 @@ class ReservationCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function setupShowOperation()
+    {
+        CRUD::addColumn([
+            'name' => 'status',
+            'label' => 'Status',
+            'type' => 'text',
+            'wrapper' => [
+                'element' => 'span',
+                'class' => function ($crud, $column, $entry, $related_key) {
+                    // Determine the badge class based on the status value
+                    if ($column['text'] == 'Pending Approval') {
+                        return 'badge text-bg-warning'; // Yellow indicates awaiting action
+                    }
+                    if ($column['text'] == 'Approved') {
+                        return 'badge text-bg-success'; // Green indicates approval
+                    }
+                    if ($column['text'] == 'Rejected') {
+                        return 'badge text-bg-secondary'; // Yellow indicates a warning
+                    }
+                    return 'badge badge-default';
+                },
+            ],
+        ]);
+        CRUD::addColumn([
+            'name' => 'user_id',
+            'label' => 'Client',
+            'entity' => 'user',
+            'model' => 'App\Models\User',
+            'attribute' => 'name',
+            'pivot' => false,
+        ]);
+        CRUD::addColumn([
+            'name' => 'service_name_id',
+            'label' => 'Service',
+            'entity' => 'service',
+            'model' => 'App\Models\Service',
+            'attribute' => 'name',
+            'pivot' => false,
+
+        ]);
+        CRUD::addColumn([
+            'name' => 'service_category_id',
+            'label' => 'Service Category',
+            'entity' => 'serviceCategory',
+            'model' => 'App\Models\ServiceCategory',
+            'attribute' => 'name',
+            'pivot' => false,
+        ]);
+        CRUD::addColumn([
+            'name' => 'reservation_date',
+            'label' => 'Reservation Date',
+            'type' => 'closure',
+            'function' => function ($entry) {
+                return \Carbon\Carbon::parse($entry->reservation_time)->format('M-d-Y');
+            },
+        ]);
+        CRUD::addColumn([
+            'name' => 'reservation_time',
+            'label' => 'Reservation Time',
+            'type' => 'closure',
+            'function' => function ($entry) {
+                return \Carbon\Carbon::parse($entry->reservation_time)->format('h:i A');
+            },
+        ]);
+        CRUD::addColumn([
+            'name' => 'name',
+            'label' => 'Client Name',
+        ]);
+        CRUD::addColumn([
+            'name' => 'email',
+            'label' => 'Client Email',
+        ]);
+        CRUD::addColumn([
+            'name' => 'phone',
+            'label' => 'Client Contact Number',
+        ]);
+        CRUD::addColumn([
+            'name' => 'payment_method',
+            'label' => 'Transaction',
+            'type' => 'closure',
+            'function' => function ($entry) {
+                return ucwords($entry->payment_method);
+            },
+        ]);
+        CRUD::addColumn([
+            'name' => 'total_amount',
+            'label' => 'Amount',
+            'type' => 'closure',
+            'function' => function ($entry) {
+                return ucwords($entry->total_amount);
+            },
+        ]);
     }
 }

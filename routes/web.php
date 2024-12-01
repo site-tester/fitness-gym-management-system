@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookNowController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -39,8 +40,16 @@ Route::middleware(['verified'])->group(function () {
     Route::get('/profile', [HomeController::class, 'viewProfile'])->name('profile');
     Route::post('/update-profile', [HomeController::class, 'updateProfile'])->name('profile.update');
     Route::get('/book-now', [HomeController::class, 'bookNow'])->name('book.now');
-    Route::post('/booking', [HomeController::class, 'bookNowPost'])->name('book.now.post');
     Route::get('/booked', [HomeController::class, 'bookedNow'])->name('booked.now');
+    Route::get('/bookings', [HomeController::class, 'bookings'])->name('booking');
+
+    // AJAX
+    Route::post('/booking', [HomeController::class, 'bookNowPost'])->name('book.now.post');
+    Route::get('/services/{categoryId}', [BookNowController::class, 'getServicesByCategory']);
+    Route::get('/service/details/{serviceId}', [BookNowController::class, 'getServiceDetails']);
+    Route::get('/booking-receipt/{id}', [BookNowController::class, 'showReceipt'])->name('reservations.show');
+
+
 });
 
 Route::post('/attendance/register', [AttendanceController::class, 'register'])->name('attendance.register');

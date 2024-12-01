@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingPaymentDetails;
 use App\Models\MembershipDetail;
+use App\Models\Payment;
+use App\Models\PaymentMethod;
 use App\Models\Reservation;
 use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
 
 class HomeController extends Controller
@@ -92,8 +97,9 @@ class HomeController extends Controller
     public function bookNow()
     {
         $profile = MembershipDetail::where('client_id', '=', Auth::user()->id)->firstOrFail();
-        // dd($profile);
-        return view('book_now', compact('profile'));
+        $serviceCategories = ServiceCategory::all();
+        $paymentMethods = PaymentMethod::all();
+        return view('book_now', compact('profile','serviceCategories', 'paymentMethods'));
     }
 
     public function bookNowPost(Request $request)
@@ -138,12 +144,25 @@ class HomeController extends Controller
 
 
             // Calculate the total amount or handle payment-related logic
-            // $service_price = $this->getServicePrice($request->input('service_name'));
-            // $reservation->total_amount = $service_price; // Example, adjust based on logic
-            $reservation->total_amount = 0; // Example, adjust based on logic
+            $service_price = $this->getServicePrice($request->input('service_name'));
+            $reservation->total_amount = $service_price; // Example, adjust based on logic
+            // $reservation->total_amount = 0; // Example, adjust based on logic
 
             // Save the reservation
             $reservation->save();
+
+            // Create a payment invoice
+            Payment::create([
+                'user_id' => Auth::id(),
+                'reservation_id' => $reservation->id,
+                'payment_method' => $reservation->payment_method ,
+                'amount' => $reservation->total_amount,
+                'payment_status' => 'Pending',
+            ]);
+
+            $payment_details = PaymentMethod::where('name',$reservation->payment_method)->first();
+
+            Mail::to(Auth::user()->email)->send(new BookingPaymentDetails($reservation, $payment_details));
 
             DB::commit(); // Commit transaction
             // return view('book_now');
@@ -152,12 +171,19 @@ class HomeController extends Controller
         } catch (\Exception $e) {
             DB::rollBack(); // Rollback transaction
             Log::error('Donation error: ' . $e->getMessage());
+            Log::error('Booking error: ' . $e->getMessage() . ' on line ' . $e->getLine());
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 
     public function bookedNow(){
         return view('book_now_success');
+    }
+
+    public function bookings(){
+
+        $reservations = Reservation::where('user_id', Auth::user()->id)->get();
+        return view('booking', compact('reservations'));
     }
 
     private function getServicePrice($serviceId)

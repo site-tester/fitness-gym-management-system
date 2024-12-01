@@ -6,7 +6,7 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class Payment extends Model
 {
     use CrudTrait;
     use HasFactory;
@@ -17,7 +17,7 @@ class Service extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'services';
+    protected $table = 'payments';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
@@ -35,13 +35,9 @@ class Service extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function category()
+    public function user()
     {
-        return $this->belongsTo(ServiceCategory::class, 'category_id');
-    }
-    public function trainer()
-    {
-        return $this->belongsTo(User::class, 'trainer_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function paymentMethod()
     {
@@ -64,4 +60,21 @@ class Service extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+
+
+    protected static function booted()
+    {
+        static::saved(function ($payment) {
+            if ($payment->payment_status == 'Paid') {
+                $reservation = Reservation::find($payment->reservation_id);
+                // Update the reservation status if it exists
+                if ($reservation) {
+                    $reservation->status = 'Paid';
+                    $reservation->save();
+                    \Log::info("Updated reservation {$reservation->id} to Paid status.");
+                }
+            }
+        });
+    }
 }

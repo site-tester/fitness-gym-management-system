@@ -53,6 +53,7 @@ class PaymentMethodCrudController extends CrudController
                 return ucfirst(str_replace('_', ' ', $entry->category));
             },
         ]);
+        
     }
 
     /**

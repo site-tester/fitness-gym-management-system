@@ -175,7 +175,7 @@
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="medical_info" name="medical_info" type="text"
-                                            value="{{ $profile->medical_info }}" value="{{ old('medical_info') }}">
+                                            value="{{ $profile->medical_info }}" value="{{ old('medical_info') }}" readonly>
                                         <label class="small mb-1" for="medical_info">Medical Information</label>
                                         @error('medical_info')
                                             <span class="invalid-feedback">{{ $message }}</span>

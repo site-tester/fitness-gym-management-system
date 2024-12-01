@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Booking')
+@section('title', 'Book Now')
 
 @section('css')
     <style>
@@ -308,8 +308,10 @@
                                                 <label for="ServCategory" class="form-label">Service Category <span
                                                         class="text-danger">*</span></label>
                                                 <select class="form-select" name="service_category" id="ServCategory">
-                                                    <option selected>Select One</option>
-                                                    <option value="basic">Basic</option>
+                                                    <option selected>--Select Category--</option>
+                                                    @foreach ($serviceCategories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
 
@@ -317,12 +319,14 @@
                                                 <label for="ServName" class="form-label">Service Name <span
                                                         class="text-danger">*</span></label>
                                                 <select class="form-select" name="service_name" id="ServName">
-                                                    <option selected>Select One</option>
-                                                    <option value="basic training">Basic Training</option>
+                                                    <option selected>--Select Service--</option>
                                                 </select>
                                             </div>
                                         </div>
-
+                                        {{-- Below id the service description --}}
+                                        <div id="servDescription" class="mt-3 mx-5 px-3 border rounded">
+                                            <p class="text-center mb-0">Select a service to view its details.</p>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -393,43 +397,45 @@
                                         <div class="q-box__question">
                                             <div class="border border-secondary p-2">
                                                 <div class="d-flex justify-content-between">
-                                                    <span><strong>Service Name</strong></span>
-                                                    <span>₱ ###</span>
+                                                    <span><strong id="summaryServName">Service Name</strong></span>
+                                                    <span id="summaryServPrice">₱ ###</span>
                                                 </div>
                                                 <div class="d-flex justify-content-between">
                                                     <span>Sub-total</span>
-                                                    <span>₱###</span>
+                                                    <span id="summarySubTotal">₱###</span>
                                                 </div>
                                                 <hr>
                                                 <div class="d-flex justify-content-between">
                                                     <h6><strong>Total Amount</strong></h6>
-                                                    <h6><strong>₱###</strong></h6>
+                                                    <h6><strong id="summaryTotal">₱###</strong></h6>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="border-bottom mb-3">
                                         <h4 class="ms-4 py-1" style="margin-bottom: 0px">Payment Method</h4>
                                     </div>
-                                    <div class="q-box__question">
+                                    {{-- <div class="q-box__question">
                                         <input class="form-check-input question__input" id="q_1_yes"
                                             name="payment_method" type="radio" value="walk-in">
                                         <label class="form-check-label question__label" for="q_1_yes">Pay on
                                             Arrival</label>
-                                    </div>
+                                    </div> --}}
+                                    @foreach ($paymentMethods as $paymentMethod)
                                     <div class="q-box__question">
-                                        <input checked class="form-check-input question__input" id="q_1_no"
-                                            name="payment_method" type="radio" value="online payment">
-                                        <label class="form-check-label question__label" for="q_1_no">Online
-                                            Banking/E-Wallet <br>
-                                            <p><small>
-                                                    Make your payment directly using online banking or an e-wallet. An email
-                                                    will be sent with payment details.
+                                        <input checked class="form-check-input question__input" id="q_1_no_{{$paymentMethod->id}}"
+                                            name="payment_method" type="radio" value="{{$paymentMethod->id}}">
+                                        <label class="form-check-label question__label" for="q_1_no_{{$paymentMethod->id}}">
+                                            {{$paymentMethod->name}}
+                                            <br>
+                                            <p>
+                                                <small>
+                                                    {{$paymentMethod->description}}
                                                 </small>
                                             </p>
                                         </label>
                                     </div>
+                                    @endforeach
                                 </div>
 
                                 <div class="step">
@@ -473,6 +479,68 @@
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#ServCategory').on('change', function() {
+                var categoryId = $(this).val();
+                var $serviceDropdown = $('#ServName');
+
+                $serviceDropdown.empty();
+                $serviceDropdown.append('<option value="">-- Select Service --</option>');
+
+                if (categoryId) {
+                    $.ajax({
+                        url: '/services/' + categoryId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            $.each(data, function(key, service) {
+                                $serviceDropdown.append('<option value="' + service.id +
+                                    '">' + service.name + '</option>');
+                            });
+                        },
+                        error: function() {
+                            alert('Error fetching services.');
+                        }
+                    });
+                }
+            });
+
+            $('#ServName').on('change', function() {
+                var serviceId = $(this).val();
+
+                if (serviceId) {
+                    $.ajax({
+                        url: '/service/details/' + serviceId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            $('#servDescription').html(`
+                                <h4 class="mb-1">Details</h4>
+                                <div class="ms-2">
+                                <h6><strong>Service:</strong> ${data.name}</h6>
+                                    <p class="mb-0"><strong>Trainer:</strong> ${data.trainer}</p>
+                                    <p><strong>Price:</strong> ₱${data.price}</p>
+                                </div>
+                            `);
+                            $('#summaryServName').text(data.name);
+                            $('#summaryServPrice').text(`₱${data.price}`);
+                            $('#summarySubTotal').text(`₱${data.price}`);
+                            $('#summaryTotal').text(`₱${data.price}`);
+                        },
+                        error: function() {
+                            $('#servDescription').html(
+                                '<p class="text-danger">Error fetching service details.</p>'
+                            );
+                        }
+                    });
+                } else {
+                    $('#servDescription').html('<p>Select a service to view its details.</p>');
+                    $('#summaryServName').text('Service Name');
+                    $('#summaryServPrice').text('₱ ###');
+                    $('#summarySubTotal').text('₱###');
+                    $('#summaryTotal').text('₱###');
                 }
             });
 

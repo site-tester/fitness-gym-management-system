@@ -28,7 +28,7 @@ class ContactusInboxCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\ContactusInbox::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/contactus-inbox');
-        CRUD::setEntityNameStrings('contactus inbox', 'contactus inboxes');
+        CRUD::setEntityNameStrings('contact us inbox', 'contact us inbox');
     }
 
     /**

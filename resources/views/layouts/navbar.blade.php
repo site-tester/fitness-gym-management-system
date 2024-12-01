@@ -45,7 +45,7 @@
                                 </li>
                             </div>
                         @else
-                            <div class="guest ms-1 row">
+                            {{-- <div class="guest ms-1 row">
                                 @hasrole('member')
                                     <li class="main-button col" >
                                         <a href="{{ route('profile') }}" style="line-height: 20px;">Profile</a>
@@ -64,6 +64,7 @@
                                     </li>
                                 @endhasanyrole
 
+
                                 <li class="main-button col">
                                     <a href="{{ route('logout') }}" class=" bg-secondary"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -73,6 +74,33 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
+                            </div> --}}
+                            <div class="dropdown">
+                                <button onclick="myFunction()" class="dropbtn rounded fw-bold">{{ Auth::user()->name }}</button>
+                                <div id="myDropdown" class="dropdown-content rounded border border-danger">
+                                    <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('booking') }}">
+                                        <i class="bi bi-journal-text"></i>
+                                        Bookings</a>
+                                    <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('profile') }}">
+                                        <i class="bi bi-person-badge"></i>
+                                        Profile</a>
+                                    <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('book.now') }}">
+                                        <i class="bi bi-journal-arrow-down"></i>
+                                        Book Now</a>
+                                    @hasanyrole('admin|superadmin')
+                                        <a class="m-1 link-body-emphasis fw-bold" href="/admin">
+                                            Dashboard
+                                        </a>
+                                    @endhasanyrole
+                                    <hr class="my-0 py-0 border border-danger">
+                                    <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i class="bi bi-escape"></i>
+                                        Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
                             </div>
                         @endguest
                     </ul>

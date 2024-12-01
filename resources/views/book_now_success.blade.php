@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Booking')
+@section('title', 'Booking Success')
 
 @section('css')
     <style>
@@ -293,7 +293,7 @@
                         <div id="steps-container">
                             <div>
                                 <div class="mt-5 p-5">
-                                    <h4 class="fw-bold">Congratulations!</h4>
+                                    <h4 class="fw-bold text-danger">Congratulations!</h4>
                                     <h5>Booking Successful</h5>
                                     <p>Please adhere to the gym's rules and regulations during your visit. For
                                         cancellations or inquiries, feel free to contact us. Enjoy your workout!</p>
