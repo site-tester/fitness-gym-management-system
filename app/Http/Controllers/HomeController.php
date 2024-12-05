@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mail\BookingPaymentDetails;
+use App\Models\GymProgress;
 use App\Models\MembershipDetail;
+use App\Models\MemberVisit;
 use App\Models\Payment;
 use App\Models\PaymentMethod;
 use App\Models\Reservation;
@@ -38,6 +40,26 @@ class HomeController extends Controller
     public function index()
     {
         return view('homepage');
+    }
+
+    public function dashboard()
+    {
+        $userDetail = MembershipDetail::where('client_id', Auth::user()->id )->first();
+        $workoutProgress = GymProgress::where('user_id', Auth::id())->orderBy('progress_date', 'desc')->limit(5)->get();
+        $timelog = MemberVisit::where('client_rfid_id', $userDetail->rfid_number)->orderBy('created_at', 'desc')->limit(3)->get();
+        return view('dashboard', compact('timelog', 'workoutProgress'));
+    }
+
+    public function bookings(){
+
+        $reservations = Reservation::where('user_id', Auth::user()->id)->get();
+        return view('booking', compact('reservations'));
+    }
+
+    public function gymProgress()
+    {
+        $workoutProgress = GymProgress::where('user_id', Auth::id())->orderBy('progress_date', 'desc')->get();
+        return view('myProgress', compact('workoutProgress'));
     }
 
     public function viewProfile()
@@ -181,11 +203,7 @@ class HomeController extends Controller
         return view('book_now_success');
     }
 
-    public function bookings(){
 
-        $reservations = Reservation::where('user_id', Auth::user()->id)->get();
-        return view('booking', compact('reservations'));
-    }
 
     private function getServicePrice($serviceId)
     {

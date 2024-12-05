@@ -12,103 +12,134 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row shadow mt-5 mx-auto w-50 p-3 border border-danger">
-            <h3>Bookings</h3>
-            <hr>
-            <div>
+    <div class="container-fluid  pt-3">
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show mx-5 mb-0" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        <div class="card border-0 m-5">
+            <div class="row m-0">
+                <div class=" mx-0 px-0 ">
+                    <div class="nav nav-pills" id="pills-tab" role="tablist">
+                        <a class="nav-link border  text-danger text-nowrap" href="{{ route('dashboard') }}" role="tab"
+                            aria-selected="true"><i class="bi bi-speedometer2"></i> Dashboard</a>
+                        <a class="nav-link border bg-danger active text-nowrap" href="{{ route('booking') }}" role="tab"
+                            aria-selected="false"><i class="bi bi-journal-text"></i> Bookings</a>
+                        <a class="nav-link border text-danger text-nowrap" href="{{ route('gym.progress') }}" role="tab"
+                            aria-selected="false"><i class="bi bi-person-arms-up"></i> My Progress</a>
+                    </div>
 
-                <table id="bookingTable" class="border border-danger rounded mt-0" style="width:100%">
-                    <thead>
-                        <tr class="">
-                            <th class="text-center">ID</th>
-                            <th class="text-center">Service</th>
-                            <th class="text-center">Category</th>
-                            <th class="text-center">Date</th>
-                            <th class="text-center">Time</th>
-                            <th class="text-center">Payment Method</th>
-                            <th class="text-center">Price</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Reciept</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($reservations as $reservation)
-                            @php
-                                $reservation_date = \Carbon\Carbon::parse($reservation->reservation_date);
-                                $reservation_time = \Carbon\Carbon::parse($reservation->reservation_time);
-                            @endphp
-                            @if ($reservation->status == 'Pending Approval')
-                                @php
-                                    $badgeClass = 'text-bg-warning'; // Yellow indicates awaiting action
-                                @endphp
-                            @elseif ($reservation->status === 'Pending Payment')
-                                @php
-                                    $badgeClass = 'text-bg-warning'; // Green indicates approval
-                                @endphp
-                            @elseif ($reservation->status === 'Approved')
-                                @php
-                                    $badgeClass = 'text-bg-success'; // Green indicates approval
-                                @endphp
-                            @elseif ($reservation->status === 'Paid')
-                                @php
-                                    $badgeClass = 'text-bg-success'; // Green indicates approval
-                                @endphp
-                            @else
-                                @php
-                                    $badgeClass = ''; // Default class if none match
-                                @endphp
-                            @endif
-                            <tr>
-                                <td class="text-center">{{ $reservation->id }}</td>
-                                <td class="text-center">{{ $reservation->service->name }}</td>
-                                <td class="text-center ">{{ $reservation->serviceCategory->name }}</td>
-                                <td class="text-center">{{ $reservation_date->format('M/d/Y') }}</td>
-                                <td class="text-center">{{ $reservation_time->format('h:i A') }}</td>
-                                <td class="text-center">{{ ucwords($reservation->payment_method) }}</td>
-                                <td class="text-center">{{ $reservation->total_amount }}</td>
-                                <td class="text-start align-items-center">
-                                    <span class="{{ $badgeClass }} badge rounded-pill p-2 mx-1 text-nowarp">
-                                    </span>
-                                    {{ $reservation->status }}
-                                </td>
+                    <div class="tab-content w-100 h-100" id="v-pills-tabContent">
 
-                                <td class="text-center">
-                                    <button class="btn border text-bg-danger" data-bs-toggle="modal"
-                                        data-bs-target="#reservationDetailsModal" data-id="{{ $reservation->id }}"
-                                        onclick="viewReservationPaymentDetails({{ $reservation->id }})"
-                                        {{ $reservation->status == 'Pending Payment' ? 'disabled' : '' }}>
-                                        View
-                                    </button>
-                                </td>
-                                {{-- {{ $reservation->created_at->format('M/d/Y') }} --}}
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel"
+                            aria-labelledby="v-pills-dashboard-tab" tabindex="0">
+                            <div class="p-3 w-100 border">
+                                <h5 class="text-danger"><i class="bi bi-journal-text"></i> Bookings</h5>
+                                <table id="bookingTable" class="border rounded-table rounded mt-0" style="width:100%">
+                                    <thead>
+                                        <tr class="">
+                                            <th class="text-center">ID</th>
+                                            <th class="text-center">Service</th>
+                                            <th class="text-center">Category</th>
+                                            <th class="text-center">Date</th>
+                                            <th class="text-center">Time</th>
+                                            <th class="text-center">Payment Method</th>
+                                            <th class="text-center">Price</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Reciept</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($reservations as $reservation)
+                                            @php
+                                                $reservation_date = \Carbon\Carbon::parse(
+                                                    $reservation->reservation_date,
+                                                );
+                                                $reservation_time = \Carbon\Carbon::parse(
+                                                    $reservation->reservation_time,
+                                                );
+                                            @endphp
+                                            @if ($reservation->status == 'Pending Approval')
+                                                @php
+                                                    $badgeClass = 'text-bg-warning'; // Yellow indicates awaiting action
+                                                @endphp
+                                            @elseif ($reservation->status === 'Pending Payment')
+                                                @php
+                                                    $badgeClass = 'text-bg-warning'; // Green indicates approval
+                                                @endphp
+                                            @elseif ($reservation->status === 'Approved')
+                                                @php
+                                                    $badgeClass = 'text-bg-success'; // Green indicates approval
+                                                @endphp
+                                            @elseif ($reservation->status === 'Paid')
+                                                @php
+                                                    $badgeClass = 'text-bg-success'; // Green indicates approval
+                                                @endphp
+                                            @else
+                                                @php
+                                                    $badgeClass = ''; // Default class if none match
+                                                @endphp
+                                            @endif
+                                            <tr>
+                                                <td class="text-center">{{ $reservation->id }}</td>
+                                                <td class="text-center">{{ $reservation->service->name }}</td>
+                                                <td class="text-center ">{{ $reservation->serviceCategory->name }}</td>
+                                                <td class="text-center">{{ $reservation_date->format('M/d/Y') }}</td>
+                                                <td class="text-center">{{ $reservation_time->format('h:i A') }}</td>
+                                                <td class="text-center">{{ ucwords($reservation->payment_method) }}</td>
+                                                <td class="text-center">{{ $reservation->total_amount }}</td>
+                                                <td class="text-start align-items-center">
+                                                    <span
+                                                        class="{{ $badgeClass }} badge rounded-pill p-2 mx-1 text-nowarp">
+                                                    </span>
+                                                    {{ $reservation->status }}
+                                                </td>
 
-                <!-- Modal -->
-                <div class="modal fade" id="reservationDetailsModal" tabindex="-1"
-                    aria-labelledby="reservationDetailsLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-md">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div id="reservationDetailsContent">
-                                    <!-- Content will be loaded dynamically -->
-                                    <p>Loading reservation details...</p>
+                                                <td class="text-center">
+                                                    <button class="btn border text-bg-danger" data-bs-toggle="modal"
+                                                        data-bs-target="#reservationDetailsModal"
+                                                        data-id="{{ $reservation->id }}"
+                                                        onclick="viewReservationPaymentDetails({{ $reservation->id }})"
+                                                        {{ $reservation->status == 'Pending Payment' ? 'disabled' : '' }}>
+                                                        View
+                                                    </button>
+                                                </td>
+                                                {{-- {{ $reservation->created_at->format('M/d/Y') }} --}}
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="reservationDetailsModal" tabindex="-1"
+                                    aria-labelledby="reservationDetailsLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-md">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="reservationDetailsContent">
+                                                    <!-- Content will be loaded dynamically -->
+                                                    <p>Loading reservation details...</p>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
                             </div>
                         </div>
+
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

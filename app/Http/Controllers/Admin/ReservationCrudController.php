@@ -105,16 +105,7 @@ class ReservationCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(ReservationRequest::class);
-        CRUD::addField([
-            'name' => 'status',
-            'label' => 'Status',
-            'type' => 'select_from_array',
-            'options' => [
-                'Pending Approval' => 'Pending Approval',
-                'Approved' => 'Approved',
-            ],
-            'allows_multiple' => false,
-        ]);
+
         CRUD::setFromDb(); // set fields from db columns.
 
         /**
@@ -123,7 +114,17 @@ class ReservationCrudController extends CrudController
          */
         CRUD::addField([
             'name' => 'user_id',
-            'label' => 'Client ID',
+            'label' => 'Client Name',
+            'entity' => 'user',
+            'model' => 'App\Models\User',
+            'attribute' => 'name',
+            'pivot' => false,
+            'options' => function ($query) {
+                // Filter users with the role 'member'
+                return $query->whereHas('roles', function ($q) {
+                    $q->where('name', 'member');
+                })->get();
+            },
         ]);
         CRUD::addField([
             'name' => 'service_name_id',
@@ -141,6 +142,16 @@ class ReservationCrudController extends CrudController
             'attribute' => 'name',
             'pivot' => false,
         ]);
+        CRUD::addField([
+            'name' => 'reservation_date',
+            'label' => 'Reservation Date',
+            'type' => 'date',
+        ]);
+        CRUD::addField([
+            'name' => 'reservation_time',
+            'label' => 'Reservation Time',
+            'type' => 'time',
+        ]);
 
     }
 
@@ -152,6 +163,16 @@ class ReservationCrudController extends CrudController
      */
     protected function setupUpdateOperation()
     {
+        CRUD::addField([
+            'name' => 'status',
+            'label' => 'Status',
+            'type' => 'select_from_array',
+            'options' => [
+                'Pending' => 'Pending',
+                'Payment Approved' => 'Payment Approved',
+            ],
+            'allows_multiple' => false,
+        ]);
         $this->setupCreateOperation();
     }
 

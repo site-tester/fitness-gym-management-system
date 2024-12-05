@@ -86,7 +86,7 @@
 
         @include('layouts.navbar')
 
-        <main class="py-4 mt-5" style="margin-top:80px !important;">
+        <main class="pb-4 mt-5" style="margin-top:80px !important;">
             @yield('content')
         </main>
 

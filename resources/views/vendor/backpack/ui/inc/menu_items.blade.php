@@ -13,6 +13,7 @@
 <x-backpack::menu-dropdown title="Manage Users" icon="la la-user">
     <x-backpack::menu-dropdown-header title="Client" />
     <x-backpack::menu-dropdown-item title="Client Details" icon="la la-user" :link="backpack_url('membership-detail')" />
+    <x-backpack::menu-dropdown-item title="Client Progress" icon="la la-chart-bar" :link="backpack_url('gym-progress')" />
     <x-backpack::menu-dropdown-item title="Add Client Details" icon="la la-user-plus" :link="backpack_url('membership-detail/create')" />
     <x-backpack::menu-dropdown-header title="Trainer" />
     <x-backpack::menu-dropdown-item title="Trainer Details" icon="la la-user" :link="backpack_url('trainer-detail')" />

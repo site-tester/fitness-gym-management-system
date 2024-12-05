@@ -44,7 +44,9 @@ Route::middleware(['verified'])->group(function () {
     Route::get('/booked', [HomeController::class, 'bookedNow'])->name('booked.now');
     Route::get('/bookings', [HomeController::class, 'bookings'])->name('booking');
 
-    // AJAX
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/my-progress', [HomeController::class, 'gymProgress'])->name('gym.progress');
+
     Route::post('/booking', [HomeController::class, 'bookNowPost'])->name('book.now.post');
     Route::get('/services/{categoryId}', [BookNowController::class, 'getServicesByCategory']);
     Route::get('/service/details/{serviceId}', [BookNowController::class, 'getServiceDetails']);

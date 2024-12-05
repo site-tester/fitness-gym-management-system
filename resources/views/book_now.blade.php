@@ -277,12 +277,12 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row shadow mt-5 mx-auto w-50 p-0 border border-danger">
-            <div class="col-7 px-0 overflow-hidden">
+    <div class="container-fluid  pt-3">
+        <div class="row shadow mt-5 mx-auto w-50 p-0  border border-danger">
+            <div class="col-7 px-0 overflow-hidden d-sm-none d-md-block">
                 <img src="{{ asset('img/Logo.jpg') }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
-            <div class="col-5 px-0 border-start border-danger border-2">
+            <div class="col-12 col-md-5 px-0 border-start border-danger border-2">
                 <div class="rounded-0 ">
                     <div class="progress mx-1 mt-1">
                         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50"

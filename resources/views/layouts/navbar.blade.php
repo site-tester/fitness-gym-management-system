@@ -76,11 +76,15 @@
                                 </form>
                             </div> --}}
                             <div class="dropdown">
-                                <button onclick="myFunction()" class="dropbtn rounded fw-bold">{{ Auth::user()->name }}</button>
+                                <button onclick="myFunction()"
+                                    class="dropbtn rounded fw-bold">{{ Auth::user()->name }}</button>
                                 <div id="myDropdown" class="dropdown-content rounded border border-danger">
-                                    <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('booking') }}">
+                                    {{-- <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('booking') }}">
                                         <i class="bi bi-journal-text"></i>
-                                        Bookings</a>
+                                        Bookings</a> --}}
+                                    <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('dashboard') }}">
+                                        <i class="bi bi-speedometer2"></i>
+                                        Dashboard</a>
                                     <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('profile') }}">
                                         <i class="bi bi-person-badge"></i>
                                         Profile</a>

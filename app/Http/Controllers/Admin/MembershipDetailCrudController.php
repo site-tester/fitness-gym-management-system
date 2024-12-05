@@ -60,6 +60,12 @@ class MembershipDetailCrudController extends CrudController
             'model' => 'App\Models\User',
             'attribute' => 'name',
             'pivot' => false,
+            'options' => function ($query) {
+                // Filter users with the role 'member'
+                return $query->whereHas('roles', function ($q) {
+                    $q->where('name', 'member');
+                })->get();
+            },
         ]);
         CRUD::addColumn([
             'name' => 'phone',

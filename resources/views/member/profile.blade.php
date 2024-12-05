@@ -24,7 +24,8 @@
 @section('background-color', 'bg-container')
 
 @section('content')
-    <div class="container w-75 m-auto mt-5">
+
+    <div class="container-fluid w-75 m-auto pt-3" >
         @if (Session::has('success'))
             <div class="toast-container end-0 ">
                 <div id="liveToast" class="toast bg-success-subtle text-success-emphasis show" role="alert"
@@ -37,7 +38,7 @@
                 </div>
             </div>
         @endif
-        <div class="container w-75">
+        <div class="container w-75 mt-5">
             <div class="my-5 ">
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">

@@ -38,6 +38,7 @@ Route::group([
     Route::crud('payment', 'PaymentCrudController');
     Route::crud('service-amenity', 'ServiceAmenityCrudController');
     Route::crud('amenity', 'AmenityCrudController');
+    Route::crud('gym-progress', 'GymProgressCrudController');
 }); // this should be the absolute last line of this file
 
 /**
