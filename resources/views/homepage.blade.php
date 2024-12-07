@@ -12,8 +12,16 @@
         <div class="video-overlay header-text">
             <div class="caption">
                 <h6>work <em class="text-accent">harder</em>, get <em class="text-accent">stronger</em></h6>
-                <h2>easy with our <em>gym</em></h2>
-                <div class="main-button scroll-to-section">
+                <h2>easy with <em
+                        style="
+                    font-family: var(--bs-font-sans-serif) !important; font-weight: 900;
+                    font-style: normal; text-shadow:1px 1px 2px #fff, /* Light shadow for highlight */ -1px -1px
+                            2px #000; Dark shadow for depth
+                    "
+                    >AJ
+                        DIA</em></h2>
+                <div class="main-button
+                        scroll-to-section">
                     <a href="#features">Become a member</a>
                 </div>
             </div>

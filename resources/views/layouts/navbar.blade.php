@@ -1,17 +1,18 @@
-<header class="header-area header-sticky">
+<header class="header-area header-sticky sticky-top">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav d-flex align-items-center justify-content-between">
                     <!-- ***** Logo Start ***** -->
                     <a href="/" class="logo">
-                        {{-- <img class="img m-auto w-100 h-100" src="{{ asset('img/logo3.png') }}" alt=""> --}}
-                        <em
-                            style="text-shadow:
-                            1px 1px 2px #fff, /* Light shadow for highlight */
-                            -1px -1px 2px #000; Dark shadow for depth">
+                        <img class="img m-auto w-100 h-100" src="{{ asset('img/Logoo.jpg') }}" alt="">
+                        {{-- <em
+                            style="
+                            font-family: var(--bs-font-sans-serif) !important; font-weight: 900;
+                            font-style: normal; text-shadow:1px 1px 2px #fff, /* Light shadow for highlight */ -1px -1px
+                            2px #000; Dark shadow for depth">
                             AJ DIA</em>
-                        <br>
+                        <br> --}}
                         {{-- <div class="fitness">Fitness Gym</div> --}}
                     </a>
                     <!-- ***** Logo End ***** -->

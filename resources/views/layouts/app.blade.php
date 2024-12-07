@@ -97,7 +97,7 @@
 
         @include('layouts.navbar')
 
-        <main class="pb-4 mt-5" style="margin-top:80px !important;">
+        <main class="pb-4">
             @yield('content')
         </main>
 
