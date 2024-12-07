@@ -28,7 +28,7 @@
                         <a class="nav-link border bg-danger active text-nowrap" href="{{ route('booking') }}" role="tab"
                             aria-selected="false"><i class="bi bi-journal-text"></i> Bookings</a>
                         <a class="nav-link border text-danger text-nowrap" href="{{ route('gym.progress') }}" role="tab"
-                            aria-selected="false"><i class="bi bi-person-arms-up"></i> My Progress</a>
+                            aria-selected="false"><i class="bi bi-clipboard2-data"></i> My Progress</a>
                     </div>
 
                     <div class="tab-content w-100 h-100" id="v-pills-tabContent">

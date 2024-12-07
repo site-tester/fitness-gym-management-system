@@ -29,7 +29,7 @@
                         <a class="nav-link border text-danger text-nowrap" href="{{ route('booking') }}" role="tab"
                             aria-selected="false"><i class="bi bi-journal-text"></i> Bookings</a>
                         <a class="nav-link border bg-danger active text-nowrap" href="{{ route('gym.progress') }}"
-                            role="tab" aria-selected="false"><i class="bi bi-person-arms-up"></i> My Progress</a>
+                            role="tab" aria-selected="false"><i class="bi bi-clipboard2-data"></i> My Progress</a>
                     </div>
 
 
@@ -39,7 +39,7 @@
                         <div class="tab-pane fade show active" id="v-pills-dashboard" role="tabpanel"
                             aria-labelledby="v-pills-dashboard-tab" tabindex="0">
                             <div class="p-3 w-100 border">
-                                <h5 class="text-danger"><i class="bi bi-person-arms-up"></i> My Progress</h5>
+                                <h5 class="text-danger"><i class="bi bi-clipboard2-data"></i> My Progress</h5>
                                 <table id="dashboardTable" class="border rounded-table mt-0" style="width:100%">
                                     <thead>
                                         <tr class="">

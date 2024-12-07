@@ -29,7 +29,7 @@
                         <a class="nav-link border text-danger text-nowrap" href="{{ route('booking') }}" role="tab"
                             aria-selected="false"><i class="bi bi-journal-text"></i> Bookings</a>
                         <a class="nav-link border text-danger text-nowrap" href="{{ route('gym.progress') }}" role="tab"
-                            aria-selected="false"><i class="bi bi-person-arms-up"></i> My Progress</a>
+                            aria-selected="false"><i class="bi bi-clipboard2-data"></i> My Progress</a>
                     </div>
 
 
@@ -41,26 +41,30 @@
 
                             <div class="p-3 w-100 border">
                                 <div class="mb-3 p-3">
-                                    <h5 class="text-center ps-3 h3 mb-4">Welcome back, {{ Auth::user()->name }}!
+                                    <h5 class="text-center ps-3 h3 mb-4">Welcome back, <em
+                                            class="h2 text-danger fw-bold">{{ Auth::user()->name }}</em>!
                                         Let’s crush your
                                         fitness goals today!</h5>
-                                    <dov class="row">
-                                        <div class="col border-md-start pe-md-4">
-                                            <h3 class="text-center mb-3"><i class="bi bi-clock-fill text-danger"></i> Timelog</h3>
+
+                                    <div class="row">
+                                        <div class="col px-md-e">
+                                            <h4 class=" mb-3"><i class="bi bi-clock-history text-danger"></i> Timelog</h4>
                                             <div class="row ">
                                                 @if ($timelog->isEmpty())
                                                     <div>
                                                         <div class="col m-auto">
-                                                                <h5 class="text-center">No User Timed in</h5>
+                                                            <h5 class="text-center">No User Timed in</h5>
                                                         </div>
                                                     </div>
                                                 @else
-                                                <div class="row justify-content-center">
-                                                    @foreach ($timelog as $member)
+                                                    <div class="row justify-content-center">
+                                                        @foreach ($timelog as $member)
                                                             @php
                                                                 $time_in = \Carbon\Carbon::parse($member->time_in);
                                                                 $time_out = \Carbon\Carbon::parse($member->time_out);
-                                                                $timelog_date = \Carbon\Carbon::parse($member->timelog_date);
+                                                                $timelog_date = \Carbon\Carbon::parse(
+                                                                    $member->timelog_date,
+                                                                );
                                                             @endphp
                                                             <div class="col-3">
                                                                 <div class="card p-2 h-100">
@@ -75,28 +79,34 @@
                                                                     </div>
                                                                     <div class="text-secondary text-center row">
                                                                         @if ($member->time_in)
-                                                                            <p class="mb-0 col-12 col-md-6 text-md-start">Time-In: <br>
+                                                                            <p class="mb-0 col-12 col-md-6 text-md-start">
+                                                                                Time-In: <br>
                                                                                 {{ $time_in->format('h:i A') }}</p>
                                                                         @endif
                                                                         {{-- <br class="d-block d-md-none"> --}}
                                                                         @if ($member->time_out)
-                                                                            <p class="mb-0 col-12 col-md-6 text-md-end">Time-Out: <br>
+                                                                            <p class="mb-0 col-12 col-md-6 text-md-end">
+                                                                                Time-Out: <br>
                                                                                 {{ $time_out->format('h:i A') }}</p>
                                                                         @endif
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-                                                    @endforeach
-                                                </div>
+                                                        @endforeach
+                                                    </div>
                                                 @endif
                                             </div>
                                         </div>
-                                    </dov>
+                                    </div>
+                                </div>
+                                <hr class="mb-4">
+                                <div class="px-3">
+                                    <h4> <i class="bi bi-graph-up text-danger"></i> Workout Progress</h4>
+                                    <canvas id="progressChart" style="max-height: 200px"></canvas>
                                 </div>
                                 <hr class="my-4">
                                 <div class="p-3">
-                                    <h4> <i class="bi bi-person-arms-up text-danger"></i>Latest Progress</h4>
+                                    <h4> <i class="bi bi-clipboard2-data text-danger"></i> Latest Progress</h4>
                                     <table id="dashboardTable" class="border rounded-table mt-0" style="width:100%">
                                         <thead>
                                             <tr class="">
@@ -137,6 +147,7 @@
 
 @section('scripts')
     <script src="https://cdn.datatables.net/v/dt/dt-2.1.8/r-3.0.3/datatables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(document).ready(function() {
             $.ajaxSetup({
@@ -156,6 +167,75 @@
 
 
 
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('progressChart').getContext('2d');
+
+            // Data passed from the controller
+            const labels = @json($labels);
+            const weightData = @json($weightData);
+            const repsData = @json($repsData);
+            const bmiData = @json($bmiData);
+
+            // Create the line chart
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels, // x-axis: dates
+                    datasets: [{
+                            label: 'Weight (kg)',
+                            data: weightData,
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                        },
+                        {
+                            label: 'Reps',
+                            data: repsData,
+                            borderColor: 'rgba(255, 206, 86, 1)',
+                            backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                        },
+                        {
+                            label: 'BMI',
+                            data: bmiData,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                        },
+                        tooltip: {
+                            enabled: true,
+                        },
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date',
+                            },
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Progress Metrics',
+                            },
+                            beginAtZero: true,
+                        },
+                    },
+                },
+            });
         });
     </script>
 @endsection

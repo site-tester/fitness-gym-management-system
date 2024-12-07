@@ -47,7 +47,18 @@ class HomeController extends Controller
         $userDetail = MembershipDetail::where('client_id', Auth::user()->id )->first();
         $workoutProgress = GymProgress::where('user_id', Auth::id())->orderBy('progress_date', 'desc')->limit(5)->get();
         $timelog = MemberVisit::where('client_rfid_id', $userDetail->rfid_number)->orderBy('created_at', 'desc')->limit(3)->get();
-        return view('dashboard', compact('timelog', 'workoutProgress'));
+
+        $progressData = GymProgress::where('user_id', auth()->id())
+            ->orderBy('progress_date', 'asc')
+            ->get(['progress_date', 'weight', 'reps', 'bmi']);
+
+        // Prepare data for Chart.js
+        $labels = $progressData->pluck('progress_date'); // x-axis labels
+        $weightData = $progressData->pluck('weight');    // y-axis: weight
+        $repsData = $progressData->pluck('reps');        // y-axis: reps
+        $bmiData = $progressData->pluck('bmi');
+                // y-axis: BMI
+        return view('dashboard', compact('timelog', 'workoutProgress', 'labels', 'weightData', 'repsData', 'bmiData'));
     }
 
     public function bookings(){
