@@ -28,7 +28,7 @@ return [
      * Pick a login page layout.
      * Possible values: default, illustration, cover
      */
-    'auth_layout' => 'default', // default, illustration, cover
+    'auth_layout' => 'illustration', // default, illustration, cover
 
     /**
      * Here you can easily load your own extra css styles.
@@ -95,7 +95,7 @@ return [
         /**
          * When true, the password input will have a toggle button to show/hide the password.
          */
-        'showPasswordVisibilityToggler' => false,
+        'showPasswordVisibilityToggler' => true,
     ],
 
     /**

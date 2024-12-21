@@ -5,7 +5,7 @@
                 <nav class="main-nav d-flex align-items-center justify-content-between">
                     <!-- ***** Logo Start ***** -->
                     <a href="/" class="logo">
-                        <img class="img m-auto w-100 h-100" src="{{ asset('img/Logoo.jpg') }}" alt="">
+                        <img class="img m-auto w-100 h-100" src="{{ asset('img/Logo.jpg') }}" alt="">
                         {{-- <em
                             style="
                             font-family: var(--bs-font-sans-serif) !important; font-weight: 900;
@@ -24,6 +24,14 @@
                                 Home
                             </a>
                         </li>
+                        @hasrole('member')
+                            <li class="scroll-to-section">
+                                <a href="{{ route('workout') }}"
+                                    class="{{ Route::currentRouteName() === 'workout' ? 'active' : '' }}">
+                                    Workouts
+                                </a>
+                            </li>
+                        @endhasrole
                         <li class="scroll-to-section">
                             <a href="{{ route('about.us') }}"
                                 class="{{ Route::currentRouteName() === 'about.us' ? 'active' : '' }}">

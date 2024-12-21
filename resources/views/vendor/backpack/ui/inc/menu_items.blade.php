@@ -28,6 +28,8 @@
 </x-backpack::menu-dropdown>
 
 <x-backpack::menu-dropdown title="Manage GYM" icon="la la-dumbbell">
+    <x-backpack::menu-dropdown-header title="Workouts" />
+    <x-backpack::menu-dropdown-item title="Workouts" icon="la la-dumbbell" :link="backpack_url('workout')" />
     <x-backpack::menu-dropdown-header title="Services" />
     <x-backpack::menu-dropdown-item title="Service" icon="la la-hard-hat" :link="backpack_url('service')" />
     <x-backpack::menu-dropdown-item title="Service Categories" icon="la la-clipboard-list" :link="backpack_url('service-category')" />
@@ -38,4 +40,3 @@
 </x-backpack::menu-dropdown>
 
 <x-backpack::menu-item title="Contact Us Inbox" icon="la la-inbox" :link="backpack_url('contactus-inbox')" />
-

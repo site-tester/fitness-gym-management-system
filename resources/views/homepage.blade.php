@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading">
-                        <h2><em>Services</em></h2>
+                        <h2>Our <em>Services</em></h2>
                         <img src="{{ asset('img/line-dec.png') }}" alt="waves">
                     </div>
                 </div>
@@ -161,7 +161,7 @@
                         <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula, sit amet
                             dapibus odio augue eget libero. Morbi tempus mauris a nisi luctus imperdiet.</p>
                         <div class="main-button scroll-to-section">
-                            <a href="#our-classes">Become a member</a>
+                            <a href="{{ route('register') }}">Become a member</a>
                         </div>
                     </div>
                 </div>

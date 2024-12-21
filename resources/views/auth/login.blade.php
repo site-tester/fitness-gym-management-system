@@ -33,7 +33,7 @@
                 <div class="card mb-5" style="min-height: 400px">
                     {{-- <div class="card-header">{{ __('Login') }}</div> --}}
                     <div class="card-body row ">
-                        <div class="col col-md-6 text-center align-content-center">
+                        <div class="d-none d-md-block col-md-6 text-center align-content-center">
                             <div class="font-monospace h3 fst-italic mb-3">
                                 Fitness Gym Management System
                             </div>
@@ -41,11 +41,11 @@
                                 <img src="{{ asset('img/Logo.jpg') }}" alt="" width="200px">
                             </div>
                             <div class="login-address mb-3">
-                                <p class="h5"><i class="bi bi-geo-alt-fill text-accent"></i> address</p>
+                                <p class="h5 px-3"><i class="bi bi-geo-alt-fill text-accent"></i> DIA Building Basement Area, Tara, Sipocot, Philippines</p>
                             </div>
 
                         </div>
-                        <div class="col col-md-6 p-5">
+                        <div class="col col-md-6 py-5 ps-3 pe-5">
                             <form class="mt-md-5" method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="h3 mb-3">Login</div>
@@ -88,9 +88,11 @@
                                         <span class="input-group-text" id="basic-addon1"><i
                                                 class="bi bi-shield-lock"></i></span>
                                         <input id="password" type="password"
-                                            class="form-control rounded-end @error('password') is-invalid @enderror"
-                                            name="password" required autocomplete="current-password" placeholder="Password">
-
+                                            class="form-control @error('password') is-invalid @enderror" name="password"
+                                            required autocomplete="current-password" placeholder="Password">
+                                        <span class="input-group-text btn border-secondary-subtle"
+                                            ><i id="togglePassword"
+                                                class="bi bi-eye"></i></span>
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -136,4 +138,30 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            //  Toggle  Password Start
+            $("#togglePassword").removeClass("bi bi-eye").addClass("bi bi-eye-slash");
+            $("#togglePassword").click(function() {
+                const passwordInput = $("#password");
+                const type = passwordInput.attr("type");
+
+                if (type === "password") {
+                    passwordInput.attr("type", "text");
+                    $("#togglePassword").removeClass("bi bi-eye-slash").addClass("bi bi-eye");
+                } else {
+                    passwordInput.attr("type", "password");
+                    $("#togglePassword").removeClass("bi bi-eye").addClass("bi bi-eye-slash");
+                }
+            });
+            //  Toggle  Password End
+
+        });
+    </script>
 @endsection

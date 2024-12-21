@@ -12,6 +12,7 @@ use App\Models\Reservation;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Models\User;
+use App\Models\Workout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -44,7 +45,7 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        $userDetail = MembershipDetail::where('client_id', Auth::user()->id )->first();
+        $userDetail = MembershipDetail::where('client_id', Auth::user()->id)->first();
         $workoutProgress = GymProgress::where('user_id', Auth::id())->orderBy('progress_date', 'desc')->limit(5)->get();
         $timelog = MemberVisit::where('client_rfid_id', $userDetail->rfid_number)->orderBy('created_at', 'desc')->limit(3)->get();
 
@@ -57,11 +58,12 @@ class HomeController extends Controller
         $weightData = $progressData->pluck('weight');    // y-axis: weight
         $repsData = $progressData->pluck('reps');        // y-axis: reps
         $bmiData = $progressData->pluck('bmi');
-                // y-axis: BMI
+        // y-axis: BMI
         return view('dashboard', compact('timelog', 'workoutProgress', 'labels', 'weightData', 'repsData', 'bmiData'));
     }
 
-    public function bookings(){
+    public function bookings()
+    {
 
         $reservations = Reservation::where('user_id', Auth::user()->id)->get();
         return view('booking', compact('reservations'));
@@ -133,7 +135,7 @@ class HomeController extends Controller
         $serviceCategories = ServiceCategory::all();
         $paymentMethods = PaymentMethod::all();
 
-        return view('book_now', compact('profile','serviceCategories', 'paymentMethods'));
+        return view('book_now', compact('profile', 'serviceCategories', 'paymentMethods'));
     }
 
     public function bookNowPost(Request $request)
@@ -189,12 +191,12 @@ class HomeController extends Controller
             Payment::create([
                 'user_id' => Auth::id(),
                 'reservation_id' => $reservation->id,
-                'payment_method' => $reservation->payment_method ,
+                'payment_method' => $reservation->payment_method,
                 'amount' => $reservation->total_amount,
                 'payment_status' => 'Pending',
             ]);
 
-            $payment_details = PaymentMethod::where('name',$reservation->payment_method)->first();
+            $payment_details = PaymentMethod::where('name', $reservation->payment_method)->first();
 
             Mail::to(Auth::user()->email)->send(new BookingPaymentDetails($reservation, $payment_details));
 
@@ -210,7 +212,8 @@ class HomeController extends Controller
         }
     }
 
-    public function bookedNow(){
+    public function bookedNow()
+    {
         return view('book_now_success');
     }
 
@@ -222,4 +225,54 @@ class HomeController extends Controller
         $service = Service::find($serviceId);
         return $service->price ?? 0; // Default to 0 if price not found
     }
+
+    public function workoutView(Request $request)
+    {
+
+        // Retrieve the filter values from the request
+        $skillLevel = $request->get('excercise_type', 'all');
+        $bodyPart = $request->get('body-part', 'all');
+
+        // Query the workouts based on the selected filters
+        $workouts = Workout::query();
+
+        if ($skillLevel !== 'all') {
+            $workouts->where('experience_level', $skillLevel);
+        }
+
+        if ($bodyPart !== 'all') {
+            $workouts->where('target_muscle_group', $bodyPart);
+        }
+
+        // Get the results
+        $workouts = $workouts->get();
+
+        // Generate YouTube thumbnails
+        foreach ($workouts as $workout) {
+            // Assuming `youtube_url` is a column in your workouts table
+            if ($workout->video_url) {
+                $workout->youtube_thumbnail = $this->getYouTubeThumbnail($workout->video_url);
+            } else {
+                $workout->youtube_thumbnail = null;
+            }
+        }
+
+        return view('workouts', compact('workouts'));
+    }
+
+    public function getYouTubeThumbnail($youtubeUrl) {
+        parse_str(parse_url($youtubeUrl, PHP_URL_QUERY), $queryParams);
+        if (isset($queryParams['v'])) {
+            $videoId = $queryParams['v'];
+            return "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg";
+        }
+        return null;
+    }
+
+    public function workoutDetails($workoutId)
+    {
+        $workout = Workout::find($workoutId);
+        return view('workouts_page', compact('workout'));
+    }
+
 }
