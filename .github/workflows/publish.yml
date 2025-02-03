@@ -1,0 +1,85 @@
+name: Deploy Laravel App to Hostinger
+
+on:
+  push:
+    branches:
+      - main  # Change this to the branch you want to trigger the deployment from
+
+jobs:
+  deploy:
+    name: Deploy Application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'  # Use the version that matches your Laravel app
+          extensions: mbstring, xml, bcmath
+          tools: composer
+
+      - name: Install Dependencies
+        run: |
+          composer install --optimize-autoloader --no-dev
+          npm install
+          npm run build  # If you're using Vite
+
+      - name: Deploy via SSH
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: 45.84.205.136 # ${{ secrets.HOSTINGER_SSH_HOST }}
+          username: u992745133 # ${{ secrets.HOSTINGER_SSH_USER }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          source: "./"  # Copies the entire Laravel project
+          target: "/home/u711147399/domains/ajdiafitnessgym.com"  # Path to your subdomain directory
+          rm: true
+          port: 65002
+
+      - name: Run SSH Commands
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: 45.84.205.136
+          username: u992745133
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          port: 65002
+          script: |
+            cd "/home/u711147399/domains/ajdiafitnessgym.com"
+            # Create .env file with content
+            echo "APP_NAME=AJ DIA" > .env
+            echo "APP_ENV=production" >> .env
+            echo "APP_KEY=" >> .env
+            echo "APP_DEBUG=true" >> .env
+            echo "APP_URL=https://ajdiafitnessgym.com/" >> .env
+            echo "LOG_CHANNEL=stack" >> .env
+            echo "LOG_LEVEL=debug" >> .env
+            echo "DB_CONNECTION=mysql" >> .env
+            echo "DB_HOST=localhost" >> .env
+            echo "DB_PORT=3306" >> .env
+            echo "DB_DATABASE=u992745133_ajdiafitness" >> .env
+            echo "DB_USERNAME=u992745133_ajdia" >> .env
+            echo "DB_PASSWORD='>GGOCHs6C'" >> .env
+            echo "BROADCAST_DRIVER=log" >> .env
+            echo "CACHE_DRIVER=file" >> .env
+            echo "FILESYSTEM_DISK=local" >> .env
+            echo "QUEUE_CONNECTION=sync" >> .env
+            echo "SESSION_DRIVER=file" >> .env
+            echo "SESSION_LIFETIME=120" >> .env
+            echo "MAIL_MAILER=smtp" >> .env
+            echo "MAIL_HOST=smtp.hostinger.com" >> .env
+            echo "MAIL_PORT=465" >> .env
+            echo "MAIL_USERNAME='support@ajdiafitnessgym.com'" >> .env
+            echo "MAIL_PASSWORD='0#bGUMrIp4H7'" >> .env
+            echo "MAIL_ENCRYPTION=ssl" >> .env
+            echo "MAIL_FROM_ADDRESS='support@ajdiafitnessgym.com'" >> .env
+            echo "MAIL_FROM_NAME=\"AJ DIA\"" >> .env
+            composer2 install --optimize-autoloader --no-dev
+            php artisan key:generate
+            php artisan migrate:refresh --seed --seeder=DatabaseSeeder
+            php artisan cache:clear
+            php artisan config:clear
+            php artisan route:clear
+            php artisan view:clear
+
