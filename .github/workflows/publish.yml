@@ -37,6 +37,7 @@ jobs:
           target: "/home/u711147399/domains/ajdiafitnessgym.com"  # Path to your subdomain directory
           rm: true
           port: 65002
+          debug: true
 
       - name: Run SSH Commands
         uses: appleboy/ssh-action@v0.1.5
