@@ -32,7 +32,7 @@ jobs:
         with:
           host: 45.84.205.136 # ${{ secrets.HOSTINGER_SSH_HOST }}
           username: u992745133 # ${{ secrets.HOSTINGER_SSH_USER }}
-          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "./"  # Copies the entire Laravel project
           target: "/home/u711147399/domains/ajdiafitnessgym.com"  # Path to your subdomain directory
           rm: true
@@ -43,7 +43,7 @@ jobs:
         with:
           host: 45.84.205.136
           username: u992745133
-          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 65002
           script: |
             cd "/home/u711147399/domains/ajdiafitnessgym.com"
