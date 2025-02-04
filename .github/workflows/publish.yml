@@ -23,7 +23,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          composer install --optimize-autoloader --no-dev
+          composer2 install --optimize-autoloader --no-dev
           npm install
           npm run build  # If you're using Vite
 
@@ -82,6 +82,7 @@ jobs:
 
             # ✅ Install dependencies & run migrations
             composer2 install --optimize-autoloader --no-dev
+            composer2 update fakerphp/faker
             php artisan key:generate
             php artisan migrate:fresh --seed --seeder=DatabaseSeeder --force
             php artisan cache:clear
