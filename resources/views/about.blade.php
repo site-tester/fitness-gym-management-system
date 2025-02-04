@@ -6,7 +6,7 @@
 @section('content')
     <div>
         <div class="main-banner" id="top">
-            <div class="d-flex justify-content-center align-items-center Fixed-parallax-background" style="height: 350px;background: url(/img/423584374_868624935269571_8955187234334423439_n.jpg);"></div>
+            <div class="d-flex justify-content-center align-items-center Fixed-parallax-background" style="height: 350px;background: url(resources/img/423584374_868624935269571_8955187234334423439_n.jpg);"></div>
             <div class="video-overlay header-text h-100">
                 <div class="caption mt-5">
                     <h1 class="hero-title text-white" style="font-weight: bold;font-size: 50px;">ABOUT US</h1>
