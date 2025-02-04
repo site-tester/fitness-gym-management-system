@@ -342,7 +342,7 @@
                         <div class="col-lg-4">
                             <div class="trainer-item">
                                 <div class="image-thumb">
-                                    <img src="{{ asset('storage/' . $trainer->trainerDetails->profile_picture) }}"
+                                    <img src="{{ asset('storage/app/public' . $trainer->trainerDetails->profile_picture) }}"
                                         alt="">
                                 </div>
                                 <div class="down-content">
