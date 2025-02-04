@@ -80,9 +80,12 @@ jobs:
             echo "MAIL_FROM_ADDRESS='support@ajdiafitnessgym.com'" >> .env
             echo "MAIL_FROM_NAME=\"AJ DIA\"" >> .env
 
-            # ✅ Install dependencies & run migrations
+            # ✅ Install dependencies & run migrations & symlink storage
             composer2 install --optimize-autoloader --no-dev
             composer2 update fakerphp/faker
+
+            php artisan storage:link
+
             php artisan key:generate
             php artisan migrate:fresh --seed --seeder=DatabaseSeeder --force
             php artisan cache:clear
