@@ -22,7 +22,7 @@
                         DIA</em></h2>
                 <div class="main-button
                         scroll-to-section">
-                    <a href="#features">Become a member</a>
+                    <a href="{{ route('register') }}">Become a member</a>
                 </div>
             </div>
         </div>
