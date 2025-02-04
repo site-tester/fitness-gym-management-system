@@ -6,7 +6,7 @@
     <!-- ***** Main Banner Area Start ***** -->
     <div class="main-banner" id="top">
         <video autoplay muted loop id="bg-video">
-            <source src="{{ asset('img/gym-video.mp4') }}" type="video/mp4" />
+            <source src="{{ asset('public/img/gym-video.mp4') }}" type="video/mp4" />
         </video>
 
         <div class="video-overlay header-text">
@@ -36,7 +36,7 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading">
                         <h2>Our <em>Services</em></h2>
-                        <img src="{{ asset('img/line-dec.png') }}" alt="waves">
+                        <img src="{{ asset('public/img/line-dec.png') }}" alt="waves">
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@
                     @foreach ($services as $service)
                         <li class="feature-item col-6">
                             <div class="left-icon">
-                                <img src="{{ asset('img/features-first-icon.png') }}" alt="First One">
+                                <img src="{{ asset('public/img/features-first-icon.png') }}" alt="First One">
                             </div>
                             <div class="right-content">
                                 <h4>{{ $service->name }}</h4>
@@ -331,7 +331,7 @@
                     <div class="col-lg-6 offset-lg-3">
                         <div class="section-heading">
                             <h2>Expert <em>Trainers</em></h2>
-                            <img src="{{ asset('img/line-dec.png') }}" alt="">
+                            <img src="{{ asset('public/img/line-dec.png') }}" alt="">
                             <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor,
                                 ultricies fermentum massa consequat eu.</p>
                         </div>
