@@ -297,7 +297,9 @@ a[x-apple-data-detectors],
                                         style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Roboto&quot;,&quot;Oxygen&quot;,&quot;Ubuntu&quot;,&quot;Cantarell&quot;,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;border:1px solid white">
                                         Account Name:</td>
                                     <td style="font-size:16px;font-weight:600;line-height:1.4;color:#555;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Roboto&quot;,&quot;Oxygen&quot;,&quot;Ubuntu&quot;,&quot;Cantarell&quot;,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;border:1px solid white"
-                                        bgcolor="#f2f2f2">{{$payment_method->account_name}}</td>
+                                        bgcolor="#f2f2f2">
+                                        {{$payment_method->account_name}}
+                                    </td>
                                 </tr>
                                 <tr bgcolor="#f2f2f2">
                                     <td

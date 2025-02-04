@@ -196,7 +196,7 @@ class HomeController extends Controller
                 'payment_status' => 'Pending',
             ]);
 
-            $payment_details = PaymentMethod::where('name', $reservation->payment_method)->first();
+            $payment_details = PaymentMethod::where('id', $reservation->payment_method)->first();
 
             Mail::to(Auth::user()->email)->send(new BookingPaymentDetails($reservation, $payment_details));
 

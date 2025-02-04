@@ -16,10 +16,10 @@ class PaymentMethodSeeder extends Seeder
         $payment_methods = [
             [
                 'name' => 'Walk-In',
-                'account_name' => '',
-                'account_number' => '',
-                'category' => '',
-                'qr_path' => '',
+                'account_name' => "N/A",
+                'account_number' => "N/A",
+                'category' => 'walk_in',
+                'qr_path' => 'N/A',
                 'description' => 'Pay on Arrival',
             ],
             [
