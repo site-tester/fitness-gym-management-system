@@ -6,7 +6,7 @@
 @section('content')
     <div>
         <div class="main-banner" id="top">
-            <div class="d-flex justify-content-center align-items-center Fixed-parallax-background" style="height: 350px;background: url(resources/img/423584374_868624935269571_8955187234334423439_n.jpg);"></div>
+            <div class="d-flex justify-content-center align-items-center Fixed-parallax-background" style="height: 350px;background: url(/resources/img/423584374_868624935269571_8955187234334423439_n.jpg);"></div>
             <div class="video-overlay header-text h-100">
                 <div class="caption mt-5">
                     <h1 class="hero-title text-white" style="font-weight: bold;font-size: 50px;">ABOUT US</h1>
@@ -36,7 +36,7 @@
                                     <p class="mb-4" style="text-align: justify;">AJ DIA Fitness Gym is an establishment made for everyone who wish to better themselves physically and mentally. We believe in more than just workouts; we believe in building a community dedicated to strength, wellness, and personal growth. Join us on a journey to transform your body and mind, where every rep brings you closer to your best self!<br><br></p>
                                 </div>
                             </div>
-                            <div class="col-md-6 order-first order-md-last" style="min-height: 250px;background: #bb3030;"><img class="w-100 h-100 fit-cover" src="{{ asset('img/423582406_868624681936263_6185503928828898119_n.jpg')}}"></div>
+                            <div class="col-md-6 order-first order-md-last" style="min-height: 250px;background: #bb3030;"><img class="w-100 h-100 fit-cover" src="{{ asset('/resources/img/423582406_868624681936263_6185503928828898119_n.jpg')}}"></div>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     <div class="carousel-item active">
                         <section class="text-white py-4 py-xl-5">
                             <div class="container-fluid px-0">
-                                <div class="border rounded border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: linear-gradient(rgba(99,20,20,0.2), rgba(99,20,20,0.2)), url(/img/423583148_868625718602826_376942488243513661_n.jpg) center / cover;">
+                                <div class="border rounded border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: linear-gradient(rgba(99,20,20,0.2), rgba(99,20,20,0.2)), url(/resources/img/423583148_868625718602826_376942488243513661_n.jpg) center / cover;">
                                     <div class="row">
                                         <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                                             <div>

@@ -8,7 +8,7 @@
     <div>
         <div class="main-banner" id="top">
             <div class="d-flex justify-content-center align-items-center Fixed-parallax-background"
-                style="height: 400px; background-image: url('/img/423582406_868624681936263_6185503928828898119_n.jpg'); background-size: cover; background-attachment: fixed; background-position: center;">
+                style="height: 400px; background-image: url('/resources/img/423582406_868624681936263_6185503928828898119_n.jpg'); background-size: cover; background-attachment: fixed; background-position: center;">
             </div>
 
             <div class="video-overlay header-text h-100">
@@ -135,7 +135,7 @@
             </div>
         </div>
         <div class="bg-light border rounded border-light hero-photography jumbotron py-5 px-4 mb-3 text-center"
-            style="padding-top: 70px;margin-top: 0px; background: url('/img/423583148_868625718602826_376942488243513661_n.jpg'); background-size: cover;
+            style="padding-top: 70px;margin-top: 0px; background: url('/resources/img/423583148_868625718602826_376942488243513661_n.jpg'); background-size: cover;
   background-position: center;">
             <h1 class="hero-title text-white" style="font-weight: bold;">VISIT US ON FACEBOOK!</h1>
             <p class="hero-subtitle text-white">Stay connected! Visit us on Facebook for the latest from AJ DIA Fitness</p>
