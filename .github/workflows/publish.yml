@@ -49,7 +49,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 65002
           script: |
-            cd "/home/u992745133/domains/ajdiafitnessgym.com/public_html
+            cd "/home/u992745133/domains/ajdiafitnessgym.com/public_html"
             # Create .env file with content
             echo "APP_NAME=AJ DIA" > .env
             echo "APP_ENV=production" >> .env
