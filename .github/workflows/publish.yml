@@ -90,5 +90,5 @@ jobs:
             php artisan view:clear
 
             # ✅ Copy .htaccess and index.php to parent folder
-            cp .htaccess ../
-            cp index.php ../
+            cp public/.htaccess ./
+            cp public/index.php ./
