@@ -94,4 +94,6 @@ jobs:
             cp public/.htaccess ./
             cp public/index2.php ./index.php
             cp -r public/build ./
-            # cp public/storage ./storage/app/public
+
+            # ✅ Install Laravel Backpack
+            php artisan backpack:install
