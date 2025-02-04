@@ -38,7 +38,7 @@
                                 Fitness Gym Management System
                             </div>
                             <div class="logo mb-3">
-                                <img src="{{ asset('img/Logo.jpg') }}" alt="" width="200px">
+                                <img src="{{ asset('/resources/img/Logo.jpg') }}" alt="" width="200px">
                             </div>
                             <div class="login-address mb-3">
                                 <p class="h5 px-3"><i class="bi bi-geo-alt-fill text-accent"></i> DIA Building Basement Area, Tara, Sipocot, Philippines</p>

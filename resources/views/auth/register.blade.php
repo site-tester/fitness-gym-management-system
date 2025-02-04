@@ -35,7 +35,7 @@
 
                 <div class="card-body">
                     <div  class="text-center">
-                        <img class="img-fluid" src="{{asset('img/Logo.jpg')}}" alt="" width="200">
+                        <img class="img-fluid" src="{{asset('/resources/img/Logo.jpg')}}" alt="" width="200">
                         <p class="my-5 h4">Register</p>
                     </div>
 
