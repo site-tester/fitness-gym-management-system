@@ -92,5 +92,5 @@ jobs:
 
             # ✅ Copy .htaccess and index.php to parent folder
             cp public/.htaccess ./
-            cp public/index.php ./
-            cp public/build ./
+            cp public/index2.php ./index.php
+            cp -r public/build ./
