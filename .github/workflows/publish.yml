@@ -50,7 +50,8 @@ jobs:
           port: 65002
           script: |
             cd "/home/u992745133/domains/ajdiafitnessgym.com/public_html"
-            # Create .env file with content
+
+            # ✅ Create .env file with content
             echo "APP_NAME='AJ DIA'" > .env
             echo "APP_ENV=production" >> .env
             echo "APP_KEY=" >> .env
@@ -78,6 +79,8 @@ jobs:
             echo "MAIL_ENCRYPTION=ssl" >> .env
             echo "MAIL_FROM_ADDRESS='support@ajdiafitnessgym.com'" >> .env
             echo "MAIL_FROM_NAME=\"AJ DIA\"" >> .env
+
+            # ✅ Install dependencies & run migrations
             composer2 install --optimize-autoloader --no-dev
             php artisan key:generate
             php artisan migrate:refresh --seed --seeder=DatabaseSeeder
@@ -86,3 +89,6 @@ jobs:
             php artisan route:clear
             php artisan view:clear
 
+            # ✅ Copy .htaccess and index.php to parent folder
+            cp .htaccess ../
+            cp index.php ../
