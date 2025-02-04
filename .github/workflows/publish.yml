@@ -83,7 +83,7 @@ jobs:
             # ✅ Install dependencies & run migrations
             composer2 install --optimize-autoloader --no-dev
             php artisan key:generate
-            php artisan migrate:refresh --seed --seeder=DatabaseSeeder --force
+            php artisan migrate:fresh --seed --seeder=DatabaseSeeder --force
             php artisan cache:clear
             php artisan config:clear
             php artisan route:clear
