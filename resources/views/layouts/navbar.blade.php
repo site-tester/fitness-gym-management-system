@@ -91,15 +91,20 @@
                                     {{-- <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('booking') }}">
                                         <i class="bi bi-journal-text"></i>
                                         Bookings</a> --}}
-                                    <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('dashboard') }}">
-                                        <i class="bi bi-speedometer2"></i>
-                                        Dashboard</a>
-                                    <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('profile') }}">
-                                        <i class="bi bi-person-badge"></i>
-                                        Profile</a>
-                                    <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('book.now') }}">
-                                        <i class="bi bi-journal-arrow-down"></i>
-                                        Book Now</a>
+                                    @php
+                                        $userDetails = Auth::user()->rfid_number;
+                                    @endphp
+                                    @if ($userDetails)
+                                        <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('dashboard') }}">
+                                            <i class="bi bi-speedometer2"></i>
+                                            Dashboard</a>
+                                        <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('profile') }}">
+                                            <i class="bi bi-person-badge"></i>
+                                            Profile</a>
+                                        <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('book.now') }}">
+                                            <i class="bi bi-journal-arrow-down"></i>
+                                            Book Now</a>
+                                    @endif
                                     @hasanyrole('admin|superadmin')
                                         <a class="m-1 link-body-emphasis fw-bold" href="/admin">
                                             Dashboard

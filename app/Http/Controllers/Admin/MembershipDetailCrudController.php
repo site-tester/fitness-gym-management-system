@@ -104,20 +104,30 @@ class MembershipDetailCrudController extends CrudController
          * - CRUD::field('price')->type('number');
          */
         CRUD::addField([
-            'name' => 'name',
+            'name' => 'user_id',
             'label' => 'Client Name',
-            'type' => 'text'
+            'type' => 'select_from_array',
+            'options' => User::whereHas('roles', function ($query) {
+                $query->where('name', 'member');
+            })
+                ->whereNull('rfid_number')
+                ->orWhere('rfid_number', '')
+
+                ->pluck('name', 'id')
+                ->toArray(),
+            'allows_null' => false,
+            'default' => '',
         ]);
-        CRUD::addField([
-            'name' => 'email',
-            'label' => 'Email',
-            'type' => 'email'
-        ]);
-        CRUD::addField([
-            'name' => 'password',
-            'label' => 'Password',
-            'type' => 'password'
-        ]);
+        // CRUD::addField([
+        //     'name' => 'email',
+        //     'label' => 'Email',
+        //     'type' => 'email'
+        // ]);
+        // CRUD::addField([
+        //     'name' => 'password',
+        //     'label' => 'Password',
+        //     'type' => 'password'
+        // ]);
         CRUD::addField([
             'name' => 'rfid_number',
             'label' => 'RFID Card Number',
@@ -207,13 +217,13 @@ class MembershipDetailCrudController extends CrudController
     {
         $request = $this->crud->getRequest();
 
-        dd($request->all());
+        // dd($request->all());
 
         $rules = [
             'rfid_number' => 'required|unique:users,rfid_number',
-            'name' => 'required|min:2',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
+            // 'name' => 'required|min:2',
+            // 'email' => 'required|email|unique:users,email',
+            // 'password' => 'required|min:6',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
             'address' => 'required',
             'birthdate' => 'required|date',
@@ -229,13 +239,13 @@ class MembershipDetailCrudController extends CrudController
         $messages = [
             'rfid_number.required' => 'The RFID number is required.',
             'rfid_number.unique' => 'The RFID number already in use, must be unique.',
-            'name.required' => 'The name is required.',
-            'name.min' => 'The name must be at least 2 characters.',
-            'email.required' => 'The email address is required.',
-            'email.email' => 'Please provide a valid email address.',
-            'email.unique' => 'This email address is already registered.',
-            'password.required' => 'The password is required.',
-            'password.min' => 'The password must be at least 6 characters.',
+            // 'name.required' => 'The name is required.',
+            // 'name.min' => 'The name must be at least 2 characters.',
+            // 'email.required' => 'The email address is required.',
+            // 'email.email' => 'Please provide a valid email address.',
+            // 'email.unique' => 'This email address is already registered.',
+            // 'password.required' => 'The password is required.',
+            // 'password.min' => 'The password must be at least 6 characters.',
             'phone.required' => 'The phone number is required.',
             'phone.regex' => 'The phone number format is invalid.',
             'address.required' => 'The address is required.',
@@ -253,18 +263,24 @@ class MembershipDetailCrudController extends CrudController
 
         $request->validate($rules, $messages);
 
-        $username = $this->generateUsername($request['name']);
+        // $username = $this->generateUsername($request['name']);
 
-        $user = User::create([
+        // $user = User::createOrFirst([
+        //     'rfid_number' => $request['rfid_number'],
+        //     'name' => $request['name'],
+        //     'username' => $username,
+        //     'email' => $request['email'],
+        //     'password' => Hash::make($request['password']), // Hash the password
+        // ]);
+
+        // $memberRole = Role::where('name', 'member')->first();
+        // $user->assignRole($memberRole);
+
+        $user = User::where('id', $request['user_id'])->first();
+
+        $user->update([
             'rfid_number' => $request['rfid_number'],
-            'name' => $request['name'],
-            'username' => $username,
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']), // Hash the password
         ]);
-
-        $memberRole = Role::where('name', 'member')->first();
-        $user->assignRole($memberRole);
 
         // Create the MemberDetails record and associate it with the User
         MembershipDetail::create([

@@ -1,14 +1,14 @@
 @extends(backpack_view('layouts.auth'))
 
 @section('content')
-    <div class="page page-center" style="background-image: url({{ basset('img/ad_bg.jpg') }});background-position: center; background-size: fill; background-repeat: no-repeat;">
+    <div class="page page-center" style="background-image: url({{ asset('storage/img/ad_bg.jpg') }});background-position: center; background-size: fill; background-repeat: no-repeat;">
         <div class="container container-normal py-4">
             <div class="row align-items-center g-4">
                 <div class="col-lg">
                     <div class="container-tight">
-                        <div class="text-center mb-4 display-6 auth-logo-container">
+                        {{-- <div class="text-center mb-4 display-6 auth-logo-container">
                             {!! backpack_theme_config('project_logo') !!}
-                        </div>
+                        </div> --}}
                         <div class="">
                             <div class=" pt-0">
                                 @include(backpack_view('auth.login.inc.form'))
