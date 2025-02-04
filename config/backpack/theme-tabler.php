@@ -28,7 +28,7 @@ return [
      * Pick a login page layout.
      * Possible values: default, illustration, cover
      */
-    'auth_layout' => 'illustration', // default, illustration, cover
+    'auth_layout' => 'cover', // default, illustration, cover
 
     /**
      * Here you can easily load your own extra css styles.
@@ -62,7 +62,7 @@ return [
         /**
          * The color mode used by default.
          */
-        'defaultColorMode' => 'light', // system, light, dark
+        'defaultColorMode' => 'dark', // system, light, dark
 
         /**
          * When true, a switch is displayed to let admins choose their favorite theme mode.
