@@ -303,25 +303,25 @@ class MembershipDetailCrudController extends CrudController
         return redirect()->route('membership-detail.index');
     }
 
-    public function generateUsername($fullName)
-    {
-        // Convert the full name to lowercase and remove extra spaces
-        $formattedName = strtolower(trim($fullName));
+    // public function generateUsername($fullName)
+    // {
+    //     // Convert the full name to lowercase and remove extra spaces
+    //     $formattedName = strtolower(trim($fullName));
 
-        // Split the name into parts
-        $nameParts = explode(' ', $formattedName);
+    //     // Split the name into parts
+    //     $nameParts = explode(' ', $formattedName);
 
-        // Use the first part and last part of the name for the username
-        $username = $nameParts[0]; // First name
-        if (count($nameParts) > 1) {
-            $username .= '.' . end($nameParts); // Append last name
-        }
+    //     // Use the first part and last part of the name for the username
+    //     $username = $nameParts[0]; // First name
+    //     if (count($nameParts) > 1) {
+    //         $username .= '.' . end($nameParts); // Append last name
+    //     }
 
-        // Add a random number to ensure uniqueness
-        $username .= rand(100, 999);
+    //     // Add a random number to ensure uniqueness
+    //     $username .= rand(100, 999);
 
-        return $username;
-    }
+    //     return $username;
+    // }
 
 
     /**
