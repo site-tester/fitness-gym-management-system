@@ -38,6 +38,8 @@ jobs:
           rm: true
           port: 65002
           debug: true
+          command_timeout: 20m
+          tar_exec: tar
 
       - name: Run SSH Commands
         uses: appleboy/ssh-action@v0.1.5
