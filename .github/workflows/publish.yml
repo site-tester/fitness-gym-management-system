@@ -111,6 +111,6 @@ jobs:
             # ✅ Copy folders to storage
             cp -r storage/app/public/basset ./storage
             cp -r public/images ./storage/img
-            cp public/trainer1.jpg ./storage/trainer1.jpg
-            cp public/trainer2.jpg ./storage/trainer2.jpg
-            cp public/trainer3.jpg ./storage/trainer3.jpg
+            cp public/trainer1.jpg ./storage/app/public/trainer1.jpg
+            cp public/trainer2.jpg ./storage/app/public/trainer2.jpg
+            cp public/trainer3.jpg ./storage/app/public/trainer3.jpg
