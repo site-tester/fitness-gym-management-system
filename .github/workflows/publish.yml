@@ -102,4 +102,4 @@ jobs:
             cp public/.htaccess ./
             cp public/index2.php ./index.php
             cp -r public/build ./
-            cp -r storage/app/public/basset ./
+            cp -r storage/app/public/basset ./storage
