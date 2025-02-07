@@ -97,10 +97,17 @@ jobs:
             php artisan view:clear
 
             # ✅ Load the admin panel to initialize dependencies
-            curl -k --silent --show-error --output /dev/null https://ajdiafitnessgym.com/admin || true
+            # curl -k --show-error --output /dev/null https://ajdiafitnessgym.com/admin || true
+            wget --no-check-certificate -qO- https://ajdiafitnessgym.com/admin > /dev/null || true
 
             # ✅ Copy .htaccess and index.php to parent folder
             cp public/.htaccess ./
             cp public/index2.php ./index.php
             cp -r public/build ./
+
+            # ✅ Load the admin panel to initialize dependencies
+            # curl -k --show-error --output /dev/null https://ajdiafitnessgym.com/admin || true
+            wget --no-check-certificate -qO- https://ajdiafitnessgym.com/admin > /dev/null || true
+
+            # ✅ Copy basset folder to storage
             cp -r storage/app/public/basset ./storage
