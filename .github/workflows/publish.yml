@@ -105,8 +105,8 @@ jobs:
             cp -r public/build ./
 
             # ✅ Load the admin panel to initialize dependencies
-            curl -k --show-error --output /dev/null https://ajdiafitnessgym.com/admin || true
-            # wget --no-check-certificate https://ajdiafitnessgym.com/admin > /dev/null || true
+            # curl -k --show-error --output /dev/null https://ajdiafitnessgym.com/admin || true
+            wget --no-check-certificate -O- https://ajdiafitnessgym.com/admin
 
             # ✅ Copy basset folder to storage
             cp -r storage/app/public/basset ./storage
