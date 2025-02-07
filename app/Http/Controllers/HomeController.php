@@ -234,53 +234,53 @@ class HomeController extends Controller
         return $service->price ?? 0; // Default to 0 if price not found
     }
 
-    public function workoutView(Request $request)
-    {
+    // public function workoutView(Request $request)
+    // {
 
-        // Retrieve the filter values from the request
-        $skillLevel = $request->get('excercise_type', 'all');
-        $bodyPart = $request->get('body-part', 'all');
+    //     // Retrieve the filter values from the request
+    //     $skillLevel = $request->get('excercise_type', 'all');
+    //     $bodyPart = $request->get('body-part', 'all');
 
-        // Query the workouts based on the selected filters
-        $workouts = Workout::query();
+    //     // Query the workouts based on the selected filters
+    //     $workouts = Workout::query();
 
-        if ($skillLevel !== 'all') {
-            $workouts->where('experience_level', $skillLevel);
-        }
+    //     if ($skillLevel !== 'all') {
+    //         $workouts->where('experience_level', $skillLevel);
+    //     }
 
-        if ($bodyPart !== 'all') {
-            $workouts->where('target_muscle_group', $bodyPart);
-        }
+    //     if ($bodyPart !== 'all') {
+    //         $workouts->where('target_muscle_group', $bodyPart);
+    //     }
 
-        // Get the results
-        $workouts = $workouts->get();
+    //     // Get the results
+    //     $workouts = $workouts->get();
 
-        // Generate YouTube thumbnails
-        foreach ($workouts as $workout) {
-            // Assuming `youtube_url` is a column in your workouts table
-            if ($workout->video_url) {
-                $workout->youtube_thumbnail = $this->getYouTubeThumbnail($workout->video_url);
-            } else {
-                $workout->youtube_thumbnail = null;
-            }
-        }
+    //     // Generate YouTube thumbnails
+    //     foreach ($workouts as $workout) {
+    //         // Assuming `youtube_url` is a column in your workouts table
+    //         if ($workout->video_url) {
+    //             $workout->youtube_thumbnail = $this->getYouTubeThumbnail($workout->video_url);
+    //         } else {
+    //             $workout->youtube_thumbnail = null;
+    //         }
+    //     }
 
-        return view('workouts', compact('workouts'));
-    }
+    //     return view('workouts', compact('workouts'));
+    // }
 
-    public function getYouTubeThumbnail($youtubeUrl) {
-        parse_str(parse_url($youtubeUrl, PHP_URL_QUERY), $queryParams);
-        if (isset($queryParams['v'])) {
-            $videoId = $queryParams['v'];
-            return "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg";
-        }
-        return null;
-    }
+    // public function getYouTubeThumbnail($youtubeUrl) {
+    //     parse_str(parse_url($youtubeUrl, PHP_URL_QUERY), $queryParams);
+    //     if (isset($queryParams['v'])) {
+    //         $videoId = $queryParams['v'];
+    //         return "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg";
+    //     }
+    //     return null;
+    // }
 
-    public function workoutDetails($workoutId)
-    {
-        $workout = Workout::find($workoutId);
-        return view('workouts_page', compact('workout'));
-    }
+    // public function workoutDetails($workoutId)
+    // {
+    //     $workout = Workout::find($workoutId);
+    //     return view('workouts_page', compact('workout'));
+    // }
 
 }

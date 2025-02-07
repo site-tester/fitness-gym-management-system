@@ -33,8 +33,8 @@ Route::get('/contact-us', function(){
     return view('contact_us');
 })->name('contact.us');
 Route::post('/contact-us/send', [Controller::class, 'sendContactUs'])->name('send.contact.us');
-Route::get('/workouts', [HomeController::class, 'workoutView'])->name('workout');
-Route::get('/workout-details/{id}', [HomeController::class, 'workoutDetails'])->name('workout.details');
+Route::get('/workouts', [Controller::class, 'workoutView'])->name('workout');
+Route::get('/workout-details/{id}', [Controller::class, 'workoutDetails'])->name('workout.details');
 // Route::get('/book-now', function(){
 //     return view('book_now');
 // })->name('book.now');
@@ -45,7 +45,6 @@ Route::middleware(['verified'])->group(function () {
     Route::get('/book-now', [HomeController::class, 'bookNow'])->name('book.now');
     Route::get('/booked', [HomeController::class, 'bookedNow'])->name('booked.now');
     Route::get('/bookings', [HomeController::class, 'bookings'])->name('booking');
-
 
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::get('/my-progress', [HomeController::class, 'gymProgress'])->name('gym.progress');

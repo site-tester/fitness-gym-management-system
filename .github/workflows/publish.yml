@@ -93,6 +93,7 @@ jobs:
             php artisan cache:clear
             php artisan config:clear
             php artisan route:clear
+            php artisan route:cache
             php artisan view:clear
 
             # ✅ Load the admin panel to initialize dependencies
