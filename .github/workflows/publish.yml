@@ -107,7 +107,7 @@ jobs:
 
             # ✅ Load the admin panel to initialize dependencies
             # curl -k --show-error --output /dev/null https://ajdiafitnessgym.com/admin || true
-            wget --no-check-certificate -qO- https://ajdiafitnessgym.com/admin > /dev/null || true
+            wget --no-check-certificate https://ajdiafitnessgym.com/admin > /dev/null || true
 
             # ✅ Copy basset folder to storage
             cp -r storage/app/public/basset ./storage
