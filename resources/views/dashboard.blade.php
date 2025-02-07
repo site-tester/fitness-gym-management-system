@@ -50,7 +50,7 @@
                                         <div class="col px-md-e">
                                             <h4 class=" mb-3"><i class="bi bi-clock-history text-danger"></i> Timelog</h4>
                                             <div class="row ">
-                                                @if ($timelog->isEmpty())
+                                                @if ($timelog->isEmpty() || $timelog->count() == 0 || $timelog == null)
                                                     <div>
                                                         <div class="col m-auto">
                                                             <h5 class="text-center">No User Timed in</h5>

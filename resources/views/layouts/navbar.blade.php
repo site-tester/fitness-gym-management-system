@@ -24,14 +24,14 @@
                                 Home
                             </a>
                         </li>
-                        @hasrole('member')
+                        {{-- @hasrole('member') --}}
                             <li class="scroll-to-section">
                                 <a href="{{ route('workout') }}"
                                     class="{{ Route::currentRouteName() === 'workout' ? 'active' : '' }}">
                                     Workouts
                                 </a>
                             </li>
-                        @endhasrole
+                        {{-- @endhasrole --}}
                         <li class="scroll-to-section">
                             <a href="{{ route('about.us') }}"
                                 class="{{ Route::currentRouteName() === 'about.us' ? 'active' : '' }}">
@@ -94,7 +94,6 @@
                                     @php
                                         $userDetails = Auth::user()->rfid_number;
                                     @endphp
-                                    @if ($userDetails)
                                         <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('dashboard') }}">
                                             <i class="bi bi-speedometer2"></i>
                                             Dashboard</a>
@@ -104,7 +103,6 @@
                                         <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('book.now') }}">
                                             <i class="bi bi-journal-arrow-down"></i>
                                             Book Now</a>
-                                    @endif
                                     @hasanyrole('admin|superadmin')
                                         <a class="m-1 link-body-emphasis fw-bold" href="/admin">
                                             Dashboard

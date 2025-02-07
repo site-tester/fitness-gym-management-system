@@ -47,7 +47,14 @@ class HomeController extends Controller
     {
         $userDetail = MembershipDetail::where('client_id', Auth::user()->id)->first();
         $workoutProgress = GymProgress::where('user_id', Auth::id())->orderBy('progress_date', 'desc')->limit(5)->get();
-        $timelog = MemberVisit::where('client_rfid_id', $userDetail->rfid_number)->orderBy('created_at', 'desc')->limit(3)->get();
+        if ($userDetail) {
+            $timelog = MemberVisit::where('client_rfid_id', $userDetail->rfid_number)
+                ->orderBy('created_at', 'desc')
+                ->limit(3)
+                ->get();
+        } else {
+            $timelog = collect(); // Empty collection to prevent errors in the view
+        }
 
         $progressData = GymProgress::where('user_id', auth()->id())
             ->orderBy('progress_date', 'asc')
@@ -77,7 +84,8 @@ class HomeController extends Controller
 
     public function viewProfile()
     {
-        $profile = MembershipDetail::where('client_id', '=', Auth::user()->id)->firstOrFail();
+        // $profile = MembershipDetail::where('client_id', '=', Auth::user()->id)->firstOrFail();
+        $profile = User::where('id', Auth::id())->firstOrFail();
         // dd($profile);
         return view('member.profile', compact('profile'));
     }
