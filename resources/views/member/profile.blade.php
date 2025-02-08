@@ -160,32 +160,62 @@
                                 <div class="">
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="heigth" name="heigth" type="number"
-                                            value="{{ $profile->height }}" value="{{ old('heigth') }}" readonly>
+                                            value="{{ $profile->height }}" value="{{ old('heigth') }}"
+                                            @if (Auth::user()->rfid_number == null)
+                                                disabled
+                                                title="Please visit the gym to update this detail."
+                                            @endif
+                                            >
                                         <label class="small mb-1" for="heigth">Height</label>
+                                        @if (Auth::user()->rfid_number == null)
+                                            <p class="help-block fst-italic"><span class="text-danger">*</span>Please visit the gym to update this detail.</p>
+                                        @endif
                                         @error('height')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="weigth" name="weigth" type="number"
-                                            value="{{ $profile->weight }}" value="{{ old('weigth') }}">
+                                            value="{{ $profile->weight }}" value="{{ old('weigth') }}"
+                                            @if (Auth::user()->rfid_number == null)
+                                                disabled
+                                                title="Please visit the gym to update this detail."
+                                            @endif>
                                         <label class="small mb-1" for="heigth">Weight</label>
+                                        @if (Auth::user()->rfid_number == null)
+                                            <p class="help-block fst-italic"><span class="text-danger">*</span>Please visit the gym to update this detail.</p>
+                                        @endif
+                                        {{-- <p class="help-block">Please visit the gym to update your details.</p> --}}
                                         @error('weight')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="medical_info" name="medical_info" type="text"
-                                            value="{{ $profile->medical_info }}" value="{{ old('medical_info') }}" readonly>
+                                            value="{{ $profile->medical_info }}" value="{{ old('medical_info') }}"
+                                            @if (Auth::user()->rfid_number == null)
+                                                disabled
+                                                title="Please visit the gym to update this detail."
+                                            @endif>
                                         <label class="small mb-1" for="medical_info">Medical Information</label>
+                                        @if (Auth::user()->rfid_number == null)
+                                            <p class="help-block fst-italic"><span class="text-danger">*</span>Please visit the gym to update this detail.</p>
+                                        @endif
                                         @error('medical_info')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="guardian" name="guardian" type="text"
-                                            value="{{ $profile->guardian }}" value="{{ old('guardian') }}">
+                                            value="{{ $profile->guardian }}" value="{{ old('guardian') }}"
+                                            @if (Auth::user()->rfid_number == null)
+                                                disabled
+                                                title="Please visit the gym to update this detail."
+                                            @endif>
                                         <label class="small mb-1" for="guardian">Guardian</label>
+                                        @if (Auth::user()->rfid_number == null)
+                                            <p class="help-block fst-italic"><span class="text-danger">*</span>Please visit the gym to update this detail.</p>
+                                        @endif
                                         @error('guardian')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror

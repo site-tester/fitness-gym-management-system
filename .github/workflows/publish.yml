@@ -105,10 +105,10 @@ jobs:
             cp -r public/build ./
 
             # ✅ Load the admin panel to initialize dependencies
-            wget --no-check-certificate -O- https://ajdiafitnessgym.com/admin
+            # wget --no-check-certificate -O- https://ajdiafitnessgym.com/admin
 
             # ✅ Copy folders to storage
-            cp -r storage/app/public/basset ./storage
+            cp -r public/basset ./storage
             cp -r public/images ./storage/img
             cp public/img/trainer1.jpg ./storage/app/public/trainer1.jpg
             cp public/img/trainer2.jpg ./storage/app/public/trainer2.jpg
