@@ -645,12 +645,12 @@
                 const formData = $('#bookingForm').serialize();
                 console.log(formData);
 
-                let button = $(this);
+                let button = $("#submit-btn");
                 let spinner = $("#spinner");
 
                 // Show the spinner
                 spinner.removeClass("d-none");
-                button.prop("disabled", true); // Disable button to prevent multiple submissions
+                button.addClass("disabled");
 
                 $.ajax({
                     url: '/booking', // Change to your form action URL

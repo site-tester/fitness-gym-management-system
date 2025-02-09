@@ -280,8 +280,7 @@
     <div class="container-fluid">
         <div class="row shadow mt-5 mx-auto w-50 p-0 border border-danger">
             <div class="col-7 px-0 overflow-hidden">
-                <img src="{{ asset('/resources/img/Logo.jpg') }}" alt=""
-                    style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="{{ asset('/resources/img/Logo.jpg') }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
             <div class="col-5 px-0 border-start border-danger border-2">
                 <div class="rounded-0 ">
