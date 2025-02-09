@@ -94,7 +94,7 @@ class HomeController extends Controller
     {
         // dd($request->all());
         // Fetch the user profile
-        $memberDetail = MembershipDetail::where('client_id', Auth::id())->firstOrFail();
+        $memberDetail = MembershipDetail::firstOrCreate(['client_id' => Auth::id()]);
         $user = User::where('id', Auth::id())->firstOrFail();
 
         // Validate input fields
