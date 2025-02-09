@@ -30,8 +30,8 @@
         /* /* FORMS */
 
         #qbox-container {
-            background: url(../storage/img/Logo.jpg);
-            background-repeat: repeat;
+            /* background: url(../storage/img/Logo.jpg);
+            background-repeat: repeat; */
             position: relative;
             /* padding: 62px; */
             min-height: 630px;
