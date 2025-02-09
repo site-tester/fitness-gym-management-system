@@ -101,9 +101,10 @@
                                         <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('profile') }}">
                                             <i class="bi bi-person-badge"></i>
                                             Profile</a>
-                                        <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('book.now') }}">
+                                        <a class=" m-1 link-body-emphasis fw-bold disabled" href="{{ route('book.now') }}">
                                             <i class="bi bi-journal-arrow-down"></i>
-                                            Book Now</a>
+                                            Book Now
+                                        </a>
                                     @endhasrole
                                     @hasanyrole('admin|superadmin')
                                         <a class="m-1 link-body-emphasis fw-bold" href="/admin">

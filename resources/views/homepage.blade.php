@@ -158,8 +158,7 @@
                 <div class="col-lg-10 offset-lg-1">
                     <div class="cta-content">
                         <h2>Don’t <em>think</em>, begin <em>today</em>!</h2>
-                        <p>Ut consectetur, metus sit amet aliquet placerat, enim est ultricies ligula, sit amet
-                            dapibus odio augue eget libero. Morbi tempus mauris a nisi luctus imperdiet.</p>
+                        <p>Unlock your fitness potential with a membership at AJ DIA Fitness Gym! Whether you're a beginner or a seasoned athlete, we have everything you need to reach your goals</p>
                         <div class="main-button scroll-to-section">
                             <a href="{{ route('register') }}">Become a member</a>
                         </div>
@@ -320,9 +319,6 @@
         </div>
     </div>
 </section> --}}
-    @php
-        // dd($trainers);
-    @endphp
     <!-- ***** Testimonials Starts ***** -->
     @if ($trainers->isNotEmpty())
         <section class="section" id="trainers">
@@ -332,12 +328,11 @@
                         <div class="section-heading">
                             <h2>Expert <em>Trainers</em></h2>
                             <img src="{{ asset('public/img/line-dec.png') }}" alt="">
-                            <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor,
-                                ultricies fermentum massa consequat eu.</p>
+                            <p>Get to know your trainer! Have questions? Feel free to reach out to your trainer for inquiries about training plans, nutrition guidance, or fitness assessments.</p>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row justify-content-center">
                     @foreach ($trainers as $trainer)
                         <div class="col-lg-4">
                             <div class="trainer-item">
@@ -364,23 +359,6 @@
                             </div>
                         </div>
                     @endforeach
-                    {{-- <div class="col-lg-4">
-                        <div class="trainer-item">
-                            <div class="image-thumb">
-                                <img src="{{ asset('img/first-trainer.jpg') }}" alt="">
-                            </div>
-                            <div class="down-content">
-                                <span>Strength Trainer</span>
-                                <h4>Bret D. Bowers</h4>
-                                <p>Bitters cliche tattooed 8-bit distillery mustache. Keytar succulents gluten-free
-                                    vegan church-key pour-over seitan flannel.</p>
-                                <ul class="social-icons">
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </section>

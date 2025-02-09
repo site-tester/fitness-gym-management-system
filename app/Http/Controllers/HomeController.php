@@ -139,10 +139,9 @@ class HomeController extends Controller
 
     public function bookNow()
     {
-        $profile = MembershipDetail::where('client_id', '=', Auth::user()->id)->firstOrFail();
+        $profile = User::where('id',  Auth::id())->first();
         $serviceCategories = ServiceCategory::all();
         $paymentMethods = PaymentMethod::all();
-
         return view('book_now', compact('profile', 'serviceCategories', 'paymentMethods'));
     }
 

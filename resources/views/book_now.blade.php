@@ -368,25 +368,25 @@
                                                 <label for="FormName" class="form-label">Name <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="FormName" name="name"
-                                                    placeholder="{{ $profile->user->name }}">
-                                                <input type="hidden" name="hidden_name" value="{{ $profile->user->name }}">
+                                                    placeholder="{{ $profile->name }}" value="{{ $profile->name ?? '' }}">
+                                                <input type="hidden" name="hidden_name" value="{{ $profile->name }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="FormEmail" class="form-label">Email <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="FormEmail" name="email"
-                                                    placeholder="{{ $profile->user->email }}">
+                                                    placeholder="{{ $profile->email }}" value="{{ $profile->email ?? ''}}">
                                                 <input type="hidden" name="hidden_email"
-                                                    value="{{ $profile->user->email }}">
+                                                    value="{{ $profile->email }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="contact_number" class="form-label">Contact Number <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="phone" name="phone"
-                                                    placeholder="{{ $profile->phone }}" aria-describedby="helpId">
+                                                    placeholder="Enter Contact Number" aria-describedby="helpId">
                                                 <small id="helpId" class="form-text text-muted">eg.
                                                     09123456789</small>
-                                                <input type="hidden" name="hidden_phone" value="{{ $profile->phone }}">
+                                                <input type="hidden" name="hidden_phone" value="{{ $profile->phone ?? null }}">
                                             </div>
                                         </div>
                                     </div>
@@ -419,12 +419,6 @@
                                     <div class="border-bottom mb-3">
                                         <h4 class="ms-4 py-1" style="margin-bottom: 0px">Payment Method</h4>
                                     </div>
-                                    {{-- <div class="q-box__question">
-                                        <input class="form-check-input question__input" id="q_1_yes"
-                                            name="payment_method" type="radio" value="walk-in">
-                                        <label class="form-check-label question__label" for="q_1_yes">Pay on
-                                            Arrival</label>
-                                    </div> --}}
                                     @foreach ($paymentMethods as $paymentMethod)
                                         <div class="q-box__question">
                                             <input checked class="form-check-input question__input"
@@ -468,7 +462,10 @@
                             <div id="q-box__buttons">
                                 <button id="prev-btn" type="button">Previous</button>
                                 <button id="next-btn" type="button">Next</button>
-                                <button id="submit-btn" type="submit">Submit</button>
+                                <button id="submit-btn" type="submit">
+                                    <span id="spinner" class="spinner-border spinner-border-sm d-none" aria-hidden="true"></span>
+                                    Submit
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -647,6 +644,13 @@
                 e.preventDefault();
                 const formData = $('#bookingForm').serialize();
                 console.log(formData);
+
+                let button = $(this);
+                let spinner = $("#spinner");
+
+                // Show the spinner
+                spinner.removeClass("d-none");
+                button.prop("disabled", true); // Disable button to prevent multiple submissions
 
                 $.ajax({
                     url: '/booking', // Change to your form action URL
