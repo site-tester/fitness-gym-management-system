@@ -88,8 +88,8 @@
                                     {{-- Full Name --}}
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="ProfileName" name="name" type="text"
-                                            value="{{ Auth::user()->name }}" value="{{ old('name') }}">
-                                        <label class="small mb-1" for="name">Full Name</label>
+                                            value="{{ Auth::user()->name ?? old('name') }}">
+                                        <label class="small mb-1" for="name">Full Name <span class="text-danger">*</span></label>
                                         @error('email')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -97,8 +97,8 @@
                                     <!-- Email Address -->
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="ProfileEmail" name="profileEmail" type="email"
-                                            value="{{ Auth::user()->email }}" value="{{ old('profileEmail') }}">
-                                        <label class="small mb-1" for="ProfileEmail">Email address</label>
+                                            value="{{ Auth::user()->email ?? old('profileEmail') }}">
+                                        <label class="small mb-1" for="ProfileEmail">Email address <span class="text-danger">*</span></label>
                                         @error('email')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -106,8 +106,8 @@
                                     <!-- Birthdate -->
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="birthdate" name="birthdate" type="date"
-                                            value="{{ $profile->birthdate }}" value="{{ old('birthdate') }}">
-                                        <label class="small mb-1" for="birthdate">Birth Date</label>
+                                            value="{{ $profile->membershipDetails->birthdate ?? old('birthdate') }}">
+                                        <label class="small mb-1" for="birthdate">Birth Date <span class="text-danger">*</span></label>
                                         @error('birthdate')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -115,8 +115,8 @@
                                     <!-- Gender -->
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="gender" name="gender" type="text"
-                                            value="{{ $profile->gender }}" value="{{ old('gender') }}">
-                                        <label class="small mb-1" for="gender">Gender</label>
+                                            value="{{ $profile->membershipDetails->gender ?? old('gender') }}">
+                                        <label class="small mb-1" for="gender">Gender <span class="text-danger">*</span></label>
                                         @error('gender')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -124,8 +124,8 @@
                                     {{-- Civil Status --}}
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="civil_status" name="civil_status" type="text"
-                                            value="{{ $profile->civil_status }}" value="{{ old('civil_status') }}">
-                                        <label class="small mb-1" for="civil_status">Civil Status</label>
+                                            value="{{ $profile->membershipDetails->civil_status ?? old('civil_status') }}">
+                                        <label class="small mb-1" for="civil_status">Civil Status <span class="text-danger">*</span></label>
                                         @error('civil_status')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -133,8 +133,8 @@
                                     <!-- Form Group (Phone Number)-->
                                     <div class=" form-floating mb-3">
                                         <input class="form-control" id="Phone_number" name="contact_number" type="text"
-                                            value="{{ $profile->phone }}">
-                                        <label class="small mb-1" for="Phone_number">Contact Number</label>
+                                            value="{{ $profile->membershipDetails->phone ?? old('contact_number') }}">
+                                        <label class="small mb-1" for="Phone_number">Contact Number <span class="text-danger">*</span></label>
                                         <p class="help-block">eg. 09123456789</p>
                                         @error('contact_number')
                                             <span class="invalid-feedback">{{ $message }}</span>
@@ -144,8 +144,8 @@
                                         <!-- Form Group (Address)-->
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="address" name="address" type="text"
-                                                value="{{ $profile->address }}">
-                                            <label class="small mb-1" for="address">Street Address</label>
+                                                value="{{ $profile->membershipDetails->address ?? old('address') }}">
+                                            <label class="small mb-1" for="address">Street Address <span class="text-danger">*</span></label>
                                             @error('address')
                                                 <span class="invalid-feedback">{{ $message }}</span>
                                             @enderror
