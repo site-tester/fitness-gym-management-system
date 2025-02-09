@@ -76,7 +76,7 @@ jobs:
             MAIL_HOST=smtp.hostinger.com
             MAIL_PORT=465
             MAIL_USERNAME="support@ajdiafitnessgym.com"
-            MAIL_PASSWORD="Ajdia@2024"
+            MAIL_PASSWORD="Ajdia@2025"
             MAIL_ENCRYPTION=ssl
             MAIL_FROM_ADDRESS="support@ajdiafitnessgym.com"
             MAIL_FROM_NAME="AJ DIA"
