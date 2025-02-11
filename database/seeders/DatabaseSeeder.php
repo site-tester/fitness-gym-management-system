@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ServiceSeeder::class,
             PaymentMethodSeeder::class,
+            PermissionSeeder::class,
         ]);
 
     }
