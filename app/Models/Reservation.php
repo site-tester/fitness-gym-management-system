@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -69,10 +70,27 @@ class Reservation extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
+    // protected function reservationDate(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn ($value) => Carbon::parse($value)->format('m-d-Y'),
+    //         set: fn ($value) => Carbon::createFromFormat('m-d-Y', $value)->format('Y-m-d')
+    //     );
+    // }
+
+    // public function getReservationDateAttribute($value)
+    // {
+    //     return Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
+    // }
 
     /*
     |--------------------------------------------------------------------------
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function setReservationDateAttribute($value)
+    {
+        $this->attributes['reservation_date'] = Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
+    }
 }

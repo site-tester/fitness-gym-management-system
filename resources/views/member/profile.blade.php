@@ -160,7 +160,7 @@
                                 <div class="">
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="heigth" name="heigth" type="number"
-                                            value="{{ $profile->height }}" value="{{ old('heigth') }}"
+                                            value="{{ $profile->membershipDetails->height ?? old('heigth') }}"
                                             @if (Auth::user()->rfid_number == null)
                                                 disabled
                                                 title="Please visit the gym to update this detail."
@@ -176,7 +176,7 @@
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="weigth" name="weigth" type="number"
-                                            value="{{ $profile->weight }}" value="{{ old('weigth') }}"
+                                            value="{{ $profile->membershipDetails->weight ?? old('weigth') }}"
                                             @if (Auth::user()->rfid_number == null)
                                                 disabled
                                                 title="Please visit the gym to update this detail."
@@ -192,7 +192,7 @@
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="medical_info" name="medical_info" type="text"
-                                            value="{{ $profile->medical_info }}" value="{{ old('medical_info') }}"
+                                            value="{{ $profile->membershipDetails->medical_info ?? old('medical_info') }}"
                                             @if (Auth::user()->rfid_number == null)
                                                 disabled
                                                 title="Please visit the gym to update this detail."
@@ -207,7 +207,7 @@
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="guardian" name="guardian" type="text"
-                                            value="{{ $profile->guardian }}" value="{{ old('guardian') }}"
+                                            value="{{ $profile->membershipDetails->guardian ?? old('guardian') }}"
                                             @if (Auth::user()->rfid_number == null)
                                                 disabled
                                                 title="Please visit the gym to update this detail."
