@@ -39,6 +39,7 @@ class PermissionSeeder extends Seeder
         $this->command->info('Admin permissions: ' . implode(', ', $adminPermissions->pluck('name')->toArray()));
 
         $trainerPermissions = [
+            'manage-users',
             'manage-clients',
             'manage-bookings',
             'manage-gym',
