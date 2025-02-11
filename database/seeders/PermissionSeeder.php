@@ -30,15 +30,17 @@ class PermissionSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission, 'guard_name' => 'web']);
+            Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'web']);
         }
 
         $this->command->info('Permissions seeded successfully.');
 
-        $adminPermissions = Permission::all();
-        $this->command->info('Admin permissions: ' . implode(', ', $adminPermissions->pluck('name')->toArray()));
+        $adminRole = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+        $trainerRole = Role::firstOrCreate(['name' => 'trainer', 'guard_name' => 'web']);
 
-        $trainerPermissions = [
+        // Assign permissions correctly
+        $adminPermissions = Permission::all();
+        $trainerPermissions = Permission::whereIn('name', [
             'manage-users',
             'manage-clients',
             'manage-bookings',
@@ -48,14 +50,11 @@ class PermissionSeeder extends Seeder
             'manage-gym-services',
             'manage-gym-inventory',
             'manage-gym-equipment',
-        ];
+        ])->get();
 
-        $this->command->info('Trainer permissions: ' . implode(', ', $trainerPermissions));
+        $adminRole->syncPermissions($adminPermissions); // Give all permissions to admin
+        $trainerRole->syncPermissions($trainerPermissions); // Give only selected ones to trainer
 
-        $adminRole = Role::where('name', 'admin')->first();
-        $adminRole->givePermissionTo($adminPermissions);
-
-        $trainerRole = Role::where('name', 'trainer')->first();
-        $trainerRole->givePermissionTo($trainerPermissions);
+        $this->command->info('Roles and permissions assigned successfully.');
     }
 }
