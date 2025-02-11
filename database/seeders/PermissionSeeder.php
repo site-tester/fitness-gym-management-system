@@ -42,6 +42,7 @@ class PermissionSeeder extends Seeder
             'manage-users',
             'manage-clients',
             'manage-bookings',
+            'manage-payments',
             'manage-gym',
             'manage-gym-workouts',
             'manage-gym-services',
