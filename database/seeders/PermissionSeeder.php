@@ -44,12 +44,12 @@ class PermissionSeeder extends Seeder
             'manage-users',
             'manage-clients',
             'manage-bookings',
-            'manage-payments',
+            // 'manage-payments',
             'manage-gym',
             'manage-gym-workouts',
-            'manage-gym-services',
-            'manage-gym-inventory',
-            'manage-gym-equipment',
+            // 'manage-gym-services',
+            // 'manage-gym-inventory',
+            // 'manage-gym-equipment',
         ])->get();
 
         $adminRole->syncPermissions($adminPermissions); // Give all permissions to admin
