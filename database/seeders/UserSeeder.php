@@ -175,7 +175,7 @@ class UserSeeder extends Seeder
             ]);
 
             // Assign the role to the trainer
-            $trainerUser->assignRole([$trainerRole, $adminRole]); //assin admin role to the trainer
+            $trainerUser->assignRole([$trainerRole]); //assin admin role to the trainer
 
             // Create the associated TrainerDetail
             TrainerDetail::create([
