@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\BookingPaymentDetails;
+use App\Mail\BookingPaymentDetailsWalkIn;
 use App\Models\GymProgress;
 use App\Models\MembershipDetail;
 use App\Models\MemberVisit;
@@ -205,7 +206,11 @@ class HomeController extends Controller
 
             $payment_details = PaymentMethod::where('id', $reservation->payment_method)->first();
 
-            Mail::to(Auth::user()->email)->send(new BookingPaymentDetails($reservation, $payment_details));
+            if($payment_details->id == 1){
+                Mail::to(Auth::user()->email)->send(new BookingPaymentDetailsWalkIn($reservation, $payment_details));
+            }else{
+                Mail::to(Auth::user()->email)->send(new BookingPaymentDetails($reservation, $payment_details));
+            }
 
             DB::commit(); // Commit transaction
             // return view('book_now');

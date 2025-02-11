@@ -285,13 +285,10 @@ a[x-apple-data-detectors],
                                 <tr>
                                     <td
                                         style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Roboto&quot;,&quot;Oxygen&quot;,&quot;Ubuntu&quot;,&quot;Cantarell&quot;,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif">
-                                        <strong style="font-size:16px;color:#555">GCASH</strong>
+                                        <strong style="font-size:16px;color:#555">{{$payment_method->name}}</strong>
                                     </td>
                                     <td style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Roboto&quot;,&quot;Oxygen&quot;,&quot;Ubuntu&quot;,&quot;Cantarell&quot;,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif"
                                         align="right" valign="middle">
-                                        <img src="https://ci3.googleusercontent.com/meips/ADKq_NbHnNgbgFM8MXlXoTVGjMjQ82i_rReG_0hqCSo7SANNJw48ba-INBdSCF1E7ZTtpUI82QeO8CPBPqP4BUauecorqZx0JB7tZPai5rxNiMDPjt0WzwrWBTvEab_lm2M6EN4pfA=s0-d-e1-ft#https://cdn.shopify.com/s/files/1/0557/1733/1129/files/gcash.jpg?v=1617058372"
-                                            width="55" height="28.5" class="CToWUd"
-                                            data-bit="iit">
                                     </td>
                                 </tr>
 
@@ -309,7 +306,7 @@ a[x-apple-data-detectors],
                                         style="font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Roboto&quot;,&quot;Oxygen&quot;,&quot;Ubuntu&quot;,&quot;Cantarell&quot;,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;border:1px solid white">
                                         Account Number: </td>
                                     <td style="font-size:16px;font-weight:600;line-height:1.4;color:#555;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;Roboto&quot;,&quot;Oxygen&quot;,&quot;Ubuntu&quot;,&quot;Cantarell&quot;,&quot;Fira Sans&quot;,&quot;Droid Sans&quot;,&quot;Helvetica Neue&quot;,sans-serif;border:1px solid white"
-                                        bgcolor="#f2f2f2">09** *** ****</td>
+                                        bgcolor="#f2f2f2">{{$payment_method->account_number}}</td>
                                 </tr>
                                 <tr bgcolor="#f2f2f2">
                                     <td
