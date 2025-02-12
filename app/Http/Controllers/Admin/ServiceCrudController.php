@@ -69,6 +69,7 @@ class ServiceCrudController extends CrudController
             'entity' => 'amenities', // the related model
             'attribute' => 'name', // attribute shown in the list
             'model' => 'App\Models\Amenity', // fully qualified class name of the related model
+            'separator' => ',', // for the select_multiple field type
         ]);
     }
 
@@ -112,6 +113,10 @@ class ServiceCrudController extends CrudController
             'attribute' => 'name', // attribute shown in the select dropdown
             'model' => 'App\Models\Amenity', // fully qualified class name of the related model
             'pivot' => true, // required for many-to-many relationships
+            'separator' => ',', // for the select_multiple field type
+            'attributes' => [
+                'id' => 'amenities_select_multiple',
+            ]
         ]);
     }
 

@@ -59,6 +59,10 @@ class Reservation extends Model
     {
         return $this->belongsTo(ServiceCategory::class, 'service_category_id');
     }
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class, 'payment_method');
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

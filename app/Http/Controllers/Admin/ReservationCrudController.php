@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\ReservationRequest;
+use App\Models\Payment;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -16,7 +17,8 @@ class ReservationCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation { destroy as traitDestroy;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
@@ -40,10 +42,40 @@ class ReservationCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::addColumn([
+            'name' => 'status',
+            'label' => 'Status',
+            'type' => 'text',
+            'wrapper' => [
+                'element' => 'span',
+                'class' => function ($crud, $column, $entry, $related_key) {
+                    // Determine the badge class based on the status value
+                    if ($column['text'] == 'Pending Approval') {
+                        return 'badge text-bg-warning'; // Yellow indicates awaiting action
+                    }
+                    if ($column['text'] == 'Approved') {
+                        return 'badge text-bg-success'; // Green indicates approval
+                    }
+                    if ($column['text'] == 'Rejected') {
+                        return 'badge text-bg-secondary'; // Yellow indicates a warning
+                    }
+                    return 'badge badge-default';
+                },
+            ],
+        ]);
+
+        CRUD::addColumn([
             'name' => 'user_id',
             'label' => 'Client',
             'entity' => 'user',
             'model' => 'App\Models\User',
+            'attribute' => 'name',
+            'pivot' => false,
+        ]);
+        CRUD::addColumn([
+            'name' => 'service_category_id',
+            'label' => 'Service Category',
+            'entity' => 'serviceCategory',
+            'model' => 'App\Models\ServiceCategory',
             'attribute' => 'name',
             'pivot' => false,
         ]);
@@ -55,14 +87,6 @@ class ReservationCrudController extends CrudController
             'attribute' => 'name',
             'pivot' => false,
 
-        ]);
-        CRUD::addColumn([
-            'name' => 'service_category_id',
-            'label' => 'Service Category',
-            'entity' => 'serviceCategory',
-            'model' => 'App\Models\ServiceCategory',
-            'attribute' => 'name',
-            'pivot' => false,
         ]);
         CRUD::addColumn([
             'name' => 'reservation_date',
@@ -82,11 +106,11 @@ class ReservationCrudController extends CrudController
         ]);
         CRUD::addColumn([
             'name' => 'payment_method',
-            'label' => 'Transaction',
-            'type' => 'closure',
-            'function' => function ($entry) {
-                return ucwords($entry->payment_method);
-            },
+            'label' => 'Payment Method',
+            'entity' => 'paymentMethod',
+            'model' => 'App\Models\PaymentMethod',
+            'attribute' => 'name',
+            'pivot' => false,
         ]);
         // set columns from db columns.
 
@@ -126,22 +150,49 @@ class ReservationCrudController extends CrudController
                 })->get();
             },
         ]);
-        CRUD::addField([
-            'name' => 'service_name_id',
-            'label' => 'Service Name',
-            'entity' => 'service',
-            'model' => 'App\Models\Service',
-            'attribute' => 'name',
-            'pivot' => false,
-        ]);
+        // CRUD::addField([
+        //     'name' => 'service_category_id',
+        //     'label' => 'Service Category',
+        //     'entity' => 'serviceCategory',
+        //     'model' => 'App\Models\ServiceCategory',
+        //     'attribute' => 'name',
+        //     'pivot' => false,
+        // ]);
+        // CRUD::addField([
+        //     'name' => 'service_name_id',
+        //     'label' => 'Service Name',
+        //     'entity' => 'service',
+        //     'model' => 'App\Models\Service',
+        //     'attribute' => 'name',
+        //     'pivot' => false,
+        // ]);
         CRUD::addField([
             'name' => 'service_category_id',
             'label' => 'Service Category',
+            'type' => 'select',
             'entity' => 'serviceCategory',
             'model' => 'App\Models\ServiceCategory',
             'attribute' => 'name',
             'pivot' => false,
+            'attributes' => [
+                'id' => 'service_category_id',
+            ],
         ]);
+
+        CRUD::addField([
+            'name' => 'service_name_id',
+            'label' => 'Service Name',
+            'type' => 'select',
+            'entity' => 'service',
+            'model' => 'App\Models\Service',
+            'attribute' => 'name',
+            'pivot' => false,
+            'attributes' => [
+                'id' => 'service_name_id',
+            ],
+        ]);
+
+
         CRUD::addField([
             'name' => 'reservation_date',
             'label' => 'Reservation Date',
@@ -151,6 +202,14 @@ class ReservationCrudController extends CrudController
             'name' => 'reservation_time',
             'label' => 'Reservation Time',
             'type' => 'time',
+        ]);
+        CRUD::addField([
+            'name' => 'payment_method',
+            'label' => 'Payment Method',
+            'entity' => 'paymentMethod',
+            'model' => 'App\Models\PaymentMethod',
+            'attribute' => 'name',
+            'pivot' => false,
         ]);
 
     }
@@ -169,7 +228,8 @@ class ReservationCrudController extends CrudController
             'type' => 'select_from_array',
             'options' => [
                 'Pending' => 'Pending',
-                'Payment Approved' => 'Payment Approved',
+                'Approved' => 'Approved',
+                'Rejected' => 'Rejected',
             ],
             'allows_multiple' => false,
         ]);
@@ -254,11 +314,11 @@ class ReservationCrudController extends CrudController
         ]);
         CRUD::addColumn([
             'name' => 'payment_method',
-            'label' => 'Transaction',
-            'type' => 'closure',
-            'function' => function ($entry) {
-                return ucwords($entry->payment_method);
-            },
+            'label' => 'Payment Method',
+            'entity' => 'paymentMethod',
+            'model' => 'App\Models\PaymentMethod',
+            'attribute' => 'name',
+            'pivot' => false,
         ]);
         CRUD::addColumn([
             'name' => 'total_amount',
@@ -268,5 +328,14 @@ class ReservationCrudController extends CrudController
                 return ucwords($entry->total_amount);
             },
         ]);
+    }
+
+    public function destroy($id)
+    {
+        CRUD::hasAccessOrFail('delete');
+
+        Payment::where('reservation_id', $id)->delete();
+
+        return CRUD::delete($id);
     }
 }

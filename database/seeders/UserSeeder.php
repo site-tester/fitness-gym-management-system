@@ -29,6 +29,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@email.com',
             'password' => Hash::make('password'), // Ensure password is hashed
             'remember_token' => Str::random(60),
+            'email_verified_at' => now(),
         ]);
 
         $superAdmin = User::create([
@@ -47,6 +48,7 @@ class UserSeeder extends Seeder
                 'email' => 'jdoe@email.com',
                 'password' => Hash::make('password'), // Ensure password is hashed
                 'remember_token' => Str::random(60),
+                'email_verified_at' => now(),
             ],
         ];
 

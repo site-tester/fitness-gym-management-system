@@ -53,8 +53,6 @@ Route::middleware(['verified'])->group(function () {
     Route::get('/services/{categoryId}', [BookNowController::class, 'getServicesByCategory']);
     Route::get('/service/details/{serviceId}', [BookNowController::class, 'getServiceDetails']);
     Route::get('/booking-receipt/{id}', [BookNowController::class, 'showReceipt'])->name('reservations.show');
-
-
 });
 
 Route::post('/attendance/register', [AttendanceController::class, 'register'])->name('attendance.register');
