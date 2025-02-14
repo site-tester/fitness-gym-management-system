@@ -49,10 +49,11 @@
         }
 
         .dropbtn {
-            background-color: var(--accent);
+            background-color: transparent;
             color: white;
-            padding: 8px 20px;
-            font-size: 16px;
+            /* padding: 2px; */
+            /* font-size: 16px; */
+            /* border-radius:50%; */
             border: none;
             cursor: pointer;
         }

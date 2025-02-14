@@ -26,6 +26,10 @@ Route::get('/', [Controller::class, 'index'])->name('landing');
 
 Auth::routes(['verify' => true]);
 
+Route::get('/registration-completed', function(){
+    return view('auth.registration_confirmed');
+})->name('registration.completed');
+
 Route::get('/about', function(){
     return view('about');
 })->name('about.us');

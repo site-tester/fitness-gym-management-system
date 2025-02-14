@@ -85,8 +85,8 @@
                                 </form>
                             </div> --}}
                             <div class="dropdown">
-                                <button onclick="myFunction()"
-                                    class="dropbtn rounded fw-bold">{{ Auth::user()->name }}</button>
+                                <button onclick="myFunction()" class="dropbtn rounded fw-bold"><img src="{{ asset('/resources/img/profile_red.png') }} " alt="" style="width:33px; pointer-events: none;"></button>
+                                {{-- <button onclick="myFunction()" class="dropbtn rounded fw-bold"><img src="{{ asset('/img/profile_red.png') }} " alt="" style="width:33px; pointer-events: none;"></button> --}}
                                 <div id="myDropdown" class="dropdown-content rounded border border-danger">
                                     {{-- <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('booking') }}">
                                         <i class="bi bi-journal-text"></i>
