@@ -37,10 +37,10 @@
                     <p class="my-4 fs-5 text-muted">You've successfully registered and your fitness journey begins now. <br> t's time to train, track your progress, and transform your body!</p>
 
                     <div class="alert alert-success" role="alert">
-                        Your account is ready, so log in and start working out.
+                        Your account is ready, let's start working out.
                     </div>
 
-                    <a href="{{ route('login') }}" class="btn btn-danger px-4 py-2 fw-bold text-light">
+                    <a href="{{ Auth::check() ? route('dashboard') : route('login') }}" class="btn btn-danger px-4 py-2 fw-bold text-light">
                         <i class="fas fa-dumbbell"></i> Let's get started!
                     </a>
                 </div>
