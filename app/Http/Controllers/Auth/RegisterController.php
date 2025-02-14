@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/registration-completed';  // Redirect to a custom route after registration
 
     /**
      * Create a new controller instance.
