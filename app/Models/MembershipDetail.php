@@ -52,7 +52,7 @@ class MembershipDetail extends Model
     */
     public function user()
     {
-        return $this->belongsTo(User::class, 'rfid_number', 'rfid_number');
+        return $this->belongsTo(User::class, 'client_id', 'id');
     }
     /*
     |--------------------------------------------------------------------------

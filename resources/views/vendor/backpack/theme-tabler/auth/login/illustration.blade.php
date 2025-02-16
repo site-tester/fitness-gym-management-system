@@ -1,7 +1,7 @@
 @extends(backpack_view('layouts.auth'))
 
 @section('content')
-    <div class="page page-center" style="background-image: url({{ asset('storage/img/ad_bg.jpg') }});background-position: center; background-size: fill; background-repeat: no-repeat;">
+    <div class="page page-center" style="background-image: url({{ asset('storage/img/ad_bg.jpg') }}); background-position: center; background-size: cover; background-repeat: no-repeat; width: 100vw; height: 100vh;">
         <div class="container container-normal py-4">
             <div class="row align-items-center g-4">
                 <div class="col-lg">

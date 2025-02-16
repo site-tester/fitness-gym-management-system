@@ -60,12 +60,12 @@ class MembershipDetailCrudController extends CrudController
             'model' => 'App\Models\User',
             'attribute' => 'name',
             'pivot' => false,
-            'options' => function ($query) {
-                // Filter users with the role 'member'
-                return $query->whereHas('roles', function ($q) {
-                    $q->where('name', 'member');
-                })->get();
-            },
+            // 'options' => function ($query) {
+            //     // Filter users with the role 'member'
+            //     return $query->whereHas('roles', function ($q) {
+            //         $q->where('name', 'member');
+            //     })->get();
+            // },
         ]);
         CRUD::addColumn([
             'name' => 'phone',
@@ -666,14 +666,25 @@ class MembershipDetailCrudController extends CrudController
         imagettftext($idCard, $fontSizeSmall, 0, 540, 455, $textColor, $fontPath, $rfidCardnumber); // RFID number
         imagettftext($idCard, $fontSizeSmall, 0, 840, 455, $textColor, $fontPath, $expirationDate); // Expiration date
 
-        // Output the image in the browser
-        header('Content-Type: image/png');
-        imagepng($idCard);
+        // // Output the image in the browser
+        // header('Content-Type: image/png');
+        // imagepng($idCard);
 
-        // Clean up memory
+        // // Clean up memory
+        // imagedestroy($idCard);
+        // imagedestroy($templateImage);
+        // exit;
+
+        // Save the image temporarily
+        // Save the image
+        $imageFileName = "rfid_card_{$id}.png";
+        $imageFilePath = storage_path("app/public/{$imageFileName}");
+        imagepng($idCard, $imageFilePath);
         imagedestroy($idCard);
         imagedestroy($templateImage);
-        exit;
+
+        // Pass image path to the admin view
+        return view('vendor.backpack.ui.rfid_card', ['imagePath' => asset("storage/{$imageFileName}")]);
     }
 
 
