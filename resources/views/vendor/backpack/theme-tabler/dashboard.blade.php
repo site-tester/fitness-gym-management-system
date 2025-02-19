@@ -379,11 +379,11 @@
                             datasets: [{
                                 label: '# of Members',
                                 data: counts, // Count of each gender
-                                backgroundColor: ['rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)'
+                                backgroundColor: ['rgba(180, 234, 127, 0.90)',
+                                    'rgba(255, 102, 133, 0.9)'
                                 ], // Different colors for each gender
-                                borderColor: ['rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)'
+                                borderColor: ['rgba(180, 234, 127, 1)',
+                                    'rgba(255, 102, 133, 1)'
                                 ],
                                 borderWidth: 1
                             }]
@@ -399,47 +399,105 @@
             });
         }
 
+        // function fetchAgeStatsForChart(chartId, url) {
+        //     var chartCanvas = document.getElementById(chartId).getContext('2d');
+
+        //     // Use AJAX to fetch age stats data from the backend
+        //     $.ajax({
+        //         url: url, // The URL will be passed when calling the function
+        //         type: 'GET',
+        //         dataType: 'json',
+        //         success: function(data) {
+        //             // Prepare the labels (age ranges) and data (user count in each range)
+        //             var ageRanges = Object.keys(data); // ['18-24', '25-34', ...]
+        //             var counts = Object.values(data); // [count in 18-24, count in 25-34, ...]
+
+        //             // Create the chart
+        //             new Chart(chartCanvas, {
+        //                 type: 'pie', // Use a bar chart for age ranges
+        //                 data: {
+        //                     labels: ageRanges, // Age ranges as labels
+        //                     datasets: [{
+        //                         label: '# of Members',
+        //                         data: counts, // User count in each age range
+        //                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        //                         borderColor: 'rgba(75, 192, 192, 1)',
+        //                         borderWidth: 1
+        //                     }]
+        //                 },
+        //                 options: {
+        //                     scales: {
+        //                         y: {
+        //                             beginAtZero: true
+        //                         }
+        //                     },
+        //                     maintainAspectRatio: true,
+        //                 }
+        //             });
+        //         },
+        //         error: function() {
+        //             console.error('Error fetching age data');
+        //         }
+        //     });
+        // }
+
         function fetchAgeStatsForChart(chartId, url) {
-            var chartCanvas = document.getElementById(chartId).getContext('2d');
+    var chartCanvas = document.getElementById(chartId).getContext('2d');
 
-            // Use AJAX to fetch age stats data from the backend
-            $.ajax({
-                url: url, // The URL will be passed when calling the function
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    // Prepare the labels (age ranges) and data (user count in each range)
-                    var ageRanges = Object.keys(data); // ['18-24', '25-34', ...]
-                    var counts = Object.values(data); // [count in 18-24, count in 25-34, ...]
+    // Use AJAX to fetch age stats data from the backend
+    $.ajax({
+        url: url, // The URL will be passed when calling the function
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            // Prepare the labels (age ranges) and data (user count in each range)
+            var ageRanges = Object.keys(data); // ['18-24', '25-34', ...]
+            var counts = Object.values(data); // [count in 18-24, count in 25-34, ...]
 
-                    // Create the chart
-                    new Chart(chartCanvas, {
-                        type: 'pie', // Use a bar chart for age ranges
-                        data: {
-                            labels: ageRanges, // Age ranges as labels
-                            datasets: [{
-                                label: '# of Members',
-                                data: counts, // User count in each age range
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                y: {
-                                    beginAtZero: true
-                                }
-                            },
-                            maintainAspectRatio: true,
-                        }
-                    });
+            // Define a color palette for different age ranges
+            var backgroundColors = [
+                'rgba(255, 99, 132, 0.6)',  // Red
+                'rgba(54, 162, 235, 0.6)',  // Blue
+                'rgba(255, 206, 86, 0.6)',  // Yellow
+                'rgba(75, 192, 192, 0.6)',  // Green
+                'rgba(153, 102, 255, 0.6)', // Purple
+                'rgba(255, 159, 64, 0.6)'   // Orange
+            ];
+
+            var borderColors = [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ];
+
+            // Create the chart
+            new Chart(chartCanvas, {
+                type: 'pie',
+                data: {
+                    labels: ageRanges, // Age ranges as labels
+                    datasets: [{
+                        label: '# of Members',
+                        data: counts, // User count in each age range
+                        backgroundColor: backgroundColors.slice(0, ageRanges.length),
+                        borderColor: borderColors.slice(0, ageRanges.length),
+                        borderWidth: 1
+                    }]
                 },
-                error: function() {
-                    console.error('Error fetching age data');
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
                 }
             });
+        },
+        error: function () {
+            console.error('Error fetching age data');
         }
+    });
+}
+
 
         function fetchServiceBookingStatsForChart(chartId, url) {
             var chartCanvas = document.getElementById(chartId).getContext('2d');
