@@ -10,7 +10,7 @@
                             {!! backpack_theme_config('project_logo') !!}
                         </div> --}}
                         <div class="">
-                            <div class=" pt-0">
+                            <div class="pt-0">
                                 @include(backpack_view('auth.login.inc.form'))
                             </div>
                         </div>

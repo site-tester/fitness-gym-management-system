@@ -94,8 +94,13 @@
         }
 
         /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-        .show {
+        /* .show {
             display: block;
+        } */
+
+        .nav-item .nav-link.active{
+            color: var(--accent) !important;
+            font-weight: 500;
         }
     </style>
 
@@ -132,7 +137,7 @@
     </script>
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 
-    <script>
+    {{-- <script>
         function myFunction() {
             document.getElementById("myDropdown").classList.toggle("show");
         }
@@ -150,7 +155,7 @@
                 }
             }
         }
-    </script>
+    </script> --}}
     @yield('scripts')
 </body>
 
