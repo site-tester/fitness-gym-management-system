@@ -324,7 +324,7 @@
                                             </div>
                                         </div>
                                         {{-- Below id the service description --}}
-                                        <div class="mt-3 mx-5 px-3 py-3 border rounded">
+                                        <div class="mt-3 mx-5 px-3 py-3 border ">
                                             <div id="servDescription">
                                                 <p class="text-center mb-0">Select a service to view its details.</p>
                                             </div>

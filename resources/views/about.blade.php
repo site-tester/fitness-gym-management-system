@@ -28,7 +28,7 @@
         <footer style="padding-top: 0px;">
             <section class="py-4 py-xl-5">
                 <div class="container">
-                    <div class="border rounded border-1 border-secondary overflow-hidden">
+                    <div class="border border-1 border-secondary overflow-hidden">
                         <div class="row g-0">
                             <div class="col-md-6">
                                 <div class=" p-4 p-md-5 mt-4">
@@ -53,7 +53,7 @@
                     <div class="carousel-item active">
                         <section class="text-white py-4 py-xl-5">
                             <div class="container-fluid px-0">
-                                <div class="border rounded border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: linear-gradient(rgba(99,20,20,0.2), rgba(99,20,20,0.2)), url(/resources/img/423583148_868625718602826_376942488243513661_n.jpg) center / cover;">
+                                <div class="border border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: linear-gradient(rgba(99,20,20,0.2), rgba(99,20,20,0.2)), url(/resources/img/423583148_868625718602826_376942488243513661_n.jpg) center / cover;">
                                     <div class="row">
                                         <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                                             <div>
@@ -68,7 +68,7 @@
                     <div class="carousel-item">
                         <section class="text-white py-4 py-xl-5">
                             <div class="container">
-                                <div class="border rounded border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: linear-gradient(rgba(99,20,20,0.2), rgba(99,20,20,0.2)), url(&quot;assets/img/425443917_868625335269531_2790859811413262728_n.jpg&quot;) center / cover;">
+                                <div class="border border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: linear-gradient(rgba(99,20,20,0.2), rgba(99,20,20,0.2)), url(&quot;assets/img/425443917_868625335269531_2790859811413262728_n.jpg&quot;) center / cover;">
                                     <div class="row">
                                         <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                                             <div>
@@ -83,7 +83,7 @@
                     <div class="carousel-item">
                         <section class="text-white py-4 py-xl-5">
                             <div class="container">
-                                <div class="border rounded border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: radial-gradient(rgba(99,20,20,0.2), rgba(99,20,20,0.2)), url(&quot;assets/img/425515362_868624715269593_5481593597838287722_n.jpg&quot;) center / cover;">
+                                <div class="border border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: radial-gradient(rgba(99,20,20,0.2), rgba(99,20,20,0.2)), url(&quot;assets/img/425515362_868624715269593_5481593597838287722_n.jpg&quot;) center / cover;">
                                     <div class="row">
                                         <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                                             <div>
