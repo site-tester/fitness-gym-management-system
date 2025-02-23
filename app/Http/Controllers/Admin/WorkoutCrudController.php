@@ -29,6 +29,28 @@ class WorkoutCrudController extends CrudController
         CRUD::setModel(\App\Models\Workout::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/workout');
         CRUD::setEntityNameStrings('workout', 'workouts');
+
+        CRUD::addField([
+            'name' => 'description_html', // Database column name
+            'type' => 'custom_html',
+            'value' => '
+                <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+                <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        $("#workoutDesc").summernote({
+                            height: 300,
+                            // toolbar: [
+                            //     ["style", ["bold", "italic", "underline", "clear"]],
+                            //     ["para", ["ul", "ol", "paragraph"]],
+                            //     ["insert", ["link", "picture"]],
+                            //     ["view", ["fullscreen", "codeview"]],
+                            // ]
+                        });
+                    });
+                </script>
+            ',
+        ]);
     }
 
     /**
@@ -46,7 +68,7 @@ class WorkoutCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          */
 
-         CRUD::addColumn([
+        CRUD::addColumn([
             'name' => 'name',
             'label' => 'Workout Name',
             'type' => 'closure',
@@ -201,17 +223,25 @@ class WorkoutCrudController extends CrudController
             'label' => 'Video URL',
         ]);
 
+        // CRUD::addField([
+        //     'name' => 'description',
+        //     'label' => 'Description',
+        //     'type' => 'summernote',
+        //     'options' => [
+        //         'height' => 300,
+        //         // 'toolbar' => [
+        //         //     ['fontname', ['Poppins'] ]
+        //         // ]
+        //     ],
+        // ]);
+
         CRUD::addField([
-            'name' => 'description',
+            'name' => 'description', // Database column name
             'label' => 'Description',
-            'type' => 'summernote',
-            'options' => [
-                'height' => 300,
-                // 'toolbar' => [
-                //     ['fontname', ['Poppins'] ]
-                // ]
-            ],
+            'type' => 'custom_html',
+            'value' => '<textarea id="workoutDesc" name="description" class="form-control">' . old('description', $this->crud->getCurrentEntry()?->description) . '</textarea>',
         ]);
+
     }
 
     /**
