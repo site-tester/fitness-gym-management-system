@@ -56,7 +56,7 @@ jobs:
             APP_NAME='AJ DIA'
             APP_ENV=production
             APP_KEY=base64:JrxdwCI/yQs9QDql19kQtyh/Qqqx/ejpEiLtMQ9/mLE=
-            APP_DEBUG=true
+            APP_DEBUG=false
             APP_URL=https://ajdiafitnessgym.com
             LOG_CHANNEL=stack
             LOG_LEVEL=debug

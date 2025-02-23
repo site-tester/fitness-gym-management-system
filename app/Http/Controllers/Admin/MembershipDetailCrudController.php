@@ -684,7 +684,7 @@ class MembershipDetailCrudController extends CrudController
         imagedestroy($templateImage);
 
         // Pass image path to the admin view
-        return view('vendor.backpack.ui.rfid_card', ['imagePath' => asset("storage/{$imageFileName}")]);
+        return view('vendor.backpack.ui.rfid_card', ['imagePath' => asset("storage/app/public/{$imageFileName}")]);
     }
 
 
