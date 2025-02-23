@@ -72,6 +72,16 @@
             $deselectButton.on('click', function() {
                 $selectMultiple.val([]).trigger('change'); // Deselect all options in the select field
             });
+
+            $("#workoutDesc").summernote({
+                height: 300,
+                // toolbar: [
+                //     ["style", ["bold", "italic", "underline", "clear"]],
+                //     ["para", ["ul", "ol", "paragraph"]],
+                //     ["insert", ["link", "picture"]],
+                //     ["view", ["fullscreen", "codeview"]],
+                // ]
+            });
         });
     </script>
 @endpush

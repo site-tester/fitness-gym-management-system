@@ -29,28 +29,6 @@ class WorkoutCrudController extends CrudController
         CRUD::setModel(\App\Models\Workout::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/workout');
         CRUD::setEntityNameStrings('workout', 'workouts');
-
-        CRUD::addField([
-            'name' => 'description_html', // Database column name
-            'type' => 'custom_html',
-            'value' => '
-                <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
-                <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-                <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        $("#workoutDesc").summernote({
-                            height: 300,
-                            // toolbar: [
-                            //     ["style", ["bold", "italic", "underline", "clear"]],
-                            //     ["para", ["ul", "ol", "paragraph"]],
-                            //     ["insert", ["link", "picture"]],
-                            //     ["view", ["fullscreen", "codeview"]],
-                            // ]
-                        });
-                    });
-                </script>
-            ',
-        ]);
     }
 
     /**
