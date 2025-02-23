@@ -34,3 +34,8 @@
 @if (backpack_theme_config('vite_styles') && count(backpack_theme_config('vite_styles')))
     @vite(backpack_theme_config('vite_styles'))
 @endif
+
+@push('after_styles')
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+@endpush
+
