@@ -36,7 +36,6 @@ class Controller extends BaseController
 
     public function workoutView(Request $request)
     {
-
         // Retrieve the filter values from the request
         $skillLevel = $request->get('excercise_type', 'all');
         $bodyPart = $request->get('body-part', 'all');
@@ -58,6 +57,7 @@ class Controller extends BaseController
         // Generate YouTube thumbnails
         foreach ($workouts as $workout) {
             // Assuming `youtube_url` is a column in your workouts table
+
             if ($workout->video_url) {
                 $workout->youtube_thumbnail = $this->getYouTubeThumbnail($workout->video_url);
             } else {
