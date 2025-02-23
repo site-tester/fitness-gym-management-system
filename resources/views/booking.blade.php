@@ -42,9 +42,9 @@
                                         <tr class="">
                                             <th class="text-center">ID</th>
                                             <th class="text-center">Service</th>
-                                            <th class="text-center">Category</th>
+                                            <th class="text-center">Duration</th>
                                             <th class="text-center">Date</th>
-                                            <th class="text-center">Time</th>
+                                            {{-- <th class="text-center">Time</th> --}}
                                             <th class="text-center">Payment Method</th>
                                             <th class="text-center">Price</th>
                                             <th class="text-center">Status</th>
@@ -84,10 +84,10 @@
                                             @endif
                                             <tr>
                                                 <td class="text-center">{{ $reservation->id }}</td>
-                                                <td class="text-center">{{ $reservation->service->name }}</td>
-                                                <td class="text-center ">{{ $reservation->serviceCategory->name }}</td>
+                                                <td class="text-center">{{ $reservation->service_name }}</td>
+                                                <td class="text-center ">{{ $reservation->service_duration }}</td>
                                                 <td class="text-center">{{ $reservation_date->format('M/d/Y') }}</td>
-                                                <td class="text-center">{{ $reservation_time->format('h:i A') }}</td>
+                                                {{-- <td class="text-center">{{ $reservation_time->format('h:i A') }}</td> --}}
                                                 <td class="text-center">{{ ucwords($reservation->payment_method) }}</td>
                                                 <td class="text-center">{{ $reservation->total_amount }}</td>
                                                 <td class="text-start align-items-center">
@@ -204,8 +204,8 @@
                                     <hr>
                                     <h5>Service</h5>
                                     <div class="col-xl-10">
-                                        <p class="mb-1">${data.service}</p>
-                                        <p class="">${data.service_category}</p>
+                                        <p class="mb-1">${data.service_name}</p>
+                                        <p class="">${data.service_duration}</p>
                                     </div>
 
                                     <div class="col-xl-2">

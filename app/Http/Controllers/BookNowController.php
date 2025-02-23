@@ -62,8 +62,8 @@ class BookNowController extends Controller
             'name' => $reservation->name,
             'email' => $reservation->email,
             'phone' => $reservation->phone,
-            'service' => $reservation->service->name,
-            'service_category' => $reservation->serviceCategory->name,
+            'service' => $reservation->service_name,
+            'service_category' => $reservation->service_duration,
             'service_price' => $reservation->total_amount,
 
         ]);
