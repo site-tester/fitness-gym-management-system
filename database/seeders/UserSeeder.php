@@ -169,7 +169,7 @@ class UserSeeder extends Seeder
             // Create the trainer user
             $trainerUser = User::create([
                 'name' => $trainer['name'],
-                'username' => $trainer['username'],
+                // 'username' => $trainer['username'],
                 'email' => $trainer['email'],
                 'password' => $trainer['password'],
                 'remember_token' => $trainer['remember_token'],
