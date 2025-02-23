@@ -65,7 +65,6 @@ class BookNowController extends Controller
             'service_name' => $reservation->service_name,
             'service_duration' => $reservation->service_duration,
             'service_price' => $reservation->total_amount,
-
         ]);
     }
 }
