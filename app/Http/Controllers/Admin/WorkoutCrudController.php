@@ -201,23 +201,11 @@ class WorkoutCrudController extends CrudController
             'label' => 'Video URL',
         ]);
 
-        // CRUD::addField([
-        //     'name' => 'description',
-        //     'label' => 'Description',
-        //     'type' => 'summernote',
-        //     'options' => [
-        //         'height' => 300,
-        //         // 'toolbar' => [
-        //         //     ['fontname', ['Poppins'] ]
-        //         // ]
-        //     ],
-        // ]);
-
         CRUD::addField([
             'name' => 'description', // Database column name
             'label' => 'Description',
             'type' => 'custom_html',
-            'value' => '<textarea id="workoutDesc" name="description" class="form-control">' . old('description', $this->crud->getCurrentEntry()?->description) . '</textarea>',
+            'value' => '<textarea id="workoutDesc" name="description" class="form-control">' . old('description', optional($this->crud->getCurrentEntry())->description) . '</textarea>',
         ]);
 
     }
