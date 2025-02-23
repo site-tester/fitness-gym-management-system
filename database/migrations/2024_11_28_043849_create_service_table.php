@@ -16,7 +16,7 @@ return new class extends Migration
             // $table->string('category_id');
             // $table->string('trainer_id');
             $table->string('name');
-            $table->string('price');
+            $table->string('price')->nullable()->default(0);
             $table->string('description')->nullable();
             $table->timestamps();
         });
