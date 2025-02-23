@@ -23,6 +23,8 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+        session()->flash('login_success', 'Welcome back, ' . $user->name . '!');
+
         if ($user->hasRole('admin')) {
             return redirect()->route('backpack.dashboard'); // Redirect to admin dashboard
         } elseif ($user->hasRole('trainer')) {

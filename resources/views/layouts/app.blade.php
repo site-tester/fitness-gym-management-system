@@ -30,7 +30,7 @@
     <style>
         * {
             /* font-family: "Nunito", sans-serif; */
-            font-family: 'Poppins' !important ;
+            font-family: 'Poppins' !important;
             font-weight: 400;
             font-style: normal;
         }
@@ -117,6 +117,20 @@
 
         @include('layouts.navbar')
 
+        @if (session('login_success'))
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    Swal.fire({
+                        title: "Login Successful!",
+                        text: "{{ session('login_success') }}",
+                        icon: "success",
+                        timer: 3000,
+                        showConfirmButton: false
+                    });
+                });
+            </script>
+        @endif
+
         <main class="pb-4">
             @yield('content')
         </main>
@@ -142,6 +156,7 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
     </script>
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     {{-- <script>
         function myFunction() {
@@ -162,7 +177,11 @@
             }
         }
     </script> --}}
+
     @yield('scripts')
+
+
+
 </body>
 
 </html>
