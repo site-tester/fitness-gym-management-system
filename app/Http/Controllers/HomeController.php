@@ -152,17 +152,17 @@ class HomeController extends Controller
         try {  // Validate the incoming request
             DB::beginTransaction();
             $request->validate([
-                'service_category' => 'required',
+                'service_duration' => 'required',
                 'service_name' => 'required',
-                'formTime' => 'required',
+                // 'formTime' => 'required',
                 'payment_method' => 'required',
             ]);
 
             // Create a new service reservation record
             $reservation = new Reservation();
             $reservation->user_id = Auth::id();
-            $reservation->service_category_id = $request->input('service_category');
-            $reservation->service_name_id = $request->input('service_name');
+            $reservation->service_duration = $request->input('service_duration');
+            $reservation->service_name = $request->input('service_name');
             $reservation->reservation_date = $request->input('selected_date');
             $reservation->reservation_time = $request->input('formTime');
             $reservation->payment_method = $request->input('payment_method');
@@ -188,8 +188,8 @@ class HomeController extends Controller
 
 
             // Calculate the total amount or handle payment-related logic
-            $service_price = $this->getServicePrice($request->input('service_name'));
-            $reservation->total_amount = $service_price; // Example, adjust based on logic
+            // $service_price = $this->getServicePrice($request->input('service_name'));
+            $reservation->total_amount = $request->input('service_price');; // Example, adjust based on logic
             // $reservation->total_amount = 0; // Example, adjust based on logic
 
             // Save the reservation

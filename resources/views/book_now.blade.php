@@ -138,7 +138,7 @@
             border: 1px solid #ced4da;
             border-radius: 5px;
             background-color: #fff;
-            padding: 5px 20px 5px 50px;
+            padding: 5px 20px 0px 50px;
             cursor: pointer;
             transition: all 0.15s ease-in-out;
         }
@@ -396,7 +396,8 @@
                                                 <label for="FormEmail" class="form-label">Email <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="FormEmail" name="email"
-                                                    placeholder="{{ $profile->email }}" value="{{ $profile->email ?? '' }}">
+                                                    placeholder="{{ $profile->email }}"
+                                                    value="{{ $profile->email ?? '' }}">
                                                 <input type="hidden" name="hidden_email" value="{{ $profile->email }}">
                                             </div>
                                             <div class="mb-3">
@@ -416,7 +417,7 @@
                                 {{-- Step 4 --}}
                                 <div class="step">
                                     <div class="border-bottom mb-3">
-                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Reservation Summary</h4>
+                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Booking Summary</h4>
                                     </div>
                                     <div class="form-check ps-0 q-box">
                                         <div class="q-box__question">
@@ -424,6 +425,7 @@
                                                 <div class="d-flex justify-content-between">
                                                     <span><strong id="summaryServName">Service Name</strong></span>
                                                     <span id="summaryServPrice">₱ ###</span>
+                                                    <input id="ServPrice" type="hidden" name="service_price" value="">
                                                 </div>
                                                 {{-- <div class="d-flex justify-content-between">
                                                     <span>Sub-total</span>
@@ -464,8 +466,8 @@
                                         <div class="closing-text p-5 text-center">
                                             <div class="">
                                                 <h4>You are about to Book.</h4>
-                                                <p>Please review all the details carefully.</p>
-                                                <p>Click the Submit button to proceed.</p>
+                                                <p>Please review all the details carefully. <br> Click the Submit button to
+                                                    proceed.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -573,65 +575,72 @@
             //     }
             // });
 
-            $('#ServName').on('change', function() {
-                var serviceId = $(this).val();
+            // $('#ServName').on('change', function() {
+            //     var serviceId = $(this).val();
 
-                if (serviceId) {
-                    $.ajax({
-                        url: '/service/details/' + serviceId,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(data) {
-                            $('#servDescription').html(`
-                                <h5 class="mb-1">Details</h5>
-                                <div class="ms-2">
-                                <h6><strong>Service:</strong> ${data.name}</h6>
-                                    <p class="mb-0"><strong>Trainer:</strong> ${data.trainer}</p>
-                                    <p><strong>Price:</strong> ₱${data.price}</p>
-                                </div>
-                            `);
-                            $('#summaryServName').text(data.name);
-                            $('#summaryServPrice').text(`₱${data.price}`);
-                            $('#summarySubTotal').text(`₱${data.price}`);
-                            $('#summaryTotal').text(`₱${data.price}`);
+            //     if (serviceId) {
+            //         $.ajax({
+            //             url: '/service/details/' + serviceId,
+            //             type: 'GET',
+            //             dataType: 'json',
+            //             success: function(data) {
+            //                 $('#servDescription').html(`
+        //                     <h5 class="mb-1">Details</h5>
+        //                     <div class="ms-2">
+        //                     <h6><strong>Service:</strong> ${data.name}</h6>
+        //                         <p class="mb-0"><strong>Trainer:</strong> ${data.trainer}</p>
+        //                         <p><strong>Price:</strong> ₱${data.price}</p>
+        //                     </div>
+        //                 `);
+            //                 $('#summaryServName').text(data.name);
+            //                 $('#summaryServPrice').text(`₱${data.price}`);
+            //                 $('#summarySubTotal').text(`₱${data.price}`);
+            //                 $('#summaryTotal').text(`₱${data.price}`);
 
-                            if (data.amenities && data.amenities.length > 0) {
-                                let amenitiesList = '<h6>Amenities Included:</h6><ul>';
-                                data.amenities.forEach(function(amenity) {
-                                    amenitiesList += `<li>${amenity.name}</li>`;
-                                });
-                                amenitiesList += '</ul>';
-                                $('#amenitiesList').html(
-                                    amenitiesList
-                                ); // Add the amenities to a div with ID 'amenitiesList'
-                            } else {
-                                $('#amenitiesList').html(
-                                    '<p>No amenities available for this service.</p>');
-                            }
-                        },
-                        error: function() {
-                            $('#servDescription').html(
-                                '<p class="text-danger">Error fetching service details.</p>'
-                            );
-                            $('#amenitiesList').html(
-                                '<p class="text-danger">Error fetching amenities.</p>');
-                        }
-                    });
-                } else {
-                    $('#servDescription').html('<p>Select a service to view its details.</p>');
-                    $('#summaryServName').text('Service Name');
-                    $('#summaryServPrice').text('₱ ###');
-                    $('#summarySubTotal').text('₱###');
-                    $('#summaryTotal').text('₱###');
-                }
-            });
+            //                 if (data.amenities && data.amenities.length > 0) {
+            //                     let amenitiesList = '<h6>Amenities Included:</h6><ul>';
+            //                     data.amenities.forEach(function(amenity) {
+            //                         amenitiesList += `<li>${amenity.name}</li>`;
+            //                     });
+            //                     amenitiesList += '</ul>';
+            //                     $('#amenitiesList').html(
+            //                         amenitiesList
+            //                     ); // Add the amenities to a div with ID 'amenitiesList'
+            //                 } else {
+            //                     $('#amenitiesList').html(
+            //                         '<p>No amenities available for this service.</p>');
+            //                 }
+            //             },
+            //             error: function() {
+            //                 $('#servDescription').html(
+            //                     '<p class="text-danger">Error fetching service details.</p>'
+            //                 );
+            //                 $('#amenitiesList').html(
+            //                     '<p class="text-danger">Error fetching amenities.</p>');
+            //             }
+            //         });
+            //     } else {
+            //         $('#servDescription').html('<p>Select a service to view its details.</p>');
+            //         $('#summaryServName').text('Service Name');
+            //         $('#summaryServPrice').text('₱ ###');
+            //         $('#summarySubTotal').text('₱###');
+            //         $('#summaryTotal').text('₱###');
+            //     }
+            // });
 
             $(function() {
                 $("#datepicker").datepicker({
+                    minDate: 0,
+                    defaultDate: new Date(),
                     onSelect: function(dateText) {
                         $("#selected-date").val(dateText);
-                    }
+                    },
+
                 });
+
+                let today = $.datepicker.formatDate('mm/dd/yy', new Date());
+                $("#selected-date").val(today);
+                $("#datepicker").datepicker("setDate", new Date());
             });
 
             let $steps = $('.step');

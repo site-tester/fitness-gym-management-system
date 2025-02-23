@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('user_id');
             // $table->string('service_category_id')->nullable();
-            $table->string('service_name_id')->nullable();
+            // $table->string('service_name_id')->nullable();
+            $table->string('service_name')->nullable();
+            $table->string('service_duration')->nullable();
             $table->string('reservation_date');
             // $table->string('reservation_time');
             $table->string('name');
