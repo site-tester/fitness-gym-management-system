@@ -83,22 +83,22 @@ class ServiceCrudController extends CrudController
     {
         CRUD::setValidation(ServiceRequest::class);
 
-        CRUD::addField([
-            'name' => 'category_id',
-            'label' => 'Service Category',
-            'entity' => 'category',
-            'model' => 'App\Models\ServiceCategory',
-            'attribute' => 'name',
-            'pivot' => false,
-        ]);
-        CRUD::addField([
-            'name' => 'trainer_id',
-            'label' => 'Trainer',
-            'entity' => 'trainer',
-            'model' => 'App\Models\User',
-            'attribute' => 'name',
-            'pivot' => false,
-        ]);
+        // CRUD::addField([
+        //     'name' => 'category_id',
+        //     'label' => 'Service Category',
+        //     'entity' => 'category',
+        //     'model' => 'App\Models\ServiceCategory',
+        //     'attribute' => 'name',
+        //     'pivot' => false,
+        // ]);
+        // CRUD::addField([
+        //     'name' => 'trainer_id',
+        //     'label' => 'Trainer',
+        //     'entity' => 'trainer',
+        //     'model' => 'App\Models\User',
+        //     'attribute' => 'name',
+        //     'pivot' => false,
+        // ]);
         CRUD::setFromDb(); // set fields from db columns.
 
         /**

@@ -48,12 +48,12 @@
         @can('manage-gym-services')
             <x-backpack::menu-dropdown-header title="Services" />
             <x-backpack::menu-dropdown-item title="Service" icon="la la-hard-hat" :link="backpack_url('service')" />
-            <x-backpack::menu-dropdown-item title="Service Categories" icon="la la-clipboard-list" :link="backpack_url('service-category')" />
+            {{-- <x-backpack::menu-dropdown-item title="Service Categories" icon="la la-clipboard-list" :link="backpack_url('service-category')" /> --}}
             <x-backpack::menu-dropdown-item title="Service Amenities" icon="la la-puzzle-piece" :link="backpack_url('amenity')" />
         @endcan
         @can('manage-gym-inventory')
             <x-backpack::menu-dropdown-header title="Inventories" />
-            <x-backpack::menu-dropdown-item title='Inventory' icon='la la-boxes' :link="backpack_url('inventory')" />
+            {{-- <x-backpack::menu-dropdown-item title='Inventory' icon='la la-boxes' :link="backpack_url('inventory')" /> --}}
             <x-backpack::menu-dropdown-item title="Equipment" icon="la la-box" :link="backpack_url('equipment-inventory')" />
         @endcan
 
@@ -61,5 +61,5 @@
 @endcan
 
 @can('manage-contact-inbox')
-    <x-backpack::menu-item title="Contact Us Inbox" icon="la la-inbox" :link="backpack_url('contactus-inbox')" />
+    <x-backpack::menu-item title="Feedback Inbox" icon="la la-inbox" :link="backpack_url('feedback-inbox')" />
 @endcan
