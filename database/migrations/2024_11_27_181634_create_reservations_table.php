@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
-            $table->string('service_category_id')->nullable();
+            // $table->string('service_category_id')->nullable();
             $table->string('service_name_id')->nullable();
             $table->string('reservation_date');
-            $table->string('reservation_time');
+            // $table->string('reservation_time');
             $table->string('name');
             $table->string('email');
             $table->string('phone');

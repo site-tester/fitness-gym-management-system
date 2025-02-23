@@ -166,18 +166,18 @@ class ReservationCrudController extends CrudController
         //     'attribute' => 'name',
         //     'pivot' => false,
         // ]);
-        CRUD::addField([
-            'name' => 'service_category_id',
-            'label' => 'Service Category',
-            'type' => 'select',
-            'entity' => 'serviceCategory',
-            'model' => 'App\Models\ServiceCategory',
-            'attribute' => 'name',
-            'pivot' => false,
-            'attributes' => [
-                'id' => 'service_category_id',
-            ],
-        ]);
+        // CRUD::addField([
+        //     'name' => 'service_category_id',
+        //     'label' => 'Service Category',
+        //     'type' => 'select',
+        //     'entity' => 'serviceCategory',
+        //     'model' => 'App\Models\ServiceCategory',
+        //     'attribute' => 'name',
+        //     'pivot' => false,
+        //     'attributes' => [
+        //         'id' => 'service_category_id',
+        //     ],
+        // ]);
 
         CRUD::addField([
             'name' => 'service_name_id',
@@ -198,11 +198,11 @@ class ReservationCrudController extends CrudController
             'label' => 'Reservation Date',
             'type' => 'date',
         ]);
-        CRUD::addField([
-            'name' => 'reservation_time',
-            'label' => 'Reservation Time',
-            'type' => 'time',
-        ]);
+        // CRUD::addField([
+        //     'name' => 'reservation_time',
+        //     'label' => 'Reservation Time',
+        //     'type' => 'time',
+        // ]);
         CRUD::addField([
             'name' => 'payment_method',
             'label' => 'Payment Method',
@@ -227,7 +227,7 @@ class ReservationCrudController extends CrudController
             'label' => 'Status',
             'type' => 'select_from_array',
             'options' => [
-                'Pending' => 'Pending',
+                'Pending' => 'Pending Approval',
                 'Approved' => 'Approved',
                 'Rejected' => 'Rejected',
             ],
@@ -276,14 +276,14 @@ class ReservationCrudController extends CrudController
             'pivot' => false,
 
         ]);
-        CRUD::addColumn([
-            'name' => 'service_category_id',
-            'label' => 'Service Category',
-            'entity' => 'serviceCategory',
-            'model' => 'App\Models\ServiceCategory',
-            'attribute' => 'name',
-            'pivot' => false,
-        ]);
+        // CRUD::addColumn([
+        //     'name' => 'service_category_id',
+        //     'label' => 'Service Category',
+        //     'entity' => 'serviceCategory',
+        //     'model' => 'App\Models\ServiceCategory',
+        //     'attribute' => 'name',
+        //     'pivot' => false,
+        // ]);
         CRUD::addColumn([
             'name' => 'reservation_date',
             'label' => 'Reservation Date',
@@ -292,14 +292,14 @@ class ReservationCrudController extends CrudController
                 return \Carbon\Carbon::parse($entry->reservation_time)->format('M-d-Y');
             },
         ]);
-        CRUD::addColumn([
-            'name' => 'reservation_time',
-            'label' => 'Reservation Time',
-            'type' => 'closure',
-            'function' => function ($entry) {
-                return \Carbon\Carbon::parse($entry->reservation_time)->format('h:i A');
-            },
-        ]);
+        // CRUD::addColumn([
+        //     'name' => 'reservation_time',
+        //     'label' => 'Reservation Time',
+        //     'type' => 'closure',
+        //     'function' => function ($entry) {
+        //         return \Carbon\Carbon::parse($entry->reservation_time)->format('h:i A');
+        //     },
+        // ]);
         CRUD::addColumn([
             'name' => 'name',
             'label' => 'Client Name',
