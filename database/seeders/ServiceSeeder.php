@@ -92,7 +92,7 @@ class ServiceSeeder extends Seeder
         foreach ($amenities as $value) {
             Amenity::create([
                 'name' => $value,
-                'class' => '<i class="bi bi-suit-diamond-fill"></i>',
+                // 'class' => '<i class="bi bi-suit-diamond-fill"></i>',
             ]);
         }
 
