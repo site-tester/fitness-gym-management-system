@@ -25,7 +25,7 @@
 
 @section('content')
 
-    <div class="container-fluid w-75 m-auto pt-3" >
+    <div class="container-fluid w-100 w-md-75 m-auto pt-3">
         @if (Session::has('success'))
             <div class="toast-container end-0 ">
                 <div id="liveToast" class="toast bg-success-subtle text-success-emphasis show" role="alert"
@@ -38,7 +38,7 @@
                 </div>
             </div>
         @endif
-        <div class="container w-75 mt-5">
+        <div class="container-fluid container-md w-100 w-md-75 mt-5">
             <div class="my-5 ">
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">
@@ -61,35 +61,36 @@
                             </div>
                         @endif
 
-                        <div class="col-12 col-lg-3 border-end border-top ">
-                            <ul id="myProfileTab" class="nav nav-pills flex-column " role="tablist"
+                        <div class="col-12 col-lg-3 p-3 p-md-0 ps-md-4 pe-md-4">
+                            <ul id="myProfileTab" class="nav nav-underline flex-column " role="tablist"
                                 aria-orientation="vertical">
                                 <li class="nav-item ">
-                                    <h5><a class="nav-link w-100 float-end text-end active rounded-start"
+                                    <h5><a class="nav-link w-100 float-end text-start active "
                                             href="#profile-details-tab" role="tab" data-bs-toggle="tab">Personal
                                             Details</a></h5>
                                 </li>
                                 <li class="nav-item ">
-                                    <h5><a class="nav-link w-100 float-end text-end rounded-start" href="#gym-details-tab"
+                                    <h5><a class="nav-link w-100 float-end text-start " href="#gym-details-tab"
                                             role="tab" data-bs-toggle="tab">Gym
                                             Details</a>
                                     </h5>
                                 </li>
                                 <li class="nav-item ">
-                                    <h5><a class="nav-link w-100 float-end text-end rounded-start"
+                                    <h5><a class="nav-link w-100 float-end text-start "
                                             href="#profile-security-tab" role="tab" data-bs-toggle="tab">Security</a>
                                     </h5>
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-12 col-lg-9 ps-0 tab-content border-top">
+                        <div class="col-12 col-lg-9 p-3 p-md-0 tab-content ">
                             <div id="profile-details-tab" class="tab-pane fade show active mb-4 p-3 p-md-4" role="tabpanel">
                                 <div class="">
                                     {{-- Full Name --}}
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="ProfileName" name="name" type="text"
                                             value="{{ Auth::user()->name ?? old('name') }}">
-                                        <label class="small mb-1" for="name">Full Name <span class="text-danger">*</span></label>
+                                        <label class="small mb-1" for="name">Full Name <span
+                                                class="text-danger">*</span></label>
                                         @error('email')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -98,7 +99,8 @@
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="ProfileEmail" name="profileEmail" type="email"
                                             value="{{ Auth::user()->email ?? old('profileEmail') }}">
-                                        <label class="small mb-1" for="ProfileEmail">Email address <span class="text-danger">*</span></label>
+                                        <label class="small mb-1" for="ProfileEmail">Email address <span
+                                                class="text-danger">*</span></label>
                                         @error('email')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -107,34 +109,66 @@
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="birthdate" name="birthdate" type="date"
                                             value="{{ $profile->membershipDetails->birthdate ?? old('birthdate') }}">
-                                        <label class="small mb-1" for="birthdate">Birth Date <span class="text-danger">*</span></label>
+                                        <label class="small mb-1" for="birthdate">Birth Date <span
+                                                class="text-danger">*</span></label>
                                         @error('birthdate')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <!-- Gender -->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="gender" name="gender" type="text"
-                                            value="{{ $profile->membershipDetails->gender ?? old('gender') }}">
-                                        <label class="small mb-1" for="gender">Gender <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="gender" name="gender">
+                                            <option disabled>Select one</option>
+                                            <option value="Male"
+                                                {{ ($profile->membershipDetails->gender ?? old('gender')) == 'Male' ? 'selected' : '' }}>
+                                                Male</option>
+                                            <option value="Female"
+                                                {{ ($profile->membershipDetails->gender ?? old('gender')) == 'Female' ? 'selected' : '' }}>
+                                                Female</option>
+                                            <option value="Others"
+                                                {{ ($profile->membershipDetails->gender ?? old('gender')) == 'Others' ? 'selected' : '' }}>
+                                                Others</option>
+                                        </select>
+
+                                        <label class="small mb-1" for="gender">Gender <span
+                                                class="text-danger">*</span></label>
                                         @error('gender')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     {{-- Civil Status --}}
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="civil_status" name="civil_status" type="text"
-                                            value="{{ $profile->membershipDetails->civil_status ?? old('civil_status') }}">
-                                        <label class="small mb-1" for="civil_status">Civil Status <span class="text-danger">*</span></label>
+                                        {{-- <input class="form-control" id="civil_status" name="civil_status" type="text"
+                                            value="{{ $profile->membershipDetails->civil_status ?? old('civil_status') }}"> --}}
+                                        <select class="form-select" id="civil_status" name="civil_status">
+                                            <option disabled>Select one</option>
+                                            <option value="Single"
+                                                {{ ($profile->membershipDetails->civil_status ?? old('civil_status')) == 'Single' ? 'selected' : '' }}>
+                                                Single</option>
+                                            <option value="Married"
+                                                {{ ($profile->membershipDetails->civil_status ?? old('civil_status')) == 'Married' ? 'selected' : '' }}>
+                                                Married</option>
+                                            <option value="Widowed"
+                                                {{ ($profile->membershipDetails->civil_status ?? old('civil_status')) == 'Widowed' ? 'selected' : '' }}>
+                                                Widowed</option>
+                                            <option value="Divorced"
+                                                {{ ($profile->membershipDetails->civil_status ?? old('civil_status')) == 'Divorced' ? 'selected' : '' }}>
+                                                Divorced</option>
+                                        </select>
+
+                                        <label class="small mb-1" for="civil_status">Civil Status <span
+                                                class="text-danger">*</span></label>
                                         @error('civil_status')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <!-- Form Group (Phone Number)-->
                                     <div class=" form-floating mb-3">
-                                        <input class="form-control" id="Phone_number" name="contact_number" type="text"
+                                        <input class="form-control" id="Phone_number" name="contact_number"
+                                            type="text"
                                             value="{{ $profile->membershipDetails->phone ?? old('contact_number') }}">
-                                        <label class="small mb-1" for="Phone_number">Contact Number <span class="text-danger">*</span></label>
+                                        <label class="small mb-1" for="Phone_number">Contact Number <span
+                                                class="text-danger">*</span></label>
                                         <p class="help-block">eg. 09123456789</p>
                                         @error('contact_number')
                                             <span class="invalid-feedback">{{ $message }}</span>
@@ -145,7 +179,8 @@
                                         <div class="form-floating mb-3">
                                             <input class="form-control" id="address" name="address" type="text"
                                                 value="{{ $profile->membershipDetails->address ?? old('address') }}">
-                                            <label class="small mb-1" for="address">Street Address <span class="text-danger">*</span></label>
+                                            <label class="small mb-1" for="address">Street Address <span
+                                                    class="text-danger">*</span></label>
                                             @error('address')
                                                 <span class="invalid-feedback">{{ $message }}</span>
                                             @enderror
@@ -161,14 +196,12 @@
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="heigth" name="heigth" type="number"
                                             value="{{ $profile->membershipDetails->height ?? old('heigth') }}"
-                                            @if (Auth::user()->rfid_number == null)
-                                                disabled
-                                                title="Please visit the gym to update this detail."
-                                            @endif
-                                            >
+                                            @if (Auth::user()->rfid_number == null) disabled
+                                                title="Please visit the gym to update this detail." @endif>
                                         <label class="small mb-1" for="heigth">Height</label>
                                         @if (Auth::user()->rfid_number == null)
-                                            <p class="help-block fst-italic"><span class="text-danger">*</span>Please visit the gym to update this detail.</p>
+                                            <p class="help-block fst-italic"><span class="text-danger">*</span>Please
+                                                visit the gym to update this detail.</p>
                                         @endif
                                         @error('height')
                                             <span class="invalid-feedback">{{ $message }}</span>
@@ -177,13 +210,12 @@
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="weigth" name="weigth" type="number"
                                             value="{{ $profile->membershipDetails->weight ?? old('weigth') }}"
-                                            @if (Auth::user()->rfid_number == null)
-                                                disabled
-                                                title="Please visit the gym to update this detail."
-                                            @endif>
+                                            @if (Auth::user()->rfid_number == null) disabled
+                                                title="Please visit the gym to update this detail." @endif>
                                         <label class="small mb-1" for="heigth">Weight</label>
                                         @if (Auth::user()->rfid_number == null)
-                                            <p class="help-block fst-italic"><span class="text-danger">*</span>Please visit the gym to update this detail.</p>
+                                            <p class="help-block fst-italic"><span class="text-danger">*</span>Please
+                                                visit the gym to update this detail.</p>
                                         @endif
                                         {{-- <p class="help-block">Please visit the gym to update your details.</p> --}}
                                         @error('weight')
@@ -193,13 +225,12 @@
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="medical_info" name="medical_info" type="text"
                                             value="{{ $profile->membershipDetails->medical_info ?? old('medical_info') }}"
-                                            @if (Auth::user()->rfid_number == null)
-                                                disabled
-                                                title="Please visit the gym to update this detail."
-                                            @endif>
+                                            @if (Auth::user()->rfid_number == null) disabled
+                                                title="Please visit the gym to update this detail." @endif>
                                         <label class="small mb-1" for="medical_info">Medical Information</label>
                                         @if (Auth::user()->rfid_number == null)
-                                            <p class="help-block fst-italic"><span class="text-danger">*</span>Please visit the gym to update this detail.</p>
+                                            <p class="help-block fst-italic"><span class="text-danger">*</span>Please
+                                                visit the gym to update this detail.</p>
                                         @endif
                                         @error('medical_info')
                                             <span class="invalid-feedback">{{ $message }}</span>
@@ -208,13 +239,12 @@
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="guardian" name="guardian" type="text"
                                             value="{{ $profile->membershipDetails->guardian ?? old('guardian') }}"
-                                            @if (Auth::user()->rfid_number == null)
-                                                disabled
-                                                title="Please visit the gym to update this detail."
-                                            @endif>
+                                            @if (Auth::user()->rfid_number == null) disabled
+                                                title="Please visit the gym to update this detail." @endif>
                                         <label class="small mb-1" for="guardian">Guardian</label>
                                         @if (Auth::user()->rfid_number == null)
-                                            <p class="help-block fst-italic"><span class="text-danger">*</span>Please visit the gym to update this detail.</p>
+                                            <p class="help-block fst-italic"><span class="text-danger">*</span>Please
+                                                visit the gym to update this detail.</p>
                                         @endif
                                         @error('guardian')
                                             <span class="invalid-feedback">{{ $message }}</span>
