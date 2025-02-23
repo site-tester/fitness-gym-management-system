@@ -304,7 +304,7 @@
                                     </div>
                                     <div class="form-check ps-0 q-box">
                                         <div class="q-box__question">
-                                            <div class="mb-3">
+                                            {{-- <div class="mb-3">
                                                 <label for="ServCategory" class="form-label">Service Category <span
                                                         class="text-danger">*</span></label>
                                                 <select class="form-select" name="service_category" id="ServCategory">
@@ -313,12 +313,14 @@
                                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                     @endforeach
                                                 </select>
-                                            </div>
+                                            </div> --}}
 
                                             <div class="mb-3">
                                                 <label for="ServName" class="form-label">Service Name <span
                                                         class="text-danger">*</span></label>
                                                 <select class="form-select" name="service_name" id="ServName">
+                                                    <option selected>--Select Service--</option>
+                                                    <option selected>--Select Service--</option>
                                                     <option selected>--Select Service--</option>
                                                 </select>
                                             </div>

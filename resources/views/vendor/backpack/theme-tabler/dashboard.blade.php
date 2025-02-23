@@ -379,8 +379,8 @@
                             datasets: [{
                                 label: '# of Members',
                                 data: counts, // Count of each gender
-                                backgroundColor: ['rgba(180, 234, 127, 0.90)',
-                                    'rgba(255, 102, 133, 0.9)'
+                                backgroundColor: ['rgba(180, 234, 127, 0.4)',
+                                    'rgba(255, 102, 133, 0.4)'
                                 ], // Different colors for each gender
                                 borderColor: ['rgba(180, 234, 127, 1)',
                                     'rgba(255, 102, 133, 1)'
@@ -456,12 +456,12 @@
 
             // Define a color palette for different age ranges
             var backgroundColors = [
-                'rgba(255, 99, 132, 0.6)',  // Red
-                'rgba(54, 162, 235, 0.6)',  // Blue
-                'rgba(255, 206, 86, 0.6)',  // Yellow
-                'rgba(75, 192, 192, 0.6)',  // Green
-                'rgba(153, 102, 255, 0.6)', // Purple
-                'rgba(255, 159, 64, 0.6)'   // Orange
+                'rgba(255, 99, 132, 0.3)',  // Red
+                'rgba(54, 162, 235, 0.3)',  // Blue
+                'rgba(255, 206, 86, 0.3)',  // Yellow
+                'rgba(75, 192, 192, 0.3)',  // Green
+                'rgba(153, 102, 255, 0.3)', // Purple
+                'rgba(255, 159, 64, 0.3)'   // Orange
             ];
 
             var borderColors = [
