@@ -57,7 +57,7 @@
                                     <div class="row">
                                         <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                                             <div>
-                                                <h1 class="text-uppercase fw-bold mb-3">PROGRAMS</h1><a href="{{route('contact.us')}}" class="btn text-white fs-5 me-2 py-2 px-4" type="button" style="background: #e12c2c;">CONTACT US</a>
+                                                <h1 class="text-uppercase fw-bold mb-3">PROGRAMS</h1><a href="{{route('contact.us')}}" class="text-white fs-5 me-2 py-2 px-4" type="button" style="background: #e12c2c;">CONTACT US</a>
                                             </div>
                                         </div>
                                     </div>
@@ -87,7 +87,7 @@
                                     <div class="row">
                                         <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
                                             <div>
-                                                <h1 class="text-uppercase fw-bold mb-3">SERVICES</h1><button class="btn btn-primary fs-5 me-2 py-2 px-4" type="button" style="border-radius: 50px;background: rgb(225,44,44);font-size: 14px;">LEARN MORE</button>
+                                                <h1 class="text-uppercase fw-bold mb-3">SERVICES</h1><button class="btn btn-primary fs-5 me-2 py-2 px-4" type="button" style="background: rgb(225,44,44);font-size: 14px;">LEARN MORE</button>
                                             </div>
                                         </div>
                                     </div>

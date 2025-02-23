@@ -17,8 +17,7 @@
                     font-family: var(--bs-font-sans-serif) !important; font-weight: 900;
                     font-style: normal; text-shadow:1px 1px 2px #fff, /* Light shadow for highlight */ -1px -1px
                             2px #000; Dark shadow for depth
-                    "
-                    >AJ
+                    ">AJ
                         DIA</em></h2>
                 <div class="main-button
                         scroll-to-section">
@@ -158,7 +157,8 @@
                 <div class="col-lg-10 offset-lg-1">
                     <div class="cta-content">
                         <h2>Don’t <em>think</em>, begin <em>today</em>!</h2>
-                        <p>Unlock your fitness potential with a membership at AJ DIA Fitness Gym! Whether you're a beginner or a seasoned athlete, we have everything you need to reach your goals</p>
+                        <p>Unlock your fitness potential with a membership at AJ DIA Fitness Gym! Whether you're a beginner
+                            or a seasoned athlete, we have everything you need to reach your goals</p>
                         <div class="main-button scroll-to-section">
                             <a href="{{ route('register') }}">Become a member</a>
                         </div>
@@ -328,7 +328,8 @@
                         <div class="section-heading">
                             <h2>Expert <em>Trainers</em></h2>
                             <img src="{{ asset('public/img/line-dec.png') }}" alt="">
-                            <p>Get to know your trainer! Have questions? Feel free to reach out to your trainer for inquiries about training plans, nutrition guidance, or fitness assessments.</p>
+                            <p>Get to know your trainer! Have questions? Feel free to reach out to your trainer for
+                                inquiries about training plans, nutrition guidance, or fitness assessments.</p>
                         </div>
                     </div>
                 </div>
@@ -337,7 +338,7 @@
                         <div class="col-lg-4">
                             <div class="trainer-item">
                                 <div class="image-thumb">
-                                    <img src="/storage/app/public/{{$trainer->trainerDetails->profile_picture}}"
+                                    <img src="/storage/app/public/{{ $trainer->trainerDetails->profile_picture }}"
                                         alt="">
                                 </div>
                                 <div class="down-content">
@@ -373,12 +374,12 @@
                     <div id="map">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.4476461010263!2d122.97227737383345!3d13.751857086639983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a21bff2e01627f%3A0x54cacae120905b92!2sDIA%20Bldg!5e0!3m2!1sen!2sph!4v1729691509895!5m2!1sen!2sph=embed"
-                            width="100%" height="600px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            width="100%" height="530px" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-12">
                     <div class="contact-form">
-                        <form id="contact" action="" method="post">
+                        <form id="contact" action="{{ route('send.contact.us') }}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
@@ -393,20 +394,20 @@
                                             placeholder="Your Email*" required="">
                                     </fieldset>
                                 </div>
-                                <div class="col-md-12 col-sm-12">
+                                {{-- <div class="col-md-12 col-sm-12">
                                     <fieldset>
                                         <input name="subject" type="text" id="subject" placeholder="Subject">
                                     </fieldset>
-                                </div>
+                                </div> --}}
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <textarea name="message" rows="6" id="message" placeholder="Message" required=""></textarea>
+                                        <textarea name="message" rows="6" id="message" placeholder="Feedback" required=""></textarea>
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
                                         <button type="submit" id="form-submit" class="main-button">Send
-                                            Message</button>
+                                            Feedback</button>
                                     </fieldset>
                                 </div>
                             </div>

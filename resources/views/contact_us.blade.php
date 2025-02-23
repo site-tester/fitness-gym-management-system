@@ -24,7 +24,7 @@
                     <div class="col-md-6 col-lg-6 col-xs-12">
                         <div id="map"><iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.4476461010263!2d122.97227737383345!3d13.751857086639983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a21bff2e01627f%3A0x54cacae120905b92!2sDIA%20Bldg!5e0!3m2!1sen!2sph!4v1729691509895!5m2!1sen!2sph =embed"
-                                width="100%" height="600px" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                                width="100%" height="530px" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6 col-xs-12">
@@ -40,18 +40,18 @@
                                         <fieldset><input type="text" id="email" name="email"
                                                 pattern="[^ @]*@[^ @]*" placeholder="Your Email*" required=""></fieldset>
                                     </div>
-                                    <div class="col-sm-12 col-md-12">
+                                    {{-- <div class="col-sm-12 col-md-12">
                                         <fieldset><input type="text" id="subject" name="subject"
                                                 placeholder="Subject"></fieldset>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-lg-12">
                                         <fieldset>
-                                            <textarea id="message" name="message" placeholder="Message" required="" rows="6"></textarea>
+                                            <textarea id="message" name="message" placeholder="Feedback" required="" rows="6"></textarea>
                                         </fieldset>
                                     </div>
                                     <div class="col-lg-12">
-                                        <fieldset><button type="submit" id="form-submit" class="main-button"
-                                                >Send Message</button></fieldset>
+                                        <fieldset><button type="submit" id="form-submit" class="main-button">Send
+                                                Feedback</button></fieldset>
                                     </div>
                                 </div>
                             </form>
@@ -77,7 +77,7 @@
                                     d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"></path>
                             </svg>
                         </div>
-                        <div class="px-3" >
+                        <div class="px-3">
                             <h4 style="color: var(--accent) !important;">Address</h4>
                             <p>DIA Building Basement Area, Tara, Sipocot, Philippines</p>
                         </div>
@@ -102,8 +102,7 @@
                                     fill="currentColor"></path>
                             </svg>
                         </div>
-                        <div class="px-3"
-                            style="font-family: Poppins, sans-serif;border-color: #212528;">
+                        <div class="px-3" style="font-family: Poppins, sans-serif;border-color: #212528;">
                             <h4 style="color: var(--accent) !important;">Phone</h4>
                             <p>0912-345-6789</p>
                         </div>
@@ -138,9 +137,9 @@
             style="padding-top: 70px;margin-top: 0px; background: url('/resources/img/423583148_868625718602826_376942488243513661_n.jpg'); background-size: cover;
   background-position: center;">
             <h1 class="hero-title text-white" style="font-weight: bold;">VISIT US ON FACEBOOK!</h1>
-            <p class="hero-subtitle text-white">Stay connected! Visit us on Facebook for the latest from AJ DIA Fitness</p>
+            <p class="hero-subtitle text-white mb-4">Stay connected! Visit us on Facebook for the latest from AJ DIA Fitness</p>
             <div>
-                <a href="https://www.facebook.com/AJDIAFITNESS/?_rdc=1&amp;_rdr"
+                <a class="text-white fs-5 me-2 py-2 px-4" href="https://www.facebook.com/AJDIAFITNESS/?_rdc=1&amp;_rdr"
                     style="color: rgb(255,255,255);background: #e12c2c;font-size: 20px;border: 9px solid rgb(225,44,44);">CLICK
                     HERE
                 </a>

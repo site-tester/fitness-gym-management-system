@@ -26,7 +26,7 @@ class Controller extends BaseController
         ContactusInbox::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'subject' => $request->input('subject'),
+            // 'subject' => $request->input('subject'),
             'message' => $request->input('message'),
         ]);
 
