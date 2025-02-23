@@ -169,10 +169,10 @@ a[x-apple-data-detectors],
                       <td align="center" style="padding:0;Margin:0;width:265px">
                        <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                          <tr>
-                          <td align="left" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px"><strong>{{$booking->service->name}}</strong></p></td>
+                          <td align="left" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px"><strong>{{$booking->service_name}}</strong></p></td>
                          </tr>
                          <tr>
-                          <td align="left" style="padding:0;Margin:0;padding-top:5px"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Category: {{$booking->serviceCategory->name}}<br>Trainer: {{$booking->service->trainer->name}}</p></td>
+                          <td align="left" style="padding:0;Margin:0;padding-top:5px"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Duration: {{$booking->service_duration}}</p></td>
                          </tr>
                        </table></td>
                      </tr>
@@ -196,7 +196,7 @@ a[x-apple-data-detectors],
                       <td align="left" style="padding:0;Margin:0;width:85px">
                        <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                          <tr>
-                          <td align="right" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">₱{{$booking->service->price}}</p></td>
+                          <td align="right" style="padding:0;Margin:0"><p style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">₱{{$booking->total_amount}}</p></td>
                          </tr>
                        </table></td>
                      </tr>
@@ -211,9 +211,9 @@ a[x-apple-data-detectors],
                   <td align="center" class="es-m-p0r" style="padding:0;Margin:0;width:560px">
                    <table cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;border-top:2px solid #efefef;border-bottom:2px solid #efefef" role="presentation">
                      <tr>
-                      <td align="right" style="padding:0;Margin:0;padding-top:10px;padding-bottom:20px"><p class="es-m-txt-r" style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Subtotal:&nbsp;<strong>₱{{$booking->service->price}}</strong><br>
+                      <td align="right" style="padding:0;Margin:0;padding-top:10px;padding-bottom:20px"><p class="es-m-txt-r" style="Margin:0;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;letter-spacing:0;color:#333333;font-size:14px">Subtotal:&nbsp;<strong>₱{{$booking->total_amount}}</strong><br>
                         {{-- Tax:&nbsp;<strong>₱{{$booking->service->price*0.12}}</strong><br> --}}
-                        Total:&nbsp;<strong>₱{{$booking->service->price}}</strong></p></td>
+                        Total:&nbsp;<strong>₱{{$booking->total_amount}}</strong></p></td>
                      </tr>
                    </table></td>
                  </tr>
