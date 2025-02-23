@@ -267,12 +267,12 @@ class TrainerDetailCrudController extends CrudController
         // Validate the request
         $request->validate($rules, $messages);
 
-        $username = $this->generateUsername($request['name']);
+        // $username = $this->generateUsername($request['name']);
 
         $user = User::create([
             'rfid_number' => $request['rfid_number'],
             'name' => $request['name'],
-            'username' => $username,
+            // 'username' => $username,
             'email' => $request['email'],
             'password' => Hash::make($request['password']), // Hash the password
         ]);

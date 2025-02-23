@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
         // Create admin user
         $admin = User::create([
             'name' => 'Admin',
-            'username' => 'admin',
+            // 'username' => 'admin',
             'email' => 'admin@email.com',
             'password' => Hash::make('password'), // Ensure password is hashed
             'remember_token' => Str::random(60),
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
 
         $superAdmin = User::create([
             'name' => 'Super Admin',
-            'username' => 'superadmin',
+            // 'username' => 'superadmin',
             'email' => 'superadmin@email.com',
             'password' => Hash::make('password'), // Ensure password is hashed
             'remember_token' => Str::random(60),
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
             [
                 'rfid_number' => '1019735270',
                 'name' => 'John Doe',
-                'username' => 'jdoe',
+                // 'username' => 'jdoe',
                 'email' => 'jdoe@email.com',
                 'password' => Hash::make('password'), // Ensure password is hashed
                 'remember_token' => Str::random(60),
@@ -72,7 +72,7 @@ class UserSeeder extends Seeder
             $memberUser = User::create([
                 'rfid_number' => $member['rfid_number'],
                 'name' => $member['name'],
-                'username' => $member['username'],
+                // 'username' => $member['username'],
                 'email' => $member['email'],
                 'password' => $member['password'],
                 'remember_token' => $member['remember_token'],
@@ -99,7 +99,7 @@ class UserSeeder extends Seeder
         $trainers = [
             [
                 'name' => 'Trainer 1',
-                'username' => 'trainer1',
+                // 'username' => 'trainer1',
                 'email' => 'trainer1@email.com',
                 'password' => Hash::make('password'), // Ensure password is hashed
                 'remember_token' => Str::random(60),
@@ -141,7 +141,7 @@ class UserSeeder extends Seeder
             // ],
             [
                 'name' => 'Trainer 3',
-                'username' => 'trainer3',
+                // 'username' => 'trainer3',
                 'email' => 'trainer3@email.com',
                 'password' => Hash::make('password'), // Ensure password is hashed
                 'remember_token' => Str::random(60),
