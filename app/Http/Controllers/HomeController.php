@@ -164,7 +164,7 @@ class HomeController extends Controller
             $reservation->service_duration = $request->input('service_duration');
             $reservation->service_name = $request->input('service_name');
             $reservation->reservation_date = $request->input('selected_date');
-            $reservation->reservation_time = $request->input('formTime');
+            // $reservation->reservation_time = $request->input('formTime');
             $reservation->payment_method = $request->input('payment_method');
 
             // You can also add hidden fields if needed
