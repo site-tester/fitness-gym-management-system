@@ -30,7 +30,7 @@
     <style>
         * {
             /* font-family: "Nunito", sans-serif; */
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins' !important ;
             font-weight: 400;
             font-style: normal;
         }

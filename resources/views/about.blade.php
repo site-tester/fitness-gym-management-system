@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="container mt-4">
-            <div class="card">
+            <div class="card border-0">
                 <div class="card-body" style="border-radius: 0px;">
                     <h4 class="card-title" style="text-align: center;font-size: 40px;font-weight: bold;color: var(--accent) !important;text-shadow: 2px 2px rgb(129,34,34);">OUR STORY</h4>
                     <h6 class="text-muted card-subtitle mb-2" style="text-align: center;">HISTORY</h6>
@@ -28,7 +28,7 @@
         <footer style="padding-top: 0px;">
             <section class="py-4 py-xl-5">
                 <div class="container">
-                    <div class="border rounded border-1 border-secondary overflow-hidden">
+                    <div class="overflow-hidden">
                         <div class="row g-0">
                             <div class="col-md-6">
                                 <div class=" p-4 p-md-5 mt-4">
