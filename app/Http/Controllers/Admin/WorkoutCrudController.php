@@ -205,6 +205,12 @@ class WorkoutCrudController extends CrudController
             'name' => 'description',
             'label' => 'Description',
             'type' => 'summernote',
+            'options' => [
+                'height' => 300,
+                // 'toolbar' => [
+                //     ['fontname', ['Poppins'] ]
+                // ]
+            ],
         ]);
     }
 
