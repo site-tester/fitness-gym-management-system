@@ -34,14 +34,15 @@
                     {{-- <div class="card-header">{{ __('Login') }}</div> --}}
                     <div class="card-body row ">
                         <div class="d-none d-md-block col-md-6 text-center align-content-center">
-                            <div class="font-monospace h3 fst-italic mb-3">
-                                Fitness Gym Management System
+                            <div class=" h3 mb-3">
+                                {{-- Fitness Gym Management System --}}
+                                
                             </div>
                             <div class="logo mb-3">
                                 <img src="{{ asset('/resources/img/Logo.jpg') }}" alt="" width="200px">
                             </div>
                             <div class="login-address mb-3">
-                                <p class="h5 px-3"><i class="bi bi-geo-alt-fill text-accent"></i> DIA Building Basement Area, Tara, Sipocot, Philippines</p>
+                                <p class="h5 px-3" style="font-size: small"><i class="bi bi-geo-alt-fill text-accent"></i> DIA Building Basement Area, Tara, Sipocot, Philippines</p>
                             </div>
 
                         </div>
