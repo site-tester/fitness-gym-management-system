@@ -114,4 +114,4 @@ jobs:
             cp public/img/trainer2.jpg ./storage/app/public/trainer2.jpg
             cp public/img/trainer3.jpg ./storage/app/public/trainer3.jpg
 
-            php artisan backpack:fix
+            php artisan basset:cache
