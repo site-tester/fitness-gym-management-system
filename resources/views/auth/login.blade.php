@@ -36,9 +36,9 @@
                         <div class="d-none d-md-block col-md-6 text-center align-content-center">
                             <div class=" h3 mb-3">
                                 {{-- Fitness Gym Management System --}}
-                                
+
                             </div>
-                            <div class="logo mb-3">
+                            <div class=" mb-3">
                                 <img src="{{ asset('/resources/img/Logo.jpg') }}" alt="" width="200px">
                             </div>
                             <div class="login-address mb-3">
