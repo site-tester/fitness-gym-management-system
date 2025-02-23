@@ -280,7 +280,8 @@
     <div class="container-fluid  pt-3">
         <div class="row shadow mt-5 mx-auto w-75 p-0  border border-danger">
             <div class="col-7 px-0 overflow-hidden d-sm-none d-md-block">
-                <img src="{{ asset('/resources/img/Logo.jpg') }}" alt="" style="width:100% ; height: 100%; object-fit: cover;">
+                <img src="{{ asset('/resources/img/Logo.jpg') }}" alt=""
+                    style="width:100% ; height: 100%; object-fit: cover;">
             </div>
             <div class="col-12 col-md-5 px-0 border-start border-danger border-2">
                 <div class="rounded-0 h-100">
@@ -315,23 +316,41 @@
                                                 </select>
                                             </div> --}}
 
-                                            <div class="mb-3">
-                                                <label for="ServName" class="form-label">Service Name <span
-                                                        class="text-danger">*</span></label>
-                                                <select class="form-select" name="service_name" id="ServName">
-                                                    <option selected>--Select Service--</option>
-                                                    <option selected>--Select Service--</option>
-                                                    <option selected>--Select Service--</option>
-                                                </select>
+                                            <div class="row">
+                                                <!-- Service Name -->
+                                                <div class="col-12 mb-3">
+                                                    <label for="service_name" class="form-label">Service Name <span
+                                                            class="text-danger">*</span></label>
+                                                    <select class="form-select" name="service_name" id="service_name">
+                                                        <option selected disabled>-- Select Service --</option>
+                                                        <option value="Regular">Regular</option>
+                                                        <option value="Promo">Promo/Student</option>
+                                                    </select>
+                                                </div>
+
+                                                <!-- Service Duration -->
+                                                <div class="col-12 mb-3">
+                                                    <label for="service_duration" class="form-label">Service Duration <span
+                                                            class="text-danger">*</span></label>
+                                                    <select class="form-select" name="service_duration"
+                                                        id="service_duration" disabled>
+                                                        <option selected disabled>-- Select Duration --</option>
+                                                        <option value="Monthly">Monthly</option>
+                                                        <option value="Day">Daily</option>
+                                                    </select>
+                                                </div>
                                             </div>
+
                                         </div>
                                         {{-- Below id the service description --}}
                                         <div class="mt-3 mx-5 px-3 py-3 border ">
                                             <div id="servDescription">
                                                 <p class="text-center mb-0">Select a service to view its details.</p>
                                             </div>
-                                            <div id="amenitiesList"></div>
                                         </div>
+
+                                        <input id="ServName" type="hidden" name="ServName">
+                                        <input id="ServDuration" type="hidden" name="ServDuration">
 
                                     </div>
                                 </div>
@@ -339,22 +358,22 @@
                                 {{-- Step 2 --}}
                                 <div class="step">
                                     <div class="border-bottom mb-3">
-                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Choose Date & Time</h4>
+                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Choose Date</h4>
                                     </div>
                                     <div class="form-check ps-0 q-box">
                                         <div class="q-box__question">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Date <span
-                                                        class="text-danger">*</span></label>
-                                                <div id="datepicker"></div>
-                                                <input class="form-control" type="text" id="selected-date" value=""
-                                                    name="selected_date" hidden>
+                                                {{-- <label for="" class="form-label col-12">Date <span
+                                                        class="text-danger">*</span></label> --}}
+                                                <div id="datepicker" style="display: flex; justify-content: center;"></div>
+                                                <input class="form-control w-auto" type="text" id="selected-date"
+                                                    value="" name="selected_date" hidden>
                                             </div>
-                                            <div class="mb-3">
+                                            {{-- <div class="mb-3">
                                                 <label for="formTime" class="form-label">Time <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="time" name="formTime" id="formTime">
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -377,9 +396,8 @@
                                                 <label for="FormEmail" class="form-label">Email <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="FormEmail" name="email"
-                                                    placeholder="{{ $profile->email }}" value="{{ $profile->email ?? ''}}">
-                                                <input type="hidden" name="hidden_email"
-                                                    value="{{ $profile->email }}">
+                                                    placeholder="{{ $profile->email }}" value="{{ $profile->email ?? '' }}">
+                                                <input type="hidden" name="hidden_email" value="{{ $profile->email }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="contact_number" class="form-label">Contact Number <span
@@ -388,7 +406,8 @@
                                                     placeholder="Enter Contact Number" aria-describedby="helpId">
                                                 <small id="helpId" class="form-text text-muted">eg.
                                                     09123456789</small>
-                                                <input type="hidden" name="hidden_phone" value="{{ $profile->phone ?? null }}">
+                                                <input type="hidden" name="hidden_phone"
+                                                    value="{{ $profile->phone ?? null }}">
                                             </div>
                                         </div>
                                     </div>
@@ -406,10 +425,10 @@
                                                     <span><strong id="summaryServName">Service Name</strong></span>
                                                     <span id="summaryServPrice">₱ ###</span>
                                                 </div>
-                                                <div class="d-flex justify-content-between">
+                                                {{-- <div class="d-flex justify-content-between">
                                                     <span>Sub-total</span>
                                                     <span id="summarySubTotal">₱###</span>
-                                                </div>
+                                                </div> --}}
                                                 <hr>
                                                 <div class="d-flex justify-content-between">
                                                     <h6><strong>Total Amount</strong></h6>
@@ -424,8 +443,8 @@
                                     @foreach ($paymentMethods as $paymentMethod)
                                         <div class="q-box__question">
                                             <input checked class="form-check-input question__input"
-                                                id="q_1_no_{{ $paymentMethod->id }}" name="payment_method"
-                                                type="radio" value="{{ $paymentMethod->id }}">
+                                                id="q_1_no_{{ $paymentMethod->id }}" name="payment_method" type="radio"
+                                                value="{{ $paymentMethod->id }}">
                                             <label class="form-check-label question__label"
                                                 for="q_1_no_{{ $paymentMethod->id }}">
                                                 {{ $paymentMethod->name }}
@@ -465,7 +484,8 @@
                                 <button id="prev-btn" type="button">Previous</button>
                                 <button id="next-btn" type="button">Next</button>
                                 <button id="submit-btn" type="submit">
-                                    <span id="spinner" class="spinner-border spinner-border-sm d-none" aria-hidden="true"></span>
+                                    <span id="spinner" class="spinner-border spinner-border-sm d-none"
+                                        aria-hidden="true"></span>
                                     Submit
                                 </button>
                             </div>
@@ -489,30 +509,69 @@
                 }
             });
 
-            $('#ServCategory').on('change', function() {
-                var categoryId = $(this).val();
-                var $serviceDropdown = $('#ServName');
-
-                $serviceDropdown.empty();
-                $serviceDropdown.append('<option value="">-- Select Service --</option>');
-
-                if (categoryId) {
-                    $.ajax({
-                        url: '/services/' + categoryId,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(data) {
-                            $.each(data, function(key, service) {
-                                $serviceDropdown.append('<option value="' + service.id +
-                                    '">' + service.name + '</option>');
-                            });
-                        },
-                        error: function() {
-                            alert('Error fetching services.');
-                        }
-                    });
+            let prices = {
+                "Regular": {
+                    "Monthly": 1500,
+                    "Day": 150
+                },
+                "Promo": {
+                    "Monthly": 1000,
+                    "Day": 100
                 }
+            };
+
+            $("#service_name").change(function() {
+                $("#service_duration").prop("disabled", false); // Enable duration select
+                $("#service_duration").prop("selectedIndex", 0);
+                $("#servDescription").html(
+                    '<p class="text-center mb-0">Select a duration to view the price.</p>');
             });
+
+            $("#service_duration").change(function() {
+                let service = $("#service_name").val();
+                let duration = $(this).val();
+                let price = prices[service][duration];
+
+                // Update service description
+                let summary = `
+                    <h5 class="text-center">${service} - ${duration}</h5>
+                    <p class="text-center text-success fw-bold">Price: ₱${price}</p>
+                `;
+                $("#servDescription").html(summary);
+
+                $("#ServName").val(service);
+                $("#summaryServName").text(service);
+                $("#ServDuration").val(duration);
+                $("#ServPrice").val(price);
+                $("#summaryServPrice").text(price);
+                // $("#summarySubTotal").text(price);
+                $("#summaryTotal").text(price);
+            });
+
+            // $('#service_name').on('change', function() {
+            //     var categoryId = $(this).val();
+            //     var $serviceDropdown = $('#service_duration');
+
+            //     $serviceDropdown.empty();
+            //     $serviceDropdown.append('<option value="">-- Select Service --</option>');
+
+            //     if (categoryId) {
+            //         $.ajax({
+            //             url: '/services/' + categoryId,
+            //             type: 'GET',
+            //             dataType: 'json',
+            //             success: function(data) {
+            //                 $.each(data, function(key, service) {
+            //                     $serviceDropdown.append('<option value="' + service.id +
+            //                         '">' + service.name + '</option>');
+            //                 });
+            //             },
+            //             error: function() {
+            //                 alert('Error fetching services.');
+            //             }
+            //         });
+            //     }
+            // });
 
             $('#ServName').on('change', function() {
                 var serviceId = $(this).val();
