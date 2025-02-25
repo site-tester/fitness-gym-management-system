@@ -4,11 +4,14 @@
 
 @section('css')
 
-<style>
-    .feature-item .left-icon img {
-        width: 60px;
-    }
-</style>
+    <style>
+        .feature-item .left-icon img {
+            width: 60px;
+        }
+        .feature-item {
+            margin-bottom: 30px;
+        }
+    </style>
 
 @endsection
 
@@ -51,13 +54,15 @@
 
                 <ul class="features-items row">
                     @foreach ($services as $service)
-                        <li class="feature-item col-6 d-flex align-items-center">
-                            <div class="left-icon">
-                                <img src="{{ asset('public/img/features-first-icon.png') }}" style="background-color: #ed563b; cursor: none;" >
-                            </div>
-                            <div class="right-content d-flex align-items-center">
-                                <h4>{{ $service->name }}</h4>
-                                {{-- <div>
+                        <li class="feature-item col-4 d-flex align-items-center">
+                            <div class="">
+                                <div class="left-icon">
+                                    <img src="{{ asset('public/img/features-first-icon.png') }}"
+                                        style="background-color: #ed563b; cursor: none;">
+                                </div>
+                                <div class="right-content d-flex align-items-center">
+                                    <h4>{{ $service->name }}</h4>
+                                    {{-- <div>
                                     <p>{{ $service->description }}</p>
                                     <p>Inclusions:
                                         @foreach ($service->amenities as $amenity)
@@ -68,6 +73,7 @@
                                         @endforeach
                                     </p>
                                 </div> --}}
+                                </div>
                             </div>
                         </li>
                     @endforeach
