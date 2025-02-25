@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <ul class="features-items row w-75 mx-auto">
+                <ul class="features-items row w-100 w-md-75 mx-auto">
                     @foreach ($services as $service)
                         <li class="feature-item col-12 col-md-6 ">
                             <div class="">
