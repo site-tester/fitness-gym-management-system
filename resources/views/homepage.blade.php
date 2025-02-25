@@ -58,7 +58,7 @@
                             <div class="d-flex align-items-center w-100">
                                 <div class="left-icon">
                                     <img src="{{ asset('public/img/features-first-icon.png') }}"
-                                        style="background-color: #ed563b; cursor: none;">
+                                        style="background-color: #ed563b; cursor: default;">
                                 </div>
                                 <div class="right-content">
                                     <h4 class="align-self-center">{{ $service->name }}</h4>
