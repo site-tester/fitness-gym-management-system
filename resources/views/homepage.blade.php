@@ -54,14 +54,14 @@
 
                 <ul class="features-items row">
                     @foreach ($services as $service)
-                        <li class="feature-item col-4 d-flex align-items-center">
+                        <li class="feature-item col-12 col-md-4 d-flex align-items-center">
                             <div class="">
                                 <div class="left-icon">
                                     <img src="{{ asset('public/img/features-first-icon.png') }}"
                                         style="background-color: #ed563b; cursor: none;">
                                 </div>
                                 <div class="right-content w-100">
-                                    <h4 class="text-nowrap">{{ $service->name }}</h4>
+                                    <h4 class="text-md-nowrap">{{ $service->name }}</h4>
                                     {{-- <div>
                                     <p>{{ $service->description }}</p>
                                     <p>Inclusions:
