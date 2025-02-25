@@ -58,7 +58,7 @@
                             <div class="d-flex align-items-center w-100">
                                 <div class="left-icon">
                                     <img src="{{ asset('public/img/features-first-icon.png') }}"
-                                        style="background-color: #ed563b; cursor: default;">
+                                        style="background-color: #ed563b; cursor: default; pointer-events: none;">
                                 </div>
                                 <div class="right-content">
                                     <h4 class="align-self-center">{{ $service->name }}</h4>
@@ -343,7 +343,7 @@
                     <div class="col-lg-6 offset-lg-3">
                         <div class="section-heading">
                             <h2>Expert <em>Trainers</em></h2>
-                            <img src="{{ asset('public/img/line-dec.png') }}" alt="" style="cursor: default;">
+                            <img src="{{ asset('public/img/line-dec.png') }}" alt="" style="cursor: default; pointer-events: none;">
                             <p>Get to know your trainer! Have questions? Feel free to reach out to your trainer for
                                 inquiries about training plans, nutrition guidance, or fitness assessments.</p>
                         </div>
