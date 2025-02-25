@@ -36,7 +36,7 @@ class ServiceSeeder extends Seeder
             [
                 // 'category_id' => 1,
                 // 'trainer_id' => 4,
-                'name' => 'Gain/Loss Workout',
+                'name' => 'Gain / Loss Workout',
                 // 'price' => 2500,
             ],
             [
@@ -51,12 +51,12 @@ class ServiceSeeder extends Seeder
                 'name' => 'Weight Loss Workout',
                 // 'price' => 2000,
             ],
-            [
-                // 'category_id' => 3,
-                // 'trainer_id' => 5,
-                'name' => 'Locker Rooms',
-                // 'price' => 1500,
-            ],
+            // [
+            //     // 'category_id' => 3,
+            //     // 'trainer_id' => 5,
+            //     'name' => 'Locker Rooms',
+            //     // 'price' => 1500,
+            // ],
             [
                 // 'category_id' => 4,
                 // 'trainer_id' => 4,
