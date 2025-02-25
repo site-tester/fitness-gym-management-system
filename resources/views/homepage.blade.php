@@ -49,14 +49,14 @@
                                 <h4>{{ $service->name }}</h4>
                                 <div>
                                     <p>{{ $service->description }}</p>
-                                    <p>Inclusions:
+                                    {{-- <p>Inclusions:
                                         @foreach ($service->amenities as $amenity)
                                             {!! $amenity->class !!} {{ $amenity->name }}
                                             @if (!$loop->last)
                                                 ,
                                             @endif
                                         @endforeach
-                                    </p>
+                                    </p> --}}
                                 </div>
                             </div>
                         </li>
