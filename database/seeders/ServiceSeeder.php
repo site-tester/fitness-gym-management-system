@@ -60,7 +60,7 @@ class ServiceSeeder extends Seeder
             [
                 // 'category_id' => 4,
                 // 'trainer_id' => 4,
-                'name' => 'Body Development Workou',
+                'name' => 'Body Development Workout',
                 // 'price' => 3000,
             ],
             // [

@@ -2,6 +2,16 @@
 
 @section('title', 'Homepage')
 
+@section('css')
+
+<style>
+    .feature-item .left-icon img {
+        width: 60px;
+    }
+</style>
+
+@endsection
+
 @section('content')
     <!-- ***** Main Banner Area Start ***** -->
     <div class="main-banner" id="top">
@@ -41,23 +51,23 @@
 
                 <ul class="features-items row">
                     @foreach ($services as $service)
-                        <li class="feature-item col-6">
+                        <li class="feature-item col-6 d-flex align-items-center">
                             <div class="left-icon">
                                 <img src="{{ asset('public/img/features-first-icon.png') }}" style="background-color: #ed563b; cursor: none;" >
                             </div>
-                            <div class="right-content">
+                            <div class="right-content d-flex align-items-center">
                                 <h4>{{ $service->name }}</h4>
-                                <div>
+                                {{-- <div>
                                     <p>{{ $service->description }}</p>
-                                    {{-- <p>Inclusions:
+                                    <p>Inclusions:
                                         @foreach ($service->amenities as $amenity)
                                             {!! $amenity->class !!} {{ $amenity->name }}
                                             @if (!$loop->last)
                                                 ,
                                             @endif
                                         @endforeach
-                                    </p> --}}
-                                </div>
+                                    </p>
+                                </div> --}}
                             </div>
                         </li>
                     @endforeach
