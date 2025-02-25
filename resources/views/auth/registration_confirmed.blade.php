@@ -34,7 +34,7 @@
                     {{-- <img class="img-fluid mb-4" src="{{ asset('/resources/img/Logo.jpg') }}" alt="Logo" width="150"> --}}
 
                     <h2 class="fw-bold text-danger">💪 Welcome to AJ DIA! 💪</h2>
-                    <p class="my-4 fs-5 text-muted">You've successfully registered and your fitness journey begins now. <br> t's time to train, track your progress, and transform your body!</p>
+                    <p class="my-4 fs-5 text-muted">You've successfully registered and your fitness journey begins now.</p>
 
                     <div class="alert alert-success" role="alert">
                         Your account is ready, let's start working out.
