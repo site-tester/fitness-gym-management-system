@@ -52,9 +52,9 @@
                     </div>
                 </div>
 
-                <ul class="features-items row w-100 w-md-75 mx-auto">
+                <ul class="features-items row  w-100 w-md-75 mx-auto">
                     @foreach ($services as $service)
-                        <li class="feature-item col-12 col-md-6 ">
+                        <li class="feature-item col-12 col-md-6 align-items-center ">
                             <div class="">
                                 <div class="left-icon">
                                     <img src="{{ asset('public/img/features-first-icon.png') }}"
