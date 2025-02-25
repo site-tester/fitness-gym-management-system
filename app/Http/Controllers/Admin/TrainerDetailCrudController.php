@@ -213,12 +213,12 @@ class TrainerDetailCrudController extends CrudController
             'type' => 'text',
             'hint' => 'eg. https://www.example.com',
         ]);
-        CRUD::addField([
-            'name' => 'twitter_link',
-            'label' => 'Twitter Link',
-            'type' => 'text',
-            'hint' => 'eg. https://www.example.com',
-        ]);
+        // CRUD::addField([
+        //     'name' => 'twitter_link',
+        //     'label' => 'Twitter Link',
+        //     'type' => 'text',
+        //     'hint' => 'eg. https://www.example.com',
+        // ]);
     }
 
     public function store()
@@ -242,7 +242,7 @@ class TrainerDetailCrudController extends CrudController
             'profile_picture' => 'nullable|image|max:2048', // Accepts image files up to 2MB
             'bio' => 'nullable|string',
             'facebook_link' => 'nullable|url',
-            'twitter_link' => 'nullable|url',
+            // 'twitter_link' => 'nullable|url',
         ];
 
         // Define custom error messages
@@ -261,7 +261,7 @@ class TrainerDetailCrudController extends CrudController
             'profile_picture.image' => 'The profile picture must be an image file.',
             'profile_picture.max' => 'The profile picture must not exceed 2MB.',
             'facebook_link.url' => 'The Facebook link must be a valid URL.',
-            'twitter_link.url' => 'The Twitter link must be a valid URL.',
+            // 'twitter_link.url' => 'The Twitter link must be a valid URL.',
         ];
 
         // Validate the request
@@ -304,7 +304,7 @@ class TrainerDetailCrudController extends CrudController
             'profile_picture' => $profilePicturePath,
             'bio' => $request['bio'],
             'facebook_link' => $request['facebook_link'],
-            'twitter_link' => $request['twitter_link'],
+            // 'twitter_link' => $request['twitter_link'],
         ]);
 
         \Alert::success('Trainer Created Successfully!')->flash();
@@ -443,12 +443,12 @@ class TrainerDetailCrudController extends CrudController
             'type' => 'text',
             'hint' => 'eg. https://www.example.com',
         ]);
-        CRUD::addField([
-            'name' => 'twitter_link',
-            'label' => 'Twitter Link',
-            'type' => 'text',
-            'hint' => 'eg. https://www.example.com',
-        ]);
+        // CRUD::addField([
+        //     'name' => 'twitter_link',
+        //     'label' => 'Twitter Link',
+        //     'type' => 'text',
+        //     'hint' => 'eg. https://www.example.com',
+        // ]);
     }
 
     public function update($id)
@@ -472,7 +472,7 @@ class TrainerDetailCrudController extends CrudController
             'profile_picture' => 'nullable|image|max:2048', // Accepts image files up to 2MB
             'bio' => 'nullable|string',
             'facebook_link' => 'nullable|url',
-            'twitter_link' => 'nullable|url',
+            // 'twitter_link' => 'nullable|url',
         ];
 
         // Define custom error messages
@@ -491,7 +491,7 @@ class TrainerDetailCrudController extends CrudController
             'profile_picture.image' => 'The profile picture must be an image file.',
             'profile_picture.max' => 'The profile picture must not exceed 2MB.',
             'facebook_link.url' => 'The Facebook link must be a valid URL.',
-            'twitter_link.url' => 'The Twitter link must be a valid URL.',
+            // 'twitter_link.url' => 'The Twitter link must be a valid URL.',
         ];
 
         // Validate the request
@@ -532,7 +532,7 @@ class TrainerDetailCrudController extends CrudController
             'profile_picture' => $profilePicturePath,
             'bio' => $request['bio'],
             'facebook_link' => $request['facebook_link'],
-            'twitter_link' => $request['twitter_link'],
+            // 'twitter_link' => $request['twitter_link'],
         ]);
 
         \Alert::success('Trainer Updated Successfully!')->flash();
@@ -676,24 +676,24 @@ class TrainerDetailCrudController extends CrudController
             },
             'escaped' => false,
         ]);
-        CRUD::addColumn([
-            'name' => 'twitter_link',
-            'label' => 'X(Twitter) URL',
-            'type' => 'closure',  // Use a closure to display the value
-            'function' => function ($entry) {
-                // Decode the JSON stored in the twitter_link column
-                $twitterLink = $entry->twitter_link;
+        // CRUD::addColumn([
+        //     'name' => 'twitter_link',
+        //     'label' => 'X(Twitter) URL',
+        //     'type' => 'closure',  // Use a closure to display the value
+        //     'function' => function ($entry) {
+        //         // Decode the JSON stored in the twitter_link column
+        //         $twitterLink = $entry->twitter_link;
 
-                // If the URL is present, display it as a clickable link
-                if ($twitterLink) {
-                    return '<a href="' . $twitterLink . '" target="_blank">' . $twitterLink . '</a>';
-                }
+        //         // If the URL is present, display it as a clickable link
+        //         if ($twitterLink) {
+        //             return '<a href="' . $twitterLink . '" target="_blank">' . $twitterLink . '</a>';
+        //         }
 
-                // If the URL is not set, return a fallback message or empty string
-                return 'No Twitter URL';
-            },
-            'escaped' => false,
-        ]);
+        //         // If the URL is not set, return a fallback message or empty string
+        //         return 'No Twitter URL';
+        //     },
+        //     'escaped' => false,
+        // ]);
 
     }
 
