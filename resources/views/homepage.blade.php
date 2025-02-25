@@ -52,16 +52,16 @@
                     </div>
                 </div>
 
-                <ul class="features-items row  w-100 w-md-75 mx-auto">
+                <ul class="features-items row align-items-center justify-content-center  w-100 w-md-75 mx-auto">
                     @foreach ($services as $service)
-                        <li class="feature-item col-12 col-md-6 align-items-center ">
-                            <div class="">
+                        <li class="feature-item col-12 col-md-6 d-flex">
+                            <div class="d-flex align-items-center w-100">
                                 <div class="left-icon">
                                     <img src="{{ asset('public/img/features-first-icon.png') }}"
                                         style="background-color: #ed563b; cursor: none;">
                                 </div>
                                 <div class="right-content">
-                                    <h4 >{{ $service->name }}</h4>
+                                    <h4 class="align-self-center">{{ $service->name }}</h4>
                                     {{-- <div>
                                     <p>{{ $service->description }}</p>
                                     <p>Inclusions:
