@@ -106,7 +106,7 @@ class UserSeeder extends Seeder
                 'gender' => 'male', // Add gender
                 'date_of_birth' => '1985-04-10', // Add date_of_birth
                 'contact_number' => '09171234567', // Add contact_number
-                'trainer_type' => 'personal trainer', // Add trainer_type
+                'trainer_type' => 'coach 1', // Add trainer_type
                 'experience_years' => 5, // Add experience_years
                 'availability' => json_encode(['Monday' => '9:00 AM - 12:00 PM', 'Wednesday' => '2:00 PM - 5:00 PM']), // Add availability
                 'hire_date' => '2019-01-15', // Add hire_date
@@ -148,7 +148,7 @@ class UserSeeder extends Seeder
                 'gender' => 'male',
                 'date_of_birth' => '1987-02-15',
                 'contact_number' => '09170123456',
-                'trainer_type' => 'group fitness instructor',
+                'trainer_type' => 'coach 2',
                 'experience_years' => 7,
                 'availability' => json_encode(['Tuesday' => '10:00 AM - 1:00 PM', 'Thursday' => '3:00 PM - 6:00 PM']),
                 'hire_date' => '2018-03-25',
