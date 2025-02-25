@@ -343,7 +343,7 @@
                     <div class="col-lg-6 offset-lg-3">
                         <div class="section-heading">
                             <h2>Expert <em>Trainers</em></h2>
-                            <img src="{{ asset('public/img/line-dec.png') }}" alt="">
+                            <img src="{{ asset('public/img/line-dec.png') }}" alt="" style="cursor: default;">
                             <p>Get to know your trainer! Have questions? Feel free to reach out to your trainer for
                                 inquiries about training plans, nutrition guidance, or fitness assessments.</p>
                         </div>
