@@ -358,7 +358,7 @@
                                         alt="">
                                 </div>
                                 <div class="down-content">
-                                    <span>{{ ucwords($trainer->trainerDetails->trainer_type) }}</span>
+                                    <span class="d-flex justify-content-center align-items-center">{{ ucwords($trainer->trainerDetails->trainer_type) }}</span>
                                     <h4>{{ $trainer->name }}</h4>
                                     <p>{{ $trainer->trainerDetails->bio }}</p>
                                     <ul class="social-icons">
