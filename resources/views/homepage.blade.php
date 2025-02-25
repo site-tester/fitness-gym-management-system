@@ -60,8 +60,8 @@
                                     <img src="{{ asset('public/img/features-first-icon.png') }}"
                                         style="background-color: #ed563b; cursor: none;">
                                 </div>
-                                <div class="right-content d-flex align-items-center">
-                                    <h4>{{ $service->name }}</h4>
+                                <div class="right-content w-100">
+                                    <h4 class="text-nowrap">{{ $service->name }}</h4>
                                     {{-- <div>
                                     <p>{{ $service->description }}</p>
                                     <p>Inclusions:
