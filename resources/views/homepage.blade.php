@@ -43,7 +43,7 @@
                     @foreach ($services as $service)
                         <li class="feature-item col-6">
                             <div class="left-icon">
-                                <img src="{{ asset('public/img/features-first-icon.png') }}" style="background-color: #ed563b;">
+                                <img src="{{ asset('public/img/features-first-icon.png') }}" style="background-color: #ed563b; cursor: none;" alt="First One">
                             </div>
                             <div class="right-content">
                                 <h4>{{ $service->name }}</h4>
