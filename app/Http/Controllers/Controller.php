@@ -36,7 +36,7 @@ class Controller extends BaseController
 
 
     public function equipmentView(){
-        $equipments = EquipmentInventory::orderBy('name', 'asc')->get();
+        $equipments = EquipmentInventory::orderBy('equipment_name', 'asc')->get();
         return view('equipments', compact('equipments'));
     }
 
