@@ -53,9 +53,9 @@
         <img src="/storage/app/public/{{ $equipment->image }}" class="card-img-top img-fluid" style="max-height: 200px; object-fit: cover;" alt="...">
     </div>
 
-    <div class="card-body flex-grow-1">
-        <!-- Additional content here -->
-    </div>
+    <!-- <div class="card-body flex-grow-1">
+        Additional content here
+    </div> -->
 
     <div class="card-footer text-center">
         <p class="card-text">{{ ucfirst($equipment->equipment_name) }}</p>
