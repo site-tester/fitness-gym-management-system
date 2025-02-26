@@ -184,7 +184,7 @@
                 e.preventDefault();
 
                 $.ajax({
-                    url: "{{ route('end.contact.us') }}", // Ensure this route is correct
+                    url: "{{ route('send.contact.us') }}", // Ensure this route is correct
                     type: "POST",
                     data: $(this).serialize(),
                     success: function(response) {
