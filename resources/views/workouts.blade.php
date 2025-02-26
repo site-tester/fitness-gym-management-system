@@ -90,19 +90,19 @@
                                     <div class="card-body">
                                         <h5 class="card-title mb-3">{{ $workout->name }}</h5>
                                         <div class="row mx-">
-                                            <div class="col-12 col-md-4 px-1">
+                                            <div class="col-12   px-1">
                                                 <div class="text-center text-uppercase bg-secondary-subtle">
                                                     <label class="text-danger">Type</label>
                                                     <p>{{ $workout->excercise_type }}</p>
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-md-4 px-1">
+                                            <div class="col-12   px-1">
                                                 <div class="text-center text-uppercase bg-secondary-subtle">
                                                     <label class="text-danger">Equipment</label>
                                                     <p>{{ $workout->equipment_required }}</p>
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-md-4 px-1">
+                                            <div class="col-12   px-1">
                                                 <div class="text-center text-uppercase bg-secondary-subtle">
                                                     <label class="text-danger">Target</label>
                                                     <p>{{ $workout->target_muscle_group }}</p>
