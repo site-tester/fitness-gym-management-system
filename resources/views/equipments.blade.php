@@ -41,7 +41,7 @@
                     <div class="card col-12 col-md-3 p-1 mb-3 mx-2">
                         <img src="/storage/app/public/{{ $equipment->image }}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <p class="card-text text-center">{{ $equipment->equipment_name }}</p>
+                            <p class="card-text text-center">{{ ucfirst($equipment->equipment_name) }}</p>
                         </div>
                     </div>
                 @endforeach
