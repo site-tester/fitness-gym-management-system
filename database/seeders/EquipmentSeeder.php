@@ -18,9 +18,47 @@ class EquipmentSeeder extends Seeder
                 'equipment_name' => 'Treadmill',
                 'image' => 'treadmill.jpg',
             ],
+            [
+                'equipment_name' => 'Ball',
+                'image' => 'ball.jpg',
+            ],
+            [
+                'equipment_name' => 'barbell',
+                'image' => 'barbell.jpg',
+            ],
+            [
+                'equipment_name' => 'bench',
+                'image' => 'bench.jpg',
+            ],
+            [
+                'equipment_name' => 'Bike',
+                'image' => 'bike.jpg',
+            ],
+            [
+                'equipment_name' => 'Chest Press',
+                'image' => 'chestpress.jpg',
+            ],
+            [
+                'equipment_name' => 'Dumbell',
+                'image' => 'dumbell.jpg',
+            ],
+            [
+                'equipment_name' => 'Plate',
+                'image' => 'plate.jpg',
+            ],
+            [
+                'equipment_name' => 'Roller',
+                'image' => 'roller.jpg',
+            ],
+            [
+                'equipment_name' => 'Elipitical',
+                'image' => 'elipitical.jpg',
+            ],
 
         ];
 
-        // EquipmentInventory::crea
+        foreach ($equipment as $equip) {
+            EquipmentInventory::create($equip);
+        }
     }
 }

@@ -37,13 +37,14 @@
         <div class="container mt-5">
             {{-- <h2 class="text-center mb-5">Gym Equipment</h2> --}}
             <div class="row m-auto justify-content-center">
-                
-                <div class="card col-12 col-md-3 p-1 mb-3 mx-2">
-                    <img src="{{ asset('equipment/threadmill.jpg') }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <p class="card-text text-center">Equipment Name</p>
+                @foreach ($equipments as $equipment)
+                    <div class="card col-12 col-md-3 p-1 mb-3 mx-2">
+                        <img src="/storage/app/public/{{ $equipment->image }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text text-center">{{ $equipment->equipment_name }}</p>
+                        </div>
                     </div>
-                </div>
+                @endforeach
 
             </div>
         </div>

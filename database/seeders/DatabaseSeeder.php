@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             PaymentMethodSeeder::class,
             PermissionSeeder::class,
             WorkoutSeeder::class,
+            EquipmentSeeder::class,
         ]);
 
     }
