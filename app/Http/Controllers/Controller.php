@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ContactusInbox;
+use App\Models\EquipmentInventory;
 use App\Models\Service;
 use App\Models\User;
 use App\Models\Workout;
@@ -35,7 +36,8 @@ class Controller extends BaseController
 
 
     public function equipmentView(){
-        return view('equipments');
+        $equipments = EquipmentInventory::all();
+        return view('equipments', compact('equipments'));
     }
 
     public function workoutView(Request $request)
