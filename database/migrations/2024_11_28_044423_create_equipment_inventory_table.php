@@ -13,10 +13,11 @@ return new class extends Migration {
         Schema::create('equipment_inventories', function (Blueprint $table) {
             $table->id();
             $table->string('equipment_name');
-            $table->string('category');
+            $table->string('image')->nullable();
+            $table->string('category')->nullable();
             $table->string('brand')->nullable();
             $table->string('model')->nullable();
-            $table->integer('quantity')->default(1);
+            $table->integer('quantity')->default(1)->nullable();
             $table->string('location')->nullable();
             $table->date('purchase_date')->nullable();
             $table->date('warranty_expiry_date')->nullable();
@@ -27,10 +28,10 @@ return new class extends Migration {
             $table->decimal('cost_per_unit', 10, 2)->nullable();
             $table->decimal('total_cost', 10, 2)->nullable();
             $table->string('supplier_name')->nullable();
-            $table->enum('usage_frequency', ['high', 'medium', 'low'])->default('medium');
+            $table->enum('usage_frequency', ['high', 'medium', 'low'])->default('medium')->nullable();
             $table->text('remarks')->nullable();
             $table->string('image')->nullable();
-            $table->foreignId('added_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('added_by')->constrained('users')->onDelete('cascade')->nullable();
             $table->timestamps();
         });
     }
