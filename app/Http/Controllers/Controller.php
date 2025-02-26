@@ -34,6 +34,10 @@ class Controller extends BaseController
     }
 
 
+    public function equipmentView(){
+        return view('equipments');
+    }
+
     public function workoutView(Request $request)
     {
         // Retrieve the filter values from the request

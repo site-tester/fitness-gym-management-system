@@ -104,6 +104,15 @@ class EquipmentInventoryCrudController extends CrudController
             ],
             'allows_multiple' => false, // Set to true if you want to allow multiple selections
         ]);
+
+        CRUD::addfield([   // Upload
+            'name'      => 'image',
+            'label'     => 'Image',
+            'type'      => 'upload',
+            'disk'      => 'uploads',
+            'upload'    => true,
+            'withFiles' => true
+        ]);
     }
 
     /**

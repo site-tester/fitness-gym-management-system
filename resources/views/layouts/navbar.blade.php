@@ -21,7 +21,12 @@
                         Workouts
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="{{ route('equipment') }}"
+                        class="nav-link  {{ Route::currentRouteName() === 'equipment' ? 'active' : '' }}">
+                        Equipments
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('about.us') }}"
                         class="nav-link {{ Route::currentRouteName() === 'about.us' ? 'active' : '' }}">
