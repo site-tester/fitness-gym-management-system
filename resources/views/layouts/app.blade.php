@@ -176,8 +176,39 @@
                 }
             }
         }
-    </script> --}}
+        --}}
 
+        <script>
+        $(document).ready(function() {
+            $('#contactForm').submit(function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: "{{ route('end.contact.us') }}", // Ensure this route is correct
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: response.success,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            location.reload(); // Reload the page after closing the alert
+                        });
+                    },
+                    error: function(xhr) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Something went wrong. Please try again.',
+                        });
+                    }
+                });
+            });
+        });
+        </script>
     @yield('scripts')
 
 
