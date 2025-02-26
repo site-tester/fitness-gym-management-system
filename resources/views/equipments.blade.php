@@ -49,19 +49,19 @@
                     </div> -->
                     <div class="card col-12 col-md-3 p-1 mb-3 mx-2 d-flex flex-column h-100">
 
-    <div class="d-flex align-items-center justify-content-center h-100">
-        <img src="/storage/app/public/{{ $equipment->image }}" class="card-img-top img-fluid" style="max-height: 200px; object-fit: cover;" alt="...">
-    </div>
+                        <div class="d-flex align-items-center justify-content-center h-100">
+                            <img src="/storage/app/public/{{ $equipment->image }}" class="card-img-top img-fluid" style="max-height: 200px; object-fit: cover;" alt="...">
+                        </div>
 
-    <!-- <div class="card-body flex-grow-1">
-        Additional content here
-    </div> -->
+                        <!-- <div class="card-body flex-grow-1">
+                            Additional content here
+                        </div> -->
 
-    <div class="card-footer text-center">
-        <p class="card-text">{{ ucfirst($equipment->equipment_name) }}</p>
-    </div>
+                        <div class="card-footer text-center">
+                            <p class="card-text text-uppercase">{{ ucfirst($equipment->equipment_name) }}</p>
+                        </div>
 
-</div>
+                    </div>
 
                 @endforeach
 

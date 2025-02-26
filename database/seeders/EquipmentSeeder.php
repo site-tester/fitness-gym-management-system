@@ -74,10 +74,10 @@ class EquipmentSeeder extends Seeder
                 'equipment_name' => 'CHEST FLY MACHINE',
                 'image' => 'CHEST FLY MACHINE.jpg',
             ],
-            [
-                'equipment_name' => 'CHEST PRESS MACHINE',
-                'image' => 'CHEST PRESS MACHINE.jpg',
-            ],
+            // [
+            //     'equipment_name' => 'CHEST PRESS MACHINE',
+            //     'image' => 'CHEST PRESS MACHINE.jpg',
+            // ],
             [
                 'equipment_name' => 'INCLINE BENCH PRESS',
                 'image' => 'INCLINE BENCH PRESS.jpg',
@@ -88,7 +88,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'LAT PULLDOWN MACHINE',
-                'image' => 'LAT PULLDOWN MACHINE.jpg',
+                'image' => 'LAT PULLDOWN  MACHINE.jpg',
             ],
             [
                 'equipment_name' => 'LEG ABDUCTION MACHINE',
@@ -103,8 +103,8 @@ class EquipmentSeeder extends Seeder
                 'image' => 'LEG PRESS MACHINE.jpg',
             ],
             [
-                'equipment_name' => 'LEG RAISE MACHINE',
-                'image' => 'LEG RAISE MACHINE.jpg',
+                'equipment_name' => 'LEG RAISE TOWER',
+                'image' => 'LEG RAISE TOWER.jpg',
             ],
             [
                 'equipment_name' => 'OVERHEAD CABLE MACHINE',
