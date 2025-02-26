@@ -24,10 +24,11 @@ class PaymentMethodSeeder extends Seeder
             ],
             [
                 'name' => 'GCash',
-                'account_name' => 'John Doe',
-                'account_number' => '09123456789',
+                'account_name' => 'Bernadeth F.',
+                'account_number' => '09272104929',
                 'category' => 'E-Wallet',
-                'qr_path' => 'https://drive.google.com/file/d/18PL5gJqYERcLHaNvFzsl864LSyfa7Kt9/view?usp=sharing',
+                // 'qr_path' => 'https://drive.google.com/file/d/18PL5gJqYERcLHaNvFzsl864LSyfa7Kt9/view?usp=sharing',
+                'qr_path' => 'https://drive.google.com/file/d/1ruVZSOkqG3-lpg_So15fMas956p5yq_m/view?usp=sharing',
                 'description' => 'Make your payment directly using GCash E-wallet. An email will be sent with payment details.',
             ],
         ];

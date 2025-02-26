@@ -19,24 +19,24 @@ class EquipmentSeeder extends Seeder
                 'image' => 'treadmill.jpg',
             ],
             [
-                'equipment_name' => 'Ball',
-                'image' => 'ball.jpg',
+                'equipment_name' => 'STABILITY Ball',
+                'image' => 'STABILITY BALL.jpg',
             ],
             [
-                'equipment_name' => 'barbell',
-                'image' => 'barbell.jpg',
+                'equipment_name' => 'Barbells and Olympic Barbells',
+                'image' => 'BARBELLS AND OLYMPIC BARBELL.jpg',
             ],
             [
                 'equipment_name' => 'bench',
-                'image' => 'bench.jpg',
+                'image' => 'BENCH.jpg',
             ],
             [
-                'equipment_name' => 'Bike',
-                'image' => 'bike.jpg',
+                'equipment_name' => 'STATIONARY BIKE',
+                'image' => 'STATIONARY BIKES.jpg',
             ],
             [
-                'equipment_name' => 'Chest Press',
-                'image' => 'chestpress.jpg',
+                'equipment_name' => 'Chest Press Machine',
+                'image' => 'CHEST PRESS MACHINE.jpg',
             ],
             [
                 'equipment_name' => 'Dumbell',
@@ -44,16 +44,101 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'Plate',
-                'image' => 'plate.jpg',
+                'image' => 'plates.jpg',
             ],
             [
                 'equipment_name' => 'Roller',
                 'image' => 'roller.jpg',
             ],
             [
-                'equipment_name' => 'Elliptical',
-                'image' => 'elliptical.jpg',
+                'equipment_name' => 'Ellipticals',
+                'image' => 'ELLIPTICALS.jpg',
             ],
+            [
+                'equipment_name' => 'AB ROLLER',
+                'image' => 'AB ROLLER.jpg',
+            ],
+            [
+                'equipment_name' => 'ABDOMINAL BENCH',
+                'image' => 'ABDOMINAL BENCH.jpg',
+            ],
+            [
+                'equipment_name' => 'ADJUSTABLE BENCH',
+                'image' => 'ADJUSTABLE BENCH.jpg',
+            ],
+            [
+                'equipment_name' => 'BARBELL',
+                'image' => 'BARBELL.jpg',
+            ],
+            [
+                'equipment_name' => 'CHEST FLY MACHINE',
+                'image' => 'CHEST FLY MACHINE.jpg',
+            ],
+            [
+                'equipment_name' => 'CHEST PRESS MACHINE',
+                'image' => 'CHEST PRESS MACHINE.jpg',
+            ],
+            [
+                'equipment_name' => 'INCLINE BENCH PRESS',
+                'image' => 'INCLINE BENCH PRESS.jpg',
+            ],
+            [
+                'equipment_name' => 'KETTLEBELLS',
+                'image' => 'kettlebells.jpg',
+            ],
+            [
+                'equipment_name' => 'LAT PULLDOWN MACHINE',
+                'image' => 'LAT PULLDOWN MACHINE.jpg',
+            ],
+            [
+                'equipment_name' => 'LEG ABDUCTION MACHINE',
+                'image' => 'LEG ABDUCTION MACHINE.jpg',
+            ],
+            [
+                'equipment_name' => 'LEG EXTENSION MACHINE',
+                'image' => 'LEG EXTENSION MACHINE.jpg',
+            ],
+            [
+                'equipment_name' => 'LEG PRESS MACHINE',
+                'image' => 'LEG PRESS MACHINE.jpg',
+            ],
+            [
+                'equipment_name' => 'LEG RAISE MACHINE',
+                'image' => 'LEG RAISE MACHINE.jpg',
+            ],
+            [
+                'equipment_name' => 'OVERHEAD CABLE MACHINE',
+                'image' => 'OVERHEAD CABLE MACHINE.jpg',
+            ],
+            [
+                'equipment_name' => 'PRECHER CURL BENCH',
+                'image' => 'PRECHER CURL BENCH.jpg',
+            ],
+            [
+                'equipment_name' => 'PULL UP BAR',
+                'image' => 'PULL UP BAR.jpg',
+            ],
+            [
+                'equipment_name' => 'ROWING MACHINE',
+                'image' => 'ROWING MACHINE.jpg',
+            ],
+            [
+                'equipment_name' => 'SHOULDER PRESS MACHINE',
+                'image' => 'SHOULDER PRESS MACHINE.jpg',
+            ],
+            [
+                'equipment_name' => 'SMITH MACHINE',
+                'image' => 'SMITH MACHINE.jpg',
+            ],
+            [
+                'equipment_name' => 'STANDING CALF MACHINE',
+                'image' => 'STANDING CALF MACHINE.jpg',
+            ],
+            [
+                'equipment_name' => 'TRICEPS PRESS MACHINE',
+                'image' => 'TRICEPS PRESS MACHINE.jpg',
+            ],
+
 
         ];
 
