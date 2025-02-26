@@ -60,7 +60,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'ABDOMINAL BENCH',
-                'image' => 'ABDOMINAL BENCH.jpg',
+                'image' => 'ABDOMINAL BENCH.png',
             ],
             [
                 'equipment_name' => 'ADJUSTABLE BENCH',
@@ -112,7 +112,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'PRECHER CURL BENCH',
-                'image' => 'PRECHER CURL BENCH.jpg',
+                'image' => 'PRECHER CURL BENCH.png',
             ],
             [
                 'equipment_name' => 'PULL UP BAR',
@@ -132,7 +132,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'STANDING CALF MACHINE',
-                'image' => 'STANDING CALF MACHINE.jpg',
+                'image' => 'STANDING CALF MACHINE.png',
             ],
             [
                 'equipment_name' => 'TRICEPS PRESS MACHINE',
