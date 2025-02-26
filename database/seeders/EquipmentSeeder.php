@@ -28,7 +28,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'bench',
-                'image' => 'BENCH.jpg',
+                'image' => 'bench.jpg',
             ],
             [
                 'equipment_name' => 'STATIONARY BIKE',
@@ -68,7 +68,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'BARBELL',
-                'image' => 'BARBELL.jpg',
+                'image' => 'barbell.jpg',
             ],
             [
                 'equipment_name' => 'CHEST FLY MACHINE',
@@ -96,7 +96,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'LEG EXTENSION MACHINE',
-                'image' => 'LEG EXTENSION MACHINE.jpg',
+                'image' => 'LEG EXTENSION MACHINE AND LEG CURL.jpg',
             ],
             [
                 'equipment_name' => 'LEG PRESS MACHINE',
@@ -108,7 +108,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'OVERHEAD CABLE MACHINE',
-                'image' => 'OVERHEAD CABLE MACHINE.jpg',
+                'image' => 'OVERHEAD CABLE MACHINES.jpg',
             ],
             [
                 'equipment_name' => 'PRECHER CURL BENCH',
@@ -116,7 +116,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'PULL UP BAR',
-                'image' => 'PULL UP BAR.jpg',
+                'image' => 'PULL UP BAR.png',
             ],
             [
                 'equipment_name' => 'ROWING MACHINE',
@@ -136,7 +136,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'TRICEPS PRESS MACHINE',
-                'image' => 'TRICEPS PRESS MACHINE.jpg',
+                'image' => 'TRICEP PRESS MACHINE.jpg',
             ],
 
 
