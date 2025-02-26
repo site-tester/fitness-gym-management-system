@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->enum('usage_frequency', ['high', 'medium', 'low'])->default('medium')->nullable();
             $table->text('remarks')->nullable();
             // $table->string('image')->nullable();
-            $table->foreignId('added_by')->constrained('users')->onDelete('cascade')->nullable();
+            $table->string('added_by')->nullable();
             $table->timestamps();
         });
     }
