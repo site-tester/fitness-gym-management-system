@@ -51,8 +51,8 @@ class EquipmentSeeder extends Seeder
                 'image' => 'roller.jpg',
             ],
             [
-                'equipment_name' => 'Elipitical',
-                'image' => 'elipitical.jpg',
+                'equipment_name' => 'Elliptical',
+                'image' => 'elliptical.jpg',
             ],
 
         ];
