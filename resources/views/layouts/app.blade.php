@@ -183,6 +183,16 @@
             $('#contactForm').submit(function(e) {
                 e.preventDefault();
 
+                // Show SweetAlert loading spinner
+            Swal.fire({
+                title: 'Sending...',
+                text: 'Please wait while we process your request.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading(); // Show spinner
+                }
+            })
+
                 $.ajax({
                     url: "{{ route('send.contact.us') }}", // Ensure this route is correct
                     type: "POST",
