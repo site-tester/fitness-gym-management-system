@@ -40,7 +40,7 @@ Route::get('/contact-us', function(){
 Route::post('/contact-us/send', [Controller::class, 'sendContactUs'])->name('send.contact.us');
 Route::get('/workouts', [Controller::class, 'workoutView'])->name('workout');
 Route::get('/equipments', [Controller::class, 'equipmentView'])->name('equipment');
-Route::get('/get-equipment-description/{id}', function ($id) {
+Route::get('/get-equipment-details/{id}', function ($id) {
     $equipment = EquipmentInventory::find($id);
     return response()->json([
         'steps' => $equipment->steps ?? 'No Steps Found',
