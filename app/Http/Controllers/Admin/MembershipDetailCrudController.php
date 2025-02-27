@@ -175,8 +175,8 @@ class MembershipDetailCrudController extends CrudController
             'label' => 'Membership Type',
             'type' => 'select_from_array',
             'options' => [
-                'basic' => 'Basic',
-                'seasonal' => 'Seasonal',
+                'regular' => 'Regular',
+                'promo' => 'Promo',
             ],
             'allows_multiple' => false,
         ]);
@@ -398,8 +398,8 @@ class MembershipDetailCrudController extends CrudController
             'label' => 'Membership Type',
             'type' => 'select_from_array',
             'options' => [
-                'basic' => 'Basic',
-                'seasonal' => 'Seasonal',
+                'regular' => 'Regular',
+                'promo' => 'Promo',
             ],
             'allows_multiple' => false,
             'value' => $this->crud->getCurrentEntry()->membership_type,
@@ -578,8 +578,8 @@ class MembershipDetailCrudController extends CrudController
             'label' => 'Membership Type',
             'type' => 'select_from_array',
             'options' => [
-                'basic' => 'Basic',
-                'seasonal' => 'Seasonal',
+                'regular' => 'Regular',
+                'promo' => 'Promo',
             ],
             'allows_multiple' => false,
         ]);

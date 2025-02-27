@@ -55,7 +55,9 @@
                                 src="{{ asset('/resources/img/profile_red.png') }} " alt=""
                                 style="width:33px; pointer-events: none;"></button>
                         {{-- <button onclick="myFunction()" class="dropbtn rounded fw-bold"><img src="{{ asset('/img/profile_red.png') }} " alt="" style="width:33px; pointer-events: none;"></button> --}}
-                        <ul id="myDropdown" class="dropdown-content dropdown-menu dropdown-menu-start rounded border border-danger">
+                        <ul id="myDropdown" class="dropdown-content dropdown-menu rounded border border-danger" data-bs-popper="static">
+
+                        <!-- <ul id="myDropdown" class="dropdown-content dropdown-menu dropdown-menu-start rounded border border-danger"> -->
                             {{-- <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('booking') }}">
                                         <i class="bi bi-journal-text"></i>
                                         Bookings</a> --}}
