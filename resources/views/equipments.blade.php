@@ -80,7 +80,7 @@ $(document).ready(function () {
                 if (response.steps) {
                     let steps = JSON.parse(response.steps);
                     if (steps && steps.length > 0) {
-                        stepsHtml = "<ol>";
+                        stepsHtml = "<ol style='text-align: justify;'>";
                         steps.forEach(function (step) {
                             stepsHtml += "<li>" + step + "</li>";
                         });
@@ -103,6 +103,9 @@ $(document).ready(function () {
                     imageAlt: "Equipment Image",
                     html: stepsHtml,
                     confirmButtonText: "Close",
+                    customClass: {
+                        confirmButton: 'btn btn-danger'
+                    },
                     didOpen: () => {
                         if (!response.image) {
                             $(".swal2-image").hide();
