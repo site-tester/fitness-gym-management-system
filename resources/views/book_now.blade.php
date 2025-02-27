@@ -421,7 +421,7 @@
                                 {{-- Step 4 --}}
                                 <div class="step">
                                     <div class="border-bottom mb-3">
-                                        <h5 class="ms-4 py-1" style="margin-bottom: 0px">Booking Summary</h5>
+                                        <h5 class="ms-4 py-1" style="margin-bottom: 0px">Amount</h5>
                                     </div>
                                     <div class="form-check ps-0 q-box">
                                         <div class="q-box__question">
@@ -444,7 +444,7 @@
                                         </div>
                                     </div>
                                     <div class="border-bottom mb-3">
-                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Payment Method</h4>
+                                        <h5 class="ms-4 py-1" style="margin-bottom: 0px">Payment Method</h5>
                                     </div>
                                     @foreach ($paymentMethods as $paymentMethod)
                                         <div class="q-box__question">
@@ -467,7 +467,7 @@
 
                                 <div class="step ">
                                     <div class="mt-1 ">
-                                        <div class="closing-text p-5 text-center">
+                                        <div class="closing-text pt-1 px-5 text-center">
                                             <div class="">
                                                 <h4>You are about to Book.</h4>
                                                 <p>Please review all the details carefully. <br> Click the Submit button to
