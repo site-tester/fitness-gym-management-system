@@ -49,7 +49,7 @@
                                     <div class="row">
                                         <div class="col px-md-e">
                                             <h4 class=" mb-3"><i class="bi bi-clock-history text-danger"></i> Timelog</h4>
-                                            <div class="row ">
+                                            <!-- <div class="row ">
                                                 @if ($timelog->isEmpty() || $timelog->count() == 0 || $timelog == null)
                                                     <div>
                                                         <div class="col m-auto">
@@ -95,7 +95,36 @@
                                                         @endforeach
                                                     </div>
                                                 @endif
-                                            </div>
+                                            </div> -->
+                                            <table id="attendanceTable" class="border rounded-table mt-0" style="width:100%">
+                                                <thead>
+                                                    <tr class="">
+                                                        <th class="text-center">#</th>
+                                                        <th class="text-center">Name</th>
+                                                        <th class="text-center">Date</th>
+                                                        <th class="text-center">Time-In</th>
+                                                        <th class="text-center">Time-Out</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($timelog as $member)
+                                                            @php
+                                                                $time_in = \Carbon\Carbon::parse($member->time_in);
+                                                                $time_out = \Carbon\Carbon::parse($member->time_out);
+                                                                $timelog_date = \Carbon\Carbon::parse(
+                                                                    $member->timelog_date,
+                                                                );
+                                                            @endphp
+                                                        <tr>
+                                                            <td class="text-center">{{ $member->id }}</td>
+                                                            <td class="text-center">{{ $member->user->name }}</td>
+                                                            <td class="text-center">{{ $timelog_date->format('M-d-Y') }}</td>
+                                                            <td class="text-center">{{ $time_in->format('h:i A') }}</td>
+                                                            <td class="text-center">{{ $time_out->format('h:i A') }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -157,6 +186,15 @@
             });
 
             $('#dashboardTable').DataTable({
+                searching: false,
+                lengthChange: false,
+                paging: false,
+                ordering: false,
+                responsive: true,
+                autoWidth: false,
+            });
+
+            $('#attendanceTable').DataTable({
                 searching: false,
                 lengthChange: false,
                 paging: false,
