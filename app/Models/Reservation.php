@@ -26,7 +26,7 @@ class Reservation extends Model
         'user_id',
         // 'service_category_id',
         'service_name',
-        'service_duration'
+        'service_duration',
         'reservation_date',
         // 'reservation_time',
         'name',
