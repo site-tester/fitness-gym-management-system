@@ -80,9 +80,9 @@ $(document).ready(function () {
                 if (response.steps) {
                     let steps = JSON.parse(response.steps);
                     if (steps && steps.length > 0) {
-                        stepsHtml = "<ol style='text-align: justify; display: list-item;'>";
+                        stepsHtml = "<ol style='text-align: justify;'>";
                         steps.forEach(function (step) {
-                            stepsHtml += "<li style='display: list-item;'>" + step + "</li>";
+                            stepsHtml += "<li style='list-style: auto !important;'>" + step + "</li>";
                         });
                         stepsHtml += "</ol>";
                     } else {
