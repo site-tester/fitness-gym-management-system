@@ -21,7 +21,7 @@
             width: 100%;
             height: 100%;
         }
-        li{
+        .workOut li{
             list-style: auto !important;
         }
     </style>
@@ -37,7 +37,7 @@
             </div>
         @endif
 
-        <div class="  mx-5">
+        <div class="workOut mx-5">
             <div class="row">
 
                 <div class="p-5">
@@ -94,7 +94,7 @@
                     </div>
                 </div>
 
-                <div class="px-5 pt-4">
+                <div class="px-5 pt-4 ">
                     <h3 class="text-uppercase fw-bold mb-3" style="font-size: 30px">Description</h3>
                     <div style="text-align:justify !important;">{!! $workout->description !!}</div>
                 </div>
