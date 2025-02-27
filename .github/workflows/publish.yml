@@ -113,6 +113,6 @@ jobs:
             cp public/img/trainer1.jpg ./storage/app/public/trainer1.jpg
             # cp public/img/trainer2.jpg ./storage/app/public/trainer2.jpg
             cp public/img/trainer3.jpg ./storage/app/public/trainer3.jpg
-            cp -r public/equipment/* ./storage/app/public
+            cp -r public/equipment/* ./storage/app/public/uploads
 
             php artisan basset:cache
