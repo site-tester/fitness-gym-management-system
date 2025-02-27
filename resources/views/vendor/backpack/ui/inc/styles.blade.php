@@ -65,6 +65,10 @@
     background-color: rgba(248, 244, 244, 0.9) !important;
     color: rgba(var(--tblr-red-rgb)) !important;
 }
+
+.navbar-expand-lg .nav-item.active:after{
+    border: 0 var(--tblr-border-style) var(--tblr-red-rgb)
+}
 </style>
 
 @endpush
