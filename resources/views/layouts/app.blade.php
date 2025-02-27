@@ -93,6 +93,10 @@
             background-color: #ddd;
         }
 
+        .dropdown-menu{
+            left: -90px !important;
+        }
+
         /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
         /* .show {
             display: block;
