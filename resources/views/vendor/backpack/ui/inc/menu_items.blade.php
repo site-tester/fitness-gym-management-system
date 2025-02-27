@@ -49,7 +49,7 @@
             <x-backpack::menu-dropdown-header title="Services" />
             <x-backpack::menu-dropdown-item title="Service" icon="la la-hard-hat" :link="backpack_url('service')" />
             {{-- <x-backpack::menu-dropdown-item title="Service Categories" icon="la la-clipboard-list" :link="backpack_url('service-category')" /> --}}
-            <x-backpack::menu-dropdown-item title="Service Amenities" icon="la la-puzzle-piece" :link="backpack_url('amenity')" />
+            <!-- <x-backpack::menu-dropdown-item title="Service Amenities" icon="la la-puzzle-piece" :link="backpack_url('amenity')" /> -->
         @endcan
         @can('manage-gym-inventory')
             <x-backpack::menu-dropdown-header title="Inventories" />
