@@ -51,7 +51,7 @@
 
     <!-- Image Container with Fixed Height -->
     <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-        <img src="/storage/app/public/uploads/{{ $equipment->image }}" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: contain;" alt="...">
+        <img src="/storage/app/public/{{ $equipment->image }}" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: contain;" alt="...">
     </div>
 
     <div class="card-body flex-grow-1">
