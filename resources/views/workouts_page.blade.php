@@ -21,6 +21,9 @@
             width: 100%;
             height: 100%;
         }
+        li{
+            list-style: auto !important;
+        }
     </style>
 
 @endsection
@@ -93,7 +96,7 @@
 
                 <div class="px-5 pt-4">
                     <h3 class="text-uppercase fw-bold mb-3" style="font-size: 30px">Description</h3>
-                    <div>{!! $workout->description !!}</div>
+                    <div style="text-align:justify !important;">{!! $workout->description !!}</div>
                 </div>
 
             </div>
