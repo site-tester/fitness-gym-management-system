@@ -30,6 +30,7 @@ return new class extends Migration {
             // $table->string('supplier_name')->nullable();
             $table->enum('usage_frequency', ['high', 'medium', 'low'])->default('medium')->nullable();
             $table->text('remarks')->nullable();
+            $table->text('steps')->nullable();
             // $table->string('image')->nullable();
             $table->string('added_by')->nullable();
             $table->timestamps();

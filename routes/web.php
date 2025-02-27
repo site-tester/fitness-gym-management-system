@@ -39,6 +39,10 @@ Route::get('/contact-us', function(){
 Route::post('/contact-us/send', [Controller::class, 'sendContactUs'])->name('send.contact.us');
 Route::get('/workouts', [Controller::class, 'workoutView'])->name('workout');
 Route::get('/equipments', [Controller::class, 'equipmentView'])->name('equipment');
+Route::get('/get-equipment-description/{id}', function ($id) {
+    $description = EquipmentInventory::find($id);
+    return response()->json(['description' => $description ? $description->steps: 'No description found']);
+});
 Route::get('/workout-details/{id}', [Controller::class, 'workoutDetails'])->name('workout.details');
 // Route::get('/book-now', function(){
 //     return view('book_now');
