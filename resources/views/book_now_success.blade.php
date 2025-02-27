@@ -278,7 +278,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row shadow mt-5 mx-auto w-50 p-0 border border-danger">
+        <div class="row shadow mt-5 mx-auto w-75 p-0 border border-danger">
             <div class="col-7 px-0 overflow-hidden">
                 <img src="{{ asset('/resources/img/Logo.jpg') }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
