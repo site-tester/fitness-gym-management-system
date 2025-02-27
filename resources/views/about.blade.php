@@ -64,9 +64,9 @@
                         <section class="text-white py-4 py-xl-5">
                             <div class="container-fluid px-0">
                                 <div class="border border-0 d-flex flex-column justify-content-center align-items-center p-4 py-5" style="background: linear-gradient(rgba(99,20,20,0.2), rgba(99,20,20,0.2)), url(/resources/img/423583148_868625718602826_376942488243513661_n.jpg) center / cover;">
-                                    <div class="row">
+                                    <div class="row w-100">
                                         <div class="col-md-10 col-xl-8 text-center d-flex d-sm-flex d-md-flex justify-content-center align-items-center mx-auto justify-content-md-start align-items-md-center justify-content-xl-center">
-                                            <div>
+                                            <div class="mx-auto">
                                                 <h1 class="text-uppercase fw-bold mb-3">PROGRAMS</h1><a href="{{route('contact.us')}}" class="text-white fs-5 me-2 py-2 px-4" type="button" style="background: #e12c2c;">CONTACT US</a>
                                             </div>
                                         </div>
