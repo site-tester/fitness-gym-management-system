@@ -117,7 +117,7 @@
                     </thead>
                     <tbody>
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                         <tr>
                             {{-- Table columns --}}
                             @foreach ($crud->columns() as $column)
@@ -134,7 +134,7 @@
                                 <th>{{ trans('backpack::crud.actions') }}</th>
                             @endif
                         </tr>
-                    </tfoot>
+                    </tfoot> -->
                 </table>
             </div>
 
