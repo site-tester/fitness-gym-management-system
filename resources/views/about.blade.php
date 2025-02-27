@@ -55,7 +55,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col">
-                    <h1 style="text-align: center;font-weight: bold;color:  var(--accent) !important;font-size: 50px;">WE OFFER</h1>
+                    <h1 class="fw-bold" style="text-align: center;color:  var(--accent) !important;">WE OFFER</h1>
                 </div>
             </div>
             <div class="carousel slide" data-bs-ride="false" id="carousel-1">
