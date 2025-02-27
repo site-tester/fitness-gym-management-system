@@ -89,6 +89,15 @@ class ReservationCrudController extends CrudController
 
         ]);
         CRUD::addColumn([
+            'name' => 'service_duration',
+            'label' => 'Service Duration',
+            // 'entity' => 'service',
+            // 'model' => 'App\Models\Service',
+            // 'attribute' => 'name',
+            // 'pivot' => false,
+
+        ]);
+        CRUD::addColumn([
             'name' => 'reservation_date',
             'label' => 'Reservation Date',
             'type' => 'closure',
@@ -195,7 +204,10 @@ class ReservationCrudController extends CrudController
         CRUD::addField([
             'name' => 'service_name',
             'label' => 'Service Name',
-            'type' => 'text',
+        ]);
+        CRUD::addField([
+            'name' => 'service_duration',
+            'label' => 'Service Duration',
         ]);
 
 
@@ -273,15 +285,15 @@ class ReservationCrudController extends CrudController
             'attribute' => 'name',
             'pivot' => false,
         ]);
-        CRUD::addColumn([
-            'name' => 'service_name',
-            'label' => 'Service',
-            'entity' => 'service',
-            'model' => 'App\Models\Service',
-            'attribute' => 'name',
-            'pivot' => false,
+        // CRUD::addColumn([
+        //     'name' => 'service_name',
+        //     'label' => 'Service',
+        //     'entity' => 'service',
+        //     'model' => 'App\Models\Service',
+        //     'attribute' => 'name',
+        //     'pivot' => false,
 
-        ]);
+        // ]);
         // CRUD::addColumn([
         //     'name' => 'service_category_id',
         //     'label' => 'Service Category',
