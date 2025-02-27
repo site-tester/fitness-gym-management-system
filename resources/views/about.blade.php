@@ -18,7 +18,7 @@
         <div class="container mt-4">
             <div class="card border-0">
                 <div class="card-body" style="border-radius: 0px;">
-                    <h4 class="card-title" style="text-align: center;font-size: 40px;font-weight: bold;color: var(--accent) !important;">OUR STORY</h4>
+                    <h4 class="card-title mb-2" style="text-align: center;font-size: 40px;font-weight: bold;color: var(--accent) !important;">OUR STORY</h4>
                     <h6 class="text-muted card-subtitle mb-2" style="text-align: center;">HISTORY</h6>
                     <!-- <hr style="border-style: solid;opacity: 1;color: rgb(0,0,0);"> -->
                     <p class="card-text px-5" style="text-align: justify;">
