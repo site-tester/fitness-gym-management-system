@@ -276,7 +276,7 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid pt-3">
+    <div class="container-fluid pt-1">
         <div class="row shadow mx-auto w-75 p-0  border border-danger">
             <div class="col-3 px-0 overflow-hidden d-sm-none d-md-block">
                 <img src="{{ asset('/resources/img/Logo.jpg') }}" alt=""
@@ -284,13 +284,13 @@
             </div>
             <div class="col-12 col-md-9 px-0 border-start border-danger border-2">
                 <div class="rounded-0 h-100">
-                    <div class="progress mx-1 mt-1">
+                    <div class="progress">
                         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50"
                             class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
                             style="width: 0%"></div>
                     </div>
                     <div class="border-bottom">
-                        <h1 class="ms-4 py-3">Let's Start</h1>
+                        <h2 class="ms-4 py-1 mb-0">Let's Start</h2>
                     </div>
 
                     <div id="qbox-container">
@@ -300,7 +300,7 @@
                                 {{-- Step 1 --}}
                                 <div class="step">
                                     <div class="border-bottom mb-3">
-                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Select Services</h4>
+                                        <h5 class="ms-4 py-1" style="margin-bottom: 0px">Select Services</h5>
                                     </div>
                                     <div class="form-check ps-0 q-box">
                                         <div class="q-box__question">
@@ -357,7 +357,7 @@
                                 {{-- Step 2 --}}
                                 <div class="step">
                                     <div class="border-bottom mb-3">
-                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Choose Date</h4>
+                                        <h5 class="ms-4 py-1" style="margin-bottom: 0px">Choose Date</h5>
                                     </div>
                                     <div class="form-check ps-0 q-box">
                                         <div class="q-box__question">
@@ -380,26 +380,29 @@
                                 {{-- Step 3 --}}
                                 <div class="step">
                                     <div class="border-bottom mb-3">
-                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Your Information</h4>
+                                        <h5 class="ms-4 py-1" style="margin-bottom: 0px">Your Information</h5>
                                     </div>
                                     <div class="form-check ps-0 q-box">
                                         <div class="q-box__question">
-                                            <div class="mb-3">
+                                            <div class="row mb-3">
+                                                <div class="col">
                                                 <label for="FormName" class="form-label">Name <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="FormName" name="name"
                                                     placeholder="{{ $profile->name }}" value="{{ $profile->name ?? '' }}">
                                                 <input type="hidden" name="hidden_name" value="{{ $profile->name }}">
+                                                </div>
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="row mb-3">
+                                                <div class="col">
                                                 <label for="FormEmail" class="form-label">Email <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="FormEmail" name="email"
                                                     placeholder="{{ $profile->email }}"
                                                     value="{{ $profile->email ?? '' }}">
-                                                <input type="hidden" name="hidden_email" value="{{ $profile->email }}">
-                                            </div>
-                                            <div class="mb-3">
+                                                    <input type="hidden" name="hidden_email" value="{{ $profile->email }}">
+                                                </div>
+                                                <div class="col">
                                                 <label for="contact_number" class="form-label">Contact Number <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="phone" name="phone"
@@ -409,6 +412,8 @@
                                                 <input type="hidden" name="hidden_phone"
                                                     value="{{ $profile->phone ?? null }}">
                                             </div>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -416,7 +421,7 @@
                                 {{-- Step 4 --}}
                                 <div class="step">
                                     <div class="border-bottom mb-3">
-                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Booking Summary</h4>
+                                        <h5 class="ms-4 py-1" style="margin-bottom: 0px">Booking Summary</h5>
                                     </div>
                                     <div class="form-check ps-0 q-box">
                                         <div class="q-box__question">
