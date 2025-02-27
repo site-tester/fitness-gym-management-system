@@ -21,6 +21,6 @@ class MemberVisit extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'client_rfid_id', 'rfid_number');
+        return $this->belongsTo(User::class, 'client_id', 'id');
     }
 }

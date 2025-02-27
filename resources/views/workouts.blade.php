@@ -34,7 +34,7 @@
                                             <option value="all" {{ request('excercise_type') == 'all' ? 'selected' : '' }}>All</option>
                                             <option value="beginner" {{ request('excercise_type') == 'beginner' ? 'selected' : '' }}>Beginner</option>
                                             <option value="intermediate" {{ request('excercise_type') == 'intermediate' ? 'selected' : '' }}>Intermediate</option>
-                                            <option value="advance" {{ request('excercise_type') == 'advance' ? 'selected' : '' }}>Advanced</option>
+                                            <option value="advanced" {{ request('excercise_type') == 'advanced' ? 'selected' : '' }}>Advanced</option>
                                         </optgroup>
                                     </select>
                                 </div>
