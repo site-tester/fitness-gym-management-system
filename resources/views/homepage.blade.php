@@ -52,32 +52,32 @@
                     </div>
                 </div>
 
-                <ul class="features-items row align-items-center justify-content-center  w-100 w-md-75 mx-auto">
-                    @foreach ($services as $service)
-                        <li class="feature-item col-12 d-flex">
-                            <div class="d-flex align-items-center w-100">
-                                <div class="left-icon">
-                                    <img src="{{ asset('public/img/features-first-icon.png') }}"
-                                        style="background-color: #ed563b; cursor: default; pointer-events: none;">
-                                </div>
-                                <div class="right-content">
-                                    <h4 class="align-self-center">{{ $service->name }}</h4>
-                                    {{-- <div>
-                                    <p>{{ $service->description }}</p>
-                                    <p>Inclusions:
-                                        @foreach ($service->amenities as $amenity)
-                                            {!! $amenity->class !!} {{ $amenity->name }}
-                                            @if (!$loop->last)
-                                                ,
-                                            @endif
-                                        @endforeach
-                                    </p>
-                                </div> --}}
-                                </div>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
+                <ul class="features-items row align-items-center justify-content-center w-100 w-md-75 mx-auto">
+    @foreach ($services as $service)
+        <li class="feature-item col-12 w-100 d-flex">
+            <div class="d-flex align-items-center justify-content-start w-100">
+                <div class="left-icon">
+                    <img src="{{ asset('public/img/features-first-icon.png') }}"
+                        style="background-color: #ed563b; cursor: default; pointer-events: none;">
+                </div>
+                <div class="right-content text-start">
+                    <h4 class="align-self-center">{{ $service->name }}</h4>
+                    {{-- <div>
+                        <p>{{ $service->description }}</p>
+                        <p>Inclusions:
+                            @foreach ($service->amenities as $amenity)
+                                {!! $amenity->class !!} {{ $amenity->name }}
+                                @if (!$loop->last)
+                                    ,
+                                @endif
+                            @endforeach
+                        </p>
+                    </div> --}}
+                </div>
+            </div>
+        </li>
+    @endforeach
+</ul>
 
 
                 {{-- <div class="col-lg-6">
