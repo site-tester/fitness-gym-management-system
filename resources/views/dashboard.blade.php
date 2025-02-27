@@ -201,6 +201,7 @@
                 ordering: false,
                 responsive: true,
                 autoWidth: false,
+                info: false,
             });
 
 
