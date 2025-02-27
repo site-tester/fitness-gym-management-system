@@ -42,12 +42,12 @@
 }
 
 .nav-item .nav-link:hover {
-    background-color: rgba(0, 0, 0, 0.1); /* Light background on hover */
-    color: #007bff; /* Change text color on hover */
+    background-color: rgba(255, 255, 255, 0.5); /* Light background on hover */
+    color: rgba(var(--tblr-red-rgb)); /* Change text color on hover */
 }
 
 .nav-item .nav-link.active {
-    background-color: #007bff; /* Active tab background color */
+    background-color: rgba(var(--tblr-red-rgb)); /* Active tab background color */
     color: #fff; /* Active tab text color */
 }
 
@@ -62,7 +62,7 @@
 
 .nav-item .dropdown-menu .dropdown-item:hover {
     background-color: rgba(0, 0, 0, 0.1);
-    color: #007bff;
+    color: rgba(var(--tblr-red-rgb));
 }
 </style>
 
