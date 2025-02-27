@@ -10,6 +10,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\AttendanceController;
 use Spatie\Permission\Models\Role;
+use App\Models\EquipmentInventory;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +41,12 @@ Route::post('/contact-us/send', [Controller::class, 'sendContactUs'])->name('sen
 Route::get('/workouts', [Controller::class, 'workoutView'])->name('workout');
 Route::get('/equipments', [Controller::class, 'equipmentView'])->name('equipment');
 Route::get('/get-equipment-description/{id}', function ($id) {
-    $description = EquipmentInventory::find($id);
-    return response()->json(['description' => $description ? $description->steps: 'No description found']);
+    $equipment = EquipmentInventory::find($id);
+    return response()->json([
+        'steps' => $equipment->steps ?? 'No Steps Found',
+        'image' => $equipment->image ?? 'No Image Found',
+        'name' => $equipment->equipment_name ?? 'No Equipment Name Found'
+    ]);
 });
 Route::get('/workout-details/{id}', [Controller::class, 'workoutDetails'])->name('workout.details');
 // Route::get('/book-now', function(){

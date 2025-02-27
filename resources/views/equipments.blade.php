@@ -71,29 +71,46 @@ $(document).ready(function () {
         let cardId = $(this).data("id");
 
         $.ajax({
-            url: "/get-equipment-description/" + cardId, // Your Laravel route
+            url: "/get-equipment-details/" + cardId, // Your Laravel route
             method: "GET",
-
             success: function (response) {
                 let stepsHtml = "";
+                let imageUrl = "";
+
                 if (response.steps) {
-                    let steps = JSON.parse(response.steps); // Parse the JSON string
-                    stepsHtml = "<h3>Steps:</h3><ol>";
-                    steps.forEach(function (step) {
-                        stepsHtml += "<li>" + step + "</li>";
-                    });
-                    stepsHtml += "</ol>";
+                    let steps = JSON.parse(response.steps);
+                    if (steps && steps.length > 0) {
+                        stepsHtml = "<ol>";
+                        steps.forEach(function (step) {
+                            stepsHtml += "<li>" + step + "</li>";
+                        });
+                        stepsHtml += "</ol>";
+                    } else {
+                        stepsHtml = "<p>No step-by-step instructions available.</p>";
+                    }
+                } else {
+                    stepsHtml = "<p>No step-by-step instructions available.</p>";
+                }
+
+                if (response.image) {
+                    imageUrl = "https://ajdiafitnessgym.com/storage/app/public/" + response.image;
                 }
 
                 Swal.fire({
-                    title: "Equipment Details",
-                    html: "<p>" + response.description + "</p>" + stepsHtml,
-                    icon: "info",
+                    title: "Equipment Instructions",
+                    imageUrl: imageUrl,
+                    imageAlt: "Equipment Image",
+                    html: stepsHtml,
                     confirmButtonText: "Close",
+                    didOpen: () => {
+                        if (!response.image) {
+                            $(".swal2-image").hide();
+                        }
+                    }
                 });
             },
             error: function () {
-                Swal.fire("Error", "Failed to load description", "error");
+                Swal.fire("Error", "Failed to load equipment details", "error");
             }
         });
     });
