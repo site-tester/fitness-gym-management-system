@@ -42,7 +42,6 @@
 
         #steps-container {
             margin: auto;
-            min-height: 420px;
             /* display: flex; */
             vertical-align: middle;
             align-items: center;
@@ -277,13 +276,13 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid  pt-3">
-        <div class="row shadow mt-5 mx-auto w-75 p-0  border border-danger">
-            <div class="col-7 px-0 overflow-hidden d-sm-none d-md-block">
+    <div class="container-fluid pt-3">
+        <div class="row shadow mx-auto w-75 p-0  border border-danger">
+            <div class="col-3 px-0 overflow-hidden d-sm-none d-md-block">
                 <img src="{{ asset('/resources/img/Logo.jpg') }}" alt=""
-                    style="width:100% ; height: 100%; object-fit: cover;">
+                    style="width:100% ; height: 100%; object-fit: contain;">
             </div>
-            <div class="col-12 col-md-5 px-0 border-start border-danger border-2">
+            <div class="col-12 col-md-9 px-0 border-start border-danger border-2">
                 <div class="rounded-0 h-100">
                     <div class="progress mx-1 mt-1">
                         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50"
@@ -318,7 +317,7 @@
 
                                             <div class="row">
                                                 <!-- Service Name -->
-                                                <div class="col-12 mb-3">
+                                                <div class="col mb-3">
                                                     <label for="service_name" class="form-label">Service Name <span
                                                             class="text-danger">*</span></label>
                                                     <select class="form-select" name="service_name" id="service_name">
@@ -329,7 +328,7 @@
                                                 </div>
 
                                                 <!-- Service Duration -->
-                                                <div class="col-12 mb-3">
+                                                <div class="col mb-3">
                                                     <label for="service_duration" class="form-label">Service Duration <span
                                                             class="text-danger">*</span></label>
                                                     <select class="form-select" name="service_duration"
@@ -343,7 +342,7 @@
 
                                         </div>
                                         {{-- Below id the service description --}}
-                                        <div class="mt-3 mx-5 px-3 py-3 border ">
+                                        <div class="mt-2 mx-5 px-3 py-3 border ">
                                             <div id="servDescription">
                                                 <p class="text-center mb-0">Select a service to view its details.</p>
                                             </div>
@@ -537,7 +536,7 @@
                 // Update service description
                 let summary = `
                     <h5 class="text-center">${service} - ${duration}</h5>
-                    <p class="text-center text-success fw-bold">Price: ₱${price}</p>
+                    <p class="text-center text-success fw-bold mb-0">Price: ₱${price}</p>
                 `;
                 $("#servDescription").html(summary);
 
