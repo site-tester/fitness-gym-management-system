@@ -18,10 +18,20 @@
         <div class="container mt-4">
             <div class="card border-0">
                 <div class="card-body" style="border-radius: 0px;">
-                    <h4 class="card-title" style="text-align: center;font-size: 40px;font-weight: bold;color: var(--accent) !important;text-shadow: 2px 2px rgb(129,34,34);">OUR STORY</h4>
+                    <h4 class="card-title" style="text-align: center;font-size: 40px;font-weight: bold;color: var(--accent) !important;">OUR STORY</h4>
                     <h6 class="text-muted card-subtitle mb-2" style="text-align: center;">HISTORY</h6>
-                    <hr style="border-style: solid;opacity: 1;color: rgb(0,0,0);">
-                    <p class="card-text px-5" style="text-align: justify;">AJ DIA Fitness Gym, located in Dia Building Basement Area Zone 1 Tara Sipooct Camarines Sur, was established in 2018 by Allan Joshua Dia. The idea of starting the gym was inspired by Allan Joshua's close bond with his father, as both were passionate about fitness and regularly visited gyms in Naga City. However, when the gym they frequented closed down, they saw an opportunity to bring fitness closer to their community.<br><br>At the time, Sipocot lacked a dedicated fitness center, and most residents who wanted to work out had limited options, often traveling to nearby cities like Naga. Seeing this gap, Allan Joshua and his father decided to build their own gym to cater to the local population. They envisioned a place where everyone in the community could have access to quality fitness facility, especially since the only other option was the public gym, which offered limited services. <br><br>This passion project, born from a father-son hobby, has grown into a cornerstone of fitness in the region, providing residents with a space to work towards their fitness goals without having to leave town.<br><br><br></p>
+                    <!-- <hr style="border-style: solid;opacity: 1;color: rgb(0,0,0);"> -->
+                    <p class="card-text px-5" style="text-align: justify;">
+                    <p style="text-indent: 2em;">
+                        AJ DIA Fitness Gym, located in Dia Building Basement Area Zone 1 Tara Sipocot Camarines Sur, was established in 2018 by Allan Joshua Dia. The idea of starting the gym was inspired by Allan Joshua's close bond with his father, as both were passionate about fitness and regularly visited gyms in Naga City. However, when the gym they frequented closed down, they saw an opportunity to bring fitness closer to their community.
+                    </p>
+                    <p style="text-indent: 2em;">
+                        At the time, Sipocot lacked a dedicated fitness center, and most residents who wanted to work out had limited options, often traveling to nearby cities like Naga. Seeing this gap, Allan Joshua and his father decided to build their own gym to cater to the local population. They envisioned a place where everyone in the community could have access to quality fitness facility, especially since the only other option was the public gym, which offered limited services. 
+                    </p>
+                    <p style="text-indent: 2em;">
+                        This passion project, born from a father-son hobby, has grown into a cornerstone of fitness in the region, providing residents with a space to work towards their fitness goals without having to leave town.
+                    </p>
+                    </p>
                 </div>
             </div>
         </div>
@@ -33,7 +43,7 @@
                             <div class="col-md-6">
                                 <div class=" p-4 p-md-5 mt-4">
                                     <h2 class="fw-bold mb-3" style="color: var(--accent) !important;">WHO WE ARE</h2>
-                                    <p class="mb-4" style="text-align: justify;">AJ DIA Fitness Gym is an establishment made for everyone who wish to better themselves physically and mentally. We believe in more than just workouts; we believe in building a community dedicated to strength, wellness, and personal growth. Join us on a journey to transform your body and mind, where every rep brings you closer to your best self!<br><br></p>
+                                    <p class="mb-4" style="text-align: justify; text-indent: 2em;">AJ DIA Fitness Gym is an establishment made for everyone who wish to better themselves physically and mentally. We believe in more than just workouts; we believe in building a community dedicated to strength, wellness, and personal growth. Join us on a journey to transform your body and mind, where every rep brings you closer to your best self!<br><br></p>
                                 </div>
                             </div>
                             <div class="col-md-6 order-first order-md-last" style="min-height: 250px;background: #bb3030;"><img class="w-100 h-100 fit-cover" src="{{ asset('/resources/img/423582406_868624681936263_6185503928828898119_n.jpg')}}"></div>

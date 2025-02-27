@@ -54,7 +54,7 @@
 
                 <ul class="features-items row align-items-center justify-content-center w-100 w-md-75 mx-auto">
     @foreach ($services as $service)
-        <li class="feature-item col-12 col-md-6 offset-md-4 w-100 align-self-center">
+        <li class="feature-item col-12 col-md-6 offset-md-7 w-100 align-self-center">
             <div class="d-flex align-items-center justify-content-start w-100">
                 <div class="left-icon">
                     <img src="{{ asset('public/img/features-first-icon.png') }}"
