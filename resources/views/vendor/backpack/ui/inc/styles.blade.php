@@ -36,5 +36,35 @@
 
 @push('after_styles')
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+<style>
+    .nav-item .nav-link {
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.nav-item .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Light background on hover */
+    color: #007bff; /* Change text color on hover */
+}
+
+.nav-item .nav-link.active {
+    background-color: #007bff; /* Active tab background color */
+    color: #fff; /* Active tab text color */
+}
+
+.nav-item .nav-link.active:hover {
+    background-color: #0056b3; /* Darker background on hover for active tab */
+}
+
+/* For dropdown items */
+.nav-item .dropdown-menu .dropdown-item {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-item .dropdown-menu .dropdown-item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #007bff;
+}
+</style>
+
 @endpush
 
