@@ -99,6 +99,7 @@ $(document).ready(function () {
                 Swal.fire({
                     title: "Equipment Instructions",
                     imageUrl: imageUrl,
+                    imageHeight: 200,
                     imageAlt: "Equipment Image",
                     html: stepsHtml,
                     confirmButtonText: "Close",
