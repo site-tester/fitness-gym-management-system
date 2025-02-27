@@ -61,5 +61,5 @@
 @endcan
 
 @can('manage-contact-inbox')
-    <x-backpack::menu-item title="Feedback Inbox" icon="la la-inbox" :link="backpack_url('feedback-inbox')" />
+    <x-backpack::menu-item title="Contact Us Inbox" icon="la la-inbox" :link="backpack_url('contactus-inbox')" />
 @endcan

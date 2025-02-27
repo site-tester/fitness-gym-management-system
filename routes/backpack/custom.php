@@ -25,7 +25,7 @@ Route::group([
     Route::crud('reservation', 'ReservationCrudController');
     Route::crud('service', 'ServiceCrudController');
     Route::crud('service-category', 'ServiceCategoryCrudController');
-    Route::crud('feedback-inbox', 'ContactusInboxCrudController');
+    Route::crud('contactus-inbox', 'ContactusInboxCrudController');
     Route::crud('payment-method', 'PaymentMethodCrudController');
     Route::crud('equipment-inventory', 'EquipmentInventoryCrudController');
     Route::crud('inventory', 'InventoryCrudController');
