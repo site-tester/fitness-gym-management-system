@@ -279,10 +279,10 @@
 @section('content')
     <div class="container-fluid">
         <div class="row shadow mt-5 mx-auto w-75 p-0 border border-danger">
-            <div class="col-7 px-0 overflow-hidden">
+            <div class="col-5 px-0 overflow-hidden">
                 <img src="{{ asset('/resources/img/Logo.jpg') }}" alt="" style="width: 100%; height: 100%; object-fit: contain;">
             </div>
-            <div class="col-5 px-0 border-start border-danger border-2">
+            <div class="col-7 px-0 border-start border-danger border-2">
                 <div class="rounded-0 ">
                     <div class="progress mx-1 mt-1">
                         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50"
@@ -292,7 +292,7 @@
                     <div id="qbox-container">
                         <div id="steps-container">
                             <div>
-                                <div class="mt-5 p-1 p-md-5">
+                                <div class="mt-5 p-1 p-md-5 pt-md-1">
                                     <div class="text-center px-3 mb-4">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1"

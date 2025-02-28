@@ -94,8 +94,8 @@ class Reservation extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function setReservationDateAttribute($value)
-    {
-        $this->attributes['reservation_date'] = Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
-    }
+    // public function setReservationDateAttribute($value)
+    // {
+    //     $this->attributes['reservation_date'] = Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
+    // }
 }

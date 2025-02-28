@@ -20,7 +20,8 @@ class UserCrudController extends CrudController
     }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation { update as traitUpdate;
     }
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation { destroy as traitDestroy;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
@@ -202,5 +203,25 @@ class UserCrudController extends CrudController
         }
 
         return $this->traitUpdate();
+    }
+
+    public function destroy($id)
+    {
+        CRUD::hasAccessOrFail('delete');
+
+        
+        // Get all memberships related to the client
+        $memberships = MembershipDetail::where('client_id', $id)->get();
+
+        // Delete all related MemberVisit records
+        foreach ($memberships as $membership) {
+            MemberVisit::where('client_rfid_id', $membership->rfid_number)->delete();
+        }
+
+        // Delete all membership records
+        MembershipDetail::where('client_id', $id)->delete();
+
+
+        return CRUD::delete($id);
     }
 }
