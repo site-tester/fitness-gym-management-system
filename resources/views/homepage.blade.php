@@ -354,7 +354,7 @@
                         <div class="col-lg-4">
                             <div class="trainer-item h-100">
                                 <div class="image-thumb">
-                                    <img src="/storage/app/public/{{ $trainer->trainerDetails->profile_picture }}"
+                                    <img src="/storage/{{ $trainer->trainerDetails->profile_picture }}"
                                         alt="">
                                 </div>
                                 <div class="down-content">
