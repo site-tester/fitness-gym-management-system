@@ -413,7 +413,7 @@
                                                     value="{{ $profile->phone ?? null }}">
                                             </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -717,6 +717,8 @@
             $submitBtn.on('click', function(e) {
                 e.preventDefault();
                 const formData = $('#bookingForm').serialize();
+                let paymentMethod = $('input[name="payment_method"]:checked').val();
+
                 console.log(formData);
 
                 let button = $("#submit-btn");
@@ -726,29 +728,54 @@
                 spinner.removeClass("d-none");
                 button.addClass("disabled");
 
-                $.ajax({
-                    url: '/booking', // Change to your form action URL
-                    method: 'POST',
-                    data: formData,
-
-                    success: function(response) {
-                        if (response.redirect_url) {
-                            window.location.href = response
-                                .redirect_url; // Redirect if URL is provided
-                        } else {
-                            alert(
-                                'Success, but no redirect URL provided. Check server response.'
-                            );
+                if (paymentMethod == 2) {
+                    // AJAX for PayPal (or other method)
+                    $.ajax({
+                        url: '/paypal-checkout', // Change to your PayPal checkout URL
+                        method: 'POST',
+                        data: formData,
+                        success: function(response) {
+                            if (response.redirect_url) {
+                                localStorage.setItem('reservation_id', response.reservation_id);
+                                window.location.href = response.redirect_url; // Redirect to PayPal
+                            } else {
+                                alert('PayPal Success, but no redirect URL provided. Check server response.');
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('PayPal AJAX Error:', {
+                                status: status,
+                                error: error,
+                                response: xhr.responseText
+                            });
                         }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('AJAX Error:', {
-                            status: status,
-                            error: error,
-                            response: xhr.responseText
-                        });
-                    }
-                });
+                    });
+
+                } else {
+                    $.ajax({
+                        url: '/booking', // Change to your form action URL
+                        method: 'POST',
+                        data: formData,
+
+                        success: function(response) {
+                            if (response.redirect_url) {
+                                window.location.href = response
+                                    .redirect_url; // Redirect if URL is provided
+                            } else {
+                                alert(
+                                    'Success, but no redirect URL provided. Check server response.'
+                                );
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', {
+                                status: status,
+                                error: error,
+                                response: xhr.responseText
+                            });
+                        }
+                    });
+                }
             });
         });
     </script>

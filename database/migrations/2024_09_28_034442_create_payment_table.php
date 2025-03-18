@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->string('user_id')->nullable(); // Foreign key to users table
+            $table->string('paypal_user_id')->nullable(); // paypal user id
             $table->string('reservation_id')->nullable(); // Foreign key to reservations table
             $table->string('payment_method'); // Payment method used
             $table->string('amount'); // Payment amount

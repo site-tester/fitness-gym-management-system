@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CustomDashboardController;
 use App\Http\Controllers\BookNowController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PaypalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
@@ -65,6 +66,12 @@ Route::middleware(['verified'])->group(function () {
     Route::get('/my-progress', [HomeController::class, 'gymProgress'])->name('gym.progress');
 
     Route::post('/booking', [HomeController::class, 'bookNowPost'])->name('book.now.post');
+    // Payment Routes
+    Route::post('/paypal-checkout', [PaypalController::class, 'pay'])->name('paypal.checkout');
+    Route::get('/paypal-success', [PaypalController::class, 'success'])->name('paypal.success');
+    Route::get('/paypal-error', [PaypalController::class, 'error'])->name('paypal.error');
+
+
     Route::get('/services/{categoryId}', [BookNowController::class, 'getServicesByCategory']);
     Route::get('/service/details/{serviceId}', [BookNowController::class, 'getServiceDetails']);
     Route::get('/booking-receipt/{id}', [BookNowController::class, 'showReceipt'])->name('reservations.show');

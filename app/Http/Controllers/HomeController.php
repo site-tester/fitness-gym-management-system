@@ -213,7 +213,7 @@ class HomeController extends Controller
             }
 
             DB::commit(); // Commit transaction
-            // return view('book_now');
+
             return response()->json(['success' => true, 'redirect_url' => route('booked.now')]);
 
         } catch (\Exception $e) {
@@ -228,8 +228,6 @@ class HomeController extends Controller
     {
         return view('book_now_success');
     }
-
-
 
     private function getServicePrice($serviceId)
     {
