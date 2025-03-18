@@ -24,10 +24,11 @@ class Reservation extends Model
     protected $guarded = ['id'];
     protected $fillable = [
         'user_id',
-        'service_category_id',
-        'service_name_id',
+        // 'service_category_id',
+        'service_name',
+        'service_duration',
         'reservation_date',
-        'reservation_time',
+        // 'reservation_time',
         'name',
         'email',
         'phone',
@@ -51,14 +52,14 @@ class Reservation extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    public function service()
-    {
-        return $this->belongsTo(Service::class, 'service_name_id');
-    }
-    public function serviceCategory()
-    {
-        return $this->belongsTo(ServiceCategory::class, 'service_category_id');
-    }
+    // public function service()
+    // {
+    //     return $this->belongsTo(Service::class, 'service_name_id');
+    // }
+    // public function serviceCategory()
+    // {
+    //     return $this->belongsTo(ServiceCategory::class, 'service_category_id');
+    // }
     public function paymentMethod()
     {
         return $this->belongsTo(PaymentMethod::class, 'payment_method');
@@ -93,8 +94,8 @@ class Reservation extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function setReservationDateAttribute($value)
-    {
-        $this->attributes['reservation_date'] = Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
-    }
+    // public function setReservationDateAttribute($value)
+    // {
+    //     $this->attributes['reservation_date'] = Carbon::createFromFormat('m/d/Y', $value)->format('Y-m-d');
+    // }
 }

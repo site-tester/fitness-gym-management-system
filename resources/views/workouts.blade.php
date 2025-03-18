@@ -34,7 +34,7 @@
                                             <option value="all" {{ request('excercise_type') == 'all' ? 'selected' : '' }}>All</option>
                                             <option value="beginner" {{ request('excercise_type') == 'beginner' ? 'selected' : '' }}>Beginner</option>
                                             <option value="intermediate" {{ request('excercise_type') == 'intermediate' ? 'selected' : '' }}>Intermediate</option>
-                                            <option value="advance" {{ request('excercise_type') == 'advance' ? 'selected' : '' }}>Advanced</option>
+                                            <option value="advanced" {{ request('excercise_type') == 'advanced' ? 'selected' : '' }}>Advanced</option>
                                         </optgroup>
                                     </select>
                                 </div>
@@ -90,19 +90,19 @@
                                     <div class="card-body">
                                         <h5 class="card-title mb-3">{{ $workout->name }}</h5>
                                         <div class="row mx-">
-                                            <div class="col-12 col-md-4 px-1">
+                                            <div class="col-12   px-1">
                                                 <div class="text-center text-uppercase bg-secondary-subtle">
                                                     <label class="text-danger">Type</label>
                                                     <p>{{ $workout->excercise_type }}</p>
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-md-4 px-1">
+                                            <div class="col-12   px-1">
                                                 <div class="text-center text-uppercase bg-secondary-subtle">
                                                     <label class="text-danger">Equipment</label>
                                                     <p>{{ $workout->equipment_required }}</p>
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-md-4 px-1">
+                                            <div class="col-12   px-1">
                                                 <div class="text-center text-uppercase bg-secondary-subtle">
                                                     <label class="text-danger">Target</label>
                                                     <p>{{ $workout->target_muscle_group }}</p>

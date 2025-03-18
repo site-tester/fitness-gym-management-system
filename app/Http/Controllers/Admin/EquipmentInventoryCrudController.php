@@ -109,8 +109,8 @@ class EquipmentInventoryCrudController extends CrudController
             'name'      => 'image',
             'label'     => 'Image',
             'type'      => 'upload',
-            'disk'      => 'uploads',
-            'upload'    => true,
+            // 'disk'      => 'uploads',
+            // 'upload'    => true,
             'withFiles' => true
         ]);
     }

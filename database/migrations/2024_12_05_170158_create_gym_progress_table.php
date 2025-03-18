@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('progress_date');
             $table->decimal('weight', 5, 2)->nullable(); // Client's weight
             $table->integer('reps')->nullable(); // Example: reps for a specific exercise
-            $table->decimal('bmi', 5, 2)->nullable(); // BMI calculation
+            $table->string('bmi')->nullable(); // BMI calculation
             $table->text('notes')->nullable(); // Additional notes about the session
             $table->timestamps();
         });

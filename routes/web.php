@@ -11,6 +11,7 @@ use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\GoogleAuthController;
 use Spatie\Permission\Models\Role;
+use App\Models\EquipmentInventory;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,14 @@ Route::get('/contact-us', function(){
 Route::post('/contact-us/send', [Controller::class, 'sendContactUs'])->name('send.contact.us');
 Route::get('/workouts', [Controller::class, 'workoutView'])->name('workout');
 Route::get('/equipments', [Controller::class, 'equipmentView'])->name('equipment');
+Route::get('/get-equipment-details/{id}', function ($id) {
+    $equipment = EquipmentInventory::find($id);
+    return response()->json([
+        'steps' => $equipment->steps ?? 'No Steps Found',
+        'image' => $equipment->image ?? 'No Image Found',
+        'name' => $equipment->equipment_name ?? 'No Equipment Name Found'
+    ]);
+});
 Route::get('/workout-details/{id}', [Controller::class, 'workoutDetails'])->name('workout.details');
 // Route::get('/book-now', function(){
 //     return view('book_now');

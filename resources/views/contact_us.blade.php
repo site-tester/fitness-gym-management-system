@@ -29,7 +29,10 @@
                     </div>
                     <div class="col-md-6 col-lg-6 col-xs-12">
                         <div class="contact-form">
-                            <form id="contact" action="{{ route('send.contact.us') }}" method="post">
+                            <form id="contactForm" 
+                            >
+                            <!-- action="{{ route('send.contact.us') }}" method="post" -->
+
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
@@ -40,18 +43,18 @@
                                         <fieldset><input type="text" id="email" name="email"
                                                 pattern="[^ @]*@[^ @]*" placeholder="Your Email*" required=""></fieldset>
                                     </div>
-                                    {{-- <div class="col-sm-12 col-md-12">
+                                     <div class="col-sm-12 col-md-12">
                                         <fieldset><input type="text" id="subject" name="subject"
                                                 placeholder="Subject"></fieldset>
-                                    </div> --}}
+                                    </div> 
                                     <div class="col-lg-12">
                                         <fieldset>
-                                            <textarea id="message" name="message" placeholder="Feedback" required="" rows="6"></textarea>
+                                            <textarea id="message" name="message" placeholder="Message" required="" rows="6"></textarea>
                                         </fieldset>
                                     </div>
                                     <div class="col-lg-12">
                                         <fieldset><button type="submit" id="form-submit" class="main-button">Send
-                                                Feedback</button></fieldset>
+                                                Message</button></fieldset>
                                     </div>
                                 </div>
                             </form>

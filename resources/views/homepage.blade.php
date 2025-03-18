@@ -52,32 +52,32 @@
                     </div>
                 </div>
 
-                <ul class="features-items row align-items-center justify-content-center  w-100 w-md-75 mx-auto">
-                    @foreach ($services as $service)
-                        <li class="feature-item col-12 col-md-6 d-flex">
-                            <div class="d-flex align-items-center w-100">
-                                <div class="left-icon">
-                                    <img src="{{ asset('public/img/features-first-icon.png') }}"
-                                        style="background-color: #ed563b; cursor: default; pointer-events: none;">
-                                </div>
-                                <div class="right-content">
-                                    <h4 class="align-self-center">{{ $service->name }}</h4>
-                                    {{-- <div>
-                                    <p>{{ $service->description }}</p>
-                                    <p>Inclusions:
-                                        @foreach ($service->amenities as $amenity)
-                                            {!! $amenity->class !!} {{ $amenity->name }}
-                                            @if (!$loop->last)
-                                                ,
-                                            @endif
-                                        @endforeach
-                                    </p>
-                                </div> --}}
-                                </div>
-                            </div>
-                        </li>
-                    @endforeach
-                </ul>
+                <ul class="features-items row align-items-center justify-content-center w-100 w-md-75 mx-auto">
+    @foreach ($services as $service)
+        <li class="feature-item col-12 col-md-6 offset-md-7 w-100 align-self-center">
+            <div class="d-flex align-items-center justify-content-start w-100">
+                <div class="left-icon">
+                    <img src="{{ asset('public/img/features-first-icon.png') }}"
+                        style="background-color: #ed563b; cursor: default; pointer-events: none;">
+                </div>
+                <div class="right-content text-start">
+                    <h4 class="align-self-center">{{ $service->name }}</h4>
+                    {{-- <div>
+                        <p>{{ $service->description }}</p>
+                        <p>Inclusions:
+                            @foreach ($service->amenities as $amenity)
+                                {!! $amenity->class !!} {{ $amenity->name }}
+                                @if (!$loop->last)
+                                    ,
+                                @endif
+                            @endforeach
+                        </p>
+                    </div> --}}
+                </div>
+            </div>
+        </li>
+    @endforeach
+</ul>
 
 
                 {{-- <div class="col-lg-6">
@@ -352,9 +352,9 @@
                 <div class="row justify-content-center">
                     @foreach ($trainers as $trainer)
                         <div class="col-lg-4">
-                            <div class="trainer-item">
+                            <div class="trainer-item h-100">
                                 <div class="image-thumb">
-                                    <img src="/storage/app/public/{{ $trainer->trainerDetails->profile_picture }}"
+                                    <img src="/storage/{{ $trainer->trainerDetails->profile_picture }}"
                                         alt="">
                                 </div>
                                 <div class="down-content">
@@ -395,7 +395,11 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-12">
                     <div class="contact-form">
-                        <form id="contact" action="{{ route('send.contact.us') }}" method="post">
+                        <form 
+                            id="contactForm" 
+                        >
+                        <!-- action="{{ route('send.contact.us') }}" 
+                            method="post" -->
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
@@ -410,20 +414,20 @@
                                             placeholder="Your Email*" required="">
                                     </fieldset>
                                 </div>
-                                {{-- <div class="col-md-12 col-sm-12">
+                                <div class="col-md-12 col-sm-12">
                                     <fieldset>
                                         <input name="subject" type="text" id="subject" placeholder="Subject">
                                     </fieldset>
-                                </div> --}}
+                                </div>   
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <textarea name="message" rows="6" id="message" placeholder="Feedback" required=""></textarea>
+                                        <textarea name="message" rows="6" id="message" placeholder="Message" required=""></textarea>
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
                                         <button type="submit" id="form-submit" class="main-button">Send
-                                            Feedback</button>
+                                            Message</button>
                                     </fieldset>
                                 </div>
                             </div>

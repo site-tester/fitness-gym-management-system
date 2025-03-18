@@ -42,7 +42,6 @@
 
         #steps-container {
             margin: auto;
-            min-height: 420px;
             /* display: flex; */
             vertical-align: middle;
             align-items: center;
@@ -277,21 +276,21 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid  pt-3">
-        <div class="row shadow mt-5 mx-auto w-75 p-0  border border-danger">
-            <div class="col-7 px-0 overflow-hidden d-sm-none d-md-block">
+    <div class="container-fluid pt-1">
+        <div class="row shadow mx-auto w-75 p-0  border border-danger">
+            <div class="col-3 px-0 overflow-hidden d-sm-none d-md-block">
                 <img src="{{ asset('/resources/img/Logo.jpg') }}" alt=""
-                    style="width:100% ; height: 100%; object-fit: cover;">
+                    style="width:100% ; height: 100%; object-fit: contain;">
             </div>
-            <div class="col-12 col-md-5 px-0 border-start border-danger border-2">
+            <div class="col-12 col-md-9 px-0 border-start border-danger border-2">
                 <div class="rounded-0 h-100">
-                    <div class="progress mx-1 mt-1">
+                    <div class="progress">
                         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50"
                             class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
                             style="width: 0%"></div>
                     </div>
                     <div class="border-bottom">
-                        <h1 class="ms-4 py-3">Let's Start</h1>
+                        <h2 class="ms-4 py-1 mb-0">Let's Start</h2>
                     </div>
 
                     <div id="qbox-container">
@@ -301,7 +300,7 @@
                                 {{-- Step 1 --}}
                                 <div class="step">
                                     <div class="border-bottom mb-3">
-                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Select Services</h4>
+                                        <h5 class="ms-4 py-1" style="margin-bottom: 0px">Select Services</h5>
                                     </div>
                                     <div class="form-check ps-0 q-box">
                                         <div class="q-box__question">
@@ -318,7 +317,7 @@
 
                                             <div class="row">
                                                 <!-- Service Name -->
-                                                <div class="col-12 mb-3">
+                                                <div class="col mb-3">
                                                     <label for="service_name" class="form-label">Service Name <span
                                                             class="text-danger">*</span></label>
                                                     <select class="form-select" name="service_name" id="service_name">
@@ -329,7 +328,7 @@
                                                 </div>
 
                                                 <!-- Service Duration -->
-                                                <div class="col-12 mb-3">
+                                                <div class="col mb-3">
                                                     <label for="service_duration" class="form-label">Service Duration <span
                                                             class="text-danger">*</span></label>
                                                     <select class="form-select" name="service_duration"
@@ -343,7 +342,7 @@
 
                                         </div>
                                         {{-- Below id the service description --}}
-                                        <div class="mt-3 mx-5 px-3 py-3 border ">
+                                        <div class="mt-2 mx-5 px-3 py-3 border ">
                                             <div id="servDescription">
                                                 <p class="text-center mb-0">Select a service to view its details.</p>
                                             </div>
@@ -358,7 +357,7 @@
                                 {{-- Step 2 --}}
                                 <div class="step">
                                     <div class="border-bottom mb-3">
-                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Choose Date</h4>
+                                        <h5 class="ms-4 py-1" style="margin-bottom: 0px">Choose Date</h5>
                                     </div>
                                     <div class="form-check ps-0 q-box">
                                         <div class="q-box__question">
@@ -381,26 +380,29 @@
                                 {{-- Step 3 --}}
                                 <div class="step">
                                     <div class="border-bottom mb-3">
-                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Your Information</h4>
+                                        <h5 class="ms-4 py-1" style="margin-bottom: 0px">Your Information</h5>
                                     </div>
                                     <div class="form-check ps-0 q-box">
                                         <div class="q-box__question">
-                                            <div class="mb-3">
+                                            <div class="row mb-3">
+                                                <div class="col">
                                                 <label for="FormName" class="form-label">Name <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="FormName" name="name"
                                                     placeholder="{{ $profile->name }}" value="{{ $profile->name ?? '' }}">
                                                 <input type="hidden" name="hidden_name" value="{{ $profile->name }}">
+                                                </div>
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="row mb-3">
+                                                <div class="col">
                                                 <label for="FormEmail" class="form-label">Email <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="FormEmail" name="email"
                                                     placeholder="{{ $profile->email }}"
                                                     value="{{ $profile->email ?? '' }}">
-                                                <input type="hidden" name="hidden_email" value="{{ $profile->email }}">
-                                            </div>
-                                            <div class="mb-3">
+                                                    <input type="hidden" name="hidden_email" value="{{ $profile->email }}">
+                                                </div>
+                                                <div class="col">
                                                 <label for="contact_number" class="form-label">Contact Number <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="text" id="phone" name="phone"
@@ -410,6 +412,8 @@
                                                 <input type="hidden" name="hidden_phone"
                                                     value="{{ $profile->phone ?? null }}">
                                             </div>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -417,7 +421,7 @@
                                 {{-- Step 4 --}}
                                 <div class="step">
                                     <div class="border-bottom mb-3">
-                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Booking Summary</h4>
+                                        <h5 class="ms-4 py-1" style="margin-bottom: 0px">Amount</h5>
                                     </div>
                                     <div class="form-check ps-0 q-box">
                                         <div class="q-box__question">
@@ -440,7 +444,7 @@
                                         </div>
                                     </div>
                                     <div class="border-bottom mb-3">
-                                        <h4 class="ms-4 py-1" style="margin-bottom: 0px">Payment Method</h4>
+                                        <h5 class="ms-4 py-1" style="margin-bottom: 0px">Payment Method</h5>
                                     </div>
                                     @foreach ($paymentMethods as $paymentMethod)
                                         <div class="q-box__question">
@@ -463,7 +467,7 @@
 
                                 <div class="step ">
                                     <div class="mt-1 ">
-                                        <div class="closing-text p-5 text-center">
+                                        <div class="closing-text pt-1 px-5 text-center">
                                             <div class="">
                                                 <h4>You are about to Book.</h4>
                                                 <p>Please review all the details carefully. <br> Click the Submit button to
@@ -537,7 +541,7 @@
                 // Update service description
                 let summary = `
                     <h5 class="text-center">${service} - ${duration}</h5>
-                    <p class="text-center text-success fw-bold">Price: ₱${price}</p>
+                    <p class="text-center text-success fw-bold mb-0">Price: ₱${price}</p>
                 `;
                 $("#servDescription").html(summary);
 

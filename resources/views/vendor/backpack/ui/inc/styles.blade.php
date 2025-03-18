@@ -36,5 +36,40 @@
 
 @push('after_styles')
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+<style>
+    .nav-item .nav-link {
+    transition: background-color 0.3s ease, color 0.3s ease !important; /* Smooth transition */
+}
+
+.nav-item .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.9) !important; /* Light background on hover */
+    color: rgba(var(--tblr-red-rgb)) !important; /* Change text color on hover */
+}
+
+.nav-item .nav-link.active {
+    background-color: rgba(var(--tblr-red-rgb)) !important; /* Active tab background color */
+    color: rgba(255, 255, 255, 0.9); /* Active tab text color */
+}
+
+.nav-item .nav-link.active:hover {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    color: rgba(var(--tblr-red-rgb)); /* Darker background on hover for active tab */
+}
+
+/* For dropdown items */
+.nav-item .dropdown-menu .dropdown-item {
+    transition: background-color 0.3s ease, color 0.3s ease !important;
+}
+
+.nav-item .dropdown-menu .dropdown-item:hover {
+    background-color: rgba(248, 244, 244, 0.9) !important;
+    color: rgba(var(--tblr-red-rgb)) !important;
+}
+
+.navbar-expand-lg .nav-item.active:after{
+    border: 0 var(--tblr-border-style) var(--tblr-red-rgb)
+}
+</style>
+
 @endpush
 

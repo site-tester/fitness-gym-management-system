@@ -40,17 +40,17 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(60),
         ]);
         //
-        $members = [
-            [
-                'rfid_number' => '1019735270',
-                'name' => 'John Doe',
-                // 'username' => 'jdoe',
-                'email' => 'jdoe@email.com',
-                'password' => Hash::make('password'), // Ensure password is hashed
-                'remember_token' => Str::random(60),
-                'email_verified_at' => now(),
-            ],
-        ];
+        // $members = [
+        //     [
+        //         'rfid_number' => '1019735270',
+        //         'name' => 'John Doe',
+        //         // 'username' => 'jdoe',
+        //         'email' => 'jdoe@email.com',
+        //         'password' => Hash::make('password'), // Ensure password is hashed
+        //         'remember_token' => Str::random(60),
+        //         'email_verified_at' => now(),
+        //     ],
+        // ];
 
         // Assign the admin role to the user
         $adminRole = Role::where('name', 'admin')->first();
@@ -66,35 +66,35 @@ class UserSeeder extends Seeder
         $superAdmin->assignRole($superAdminRole);
 
         // Assign the member role to the user
-        $memberRole = Role::where('name', 'member')->first();
-        foreach ($members as $member) {
+        // $memberRole = Role::where('name', 'member')->first();
+        // foreach ($members as $member) {
 
-            $memberUser = User::create([
-                'rfid_number' => $member['rfid_number'],
-                'name' => $member['name'],
-                // 'username' => $member['username'],
-                'email' => $member['email'],
-                'password' => $member['password'],
-                'remember_token' => $member['remember_token'],
-                'email_verified_at' => now(),
-            ]);
+        //     $memberUser = User::create([
+        //         'rfid_number' => $member['rfid_number'],
+        //         'name' => $member['name'],
+        //         // 'username' => $member['username'],
+        //         'email' => $member['email'],
+        //         'password' => $member['password'],
+        //         'remember_token' => $member['remember_token'],
+        //         'email_verified_at' => now(),
+        //     ]);
 
-            $memberUser->assignRole($memberRole);
+        //     $memberUser->assignRole($memberRole);
 
-            MembershipDetail::create([
-                'client_id' => $memberUser->id,
-                'rfid_number' => $member['rfid_number'],
-                'phone' => $faker->phoneNumber,
-                'address' => $faker->address,
-                'birthdate' => $faker->date($format = 'Y-m-d', $max = '2005-12-31'),
-                'medical_info' => $faker->sentence,
-                'height' => $faker->randomFloat(2, 1.5, 2.1),
-                'weight' => $faker->randomFloat(2, 50, 120),
-                'civil_status' => $faker->randomElement(['Single', 'Married', 'Widowed', 'Divorced']),
-                'gender' => $faker->randomElement(['Male', 'Female', 'Other']),
-                'guardian' => $faker->name,
-            ]);
-        }
+        //     MembershipDetail::create([
+        //         'client_id' => $memberUser->id,
+        //         'rfid_number' => $member['rfid_number'],
+        //         'phone' => $faker->phoneNumber,
+        //         'address' => $faker->address,
+        //         'birthdate' => $faker->date($format = 'Y-m-d', $max = '2005-12-31'),
+        //         'medical_info' => $faker->sentence,
+        //         'height' => $faker->randomFloat(2, 1.5, 2.1),
+        //         'weight' => $faker->randomFloat(2, 50, 120),
+        //         'civil_status' => $faker->randomElement(['Single', 'Married', 'Widowed', 'Divorced']),
+        //         'gender' => $faker->randomElement(['Male', 'Female', 'Other']),
+        //         'guardian' => $faker->name,
+        //     ]);
+        // }
 
         $trainers = [
             [

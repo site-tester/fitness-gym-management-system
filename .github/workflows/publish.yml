@@ -113,9 +113,9 @@ jobs:
             # ✅ Copy folders to storage
             cp -r public/basset ./storage
             cp -r public/images ./storage/img
-            cp public/img/trainer1.jpg ./storage/app/public/trainer1.jpg
-            # cp public/img/trainer2.jpg ./storage/app/public/trainer2.jpg
-            cp public/img/trainer3.jpg ./storage/app/public/trainer3.jpg
-            cp -r public/equipment/* ./storage/app/public
+            cp public/img/trainer1.jpg ./storage/trainer1.jpg
+            # cp public/img/trainer2.jpg ./storage/trainer2.jpg
+            cp public/img/trainer3.jpg ./storage/trainer3.jpg
+            cp -r public/equipment/* ./storage
 
             php artisan basset:cache

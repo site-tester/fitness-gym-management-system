@@ -40,37 +40,37 @@ class ServiceCrudController extends CrudController
     protected function setupListOperation()
     {
 
-        CRUD::addColumn([
-            'name' => 'category_id',
-            'label' => 'Service Category',
-            'entity' => 'category',
-            'model' => 'App\Models\ServiceCategory',
-            'attribute' => 'name',
-            'pivot' => false,
-        ]);
-        CRUD::addColumn([
-            'name' => 'trainer_id',
-            'label' => 'Trainer',
-            'entity' => 'trainer',
-            'model' => 'App\Models\User',
-            'attribute' => 'name',
-            'pivot' => false,
-        ]);
+        // CRUD::addColumn([
+        //     'name' => 'category_id',
+        //     'label' => 'Service Category',
+        //     'entity' => 'category',
+        //     'model' => 'App\Models\ServiceCategory',
+        //     'attribute' => 'name',
+        //     'pivot' => false,
+        // ]);
+        // CRUD::addColumn([
+        //     'name' => 'trainer_id',
+        //     'label' => 'Trainer',
+        //     'entity' => 'trainer',
+        //     'model' => 'App\Models\User',
+        //     'attribute' => 'name',
+        //     'pivot' => false,
+        // // ]);
         CRUD::setFromDb(); // set columns from db columns.
 
         /**
          * Columns can be defined using the fluent syntax:
          * - CRUD::column('price')->type('number');
          */
-        CRUD::addColumn([
-            'label' => 'Amenities',
-            'type' => 'select_multiple',
-            'name' => 'amenities', // the relationship name
-            'entity' => 'amenities', // the related model
-            'attribute' => 'name', // attribute shown in the list
-            'model' => 'App\Models\Amenity', // fully qualified class name of the related model
-            'separator' => ',', // for the select_multiple field type
-        ]);
+        // CRUD::addColumn([
+        //     'label' => 'Amenities',
+        //     'type' => 'select_multiple',
+        //     'name' => 'amenities', // the relationship name
+        //     'entity' => 'amenities', // the related model
+        //     'attribute' => 'name', // attribute shown in the list
+        //     'model' => 'App\Models\Amenity', // fully qualified class name of the related model
+        //     'separator' => ',', // for the select_multiple field type
+        // ]);
     }
 
     /**
@@ -105,19 +105,19 @@ class ServiceCrudController extends CrudController
          * Fields can be defined using the fluent syntax:
          * - CRUD::field('price')->type('number');
          */
-        CRUD::addField([
-            'label' => 'Amenities',
-            'type' => 'select_multiple',
-            'name' => 'amenities', // the relationship name in the model
-            'entity' => 'amenities', // the related model
-            'attribute' => 'name', // attribute shown in the select dropdown
-            'model' => 'App\Models\Amenity', // fully qualified class name of the related model
-            'pivot' => true, // required for many-to-many relationships
-            'separator' => ',', // for the select_multiple field type
-            'attributes' => [
-                'id' => 'amenities_select_multiple',
-            ]
-        ]);
+        // CRUD::addField([
+        //     'label' => 'Amenities',
+        //     'type' => 'select_multiple',
+        //     'name' => 'amenities', // the relationship name in the model
+        //     'entity' => 'amenities', // the related model
+        //     'attribute' => 'name', // attribute shown in the select dropdown
+        //     'model' => 'App\Models\Amenity', // fully qualified class name of the related model
+        //     'pivot' => true, // required for many-to-many relationships
+        //     'separator' => ',', // for the select_multiple field type
+        //     'attributes' => [
+        //         'id' => 'amenities_select_multiple',
+        //     ]
+        // ]);
     }
 
     /**

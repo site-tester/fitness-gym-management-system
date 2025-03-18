@@ -163,7 +163,7 @@ class HomeController extends Controller
             $reservation->user_id = Auth::id();
             $reservation->service_duration = $request->input('service_duration');
             $reservation->service_name = $request->input('service_name');
-            $reservation->reservation_date = $request->input('selected_date');
+            $reservation->reservation_date = \Carbon\Carbon::parse($request->input('selected_date'))->format('Y-m-d');
             // $reservation->reservation_time = $request->input('formTime');
             $reservation->payment_method = $request->input('payment_method');
 
