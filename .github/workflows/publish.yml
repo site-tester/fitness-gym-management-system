@@ -80,6 +80,9 @@ jobs:
             MAIL_ENCRYPTION=ssl
             MAIL_FROM_ADDRESS="support@ajdiafitnessgym.com"
             MAIL_FROM_NAME="AJ DIA"
+            GOOGLE_CLIENT_ID=830010997337-3n8kr3la44s58iojdmsal6alkr3bpe4t.apps.googleusercontent.com
+            GOOGLE_CLIENT_SECRET=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
+            GOOGLE_REDIRECT_URI=https://ajdiafitnessgym.com/auth/google/callback
             EOT
 
             # ✅ Install dependencies & run migrations & symlink storage

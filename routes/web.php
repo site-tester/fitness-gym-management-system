@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\GoogleAuthController;
 use Spatie\Permission\Models\Role;
 
 /*
@@ -67,8 +68,8 @@ Route::get('/age-stats', [CustomDashboardController::class, 'getAgeStats']);
 Route::get('/service-booking-stats', [CustomDashboardController::class, 'getServiceBookingStats']);
 Route::get('/client-bookings-by-day', [CustomDashboardController::class, 'getClientBookingsByDay']);
 
-
-
+Route::get('/auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('/auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);
 
 
 /** CATCH-ALL ROUTE for Backpack/PageManager - needs to be at the end of your routes.php file  **/
