@@ -25,6 +25,7 @@ class FacebookAuthController extends Controller
                 'name' => $facebookUser->getName(),
                 'facebook_id' => $facebookUser->getId(),
                 'password' => bcrypt(uniqid()), // Random password for Facebook users
+                'email_verified_at' => now(),
             ]);
 
             $user->assignRole('member'); // Assign the member role to the user

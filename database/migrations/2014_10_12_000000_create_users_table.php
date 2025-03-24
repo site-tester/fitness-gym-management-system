@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('rfid_number', 20)->unique()->nullable();
             $table->string('google_id')->nullable();
+            $table->string('facebook_id')->nullable();
             $table->string('name');
             // $table->string('username')->unique();
             $table->string('email')->unique();

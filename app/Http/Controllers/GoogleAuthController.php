@@ -24,6 +24,7 @@ class GoogleAuthController extends Controller
                 'name' => $googleUser->getName(),
                 'google_id' => $googleUser->getId(),
                 'password' => bcrypt(uniqid()), // Random password for Google users
+                'email_verified_at' => now(),
             ]);
 
             $user->assignRole('member'); // Assign the member role to the user
