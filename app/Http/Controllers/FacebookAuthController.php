@@ -19,8 +19,6 @@ class FacebookAuthController extends Controller
         try {
             $facebookUser = Socialite::driver('facebook')->user();
 
-            dd($facebookUser);
-
             $user = User::updateOrCreate([
                 'email' => $facebookUser->getEmail(),
             ], [
