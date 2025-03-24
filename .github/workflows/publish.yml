@@ -83,6 +83,9 @@ jobs:
             GOOGLE_CLIENT_ID=830010997337-3n8kr3la44s58iojdmsal6alkr3bpe4t.apps.googleusercontent.com
             GOOGLE_CLIENT_SECRET=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
             GOOGLE_REDIRECT_URI=https://ajdiafitnessgym.com/auth/google/callback
+            FACEBOOK_CLIENT_ID=2939909312840970
+            FACEBOOK_CLIENT_SECRET=3d2f7e9dbf50944edeaf6e3f30ef6f2d
+            FACEBOOK_REDIRECT_URI=https://ajdiafitnessgym.com/auth/facebook/callback
             EOT
 
             # ✅ Install dependencies & run migrations & symlink storage

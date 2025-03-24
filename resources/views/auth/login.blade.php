@@ -51,7 +51,7 @@
             transition: background-color .218s, border-color .218s, box-shadow .218s;
             vertical-align: middle;
             white-space: nowrap;
-            width: auto;
+            /* width: auto; */
             max-width: 400px;
             min-width: min-content;
         }
@@ -155,11 +155,11 @@
                             <div class="h3 mb-5">Login to your account</div>
                             <form class="" method="POST" action="{{ route('login') }}">
                                 @csrf
-                                <div class="row mb-3 mx-1 d-flex justify-content-center">
-                                    <a class="gsi-material-button" href="{{ route('google.login') }}">
+                                <div class="row mb-3 mx-0 mx-md-0 d-flex justify-content-center">
+                                    <a class="gsi-material-button mb-3 me-2 me-md-0" href="{{ route('google.login') }}">
                                         <div class="gsi-material-button-state"></div>
                                         <div class="gsi-material-button-content-wrapper">
-                                            <div class="gsi-material-button-icon">
+                                            <div class="gsi-material-button-icon text-primary">
                                                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
                                                     xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;">
                                                     <path fill="#EA4335"
@@ -179,6 +179,15 @@
                                             </div>
                                             <span class="gsi-material-button-contents">Login with Google</span>
                                             <span style="display: none;">Login with Google</span>
+                                        </div>
+                                    </a>
+
+                                    <a class="gsi-material-button" href="{{ route('facebook.login') }}">
+                                        <div class="gsi-material-button-state"></div>
+                                        <div class="gsi-material-button-content-wrapper">
+                                            <i class="bi bi-facebook text-primary me-2 fs-4 " aria-hidden="true"></i>
+                                            <span class="gsi-material-button-contents">Login with Facebook</span>
+                                            <span style="display: none;">Login with Facebook</span>
                                         </div>
                                     </a>
                                 </div>

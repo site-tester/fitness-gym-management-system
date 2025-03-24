@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CustomDashboardController;
 use App\Http\Controllers\BookNowController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FacebookAuthController;
 use App\Http\Controllers\PaypalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -84,9 +85,13 @@ Route::get('/age-stats', [CustomDashboardController::class, 'getAgeStats']);
 Route::get('/service-booking-stats', [CustomDashboardController::class, 'getServiceBookingStats']);
 Route::get('/client-bookings-by-day', [CustomDashboardController::class, 'getClientBookingsByDay']);
 
+// Google Redirect Routes
 Route::get('/auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);
 
+// Facebook Redirect Routes
+Route::get('/auth/facebook', [FacebookAuthController::class, 'redirectToFacebook'])->name('facebook.login');
+Route::get('/auth/facebook/callback', [FacebookAuthController::class, 'handleFacebookCallback']);
 
 /** CATCH-ALL ROUTE for Backpack/PageManager - needs to be at the end of your routes.php file  **/
 // Route::get('{page}/{subs?}', ['uses' => '\App\Http\Controllers\PageController@index'])
