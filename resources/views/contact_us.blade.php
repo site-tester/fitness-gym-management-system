@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-md-6 col-lg-6 col-xs-12">
                         <div class="contact-form">
-                            <form id="contactForm" 
+                            <form id="contactForm"
                             >
                             <!-- action="{{ route('send.contact.us') }}" method="post" -->
 
@@ -46,7 +46,7 @@
                                      <div class="col-sm-12 col-md-12">
                                         <fieldset><input type="text" id="subject" name="subject"
                                                 placeholder="Subject"></fieldset>
-                                    </div> 
+                                    </div>
                                     <div class="col-lg-12">
                                         <fieldset>
                                             <textarea id="message" name="message" placeholder="Message" required="" rows="6"></textarea>
@@ -130,7 +130,7 @@
                         </div>
                         <div class="px-3">
                             <h4 style="color: var(--accent) !important;">Email</h4>
-                            <p>ajdiafitness@gmail.com</p>
+                            <p>support@ajdiafitnessgym.com</p>
                         </div>
                     </div>
                 </div>

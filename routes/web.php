@@ -52,6 +52,9 @@ Route::get('/get-equipment-details/{id}', function ($id) {
     ]);
 });
 Route::get('/workout-details/{id}', [Controller::class, 'workoutDetails'])->name('workout.details');
+Route::get('/privacy-policy', function(){
+    return view('privacy_policy');
+})->name('privacy.policy');
 // Route::get('/book-now', function(){
 //     return view('book_now');
 // })->name('book.now');
