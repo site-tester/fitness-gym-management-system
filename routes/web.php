@@ -55,9 +55,10 @@ Route::get('/workout-details/{id}', [Controller::class, 'workoutDetails'])->name
 Route::get('/privacy-policy', function(){
     return view('privacy_policy');
 })->name('privacy.policy');
-// Route::get('/book-now', function(){
-//     return view('book_now');
-// })->name('book.now');
+
+Route::get('/data-deletion-instruction', function(){
+    return view('account-deletion');
+})->name('account.deletion');
 
 Route::middleware(['verified'])->group(function () {
     Route::get('/profile', [HomeController::class, 'viewProfile'])->name('profile');
