@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Links progress to a client
             $table->string('workout_name');
             $table->date('progress_date');
-            $table->decimal('weight', 5, 2)->nullable(); // Client's weight
+            $table->string('height')->nullable(); // Client's height
+            $table->string('weight')->nullable(); // Client's weight
             $table->integer('reps')->nullable(); // Example: reps for a specific exercise
             $table->string('bmi')->nullable(); // BMI calculation
             $table->text('notes')->nullable(); // Additional notes about the session

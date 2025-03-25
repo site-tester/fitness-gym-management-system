@@ -18,20 +18,27 @@ class GoogleAuthController extends Controller
     {
         try {
             $googleUser = Socialite::driver('google')->user();
-            $user = User::updateOrCreate([
-                'email' => $googleUser->getEmail(),
-            ], [
-                'name' => $googleUser->getName(),
-                'google_id' => $googleUser->getId(),
-                'password' => bcrypt(uniqid()), // Random password for Google users
-                'email_verified_at' => now(),
-            ]);
+            $user = User::where('google_id', $googleUser->getId())->first();
 
-            $user->assignRole('member'); // Assign the member role to the user
+            if ($user) {
+                Auth::login($user);
+                session()->flash('login_success', 'Welcome back, ' . $user->name . '!');
+                return redirect()->route('dashboard'); // Change this to your dashboard route
+            }else{
+                $user = User::create([
+                    'email' => $googleUser->getEmail(),
+                    'name' => $googleUser->getName(),
+                    'google_id' => $googleUser->getId(),
+                    'password' => bcrypt(uniqid()),
+                    'email_verified_at' => now(),
+                ]);
 
-            Auth::login($user);
-            session()->flash('login_success', 'Welcome back, ' . $user->name . '!');
-            return redirect()->route('dashboard'); // Change this to your dashboard route
+                $user->assignRole('member'); // Assign the member role to the user
+
+                Auth::login($user);
+                session()->flash('login_success', 'Welcome, ' . $user->name . '!');
+                return redirect()->route('dashboard'); // Change this to your dashboard route
+            }
 
         } catch (\Exception $e) {
             return redirect()->route('login')->with('error', 'Google login failed');

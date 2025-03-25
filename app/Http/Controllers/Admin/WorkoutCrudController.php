@@ -202,6 +202,13 @@ class WorkoutCrudController extends CrudController
         ]);
 
         CRUD::addField([
+            'name' => 'copyright',
+            'label' => 'Copyrighted?',
+            'type' => 'text',
+            'hint' => 'Enter the name of the person or company that owns the rights to this workout video or content.',
+        ]);
+
+        CRUD::addField([
             'name' => 'description', // Database column name
             'label' => 'Description',
             'type' => 'custom_html',

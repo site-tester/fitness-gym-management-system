@@ -14,6 +14,7 @@ use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Models\User;
 use App\Models\Workout;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -124,6 +125,7 @@ class HomeController extends Controller
         $memberDetail->phone = $request->contact_number;
         $memberDetail->address = $request->address;
         $memberDetail->birthdate = $request->birthdate;
+        $memberDetail->age = Carbon::parse($request->birthdate)->age;
         $memberDetail->medical_info = $request->medical_info;
         $memberDetail->civil_status = $request->civil_status;
         $memberDetail->gender = $request->gender;

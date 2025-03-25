@@ -18,9 +18,11 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->date('birthdate')->nullable();
+            $table->string('age')->nullable();
             $table->string('medical_info')->nullable();
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
+            $table->string('bmi')->nullable();
             $table->string('civil_status')->nullable();
             $table->string('gender')->nullable();
             $table->string('guardian')->nullable();

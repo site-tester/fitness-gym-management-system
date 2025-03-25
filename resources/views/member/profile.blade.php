@@ -115,6 +115,16 @@
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
                                     </div>
+
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="age" name="age" type="number"
+                                            value="{{ $profile->membershipDetails->age ?? old('age') }}"  disabled>
+                                        <label class="small mb-1" for="age">Age</label>
+                                        <p class="help-block">Age is automatically calculated upon updating of Birth Date</p>
+                                        @error('birthdate')
+                                            <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                     <!-- Gender -->
                                     <div class="form-floating mb-3">
                                         <select class="form-select" id="gender" name="gender">
@@ -196,9 +206,9 @@
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="heigth" name="heigth" type="number"
                                             value="{{ $profile->membershipDetails->height ?? old('heigth') }}"
-                                            @if (Auth::user()->rfid_number == null) disabled
-                                                title="Please visit the gym to update this detail." @endif>
-                                        <label class="small mb-1" for="heigth">Height</label>
+                                            @if (Auth::user()->rfid_number == null)
+                                                title="Please visit the gym to update this detail." @endif disabled>
+                                        <label class="small mb-1" for="heigth">Height (cm)</label>
                                         @if (Auth::user()->rfid_number == null)
                                             <p class="help-block fst-italic"><span class="text-danger">*</span>Please
                                                 visit the gym to update this detail.</p>
@@ -210,9 +220,24 @@
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="weigth" name="weigth" type="number"
                                             value="{{ $profile->membershipDetails->weight ?? old('weigth') }}"
+                                            @if (Auth::user()->rfid_number == null)
+                                                title="Please visit the gym to update this detail." @endif disabled>
+                                        <label class="small mb-1" for="heigth">Weight (kg)</label>
+                                        @if (Auth::user()->rfid_number == null)
+                                            <p class="help-block fst-italic"><span class="text-danger">*</span>Please
+                                                visit the gym to update this detail.</p>
+                                        @endif
+                                        {{-- <p class="help-block">Please visit the gym to update your details.</p> --}}
+                                        @error('weight')
+                                            <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="bmi" name="bmi" type="number"
+                                            value="{{ isset($profile->membershipDetails->bmi) ? number_format($profile->membershipDetails->bmi, 2) : old('bmi') }}"
                                             @if (Auth::user()->rfid_number == null) disabled
-                                                title="Please visit the gym to update this detail." @endif>
-                                        <label class="small mb-1" for="heigth">Weight</label>
+                                                title="Please visit the gym to update this detail." @endif disabled>
+                                        <label class="small mb-1" for="bmi">BMI</label>
                                         @if (Auth::user()->rfid_number == null)
                                             <p class="help-block fst-italic"><span class="text-danger">*</span>Please
                                                 visit the gym to update this detail.</p>
@@ -251,9 +276,15 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="my-4">
-                                    <button class="btn bg-accent btn-lg" type="submit">{{ __('Save') }}</button>
-                                </div>
+                                @if (Auth::user()->rfid_number == null)
+                                    <div class="my-4">
+                                        <button class="btn bg-accent btn-lg" type="submit" disabled>{{ __('Save') }}</button>
+                                    </div>
+                                @else
+                                    <div class="my-4">
+                                        <button class="btn bg-accent btn-lg" type="submit">{{ __('Save') }}</button>
+                                    </div>
+                                @endif
                             </div>
                     </form>
 

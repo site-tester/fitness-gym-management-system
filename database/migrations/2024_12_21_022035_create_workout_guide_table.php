@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('force_type');
             $table->string('experience_level');
             $table->string('video_url');
+            $table->string('copyright')->nullable();
             $table->longText('description');
             $table->timestamps();
         });

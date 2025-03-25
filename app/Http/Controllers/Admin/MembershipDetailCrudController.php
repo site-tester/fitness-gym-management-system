@@ -7,6 +7,7 @@ use App\Models\MembershipDetail;
 use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -66,6 +67,26 @@ class MembershipDetailCrudController extends CrudController
             //         $q->where('name', 'member');
             //     })->get();
             // },
+            // 'options' => function ($query) {
+            //     // Filter users with the role 'member'
+            //     return $query->whereHas('roles', function ($q) {
+            //         $q->where('name', 'member');
+            //     })->get();
+            // },
+        ]);
+        CRUD::addColumn([
+            'name' => 'age',
+            'label' => 'Age',
+            'value' => function ($entry) {
+                return $entry->age . ' yrs old';
+            }
+        ]);
+        CRUD::addColumn([
+            'name' => 'bmi',
+            'label' => 'BMI',
+            'value' => function ($entry) {
+                return $entry->bmi ? number_format($entry->bmi, 2) : '-';
+            }
         ]);
         CRUD::addColumn([
             'name' => 'phone',
@@ -140,7 +161,7 @@ class MembershipDetailCrudController extends CrudController
         CRUD::addField([
             'name' => 'phone',
             'label' => 'Phone',
-            'type' => 'text',
+            'type' => 'number',
             'hint' => 'eg. 09123456789',
         ]);
         CRUD::addField([
@@ -155,20 +176,42 @@ class MembershipDetailCrudController extends CrudController
         ]);
         CRUD::addField([
             'name' => 'height',
-            'label' => 'Height',
+            'label' => 'Height (cm)',
+            'type' => 'number',
+            'attributes' => [
+                'min' => 0, // Set the minimum value to 0
+            ],
         ]);
         CRUD::addField([
             'name' => 'weight',
-            'label' => 'Weight',
+            'label' => 'Weight (kg)',
+            'type' => 'number',
+            'attributes' => [
+                'min' => 0, // Set the minimum value to 0
+            ],
         ]);
         CRUD::addField([
             'name' => 'civil_status',
             'label' => 'Civil Status',
+            'type' => 'select_from_array',
+            'options' => [
+                'Single' => 'Single',
+                'Married' => 'Married',
+                'Widowed' => 'Widowed',
+                'Divorced' => 'Divorced',
+            ],
+            'allows_multiple' => false,
         ]);
         CRUD::addField([
             'name' => 'gender',
             'label' => 'Gender',
-            'type' => 'text',
+            'type' => 'select_from_array',
+            'options' => [
+                'Male' => 'Male',
+                'Female' => 'Female',
+                'Others' => 'Others',
+            ],
+            'allows_multiple' => false,
         ]);
         CRUD::addField([
             'name' => 'membership_type',
@@ -289,8 +332,10 @@ class MembershipDetailCrudController extends CrudController
             'phone' => $request['phone'],
             'address' => $request['address'],
             'birthdate' => $request['birthdate'],
+            'age' => Carbon::parse($request['birthdate'])->age,
             'height' => $request['height'],
             'weight' => $request['weight'],
+            'bmi' => $request['height'] && $request['weight'] ? $request['weight'] / (($request['height'] / 100) ** 2) : null,
             'civil_status' => $request['civil_status'],
             'gender' => $request['gender'],
             'membership_type' => $request['membership_type'],
@@ -378,11 +423,11 @@ class MembershipDetailCrudController extends CrudController
         ]);
         CRUD::addField([
             'name' => 'height',
-            'label' => 'Height',
+            'label' => 'Height (cm)',
         ]);
         CRUD::addField([
             'name' => 'weight',
-            'label' => 'Weight',
+            'label' => 'Weight (kg)',
         ]);
         CRUD::addField([
             'name' => 'civil_status',
@@ -503,8 +548,10 @@ class MembershipDetailCrudController extends CrudController
             'phone' => $request['phone'],
             'address' => $request['address'],
             'birthdate' => $request['birthdate'],
+            'age' => Carbon::parse($request['birthdate'])->age,
             'height' => $request['height'],
             'weight' => $request['weight'],
+            'bmi' => $request['height'] && $request['weight'] ? $request['weight'] / (($request['height'] / 100) ** 2) : null,
             'civil_status' => $request['civil_status'],
             'gender' => $request['gender'],
             'membership_type' => $request['membership_type'],

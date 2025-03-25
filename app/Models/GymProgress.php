@@ -21,7 +21,16 @@ class GymProgress extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    // protected $fillable = [];
+    protected $fillable = [
+        'user_id',
+        'workout_name',
+        'progress_date',
+        'weight',
+        'height',
+        'bmi',
+        'reps',
+        'notes',
+    ];
     // protected $hidden = [];
 
     /*

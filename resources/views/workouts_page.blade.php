@@ -21,7 +21,8 @@
             width: 100%;
             height: 100%;
         }
-        .workOut li{
+
+        .workOut li {
             list-style: auto !important;
         }
     </style>
@@ -49,6 +50,13 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
+
+                    @if ($workout->copyright)
+                        <!-- Copyright Watermark -->
+                        <div class="text-center" style="font-size: 14px; color: grey; opacity: 0.7;">
+                            Video - Copyright © {{ $workout->copyright }}
+                        </div>
+                    @endif
                 </div>
 
                 <div class="px-5">

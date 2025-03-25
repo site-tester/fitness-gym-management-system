@@ -27,8 +27,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'rfid_number',
         'name',
         'username',
+        'google_id',
+        'facebook_id',
         'email',
         'password',
+        'email_verified_at',
     ];
 
     /**
