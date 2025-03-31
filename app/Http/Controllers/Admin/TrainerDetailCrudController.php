@@ -368,7 +368,13 @@ class TrainerDetailCrudController extends CrudController
         CRUD::addField([
             'name' => 'gender',
             'label' => 'Gender',
-            'type' => 'text',
+            'type' => 'select_from_array',
+            'options' => [
+                'Male' => 'Male',
+                'Female' => 'Female',
+                'Others' => 'Others',
+            ],
+            'allows_multiple' => false,
         ]);
         CRUD::addField([
             'name' => 'contact_number',

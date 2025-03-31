@@ -74,7 +74,7 @@
             height: 100%;
             justify-content: center;
             position: relative;
-            width: 100%;
+            /* width: 100%; */
         }
 
         .gsi-material-button .gsi-material-button-contents {
@@ -134,7 +134,7 @@
     <div class="container login  mt-5">
         <div class="row justify-content-center m-auto">
             <div class="col col-md-8">
-                <div class="card mb-5" style="min-height: 400px">
+                <div class="card mb-5" >
                     {{-- <div class="card-header">{{ __('Login') }}</div> --}}
                     <div class="card-body row ">
                         <div class="d-none d-md-block col-md-6 text-center align-content-center">
@@ -152,44 +152,44 @@
 
                         </div>
                         <div class="col col-md-6 py-5 ps-3 pe-3 pe-md-5">
-                            <div class="h3 mb-5">Login to your account</div>
+                            <div class="h3 mb-3 text-center">Login to Your Account</div>
                             <form class="" method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="row mb-3 mx-0 mx-md-0 d-flex justify-content-center">
-                                    <a class="gsi-material-button mb-3 me-2 me-md-0" href="{{ route('google.login') }}">
-                                        <div class="gsi-material-button-state"></div>
-                                        <div class="gsi-material-button-content-wrapper">
-                                            <div class="gsi-material-button-icon text-primary">
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;">
-                                                    <path fill="#EA4335"
-                                                        d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z">
-                                                    </path>
-                                                    <path fill="#4285F4"
-                                                        d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z">
-                                                    </path>
-                                                    <path fill="#FBBC05"
-                                                        d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z">
-                                                    </path>
-                                                    <path fill="#34A853"
-                                                        d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z">
-                                                    </path>
-                                                    <path fill="none" d="M0 0h48v48H0z"></path>
-                                                </svg>
-                                            </div>
-                                            <span class="gsi-material-button-contents">Login with Google</span>
-                                            <span style="display: none;">Login with Google</span>
-                                        </div>
-                                    </a>
+                                    <div class="h5">
+                                        <p class="text-center">Login using social networks</p>
+                                    </div>
+                                    <div class="col-6 d-flex align-content-center justify-content-end" >
+                                        <a class="text-primary rounded-circle" href="{{ route('google.login') }}">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
+                                                width="30" height="30" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                style="display: block;">
+                                                <path fill="#EA4335"
+                                                    d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z">
+                                                </path>
+                                                <path fill="#4285F4"
+                                                    d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z">
+                                                </path>
+                                                <path fill="#FBBC05"
+                                                    d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z">
+                                                </path>
+                                                <path fill="#34A853"
+                                                    d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z">
+                                                </path>
+                                                <path fill="none" d="M0 0h48v48H0z"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
 
-                                    <a class="gsi-material-button" href="{{ route('facebook.login') }}">
-                                        <div class="gsi-material-button-state"></div>
-                                        <div class="gsi-material-button-content-wrapper">
-                                            <i class="bi bi-facebook text-primary me-2 fs-4 " aria-hidden="true"></i>
-                                            <span class="gsi-material-button-contents">Login with Facebook</span>
-                                            <span style="display: none;">Login with Facebook</span>
-                                        </div>
-                                    </a>
+                                    <div class="col-6 d-flex align-content-center justify-content-start">
+                                        <a class="text-primary rounded-circle" href="{{ route('facebook.login') }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
 
                                 <div class="row mb-2">
@@ -263,8 +263,6 @@
                                 </div>
                             </form>
                         </div>
-
-
                     </div>
                 </div>
             </div>
