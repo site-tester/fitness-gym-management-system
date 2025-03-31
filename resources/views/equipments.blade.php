@@ -17,7 +17,7 @@
 @endsection
 
 @section('content')
-    <div class="container  pt-3">
+    <div class="container-fluid  pt-3">
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show mx-5 mb-0" role="alert">
                 {{ session('success') }}
@@ -39,12 +39,12 @@
             </div>
         </div>
 
-        <div class="container mt-5">
+        <div class="container-fluid mt-5">
             {{-- <h2 class="text-center mb-5">Gym Equipment</h2> --}}
             <div class="row m-auto justify-content-center">
                 @foreach ($equipments as $equipment)
-                   
-                    <div class="card equipCard col-12 col-md-3 p-1 mb-3 mx-2 d-flex flex-column h-100" data-id="{{$equipment->id}}">  
+
+                    <div class="card equipCard col-12 col-md-2 p-1 mb-3 mx-2 d-flex flex-column h-100" data-id="{{$equipment->id}}">
 
                     <!-- Image Container with Fixed Height -->
                         <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
