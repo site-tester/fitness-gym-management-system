@@ -182,13 +182,56 @@
                     <div class="card-body px-md-5 mx-md-1">
                         <div class="text-center">
                             <img class="img-fluid" src="{{ asset('/resources/img/Logo.jpg') }}" alt="" width="200">
-                            <p class="mb-3 h4">Register</p>
+                            <div class="h3 mb-3 text-center">Register an Account</div>
                         </div>
-
                         <div class="row">
-
                             <form method="POST" action="{{ route('register') }}" class="col-12 g-3">
                                 @csrf
+                                <div class="row mb-3 mx-0 mx-md-0 d-flex justify-content-center">
+                                    <div class="h5">
+                                        <p class="text-center">Login using social networks</p>
+                                    </div>
+                                    <div class="col-6 d-flex align-content-center justify-content-end">
+                                        <a class="text-primary rounded-circle" href="{{ route('google.login') }}">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
+                                                width="30" height="30" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                style="display: block;">
+                                                <path fill="#EA4335"
+                                                    d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z">
+                                                </path>
+                                                <path fill="#4285F4"
+                                                    d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z">
+                                                </path>
+                                                <path fill="#FBBC05"
+                                                    d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z">
+                                                </path>
+                                                <path fill="#34A853"
+                                                    d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z">
+                                                </path>
+                                                <path fill="none" d="M0 0h48v48H0z"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-6 d-flex align-content-center justify-content-start">
+                                        <a class="text-primary rounded-circle" href="{{ route('facebook.login') }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                                fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="col-12 d-flex justify-content-center align-items-center mb-3 strikethrough-container text-center">
+                                    <p class="text-center">OR</p>
+                                </div>
+                                {{-- <div
+                                    class="col-12 d-flex justify-content-center align-items-center my-5 strikethrough-container text-center">
+                                    <h6>or</h6>
+                                </div> --}}
 
                                 <div class="row mb-3">
                                     <label for="name" class="col-md-4 col-form-label ">{{ __('Full Name') }}</label>
@@ -268,9 +311,9 @@
                                     <label for="password-confirm"
                                         class="col-md-4 col-form-label">{{ __('Confirm Password') }}</label>
                                     <div class="col input-group">
-                                        <input id="password-confirm" type="password" class="form-control password_confirm"
-                                            placeholder="Confirm Password" name="password_confirmation" required
-                                            autocomplete="new-password">
+                                        <input id="password-confirm" type="password"
+                                            class="form-control password_confirm" placeholder="Confirm Password"
+                                            name="password_confirmation" required autocomplete="new-password">
                                         <span class="input-group-text btn border-secondary-subtle">
                                             <i id="togglePasswordConfirmation" class="bi bi-eye"></i>
                                         </span>
@@ -297,7 +340,7 @@
                                 </div>
                             </form>
 
-                            <div
+                            {{-- <div
                                 class="col-12 d-flex justify-content-center align-items-center my-5 strikethrough-container text-center">
                                 <h6>or</h6>
                             </div>
@@ -309,8 +352,9 @@
                                         <div class="gsi-material-button-state"></div>
                                         <div class="gsi-material-button-content-wrapper">
                                             <div class="gsi-material-button-icon text-primary">
-                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;">
+                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 48 48" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    style="display: block;">
                                                     <path fill="#EA4335"
                                                         d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z">
                                                     </path>
@@ -340,7 +384,7 @@
                                         </div>
                                     </a>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
 
@@ -458,7 +502,74 @@
         //         $(this).toggleClass("bi-eye bi-eye-slash");
         //     });
         // });
+        // $(document).ready(function() {
+        //     function validatePassword() {
+        //         const password = $("#password").val();
+
+        //         // Password strength regex
+        //         const hasLowercase = /[a-z]/.test(password);
+        //         const hasUppercase = /[A-Z]/.test(password);
+        //         const hasNumber = /\d/.test(password);
+        //         const hasSpecialChar = /[@$!%*?&]/.test(password);
+        //         const hasMinLength = password.length >= 8;
+
+        //         updateValidationIcon(".password-requirements .char-length", hasMinLength);
+        //         updateValidationIcon(".password-requirements .uppercase", hasUppercase);
+        //         updateValidationIcon(".password-requirements .lowercase", hasLowercase);
+        //         updateValidationIcon(".password-requirements .number", hasNumber);
+        //         updateValidationIcon(".password-requirements .special-char", hasSpecialChar);
+
+        //         return hasLowercase && hasUppercase && hasNumber && hasSpecialChar && hasMinLength;
+        //     }
+
+        //     function validatePasswordMatch() {
+        //         const password = $("#password").val();
+        //         const confirmPassword = $("#password-confirm").val();
+
+        //         const isMatch = password === confirmPassword && password !== "";
+        //         updateValidationIcon(".password-confirm-check", isMatch);
+        //         return isMatch;
+        //     }
+
+        //     function updateValidationIcon(selector, isValid) {
+        //         const icon = $(selector).find("i");
+        //         if (isValid) {
+        //             icon.removeClass("bi-x-square-fill text-danger").addClass("bi-check-square-fill text-success");
+        //         } else {
+        //             icon.removeClass("bi-check-square-fill text-success").addClass("bi-x-square-fill text-danger");
+        //         }
+        //     }
+
+        //     // Event listeners for real-time validation
+        //     $("#password").on("input", function() {
+        //         validatePassword();
+        //         validatePasswordMatch();
+        //     });
+
+        //     $("#password-confirm").on("input", function() {
+        //         validatePasswordMatch();
+        //     });
+
+        //     // Toggle Password Visibility
+        //     $("#togglePassword").click(function() {
+        //         const passwordInput = $("#password");
+        //         const type = passwordInput.attr("type") === "password" ? "text" : "password";
+        //         passwordInput.attr("type", type);
+        //         $(this).toggleClass("bi-eye bi-eye-slash");
+        //     });
+
+        //     $("#togglePasswordConfirmation").click(function() {
+        //         const confirmPasswordInput = $("#password-confirm");
+        //         const type = confirmPasswordInput.attr("type") === "password" ? "text" : "password";
+        //         confirmPasswordInput.attr("type", type);
+        //         $(this).toggleClass("bi-eye bi-eye-slash");
+        //     });
+        // });
+
         $(document).ready(function() {
+            // Initially hide the password requirements and confirmation check
+            $(".password-requirements, .password-confirm-check").hide();
+
             function validatePassword() {
                 const password = $("#password").val();
 
@@ -496,13 +607,24 @@
                 }
             }
 
-            // Event listeners for real-time validation
+            // Show password requirements when typing in the password field
             $("#password").on("input", function() {
+                if ($(this).val().length > 0) {
+                    $(".password-requirements").fadeIn();
+                } else {
+                    $(".password-requirements").fadeOut();
+                }
                 validatePassword();
                 validatePasswordMatch();
             });
 
+            // Show password confirmation check only when typing in confirm password field
             $("#password-confirm").on("input", function() {
+                if ($(this).val().length > 0) {
+                    $(".password-confirm-check").fadeIn();
+                } else {
+                    $(".password-confirm-check").fadeOut();
+                }
                 validatePasswordMatch();
             });
 
