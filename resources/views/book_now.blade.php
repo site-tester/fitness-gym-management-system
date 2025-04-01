@@ -331,7 +331,7 @@
                                                     <select class="form-select" name="service_name" id="service_name">
                                                         <option selected disabled>-- Select Service --</option>
                                                         <option value="Regular">Regular</option>
-                                                        <option value="Promo">Promo/Student</option>
+                                                        <option value="Student">Student</option>
                                                     </select>
                                                 </div>
 
@@ -530,7 +530,7 @@
                     "Monthly": 1500,
                     "Day": 150
                 },
-                "Promo": {
+                "Student": {
                     "Monthly": 1000,
                     "Day": 100
                 }

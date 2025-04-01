@@ -219,7 +219,7 @@ class MembershipDetailCrudController extends CrudController
             'type' => 'select_from_array',
             'options' => [
                 'regular' => 'Regular',
-                'promo' => 'Promo',
+                'student' => 'Student',
             ],
             'allows_multiple' => false,
         ]);
@@ -444,7 +444,7 @@ class MembershipDetailCrudController extends CrudController
             'type' => 'select_from_array',
             'options' => [
                 'regular' => 'Regular',
-                'promo' => 'Promo',
+                'student' => 'Student',
             ],
             'allows_multiple' => false,
             'value' => $this->crud->getCurrentEntry()->membership_type,
@@ -626,7 +626,7 @@ class MembershipDetailCrudController extends CrudController
             'type' => 'select_from_array',
             'options' => [
                 'regular' => 'Regular',
-                'promo' => 'Promo',
+                'student' => 'Student',
             ],
             'allows_multiple' => false,
         ]);
