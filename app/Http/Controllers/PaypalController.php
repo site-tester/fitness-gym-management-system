@@ -24,16 +24,17 @@ class PaypalController extends Controller
         \Log::info($request->all());
         try {
 
+            $reservation = new Reservation();
+
             $response = $this->gateway->purchase(array(
                 'amount' => $request->service_price,
                 'currency' => env('PAYPAL_CURRENCY', 'PHP'),
-                'returnUrl' => route('paypal.success', ['reservation_id' => $request->reservation_id]),
+                'returnUrl' => route('paypal.success', ['reservation_id' => $reservation->id]),
                 'cancelUrl' => route('paypal.error')
             ))->send();
 
             if ($response->isRedirect()) {
 
-                $reservation = new Reservation();
                 $reservation->user_id = Auth::id();
                 $reservation->service_duration = $request->input('service_duration');
                 $reservation->service_name = $request->input('service_name');
