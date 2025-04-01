@@ -165,6 +165,8 @@ class GymProgressCrudController extends CrudController
      */
     protected function setupUpdateOperation()
     {
+
+
         $this->setupCreateOperation();
 
     }
@@ -223,6 +225,55 @@ class GymProgressCrudController extends CrudController
         $gymProgress->save();
 
         \Alert::success('Success', 'Client progress added successfully');
+        return redirect()->route('gym-progress.index');
+    }
+
+    protected function update()
+    {
+        $request = $this->crud->getRequest();
+
+        $rules = [
+            'user_id' => 'required|exists:users,id',
+            'workout_name' => 'required',
+            'progress_date' => 'required|date',
+            'weight' => 'required|numeric',
+            'height' => 'required|numeric',
+            'reps' => 'required|numeric',
+            'notes' => 'nullable',
+        ];
+
+        $messages = [
+            // Custom validation messages
+        ];
+
+        $request->validate($rules, $messages);
+
+        $user = MembershipDetail::where('client_id', $request->user_id)->first();
+        if (!$user) {
+            \Alert::error('Error', 'Client not found');
+            return redirect()->back();
+        }
+        $bmi = $request['weight'] / (($request['height'] / 100) ** 2);
+
+        $user->weight = $request->weight;
+        $user->height = $request->height;
+        $user->bmi = $bmi;
+        $user->save();
+
+        // Update the GymProgress entry
+        $gymProgress = GymProgress::find($request->id);
+        if ($gymProgress) {
+            $gymProgress->workout_name = $request->workout_name;
+            $gymProgress->progress_date = $request->progress_date;
+            $gymProgress->weight = $request->weight;
+            $gymProgress->height = $request->height;
+            $gymProgress->reps = $request->reps;
+            $gymProgress->bmi = $bmi;
+            $gymProgress->notes = $request->notes;
+            $gymProgress->save();
+        }
+
+        \Alert::success('Success', 'Client progress updated successfully');
         return redirect()->route('gym-progress.index');
     }
 }
