@@ -93,7 +93,7 @@
             background-color: #ddd;
         }
 
-        .dropdown-menu{
+        .dropdown-menu {
             left: -90px !important;
         }
 
@@ -136,6 +136,23 @@
         @endif
 
         <main class="pb-4">
+            @if (session('workout_reminder'))
+                <div id="workout-banner"
+                    style="background-color: #fce883; padding: 10px; text-align: center; position: sticky; top: 0; z-index: 1000;">
+                    It's time to workout! Don't miss your workout today.
+                    {{-- <script>
+                        //Clear the session variable after the banner is shown
+                        sessionStorage.setItem('workoutBannerShown', 'true');
+                        window.addEventListener('load', function() {
+                            sessionStorage.removeItem('workoutBannerShown');
+                        });
+                    </script> --}}
+                </div>
+                {{-- @php
+                    session()->forget('workout_reminder');
+                @endphp --}}
+            @endif
+
             @yield('content')
         </main>
 
@@ -182,20 +199,20 @@
         }
         --}}
 
-        <script>
+    <script>
         $(document).ready(function() {
             $('#contactForm').submit(function(e) {
                 e.preventDefault();
 
                 // Show SweetAlert loading spinner
-            Swal.fire({
-                title: 'Sending...',
-                text: 'Please wait while we process your request.',
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading(); // Show spinner
-                }
-            })
+                Swal.fire({
+                    title: 'Sending...',
+                    text: 'Please wait while we process your request.',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading(); // Show spinner
+                    }
+                })
 
                 $.ajax({
                     url: "{{ route('send.contact.us') }}", // Ensure this route is correct
@@ -209,7 +226,8 @@
                             confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK'
                         }).then(() => {
-                            location.reload(); // Reload the page after closing the alert
+                            location
+                        .reload(); // Reload the page after closing the alert
                         });
                     },
                     error: function(xhr) {
@@ -222,7 +240,7 @@
                 });
             });
         });
-        </script>
+    </script>
     @yield('scripts')
 
 

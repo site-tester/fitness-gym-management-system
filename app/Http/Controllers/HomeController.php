@@ -287,4 +287,32 @@ class HomeController extends Controller
     //     return view('workouts_page', compact('workout'));
     // }
 
+    public function checkWorkoutReminder($userId) {
+        $userId = MembershipDetail::where('client_id', $userId)->first();
+        $today = now()->toDateString();
+        $attendance = MemberVisit::where('client_rfid_id', $userId->rfid_number)
+            ->whereDate('time_in', $today)
+            ->exists();
+
+        if (!$attendance) {
+            // Trigger banner display and email sending
+            $this->displayWorkoutBanner($userId);
+            $this->sendWorkoutEmail($userId->client_id);
+        }
+    }
+
+    public function displayWorkoutBanner($userId) {
+        // Logic to store a session variable or database flag to trigger banner display on the frontend
+        session(['workout_reminder' => true]); // Using session for simplicity
+    }
+
+    public function sendWorkoutEmail($userId) {
+        $user = User::find($userId);
+        if ($user) {
+            Mail::send('emails.workout_reminder', ['user' => $user], function ($message) use ($user) {
+                $message->to($user->email)->subject('It\'s Time to Workout!');
+            });
+        }
+    }
+
 }
