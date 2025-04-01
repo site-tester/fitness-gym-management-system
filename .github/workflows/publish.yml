@@ -86,6 +86,9 @@ jobs:
             FACEBOOK_CLIENT_ID=2939909312840970
             FACEBOOK_CLIENT_SECRET=3d2f7e9dbf50944edeaf6e3f30ef6f2d
             FACEBOOK_REDIRECT_URI=https://ajdiafitnessgym.com/auth/facebook/callback
+            PAYPAL_CLIENT_ID=ATgHbO2Lm3y3rUhRh3QVxnDZ1lkQ2M6khxD_SQV6-LR9xjBQ2PD6ZOItRFOKa795AGEdqer3AAegz3gB
+            PAYPAL_CLIENT_SECRET=EAWyzBJjE_bs0NyPZeofMyMAm6pGj7CfiKlrAveC2AhByUy_LiTh9FlUa8PAhfznwMg33Ljif_WbpLdr
+            PAYPAL_CURRENCY=PHP
             EOT
 
             # ✅ Install dependencies & run migrations & symlink storage
