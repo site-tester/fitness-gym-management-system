@@ -30,20 +30,12 @@
         /* /* FORMS */
 
         #qbox-container {
-            /*background: url(../img/corona.png);*/
-            /*background-repeat: repeat;*/
             position: relative;
-            /* padding: 62px; */
-            /*min-height: 87%;*/
-            /*box-shadow: 10px 8px 21px 0px rgba(204, 204, 204, 0.75);*/
-            /*-webkit-box-shadow: 10px 8px 21px 0px rgba(204, 204, 204, 0.75);*/
-            /*-moz-box-shadow: 10px 8px 21px 0px rgba(204, 204, 204, 0.75);*/
+            height: 90%;
         }
 
         #steps-container {
             margin: auto;
-            /* display: flex; */
-            vertical-align: middle;
             align-items: center;
         }
 
@@ -203,7 +195,23 @@
         }
 
         #q-box__buttons {
+            position: absolute;
+            /* Fix the buttons to the bottom */
+            bottom: 0;
+            /* Place them at the bottom */
+            left: 0;
+            /* Align to the left */
+            width: 100%;
+            /* Make it span the width of the container */
             text-align: center;
+            /* Add some padding for spacing */
+            /* add a white background to avoid transparent issues */
+            display: flex;
+            /* flex for the buttons */
+            justify-content: center;
+            /* center the buttons */
+            gap: 10px;
+            /* add a gap between the buttons */
         }
 
         input[type="text"],
@@ -276,13 +284,13 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid pt-1">
-        <div class="row shadow mx-auto w-75 p-0  border border-danger">
-            <div class="col-3 px-0 overflow-hidden d-sm-none d-md-block">
+    <div class="container-fluid pt-1" style=" min-height: 75vh;">
+        <div class="row shadow mx-auto w-75 p-0  border border-danger" style="min-height: 713px;">
+            <div class="col-3 px-0 overflow-hidden d-sm-none d-md-block" style="min-height: 713px;">
                 <img src="{{ asset('/resources/img/Logo.jpg') }}" alt=""
                     style="width:100% ; height: 100%; object-fit: contain;">
             </div>
-            <div class="col-12 col-md-9 px-0 border-start border-danger border-2">
+            <div class="col-12 col-md-9 px-0 border-start border-danger border-2" style="min-height: 713px;">
                 <div class="rounded-0 h-100">
                     <div class="progress">
                         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50"
@@ -386,32 +394,35 @@
                                         <div class="q-box__question">
                                             <div class="row mb-3">
                                                 <div class="col">
-                                                <label for="FormName" class="form-label">Name <span
-                                                        class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="FormName" name="name"
-                                                    placeholder="{{ $profile->name }}" value="{{ $profile->name ?? '' }}">
-                                                <input type="hidden" name="hidden_name" value="{{ $profile->name }}">
+                                                    <label for="FormName" class="form-label">Name <span
+                                                            class="text-danger">*</span></label>
+                                                    <input class="form-control" type="text" id="FormName" name="name"
+                                                        placeholder="{{ $profile->name }}"
+                                                        value="{{ $profile->name ?? '' }}">
+                                                    <input type="hidden" name="hidden_name" value="{{ $profile->name }}">
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col">
-                                                <label for="FormEmail" class="form-label">Email <span
-                                                        class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="FormEmail" name="email"
-                                                    placeholder="{{ $profile->email }}"
-                                                    value="{{ $profile->email ?? '' }}">
-                                                    <input type="hidden" name="hidden_email" value="{{ $profile->email }}">
+                                                    <label for="FormEmail" class="form-label">Email <span
+                                                            class="text-danger">*</span></label>
+                                                    <input class="form-control" type="text" id="FormEmail"
+                                                        name="email" placeholder="{{ $profile->email }}"
+                                                        value="{{ $profile->email ?? '' }}">
+                                                    <input type="hidden" name="hidden_email"
+                                                        value="{{ $profile->email }}">
                                                 </div>
                                                 <div class="col">
-                                                <label for="contact_number" class="form-label">Contact Number <span
-                                                        class="text-danger">*</span></label>
-                                                <input class="form-control" type="text" id="phone" name="phone"
-                                                    placeholder="Enter Contact Number" aria-describedby="helpId">
-                                                <small id="helpId" class="form-text text-muted">eg.
-                                                    09123456789</small>
-                                                <input type="hidden" name="hidden_phone"
-                                                    value="{{ $profile->phone ?? null }}">
-                                            </div>
+                                                    <label for="contact_number" class="form-label">Contact Number <span
+                                                            class="text-danger">*</span></label>
+                                                    <input class="form-control" type="text" id="phone"
+                                                        name="phone" placeholder="Enter Contact Number"
+                                                        aria-describedby="helpId">
+                                                    <small id="helpId" class="form-text text-muted">eg.
+                                                        09123456789</small>
+                                                    <input type="hidden" name="hidden_phone"
+                                                        value="{{ $profile->phone ?? null }}">
+                                                </div>
                                             </div>
 
                                         </div>
@@ -429,7 +440,8 @@
                                                 <div class="d-flex justify-content-between">
                                                     <span><strong id="summaryServName">Service Name</strong></span>
                                                     <span id="summaryServPrice">₱ ###</span>
-                                                    <input id="ServPrice" type="hidden" name="service_price" value="">
+                                                    <input id="ServPrice" type="hidden" name="service_price"
+                                                        value="">
                                                 </div>
                                                 {{-- <div class="d-flex justify-content-between">
                                                     <span>Sub-total</span>
@@ -497,9 +509,7 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -737,9 +747,11 @@
                         success: function(response) {
                             if (response.redirect_url) {
                                 localStorage.setItem('reservation_id', response.reservation_id);
-                                window.location.href = response.redirect_url; // Redirect to PayPal
+                                window.location.href = response
+                                .redirect_url; // Redirect to PayPal
                             } else {
-                                alert('PayPal Success, but no redirect URL provided. Check server response.');
+                                alert(
+                                    'PayPal Success, but no redirect URL provided. Check server response.');
                             }
                         },
                         error: function(xhr, status, error) {
