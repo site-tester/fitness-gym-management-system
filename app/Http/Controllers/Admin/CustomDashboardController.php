@@ -20,7 +20,10 @@ class CustomDashboardController extends AdminController
     {
         parent::dashboard();
 
-        $memberAttendance = MemberVisit::with('user')->orderBy('updated_at')->get();
+        $memberAttendance = MemberVisit::with('user')
+            ->where('timelog_date', now()->toDateString())
+            ->orderBy('updated_at')
+            ->get();
 
         $clientCount = User::whereHas('roles', function ($query) {
             $query->where('name', 'member');
