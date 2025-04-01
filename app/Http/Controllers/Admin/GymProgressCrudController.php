@@ -72,16 +72,16 @@ class GymProgressCrudController extends CrudController
             'type' => 'number',
         ]);
         CRUD::addColumn([
+            'name' => 'reps',
+            'label' => 'Reps',
+            'type' => 'number',
+        ]);
+        CRUD::addColumn([
             'name' => 'bmi',
             'label' => 'BMI',
             'value' => function ($entry) {
                 return $entry->bmi ? number_format($entry->bmi, 2) : '-';
             }
-        ]);
-        CRUD::addColumn([
-            'name' => 'reps',
-            'label' => 'Reps',
-            'type' => 'number',
         ]);
         CRUD::addColumn([
             'name' => 'notes',
