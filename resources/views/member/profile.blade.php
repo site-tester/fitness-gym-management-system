@@ -346,7 +346,7 @@
         }
 
         function sendSubscriptionToServer(subscription, isNewSubscription = true) {
-            fetch(isNewSubscription ? '/notification-subscribe' : '/unsubscribe', {
+            fetch(isNewSubscription ? '/notification-subscribe' : '/notification-unsubscribe', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -390,7 +390,7 @@
                                         // Subscribe
                                         registration.pushManager.subscribe({
                                                 userVisibleOnly: true,
-                                                applicationServerKey: 'YOUR_PUBLIC_KEY' // Replace with your key
+                                                applicationServerKey: 'BHobm4neAHKzOXazDwe8YKOB4TdSijuCLmj6R3sFXLXH7daMmXXW39S-GCbS7MxydAWxSvyz40PXKhVktTtCZNA' // Replace with your key
                                             })
                                             .then(newSubscription => {
                                                 console.log('Subscribed:', newSubscription);

@@ -344,6 +344,39 @@ class HomeController extends Controller
         }
     }
 
+    public function unsubscribe(Request $request)
+    {
+        Log::info('Unsubscription request received:', $request->all());
+
+        try {
+            $user = Auth::user();
+            if (!$user) {
+                Log::warning('Unauthorized attempt to unsubscribe.');
+                return response()->json(['success' => false, 'message' => 'User not authenticated'], 401);
+            }
+
+            $endpoint = $request->input('endpoint');
+            if (!$endpoint) {
+                Log::error('Endpoint missing in unsubscription request.');
+                return response()->json(['success' => false, 'message' => 'Endpoint is required'], 400);
+            }
+
+            $user->deletePushSubscription($endpoint);
+
+            Log::info("Subscription deleted for user: {$user->id}, endpoint: {$endpoint}");
+            return response()->json(['success' => true, 'message' => 'Unsubscription successful']);
+        } catch (\Exception $exception) {
+            Log::error('Error deleting subscription: ' . $exception->getMessage(), [
+                'exception' => $exception,
+                'request_data' => $request->all(),
+            ]);
+            return response()->json(
+                ['success' => false, 'message' => 'Failed to unsubscribe: ' . $exception->getMessage()],
+                500
+            );
+        }
+    }
+
     public function testNotification()
     {
         $user = Auth::user();
