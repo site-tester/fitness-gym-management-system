@@ -349,7 +349,7 @@
         document.getElementById("subscribeNotificationButton").addEventListener("click", function() {
             // Check if the browser supports Push Notifications
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/service-worker.js')
+                navigator.serviceWorker.register('/public/service-worker.js')
                     .then((registration) => {
                         console.log('Service Worker registered:', registration); // Add this
                         return registration.pushManager.getSubscription()
