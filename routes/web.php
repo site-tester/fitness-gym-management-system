@@ -65,7 +65,7 @@ Route::middleware(['verified'])->group(function () {
     Route::post('/update-profile', [HomeController::class, 'updateProfile'])->name('profile.update');
 
     Route::post('/notification-subscribe', [HomeController::class, 'subscribeNotif'])->name('subscribe.notification');
-    Route::get('/notification-unsubscribe', [HomeController::class, 'unsubscribeNotif'])->name('unsubscribe.notification');
+    Route::post('/notification-unsubscribe', [HomeController::class, 'unsubscribeNotif'])->name('unsubscribe.notification');
     Route::get('/notification-test', [HomeController::class, 'testNotification'])->name('notification.test');
 
 

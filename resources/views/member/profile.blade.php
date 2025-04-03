@@ -302,8 +302,12 @@
                                 <div class="my-4 text-center">
                                     <button class="btn bg-accent btn-lg w-50" type="button"
                                         id="subscribeNotificationButton">
-                                        {{ __('Enable Notification') }}
+                                        {{ __('Enable Device Notification') }}
                                     </button>
+                                    {{-- <button class="btn bg-accent btn-lg w-50" type="button"
+                                        id="disableSubscribeNotificationButton">
+                                        {{ __('Disable Notification') }}
+                                    </button> --}}
 
                                     {{-- <a class="btn bg-accent btn-lg w-50" href="{{ route('notification.test') }}"
                                         >{{ __('Test Notif') }}</a> --}}
@@ -343,7 +347,8 @@
         // document.getElementById("subscribeNotificationButton").addEventListener("click", function() {
         //     // Check if the browser supports Push Notifications
         //     if ('serviceWorker' in navigator) {
-        //         navigator.serviceWorker.register('/public/service-worker.js')
+        //         navigator.serviceWorker.register('/service-worker.js')
+        //         // navigator.serviceWorker.register('/public/service-worker.js')
         //             .then((registration) => {
         //                 console.log('Service Worker registered:', registration); // Add this
         //                 return registration.pushManager.getSubscription()
@@ -377,15 +382,164 @@
         //     }
         // });
 
+        // document.getElementById("disableSubscribeNotificationButton").addEventListener("click", function() {
+        //     // Check if the browser supports Push Notifications
+        //     if ('serviceWorker' in navigator) {
+        //         navigator.serviceWorker.register('/service-worker.js')
+        //         // navigator.serviceWorker.register('/public/service-worker.js')
+        //             .then((registration) => {
+        //                 console.log('Service Worker registered:', registration); // Add this
+        //                 return registration.pushManager.getSubscription()
+        //                     .then((subscription) => {
+        //                         if (subscription) {
+        //                             return subscription;
+        //                         }
+        //                         return registration.pushManager.subscribe({
+        //                             userVisibleOnly: true,
+        //                             applicationServerKey: 'BHobm4neAHKzOXazDwe8YKOB4TdSijuCLmj6R3sFXLXH7daMmXXW39S-GCbS7MxydAWxSvyz40PXKhVktTtCZNA'
+        //                         });
+        //                     });
+        //             })
+        //             .then((subscription) => {
+        //                 console.log('Push unsubscription:', subscription); // And this
+        //                 fetch('/notification-unsubscribe', {
+        //                     method: 'POST',
+        //                     headers: {
+        //                         'Content-Type': 'application/json',
+        //                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+        //                             .getAttribute('content'),
+        //                     },
+        //                     body: JSON.stringify(subscription),
+        //                 });
+        //             })
+        //             .catch((error) => {
+        //                 console.error('Service Worker registration failed:', error); // And this
+        //             });
+        //     } else {
+        //         alert('Push notifications are not supported by your browser.');
+        //     }
+        // });
+
+        //
+        //
+
+        // const subscribeButton = document.getElementById("subscribeNotificationButton");
+        // const applicationServerKey = 'BHobm4neAHKzOXazDwe8YKOB4TdSijuCLmj6R3sFXLXH7daMmXXW39S-GCbS7MxydAWxSvyz40PXKhVktTtCZNA';
+
+        // function updateButtonState(isSubscribed) {
+        //     subscribeButton.textContent = isSubscribed ? "{{ __('Disable Notification') }}" :
+        //         "{{ __('Enable Notification') }}";
+        // }
+
+        // function sendSubscriptionToServer(subscription, isNewSubscription = true) {
+        //     fetch(isNewSubscription ? '/notification-subscribe' : '/notification-unsubscribe', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        //             },
+        //             body: JSON.stringify(subscription),
+        //         })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             console.log('Server response:', data);
+        //             // Handle response from server (e.g., show message to user)
+        //             updateButtonState(!isNewSubscription); // Toggle button state after server interaction
+        //         })
+        //         .catch(error => {
+        //             console.error('Error sending subscription to server:', error);
+        //         });
+        // }
+
+        // function unsubscribeDevice(subscription) {
+        //     subscription.unsubscribe()
+        //         .then(successful => {
+        //             console.log('User unsubscribed:', successful);
+        //             sendSubscriptionToServer(subscription, false); // Send unsubscription to server
+        //         })
+        //         .catch(error => {
+        //             console.error('Error unsubscribing:', error);
+        //         });
+        // }
+
+        // function urlBase64ToUint8Array(base64String) {
+        //     const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        //     const base64 = (base64String + padding)
+        //         .replace(/-/g, '+')
+        //         .replace(/_/g, '/');
+
+        //     const rawData = window.atob(base64);
+        //     const outputArray = new Uint8Array(rawData.length);
+
+        //     for (let i = 0; i < rawData.length; ++i) {
+        //         outputArray[i] = rawData.charCodeAt(i);
+        //     }
+        //     return outputArray;
+        // }
+
+        // if ('serviceWorker' in navigator) {
+        //     navigator.serviceWorker.register('/service-worker.js')
+        //     // navigator.serviceWorker.register('/public/service-worker.js')
+        //         .then(registration => {
+        //             console.log('Service Worker registered:', registration);
+        //             return registration.pushManager.getSubscription();
+        //         })
+        //         .then(subscription => {
+        //             if (subscription) {
+        //                 console.log('Already subscribed:', subscription);
+        //                 updateButtonState(true);
+        //             } else {
+        //                 console.log('Not subscribed yet');
+        //                 updateButtonState(false);
+        //             }
+
+        //             subscribeButton.addEventListener("click", () => {
+        //                 navigator.serviceWorker.ready.then(registration => {
+        //                     registration.pushManager.getSubscription()
+        //                         .then(currentSubscription => {
+        //                             if (currentSubscription) {
+        //                                 unsubscribeDevice(currentSubscription);
+        //                             } else {
+        //                                 const convertedVapidKey = urlBase64ToUint8Array(
+        //                                     applicationServerKey);
+        //                                 registration.pushManager.subscribe({
+        //                                         userVisibleOnly: true,
+        //                                         applicationServerKey: convertedVapidKey, // Use the converted key
+        //                                     })
+        //                                     .then(newSubscription => {
+        //                                         console.log('Subscribed:', newSubscription);
+        //                                         sendSubscriptionToServer(newSubscription, true);
+        //                                     })
+        //                                     .catch(error => {
+        //                                         console.error('Subscribe error:', error);
+        //                                     });
+        //                             }
+        //                         });
+        //                 });
+        //             });
+        //         })
+        //         .catch(error => {
+        //             console.error('Service Worker registration failed:', error);
+        //         });
+        // } else {
+        //     alert('Push notifications are not supported by your browser.');
+        // }
+
+
+        //
+        //
+
         const subscribeButton = document.getElementById("subscribeNotificationButton");
+        const applicationServerKey =
+            'BHobm4neAHKzOXazDwe8YKOB4TdSijuCLmj6R3sFXLXH7daMmXXW39S-GCbS7MxydAWxSvyz40PXKhVktTtCZNA';
 
         function updateButtonState(isSubscribed) {
-            subscribeButton.textContent = isSubscribed ? "{{ __('Disable Notification') }}" :
-                "{{ __('Enable Notification') }}";
+            subscribeButton.textContent = isSubscribed ? "{{ __('Disable Device Notification') }}" :
+                "{{ __('Enable Device Notification') }}";
         }
 
         function sendSubscriptionToServer(subscription, isNewSubscription = true) {
-            fetch(isNewSubscription ? '/notification-subscribe' : '/unsubscribe', {
+            fetch(isNewSubscription ? '/notification-subscribe' : '/notification-unsubscribe', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -396,8 +550,9 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Server response:', data);
-                    // Handle response from server (e.g., show message to user)
-                    updateButtonState(!isNewSubscription); // Toggle button state after server interaction
+                    // Handle response from server
+                    updateButtonState(!isNewSubscription);
+                    window.location.reload(); // Refresh the page
                 })
                 .catch(error => {
                     console.error('Error sending subscription to server:', error);
@@ -408,11 +563,26 @@
             subscription.unsubscribe()
                 .then(successful => {
                     console.log('User unsubscribed:', successful);
-                    sendSubscriptionToServer(subscription, false); // Send unsubscription to server
+                    sendSubscriptionToServer(subscription, false);
                 })
                 .catch(error => {
                     console.error('Error unsubscribing:', error);
                 });
+        }
+
+        function urlBase64ToUint8Array(base64String) {
+            const padding = '='.repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding)
+                .replace(/-/g, '+')
+                .replace(/_/g, '/');
+
+            const rawData = window.atob(base64);
+            const outputArray = new Uint8Array(rawData.length);
+
+            for (let i = 0; i < rawData.length; ++i) {
+                outputArray[i] = rawData.charCodeAt(i);
+            }
+            return outputArray;
         }
 
         if ('serviceWorker' in navigator) {
@@ -437,9 +607,11 @@
                                     if (currentSubscription) {
                                         unsubscribeDevice(currentSubscription);
                                     } else {
+                                        const convertedVapidKey = urlBase64ToUint8Array(
+                                            applicationServerKey);
                                         registration.pushManager.subscribe({
                                                 userVisibleOnly: true,
-                                                applicationServerKey: 'YOUR_PUBLIC_KEY' // Replace with your key
+                                                applicationServerKey: convertedVapidKey,
                                             })
                                             .then(newSubscription => {
                                                 console.log('Subscribed:', newSubscription);

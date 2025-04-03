@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use NotificationChannels\WebPush\PushSubscription;
 use Spatie\Permission\Models\Role;
 
 class HomeController extends Controller
@@ -344,7 +345,7 @@ class HomeController extends Controller
         }
     }
 
-    public function unsubscribe(Request $request)
+    public function unsubscribeNotif(Request $request)
     {
         Log::info('Unsubscription request received:', $request->all());
 
@@ -361,10 +362,18 @@ class HomeController extends Controller
                 return response()->json(['success' => false, 'message' => 'Endpoint is required'], 400);
             }
 
-            $user->deletePushSubscription($endpoint);
+            // $user->deletePushSubscription($endpoint);
+
+            // Optionally, you can also delete the subscription from the database
+            PushSubscription::where('endpoint', $endpoint)
+                ->where('subscribable_id', $user->id)
+                ->where('subscribable_type', User::class)
+                ->delete();
+            // $user->subscriptions()->where('endpoint', $endpoint)->delete();
+
 
             Log::info("Subscription deleted for user: {$user->id}, endpoint: {$endpoint}");
-            return response()->json(['success' => true, 'message' => 'Unsubscription successful']);
+            return response()->json(['success' => true]);
         } catch (\Exception $exception) {
             Log::error('Error deleting subscription: ' . $exception->getMessage(), [
                 'exception' => $exception,
