@@ -337,43 +337,44 @@
 
 @section('scripts')
 
-<script>
-    const vapidPublicKey = @json($vapidPublicKey);
+    <script>
+        const vapidPublicKey = @json($vapidPublicKey);
 
-    document.getElementById("subscribeNotificationButton").addEventListener("click", function() {
-        // Check if the browser supports Push Notifications
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/public/service-worker.js')
-                .then((registration) => {
-                    console.log('Service Worker registered:', registration); // Add this
-                    return registration.pushManager.getSubscription()
-                        .then((subscription) => {
-                            if (subscription) {
-                                return subscription;
-                            }
-                            return registration.pushManager.subscribe({
-                                userVisibleOnly: true,
-                                applicationServerKey: 'BHobm4neAHKzOXazDwe8YKOB4TdSijuCLmj6R3sFXLXH7daMmXXW39S-GCbS7MxydAWxSvyz40PXKhVktTtCZNA'
+        document.getElementById("subscribeNotificationButton").addEventListener("click", function() {
+            // Check if the browser supports Push Notifications
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/public/service-worker.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered:', registration); // Add this
+                        return registration.pushManager.getSubscription()
+                            .then((subscription) => {
+                                if (subscription) {
+                                    return subscription;
+                                }
+                                return registration.pushManager.subscribe({
+                                    userVisibleOnly: true,
+                                    applicationServerKey: 'BHobm4neAHKzOXazDwe8YKOB4TdSijuCLmj6R3sFXLXH7daMmXXW39S-GCbS7MxydAWxSvyz40PXKhVktTtCZNA'
+                                });
                             });
+                    })
+                    .then((subscription) => {
+                        console.log('Push subscription:', subscription); // And this
+                        fetch('/notification-subscribe', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                    .getAttribute('content'),
+                            },
+                            body: JSON.stringify(subscription),
                         });
-                })
-                .then((subscription) => {
-                    console.log('Push subscription:', subscription); // And this
-                    fetch('/notification-subscribe', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                                .getAttribute('content'),
-                        },
-                        body: JSON.stringify(subscription),
+                    })
+                    .catch((error) => {
+                        console.error('Service Worker registration failed:', error); // And this
                     });
-                })
-                .catch((error) => {
-                    console.error('Service Worker registration failed:', error); // And this
-                });
-        } else {
-            alert('Push notifications are not supported by your browser.');
-        }
-    });
+            } else {
+                alert('Push notifications are not supported by your browser.');
+            }
+        });
+    </script>
 @endsection
