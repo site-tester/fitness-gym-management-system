@@ -303,14 +303,8 @@
                                     <button class="btn bg-accent btn-lg w-50" type="button"
                                         id="subscribeNotificationButton">{{ __('Enable Notification') }}</button>
 
-                                    <a class="btn bg-accent btn-lg w-50" href="{{ route('notification.test') }}"
-                                        >{{ __('Test Notif') }}</a>
-
-                                    @if (Auth::user()->is_subscribed)
-                                        <p class="text-success">You are already subscribed to notifications.</p>
-                                    @else
-                                        <p class="text-danger">You are not subscribed to notifications.</p>
-                                    @endif
+                                    {{-- <a class="btn bg-accent btn-lg w-50" href="{{ route('notification.test') }}"
+                                        >{{ __('Test Notif') }}</a> --}}
                                 </div>
                             </div>
                         </div>
@@ -344,44 +338,89 @@
 @section('scripts')
 
     <script>
-        const vapidPublicKey = @json($vapidPublicKey);
+        const subscribeButton = document.getElementById("subscribeNotificationButton");
 
-        document.getElementById("subscribeNotificationButton").addEventListener("click", function() {
-            // Check if the browser supports Push Notifications
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/public/service-worker.js')
-                    .then((registration) => {
-                        console.log('Service Worker registered:', registration); // Add this
-                        return registration.pushManager.getSubscription()
-                            .then((subscription) => {
-                                if (subscription) {
-                                    return subscription;
-                                }
-                                return registration.pushManager.subscribe({
-                                    userVisibleOnly: true,
-                                    applicationServerKey: 'BHobm4neAHKzOXazDwe8YKOB4TdSijuCLmj6R3sFXLXH7daMmXXW39S-GCbS7MxydAWxSvyz40PXKhVktTtCZNA'
+        function updateButtonState(isSubscribed) {
+            subscribeButton.textContent = isSubscribed ? "{{ __('Disable Notification') }}" :
+                "{{ __('Enable Notification') }}";
+        }
+
+        function sendSubscriptionToServer(subscription, isNewSubscription = true) {
+            fetch(isNewSubscription ? '/notification-subscribe' : '/unsubscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify(subscription),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Server response:', data);
+                    // Handle response from server (e.g., show message to user)
+                    updateButtonState(!isNewSubscription); // Toggle button state after server interaction
+                })
+                .catch(error => {
+                    console.error('Error sending subscription to server:', error);
+                });
+        }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/public/service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker registered:', registration);
+                    return registration.pushManager.getSubscription();
+                })
+                .then(subscription => {
+                    if (subscription) {
+                        console.log('Already subscribed:', subscription);
+                        updateButtonState(true); // Update button state on initial load
+                    } else {
+                        updateButtonState(false);
+                    }
+
+                    subscribeButton.addEventListener("click", () => {
+                        navigator.serviceWorker.ready.then(registration => {
+                            registration.pushManager.getSubscription()
+                                .then(subscription => {
+                                    if (subscription) {
+                                        // Unsubscribe
+                                        unsubscribeDevice(subscription);
+                                    } else {
+                                        // Subscribe
+                                        registration.pushManager.subscribe({
+                                                userVisibleOnly: true,
+                                                applicationServerKey: 'YOUR_PUBLIC_KEY' // Replace with your key
+                                            })
+                                            .then(newSubscription => {
+                                                console.log('Subscribed:', newSubscription);
+                                                sendSubscriptionToServer(newSubscription,
+                                                true); //send subsription to server
+                                            })
+                                            .catch(error => {
+                                                console.error('Subscribe error:', error);
+                                            });
+                                    }
                                 });
-                            });
-                    })
-                    .then((subscription) => {
-                        console.log('Push subscription:', subscription); // And this
-                        fetch('/notification-subscribe', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                                    .getAttribute('content'),
-                            },
-                            body: JSON.stringify(subscription),
                         });
-                    })
-                    .catch((error) => {
-                        console.error('Service Worker registration failed:', error); // And this
                     });
-            } else {
-                alert('Push notifications are not supported by your browser.');
-            }
-        });
-        // {{ route('subscribe.notification') }}
+                })
+                .catch(error => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        } else {
+            alert('Push notifications are not supported by your browser.');
+        }
+
+        function unsubscribeDevice(subscription) {
+            subscription.unsubscribe()
+                .then(successful => {
+                    console.log('User unsubscribed:', successful);
+                    sendSubscriptionToServer(subscription, false); // Send unsubscription to server
+                })
+                .catch(error => {
+                    console.error('Error unsubscribing:', error);
+                });
+        }
     </script>
 @endsection
