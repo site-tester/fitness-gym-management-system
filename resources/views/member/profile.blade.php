@@ -301,7 +301,9 @@
                             <div class="form-floating mb-3">
                                 <div class="my-4 text-center">
                                     <button class="btn bg-accent btn-lg w-50" type="button"
-                                        id="subscribeNotificationButton">{{ __('Enable Notification') }}</button>
+                                        id="subscribeNotificationButton">
+                                        {{ __('Enable Notification') }}
+                                    </button>
 
                                     {{-- <a class="btn bg-accent btn-lg w-50" href="{{ route('notification.test') }}"
                                         >{{ __('Test Notif') }}</a> --}}
