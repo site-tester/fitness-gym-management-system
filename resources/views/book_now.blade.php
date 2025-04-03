@@ -278,19 +278,28 @@
             color: #ffffff;
         }
 
-        */
+        .payment-methods-container {
+            max-height: 150px;
+            /* Adjust height as needed */
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            /* Optional: to indicate scrollable area */
+            padding: 10px;
+            margin: 0 50px ;
+            margin-bottom: 80px;
+        }
     </style>
 
 @endsection
 
 @section('content')
-    <div class="container-fluid pt-1" style=" min-height: 75vh;">
-        <div class="row shadow mx-auto w-75 p-0  border border-danger" style="min-height: 713px;">
-            <div class="col-3 px-0 overflow-hidden d-sm-none d-md-block" style="min-height: 713px;">
+    <div class="container-fluid pt-1" style=" min-height: 60vh;">
+        <div class="row shadow mx-auto w-75 p-0  border border-danger" style="min-height: 60vh;">
+            <div class="col-3 px-0 overflow-hidden d-sm-none d-md-block" style="min-height: 60vh;">
                 <img src="{{ asset('/resources/img/Logo.jpg') }}" alt=""
                     style="width:100% ; height: 100%; object-fit: contain;">
             </div>
-            <div class="col-12 col-md-9 px-0 border-start border-danger border-2" style="min-height: 713px;">
+            <div class="col-12 col-md-9 px-0 border-start border-danger border-2" style="min-height: 60vh;">
                 <div class="rounded-0 h-100">
                     <div class="progress">
                         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50"
@@ -350,7 +359,7 @@
 
                                         </div>
                                         {{-- Below id the service description --}}
-                                        <div class="mt-2 mx-5 px-3 py-3 border ">
+                                        <div class="mt-2 mx-5 px-3 py-3 border " style="margin-bottom: 80px">
                                             <div id="servDescription">
                                                 <p class="text-center mb-0">Select a service to view its details.</p>
                                             </div>
@@ -367,7 +376,7 @@
                                     <div class="border-bottom mb-3">
                                         <h5 class="ms-4 py-1" style="margin-bottom: 0px">Choose Date</h5>
                                     </div>
-                                    <div class="form-check ps-0 q-box">
+                                    <div class="form-check ps-0 q-box" style="margin-bottom: 80px">
                                         <div class="q-box__question">
                                             <div class="mb-3">
                                                 {{-- <label for="" class="form-label col-12">Date <span
@@ -390,7 +399,7 @@
                                     <div class="border-bottom mb-3">
                                         <h5 class="ms-4 py-1" style="margin-bottom: 0px">Your Information</h5>
                                     </div>
-                                    <div class="form-check ps-0 q-box">
+                                    <div class="form-check ps-0 q-box" style="margin-bottom: 80px">
                                         <div class="q-box__question">
                                             <div class="row mb-3">
                                                 <div class="col">
@@ -458,23 +467,25 @@
                                     <div class="border-bottom mb-3">
                                         <h5 class="ms-4 py-1" style="margin-bottom: 0px">Payment Method</h5>
                                     </div>
-                                    @foreach ($paymentMethods as $paymentMethod)
-                                        <div class="q-box__question">
-                                            <input checked class="form-check-input question__input"
-                                                id="q_1_no_{{ $paymentMethod->id }}" name="payment_method" type="radio"
-                                                value="{{ $paymentMethod->id }}">
-                                            <label class="form-check-label question__label"
-                                                for="q_1_no_{{ $paymentMethod->id }}">
-                                                {{ $paymentMethod->name }}
-                                                <br>
-                                                <p>
-                                                    <small>
-                                                        {{ $paymentMethod->description }}
-                                                    </small>
-                                                </p>
-                                            </label>
-                                        </div>
-                                    @endforeach
+                                    <div class="payment-methods-container">
+                                        @foreach ($paymentMethods as $paymentMethod)
+                                            <div class="q-box__question">
+                                                <input checked class="form-check-input question__input"
+                                                    id="q_1_no_{{ $paymentMethod->id }}" name="payment_method"
+                                                    type="radio" value="{{ $paymentMethod->id }}">
+                                                <label class="form-check-label question__label"
+                                                    for="q_1_no_{{ $paymentMethod->id }}">
+                                                    {{ $paymentMethod->name }}
+                                                    <br>
+                                                    <p>
+                                                        <small>
+                                                            {{ $paymentMethod->description }}
+                                                        </small>
+                                                    </p>
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
 
                                 <div class="step ">
@@ -748,10 +759,11 @@
                             if (response.redirect_url) {
                                 localStorage.setItem('reservation_id', response.reservation_id);
                                 window.location.href = response
-                                .redirect_url; // Redirect to PayPal
+                                    .redirect_url; // Redirect to PayPal
                             } else {
                                 alert(
-                                    'PayPal Success, but no redirect URL provided. Check server response.');
+                                    'PayPal Success, but no redirect URL provided. Check server response.'
+                                );
                             }
                         },
                         error: function(xhr, status, error) {
