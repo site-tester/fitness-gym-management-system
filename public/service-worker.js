@@ -29,7 +29,7 @@ self.addEventListener('push', (event) => {
       body: data.body,
       icon: data.icon,
       actions: [
-        { action: 'view_app', title: 'View App' },
+        { action: 'view_app', title: 'Visit Website' },
       ],
     };
     event.waitUntil(self.registration.showNotification(data.title, options));
