@@ -5,7 +5,9 @@
         {{ trans('backpack::base.dashboard') }}
     </a>
 </li>
-
+@can('manage-users')
+    <x-backpack::menu-item title="Attendances" icon="la la-list" :link="backpack_url('attendance')" />
+@endcan
 {{-- Notification ToDo --}}
 {{-- <x-backpack::menu-item title='Notifications' icon='la la-exclamation-triangle' :link="backpack_url('')" /> --}}
 {{-- End Notification --}}
@@ -63,3 +65,5 @@
 @can('manage-contact-inbox')
     <x-backpack::menu-item title="Contact Us Inbox" icon="la la-inbox" :link="backpack_url('contactus-inbox')" />
 @endcan
+
+{{-- <x-backpack::menu-item title="Attendances" icon="la la-question" :link="backpack_url('attendance')" /> --}}
