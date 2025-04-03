@@ -14,6 +14,7 @@ use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Models\User;
 use App\Models\Workout;
+use App\Notifications\GymWorkoutNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,7 +90,8 @@ class HomeController extends Controller
         // $profile = MembershipDetail::where('client_id', '=', Auth::user()->id)->firstOrFail();
         $profile = User::where('id', Auth::id())->firstOrFail();
         // dd($profile);
-        return view('member.profile', compact('profile'));
+        $vapidPublicKey = env('VAPID_PUBLIC_KEY');
+        return view('member.profile', compact('profile', 'vapidPublicKey'));
     }
 
     public function updateProfile(Request $request)
@@ -142,7 +144,7 @@ class HomeController extends Controller
 
     public function bookNow()
     {
-        $profile = User::where('id',  Auth::id())->first();
+        $profile = User::where('id', Auth::id())->first();
         $serviceCategories = ServiceCategory::all();
         $paymentMethods = PaymentMethod::all();
         return view('book_now', compact('profile', 'serviceCategories', 'paymentMethods'));
@@ -191,7 +193,8 @@ class HomeController extends Controller
 
             // Calculate the total amount or handle payment-related logic
             // $service_price = $this->getServicePrice($request->input('service_name'));
-            $reservation->total_amount = $request->input('service_price');; // Example, adjust based on logic
+            $reservation->total_amount = $request->input('service_price');
+            ; // Example, adjust based on logic
             // $reservation->total_amount = 0; // Example, adjust based on logic
 
             // Save the reservation
@@ -208,9 +211,9 @@ class HomeController extends Controller
 
             $payment_details = PaymentMethod::where('id', $reservation->payment_method)->first();
 
-            if($payment_details->id == 1){
+            if ($payment_details->id == 1) {
                 Mail::to(Auth::user()->email)->send(new BookingPaymentDetailsWalkIn($reservation, $payment_details));
-            }else{
+            } else {
                 Mail::to(Auth::user()->email)->send(new BookingPaymentDetails($reservation, $payment_details));
             }
 
@@ -287,7 +290,8 @@ class HomeController extends Controller
     //     return view('workouts_page', compact('workout'));
     // }
 
-    public function checkWorkoutReminder($userId) {
+    public function checkWorkoutReminder($userId)
+    {
         $userId = MembershipDetail::where('client_id', $userId)->first();
         $today = now()->toDateString();
         $attendance = MemberVisit::where('client_rfid_id', $userId->rfid_number)
@@ -301,18 +305,50 @@ class HomeController extends Controller
         }
     }
 
-    public function displayWorkoutBanner($userId) {
+    public function displayWorkoutBanner($userId)
+    {
         // Logic to store a session variable or database flag to trigger banner display on the frontend
         session(['workout_reminder' => true]); // Using session for simplicity
     }
 
-    public function sendWorkoutEmail($userId) {
+    public function sendWorkoutEmail($userId)
+    {
         $user = User::find($userId);
         if ($user) {
             Mail::send('emails.workout_reminder', ['user' => $user], function ($message) use ($user) {
                 $message->to($user->email)->subject('It\'s Time to Workout!');
             });
         }
+    }
+
+    public function subscribeNotif(Request $request)
+    {
+        Log::info('Subscription data:', $request->all()); // Log the entire request
+        try {
+            $user = auth()->user();
+            if (!$user) {
+                Log::error('User not authenticated');
+                return response()->json(['success' => false, 'message' => 'User not authenticated'], 401);
+            }
+
+            $user->updatePushSubscription(
+                $request->endpoint,
+                $request->keys['p256dh'],
+                $request->keys['auth']
+            );
+            Log::info('Subscription saved for user: ' . $user->id);
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            Log::error('Error saving subscription: ' . $e->getMessage()); // Log any errors
+            return response()->json(['success' => false, 'message' => 'Failed to save subscription: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function testNotification()
+    {
+        $user = Auth::user();
+        $user->notify(new GymWorkoutNotification());
+        return redirect()->back()->with('success', 'Notification sent successfully!');
     }
 
 }

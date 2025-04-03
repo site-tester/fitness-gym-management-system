@@ -134,11 +134,37 @@ class GymProgressCrudController extends CrudController
             'name' => 'weight',
             'label' => 'Weight (kg)',
             'type' => 'number',
+            'attributes' => [
+                'id' => 'weight',
+                'step' => '0.01', // Allows decimal values
+            ],
         ]);
+
         CRUD::addField([
             'name' => 'height',
             'label' => 'Height (cm)',
             'type' => 'number',
+            'attributes' => [
+                'id' => 'height',
+                'step' => '0.1', // Allows decimal values
+            ],
+        ]);
+
+        // Button for calculating BMI
+        // CRUD::addField([
+        //     'name' => 'calculate_bmi',
+        //     'type' => 'custom_html',
+        //     'value' => '<button type="button" id="calculateBmi" class="btn btn-primary">Calculate BMI</button>',
+        // ]);
+
+        CRUD::addField([
+            'name' => 'bmi',
+            'label' => 'BMI <button type="button" id="calculateBmi" class="btn btn-primary btn-sm">Calculate</button>',
+            'attributes' => [
+                'id' => 'bmi',
+                'readonly' => 'readonly', // Makes the field uneditable
+                'disabled' => 'disabled', // Disables the field
+            ],
         ]);
         CRUD::addField([
             'name' => 'reps',
@@ -201,7 +227,7 @@ class GymProgressCrudController extends CrudController
 
         $request->validate($rules, $messages);
 
-        $user = MembershipDetail::where('client_id' ,$request->user_id)->first();
+        $user = MembershipDetail::where('client_id', $request->user_id)->first();
         if (!$user) {
             \Alert::error('Error', 'Client not found');
             return redirect()->back();

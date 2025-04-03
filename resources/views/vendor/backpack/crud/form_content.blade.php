@@ -89,7 +89,7 @@
          */
         $(document).on('select2:open', () => {
             setTimeout(() => document.querySelector('.select2-container--open .select2-search__field').focus(),
-            100);
+                100);
         });
 
         jQuery('document').ready(function($) {
@@ -265,5 +265,21 @@
         });
     </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("calculateBmi").addEventListener("click", function() {
+                let weight = parseFloat(document.getElementById("weight").value);
+                let height = parseFloat(document.getElementById("height").value) /
+                    100; // Convert cm to meters
+
+                if (!isNaN(weight) && !isNaN(height) && height > 0) {
+                    let bmi = (weight / (height * height)).toFixed(2); // BMI formula
+                    document.getElementById("bmi").value = bmi; // Set BMI field value
+                } else {
+                    alert("Please enter valid weight and height values.");
+                }
+            });
+        });
+    </script>
     @include('crud::inc.form_fields_script')
 @endsection

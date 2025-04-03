@@ -63,6 +63,12 @@ Route::get('/data-deletion-instruction', function(){
 Route::middleware(['verified'])->group(function () {
     Route::get('/profile', [HomeController::class, 'viewProfile'])->name('profile');
     Route::post('/update-profile', [HomeController::class, 'updateProfile'])->name('profile.update');
+
+    Route::post('/notification-subscribe', [HomeController::class, 'subscribeNotif'])->name('subscribe.notification');
+    Route::get('/notification-unsubscribe', [HomeController::class, 'unsubscribeNotif'])->name('unsubscribe.notification');
+    Route::get('/notification-test', [HomeController::class, 'testNotification'])->name('notification.test');
+
+
     Route::get('/book-now', [HomeController::class, 'bookNow'])->name('book.now');
     Route::get('/booked', [HomeController::class, 'bookedNow'])->name('booked.now');
     Route::get('/bookings', [HomeController::class, 'bookings'])->name('booking');

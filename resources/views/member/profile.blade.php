@@ -65,8 +65,8 @@
                             <ul id="myProfileTab" class="nav nav-underline flex-column " role="tablist"
                                 aria-orientation="vertical">
                                 <li class="nav-item ">
-                                    <h5><a class="nav-link w-100 float-end text-start active "
-                                            href="#profile-details-tab" role="tab" data-bs-toggle="tab">Personal
+                                    <h5><a class="nav-link w-100 float-end text-start active " href="#profile-details-tab"
+                                            role="tab" data-bs-toggle="tab">Personal
                                             Details</a></h5>
                                 </li>
                                 <li class="nav-item ">
@@ -76,8 +76,13 @@
                                     </h5>
                                 </li>
                                 <li class="nav-item ">
-                                    <h5><a class="nav-link w-100 float-end text-start "
-                                            href="#profile-security-tab" role="tab" data-bs-toggle="tab">Security</a>
+                                    <h5><a class="nav-link w-100 float-end text-start " href="#profile-notification-tab"
+                                            role="tab" data-bs-toggle="tab">Notifications</a>
+                                    </h5>
+                                </li>
+                                <li class="nav-item ">
+                                    <h5><a class="nav-link w-100 float-end text-start " href="#profile-security-tab"
+                                            role="tab" data-bs-toggle="tab">Security</a>
                                     </h5>
                                 </li>
                             </ul>
@@ -118,9 +123,10 @@
 
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="age" name="age" type="number"
-                                            value="{{ $profile->membershipDetails->age ?? old('age') }}"  disabled>
+                                            value="{{ $profile->membershipDetails->age ?? old('age') }}" disabled>
                                         <label class="small mb-1" for="age">Age</label>
-                                        <p class="help-block">Age is automatically calculated upon updating of Birth Date</p>
+                                        <p class="help-block">Age is automatically calculated upon updating of Birth Date
+                                        </p>
                                         @error('birthdate')
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
@@ -206,8 +212,8 @@
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="heigth" name="heigth" type="number"
                                             value="{{ $profile->membershipDetails->height ?? old('heigth') }}"
-                                            @if (Auth::user()->rfid_number == null)
-                                                title="Please visit the gym to update this detail." @endif disabled>
+                                            @if (Auth::user()->rfid_number == null) title="Please visit the gym to update this detail." @endif
+                                            disabled>
                                         <label class="small mb-1" for="heigth">Height (cm)</label>
                                         @if (Auth::user()->rfid_number == null)
                                             <p class="help-block fst-italic"><span class="text-danger">*</span>Please
@@ -220,8 +226,8 @@
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="weigth" name="weigth" type="number"
                                             value="{{ $profile->membershipDetails->weight ?? old('weigth') }}"
-                                            @if (Auth::user()->rfid_number == null)
-                                                title="Please visit the gym to update this detail." @endif disabled>
+                                            @if (Auth::user()->rfid_number == null) title="Please visit the gym to update this detail." @endif
+                                            disabled>
                                         <label class="small mb-1" for="heigth">Weight (kg)</label>
                                         @if (Auth::user()->rfid_number == null)
                                             <p class="help-block fst-italic"><span class="text-danger">*</span>Please
@@ -236,7 +242,8 @@
                                         <input class="form-control" id="bmi" name="bmi" type="number"
                                             value="{{ isset($profile->membershipDetails->bmi) ? number_format($profile->membershipDetails->bmi, 2) : old('bmi') }}"
                                             @if (Auth::user()->rfid_number == null) disabled
-                                                title="Please visit the gym to update this detail." @endif disabled>
+                                                title="Please visit the gym to update this detail." @endif
+                                            disabled>
                                         <label class="small mb-1" for="bmi">BMI</label>
                                         @if (Auth::user()->rfid_number == null)
                                             <p class="help-block fst-italic"><span class="text-danger">*</span>Please
@@ -278,7 +285,8 @@
                                 </div>
                                 @if (Auth::user()->rfid_number == null)
                                     <div class="my-4">
-                                        <button class="btn bg-accent btn-lg" type="submit" disabled>{{ __('Save') }}</button>
+                                        <button class="btn bg-accent btn-lg" type="submit"
+                                            disabled>{{ __('Save') }}</button>
                                     </div>
                                 @else
                                     <div class="my-4">
@@ -287,6 +295,26 @@
                                 @endif
                             </div>
                     </form>
+
+                    <div id="profile-notification-tab" class="tab-pane fade mb-4 p-3 p-md-4">
+                        <div class="">
+                            <div class="form-floating mb-3">
+                                <div class="my-4 text-center">
+                                    <button class="btn bg-accent btn-lg w-50" type="button"
+                                        id="subscribeNotificationButton">{{ __('Enable Notification') }}</button>
+
+                                    <a class="btn bg-accent btn-lg w-50" href="{{ route('notification.test') }}"
+                                        >{{ __('Test Notif') }}</a>
+
+                                    @if (Auth::user()->is_subscribed)
+                                        <p class="text-success">You are already subscribed to notifications.</p>
+                                    @else
+                                        <p class="text-danger">You are not subscribed to notifications.</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Security -->
                     <div id="profile-security-tab" class="tab-pane fade mb-4 p-3 p-md-4">
@@ -311,4 +339,49 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+
+    <script>
+        const vapidPublicKey = @json($vapidPublicKey);
+
+        document.getElementById("subscribeNotificationButton").addEventListener("click", function() {
+            // Check if the browser supports Push Notifications
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered:', registration); // Add this
+                        return registration.pushManager.getSubscription()
+                            .then((subscription) => {
+                                if (subscription) {
+                                    return subscription;
+                                }
+                                return registration.pushManager.subscribe({
+                                    userVisibleOnly: true,
+                                    applicationServerKey: 'BHobm4neAHKzOXazDwe8YKOB4TdSijuCLmj6R3sFXLXH7daMmXXW39S-GCbS7MxydAWxSvyz40PXKhVktTtCZNA'
+                                });
+                            });
+                    })
+                    .then((subscription) => {
+                        console.log('Push subscription:', subscription); // And this
+                        fetch('/notification-subscribe', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                    .getAttribute('content'),
+                            },
+                            body: JSON.stringify(subscription),
+                        });
+                    })
+                    .catch((error) => {
+                        console.error('Service Worker registration failed:', error); // And this
+                    });
+            } else {
+                alert('Push notifications are not supported by your browser.');
+            }
+        });
+        // {{ route('subscribe.notification') }}
+    </script>
 @endsection
