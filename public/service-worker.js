@@ -55,7 +55,7 @@ self.addEventListener('push', (event) => {
   });
 
   function sendSubscriptionToServer(subscription) {
-       fetch('/subscriptions', {
+       fetch('/notification-subscribe', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',

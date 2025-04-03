@@ -89,6 +89,8 @@ jobs:
             PAYPAL_CLIENT_ID=ATgHbO2Lm3y3rUhRh3QVxnDZ1lkQ2M6khxD_SQV6-LR9xjBQ2PD6ZOItRFOKa795AGEdqer3AAegz3gB
             PAYPAL_CLIENT_SECRET=EAWyzBJjE_bs0NyPZeofMyMAm6pGj7CfiKlrAveC2AhByUy_LiTh9FlUa8PAhfznwMg33Ljif_WbpLdr
             PAYPAL_CURRENCY=PHP
+            VAPID_PUBLIC_KEY=BHobm4neAHKzOXazDwe8YKOB4TdSijuCLmj6R3sFXLXH7daMmXXW39S-GCbS7MxydAWxSvyz40PXKhVktTtCZNA
+            VAPID_PRIVATE_KEY=PUgGcHYog8tgapBmnoYTa4ENe9tAAd85ZguwLOtkX_s
             EOT
 
             # ✅ Install dependencies & run migrations & symlink storage
