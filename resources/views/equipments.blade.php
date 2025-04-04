@@ -86,10 +86,10 @@
 
                         if (response.steps) {
                             let steps = JSON.parse(response.steps);
-                            stepsHtml = "Status: <span class='badge text-bg-success'>" +
+                            stepsHtml = "<span class='badge text-bg-success'>" +
                                 status + "</span><br>";
                             stepsHtml += "Quantity: " + quantity +
-                            "<br><br>"; 
+                                "<br><br>";
                             stepsHtml +=
                                 "<h4 style='text-align: center;'>Step-by-Step Instructions</h4>";
                             if (steps && steps.length > 0) {

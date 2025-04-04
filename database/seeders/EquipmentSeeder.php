@@ -16,7 +16,7 @@ class EquipmentSeeder extends Seeder
         $equipment = [
             [
                 'equipment_name' => 'Treadmill',
-                'image' => 'treadmill.jpg',
+                'image' => 'threadmill.jpg',
                 'steps' => json_encode([
                     "Step onto the treadmill and clip the safety key to your clothing.",
                     "Start by pressing the 'Start' button.",
@@ -214,7 +214,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'LAT PULLDOWN MACHINE',
-                'image' => 'LAT PULLDOWN  MACHINE.jpg',
+                'image' => 'LAT PULLDOWN MACHINE.jpg',
                 'steps' => json_encode([
                     "Adjust the seat and thigh pad for proper alignment.",
                     "Grip the bar with hands wider than shoulder-width.",
@@ -347,7 +347,7 @@ class EquipmentSeeder extends Seeder
             // ],
             [
                 'equipment_name' => 'TRICEPS PRESS MACHINE',
-                'image' => 'TRICEP PRESS MACHINE.jpg',
+                'image' => 'TRICEPS PRESS MACHINE.jpg',
                 'steps' => json_encode([
                     "Adjust the seat and handles for proper alignment.",
                     "Grip the handles with hands shoulder-width apart.",
