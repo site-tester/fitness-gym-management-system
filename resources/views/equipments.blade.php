@@ -8,6 +8,7 @@
         .equipCard {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
+
         .equipCard:hover {
             transform: scale(1.1);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -43,12 +44,13 @@
             {{-- <h2 class="text-center mb-5">Gym Equipment</h2> --}}
             <div class="row m-auto justify-content-center">
                 @foreach ($equipments as $equipment)
+                    <div class="card equipCard col-12 col-md-2 p-1 mb-3 mx-2 d-flex flex-column h-100"
+                        data-id="{{ $equipment->id }}">
 
-                    <div class="card equipCard col-12 col-md-2 p-1 mb-3 mx-2 d-flex flex-column h-100" data-id="{{$equipment->id}}">
-
-                    <!-- Image Container with Fixed Height -->
+                        <!-- Image Container with Fixed Height -->
                         <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-                            <img src="/storage/{{ $equipment->image }}" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: contain;" alt="...">
+                            <img src="/storage/{{ $equipment->image }}" class="img-fluid"
+                                style="max-height: 100%; max-width: 100%; object-fit: contain;" alt="...">
                         </div>
                         <div class="card-body flex-grow-1">
                             <!-- Additional content here -->
@@ -56,7 +58,7 @@
                         <div class="card-footer text-center">
                             <p class="card-text text-uppercase">{{ ucfirst($equipment->equipment_name) }}</p>
                         </div>
-                </div>
+                    </div>
                 @endforeach
             </div>
         </div>
@@ -65,60 +67,73 @@
 
 @section('scripts')
 
-<script>
-$(document).ready(function () {
-    $(".card").on("click", function () {
-        let cardId = $(this).data("id");
+    <script>
+        $(document).ready(function() {
+            $(".card").on("click", function() {
+                let cardId = $(this).data("id");
 
-        $.ajax({
-            url: "/get-equipment-details/" + cardId, // Your Laravel route
-            method: "GET",
-            success: function (response) {
-                let stepsHtml = "";
-                let imageUrl = "";
+                $.ajax({
+                    url: "/get-equipment-details/" + cardId, // Your Laravel route
+                    method: "GET",
+                    success: function(response) {
+                        console.log(response);
+                        let stepsHtml = "";
+                        let imageUrl = "";
+                        let equipmentName = response.name || "No Equipment Name Found";
+                        let status = response.status || "No Status Found";
+                        let quantity = response.quantity ||
+                            "No Quantity Found"; // Ensure quantity is set
 
-                if (response.steps) {
-                    let steps = JSON.parse(response.steps);
-                    if (steps && steps.length > 0) {
-                        stepsHtml = "<ol style='text-align: justify;'>";
-                        steps.forEach(function (step) {
-                            stepsHtml += "<li style='list-style: auto !important;'>" + step + "</li>";
-                        });
-                        stepsHtml += "</ol>";
-                    } else {
-                        stepsHtml = "<p>No step-by-step instructions available.</p>";
-                    }
-                } else {
-                    stepsHtml = "<p>No step-by-step instructions available.</p>";
-                }
-
-                if (response.image) {
-                    imageUrl = "https://ajdiafitnessgym.com/storage/" + response.image;
-                }
-
-                Swal.fire({
-                    title: "Equipment Instructions",
-                    imageUrl: imageUrl,
-                    imageHeight: 200,
-                    imageAlt: "Equipment Image",
-                    html: stepsHtml,
-                    confirmButtonText: "Close",
-                    customClass: {
-                        confirmButton: 'btn btn-danger'
-                    },
-                    didOpen: () => {
-                        if (!response.image) {
-                            $(".swal2-image").hide();
+                        if (response.steps) {
+                            let steps = JSON.parse(response.steps);
+                            stepsHtml = "Status: <span class='badge text-bg-success'>" +
+                                status + "</span><br>";
+                            stepsHtml += "Quantity: " + quantity +
+                            "<br><br>"; 
+                            stepsHtml +=
+                                "<h4 style='text-align: center;'>Step-by-Step Instructions</h4>";
+                            if (steps && steps.length > 0) {
+                                stepsHtml += "<ol style='text-align: justify;'>";
+                                steps.forEach(function(step) {
+                                    stepsHtml +=
+                                        "<li style='list-style: auto !important;'>" +
+                                        step + "</li>";
+                                });
+                                stepsHtml += "</ol>";
+                            } else {
+                                stepsHtml = "<p>No step-by-step instructions available.</p>";
+                            }
+                        } else {
+                            stepsHtml = "<p>No step-by-step instructions available.</p>";
                         }
+
+                        if (response.image) {
+                            imageUrl = "https://ajdiafitnessgym.com/storage/" + response.image;
+                        }
+
+                        Swal.fire({
+                            title: equipmentName,
+                            imageUrl: imageUrl,
+                            imageHeight: 200,
+                            imageAlt: "Equipment Image",
+                            html: stepsHtml,
+                            confirmButtonText: "Close",
+                            customClass: {
+                                confirmButton: 'btn btn-danger'
+                            },
+                            didOpen: () => {
+                                if (!response.image) {
+                                    $(".swal2-image").hide();
+                                }
+                            }
+                        });
+                    },
+                    error: function() {
+                        Swal.fire("Error", "Failed to load equipment details", "error");
                     }
                 });
-            },
-            error: function () {
-                Swal.fire("Error", "Failed to load equipment details", "error");
-            }
+            });
         });
-    });
-});
-</script>
+    </script>
 
 @endsection

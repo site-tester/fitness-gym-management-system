@@ -45,10 +45,20 @@ Route::get('/workouts', [Controller::class, 'workoutView'])->name('workout');
 Route::get('/equipments', [Controller::class, 'equipmentView'])->name('equipment');
 Route::get('/get-equipment-details/{id}', function ($id) {
     $equipment = EquipmentInventory::find($id);
+
+    if (!$equipment) {
+        return response()->json([
+            'error' => 'Equipment not found'
+        ], 404);
+    }
+
     return response()->json([
         'steps' => $equipment->steps ?? 'No Steps Found',
         'image' => $equipment->image ?? 'No Image Found',
-        'name' => $equipment->equipment_name ?? 'No Equipment Name Found'
+        'name' => $equipment->equipment_name ?? 'No Equipment Name Found',
+        'status' => 'Ready to Use' ?? 'No Status Found',
+        // 'status' => $equipment->condition ?? 'No Status Found',
+        'quantity' => $equipment->quantity ?? 0,
     ]);
 });
 Route::get('/workout-details/{id}', [Controller::class, 'workoutDetails'])->name('workout.details');
