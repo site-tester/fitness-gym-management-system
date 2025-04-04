@@ -301,7 +301,7 @@ class HomeController extends Controller
 
         if (!$attendance) {
             // Trigger banner display and email sending
-            $this->displayWorkoutBanner($userId);
+            // $this->displayWorkoutBanner($userId);
             $this->sendWorkoutEmail($userId->client_id);
         }
     }
