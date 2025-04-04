@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MembershipDetail;
 use App\Models\MemberVisit;
 use App\Models\User;
+use App\Notifications\GymWorkoutNotification;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -69,6 +70,7 @@ class LoginController extends Controller
     public function sendWorkoutEmail($userId)
     {
         $user = User::find($userId);
+        $user->notify(new GymWorkoutNotification());
         dd($user);
         if ($user) {
             Mail::send('emails.workout_reminder', ['user' => $user], function ($message) use ($user) {

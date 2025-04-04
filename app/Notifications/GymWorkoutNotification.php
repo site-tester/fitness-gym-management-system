@@ -49,11 +49,21 @@ class GymWorkoutNotification extends Notification
      */
     public function toWebPush($notifiable, $notification)
     {
+        // return (new WebPushMessage)
+        //     ->title('AJ Dia Reminder')
+        //     ->body('Time for your scheduled workout!')
+        //     ->action('Visit Website', 'https://ajdiafitnessgym.com')
+        //     ->icon('{{ asset("public/img/Logo.jpg") }}');
+
+        $userName = $notifiable->name ?? 'Fitness Champion'; // Fallback if name is not available
+
         return (new WebPushMessage)
-            ->title('AJ Dia Reminder')
-            ->body('Time for your scheduled workout!')
-            ->action('Visit Website', 'https://ajdiafitnessgym.com')
-            ->icon('{{ asset("public/img/Logo.jpg") }}');
+            ->title("Hey {$userName}, Let's Get Moving!")
+            ->body("You haven't crushed your workout today! Don't let your progress slip. 💪")
+            ->action('Start Workout Now!', 'https://ajdiafitnessgym.com') // Direct to workouts page
+            ->icon(asset('{{ asset("public/img/Logo.jpg") }}')) // Assuming your logo is in public/img/Logo.jpg
+            ->badge(asset('{{ asset("public/img/Logo.jpg") }}')); // Optional: Add a badge for visual appeal
+
     }
 
     /**
