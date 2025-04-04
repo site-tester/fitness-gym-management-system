@@ -39,20 +39,20 @@ class EquipmentSeeder extends Seeder
                     "Disembark carefully, maintaining balance."
                 ]),
             ],
-            [
-                'equipment_name' => 'Barbells and Olympic Barbells',
-                'image' => 'BARBELLS AND OLYMPIC BARBELL.jpg',
-                'steps' => json_encode([
-                    "Select the appropriate weight and secure plates with collars.",
-                    "Position yourself with feet shoulder-width apart.",
-                    "Grip the barbell with hands slightly wider than shoulder-width.",
-                    "Perform exercises like squats, bench press, or deadlifts with proper form.",
-                    "Return the barbell to the rack safely."
-                ]),
-            ],
+            // [
+            //     'equipment_name' => 'Barbells and Olympic Barbells',
+            //     'image' => 'BARBELLS AND OLYMPIC BARBELL.jpg',
+            //     'steps' => json_encode([
+            //         "Select the appropriate weight and secure plates with collars.",
+            //         "Position yourself with feet shoulder-width apart.",
+            //         "Grip the barbell with hands slightly wider than shoulder-width.",
+            //         "Perform exercises like squats, bench press, or deadlifts with proper form.",
+            //         "Return the barbell to the rack safely."
+            //     ]),
+            // ],
             [
                 'equipment_name' => 'bench',
-                'image' => 'bench.jpg',
+                'image' => 'BENCH.jpg',
                 'steps' => json_encode([
                     "Position yourself on the bench according to the exercise.",
                     "Use the bench for exercises like bench press, dumbbell rows, or step-ups.",
@@ -63,7 +63,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'STATIONARY BIKE',
-                'image' => 'STATIONARY BIKES.jpg',
+                'image' => 'STATIONARY BIKE.jpg',
                 'steps' => json_encode([
                     "Adjust the seat height for comfortable leg extension.",
                     "Adjust resistance to your desired level.",
@@ -105,17 +105,17 @@ class EquipmentSeeder extends Seeder
                     "Remove plates and return them to the rack after use."
                 ]),
             ],
-            [
-                'equipment_name' => 'Roller',
-                'image' => 'roller.jpg',
-                'steps' => json_encode([
-                    "Position the roller on the floor.",
-                    "Kneel or lie down, placing your hands or feet on the roller.",
-                    "Roll the roller back and forth, engaging your core.",
-                    "Maintain proper body alignment and control.",
-                    "Discontinue use if you feel pain."
-                ]),
-            ],
+            // [
+            //     'equipment_name' => 'Roller',
+            //     'image' => 'AB ROLLER.jpg',
+            //     'steps' => json_encode([
+            //         "Position the roller on the floor.",
+            //         "Kneel or lie down, placing your hands or feet on the roller.",
+            //         "Roll the roller back and forth, engaging your core.",
+            //         "Maintain proper body alignment and control.",
+            //         "Discontinue use if you feel pain."
+            //     ]),
+            // ],
             [
                 'equipment_name' => 'Ellipticals',
                 'image' => 'ELLIPTICALS.jpg',
@@ -142,7 +142,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'ABDOMINAL BENCH',
-                'image' => 'ABDOMINAL BENCH.png',
+                'image' => 'ABDOMINAL BENCH.jpg',
                 'steps' => json_encode([
                     "Adjust the bench to your desired incline.",
                     "Lie on the bench with your feet secured.",
@@ -203,7 +203,7 @@ class EquipmentSeeder extends Seeder
             ],
             [
                 'equipment_name' => 'KETTLEBELLS',
-                'image' => 'kettlebells.jpg',
+                'image' => 'kettlebell.jpg',
                 'steps' => json_encode([
                     "Select an appropriate weight kettlebell.",
                     "Use kettlebells for exercises like swings, goblet squats, or Turkish get-ups.",
@@ -257,50 +257,50 @@ class EquipmentSeeder extends Seeder
                     "Engage the safety handles when finished."
                 ]),
             ],
-            [
-                'equipment_name' => 'LEG RAISE TOWER',
-                'image' => 'LEG RAISE TOWER.jpg',
-                'steps' => json_encode([
-                    "Grip the handles and position your back against the pad.",
-                    "Lift your legs towards your chest, engaging your core.",
-                    "Slowly lower your legs to the starting position.",
-                    "Maintain control and avoid swinging.",
-                    "Discontinue if you feel pain."
-                ]),
-            ],
-            [
-                'equipment_name' => 'OVERHEAD CABLE MACHINE',
-                'image' => 'OVERHEAD CABLE MACHINES.jpg',
-                'steps' => json_encode([
-                    "Select the desired attachment and weight.",
-                    "Grip the attachment with hands shoulder-width apart.",
-                    "Pull the attachment down towards your chest or face.",
-                    "Slowly return the attachment to the starting position.",
-                    "Maintain proper posture and control."
-                ]),
-            ],
-            [
-                'equipment_name' => 'PRECHER CURL BENCH',
-                'image' => 'PRECHER CURL BENCH.png',
-                'steps' => json_encode([
-                    "Adjust the seat and arm pad for proper alignment.",
-                    "Position your upper arms on the pad and grip the bar or dumbbells.",
-                    "Curl the weight towards your shoulders.",
-                    "Slowly lower the weight to the starting position.",
-                    "Maintain proper form and control."
-                ]),
-            ],
-            [
-                'equipment_name' => 'PULL UP BAR',
-                'image' => 'PULL UP BAR.png',
-                'steps' => json_encode([
-                    "Grip the bar with hands shoulder-width apart or wider.",
-                    "Hang with your arms fully extended.",
-                    "Pull yourself up until your chin is above the bar.",
-                    "Slowly lower yourself to the starting position.",
-                    "Use assisted pull-up machines or bands if needed."
-                ]),
-            ],
+            // [
+            //     'equipment_name' => 'LEG RAISE TOWER',
+            //     'image' => 'LEG RAISE TOWER.jpg',
+            //     'steps' => json_encode([
+            //         "Grip the handles and position your back against the pad.",
+            //         "Lift your legs towards your chest, engaging your core.",
+            //         "Slowly lower your legs to the starting position.",
+            //         "Maintain control and avoid swinging.",
+            //         "Discontinue if you feel pain."
+            //     ]),
+            // ],
+            // [
+            //     'equipment_name' => 'OVERHEAD CABLE MACHINE',
+            //     'image' => 'OVERHEAD CABLE MACHINES.jpg',
+            //     'steps' => json_encode([
+            //         "Select the desired attachment and weight.",
+            //         "Grip the attachment with hands shoulder-width apart.",
+            //         "Pull the attachment down towards your chest or face.",
+            //         "Slowly return the attachment to the starting position.",
+            //         "Maintain proper posture and control."
+            //     ]),
+            // ],
+            // [
+            //     'equipment_name' => 'PRECHER CURL BENCH',
+            //     'image' => 'PRECHER CURL BENCH.png',
+            //     'steps' => json_encode([
+            //         "Adjust the seat and arm pad for proper alignment.",
+            //         "Position your upper arms on the pad and grip the bar or dumbbells.",
+            //         "Curl the weight towards your shoulders.",
+            //         "Slowly lower the weight to the starting position.",
+            //         "Maintain proper form and control."
+            //     ]),
+            // ],
+            // [
+            //     'equipment_name' => 'PULL UP BAR',
+            //     'image' => 'PULL UP BAR.png',
+            //     'steps' => json_encode([
+            //         "Grip the bar with hands shoulder-width apart or wider.",
+            //         "Hang with your arms fully extended.",
+            //         "Pull yourself up until your chin is above the bar.",
+            //         "Slowly lower yourself to the starting position.",
+            //         "Use assisted pull-up machines or bands if needed."
+            //     ]),
+            // ],
             [
                 'equipment_name' => 'ROWING MACHINE',
                 'image' => 'ROWING MACHINE.jpg',
@@ -334,17 +334,17 @@ class EquipmentSeeder extends Seeder
                     "Engage the safety catches when finished."
                 ]),
             ],
-            [
-                'equipment_name' => 'STANDING CALF MACHINE',
-                'image' => 'STANDING CALF MACHINE.png',
-                'steps' => json_encode([
-                    "Adjust the shoulder pads for proper alignment.",
-                    "Position your feet on the platform with heels hanging off.",
-                    "Raise your heels, engaging your calf muscles.",
-                    "Slowly lower your heels to the starting position.",
-                    "Adjust the weight as needed."
-                ]),
-            ],
+            // [
+            //     'equipment_name' => 'STANDING CALF MACHINE',
+            //     'image' => 'STANDING CALF MACHINE.png',
+            //     'steps' => json_encode([
+            //         "Adjust the shoulder pads for proper alignment.",
+            //         "Position your feet on the platform with heels hanging off.",
+            //         "Raise your heels, engaging your calf muscles.",
+            //         "Slowly lower your heels to the starting position.",
+            //         "Adjust the weight as needed."
+            //     ]),
+            // ],
             [
                 'equipment_name' => 'TRICEPS PRESS MACHINE',
                 'image' => 'TRICEP PRESS MACHINE.jpg',
