@@ -52,7 +52,7 @@ class EquipmentSeeder extends Seeder
             // ],
             [
                 'equipment_name' => 'bench',
-                'image' => 'BENCH.jpg',
+                'image' => 'bench.jpg',
                 'steps' => json_encode([
                     "Position yourself on the bench according to the exercise.",
                     "Use the bench for exercises like bench press, dumbbell rows, or step-ups.",
