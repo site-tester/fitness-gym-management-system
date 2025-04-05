@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('timelogs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_rfid_id');
+            $table->string('client_name')->nullable();
             $table->date('timelog_date')->nullable();
             $table->timestamp('time_in')->nullable();
             $table->timestamp('time_out')->nullable();

@@ -217,47 +217,51 @@
 
                     <div class="card-body pb-5">
                         <h3>Attendance</h3>
-                        <div class="divide-y">
+                        <div class="divide-y ">
                             @if ($memberAttendance->isEmpty())
                                 <div>
                                     <div class="row">
-                                        <div class="col m-auto">
+                                        <div class="col m-0 p-0">
                                             <h5 class="text-center">No User Timed in</h5>
                                         </div>
                                     </div>
                                 </div>
                             @else
-                                @foreach ($memberAttendance as $member)
-                                    <div>
-                                        @php
-                                            $time_in = \Carbon\Carbon::parse($member->time_in);
-                                            $time_out = \Carbon\Carbon::parse($member->time_out);
-                                        @endphp
-                                        <div class="row">
-                                            {{-- <div class="col-auto">
+                                <div class=" overflow-y-scroll overflow-x-hidden" style="max-height: 600px">
+                                    @foreach ($memberAttendance as $member)
+                                        <div>
+                                            @php
+                                                $time_in = \Carbon\Carbon::parse($member->time_in);
+                                                $time_out = \Carbon\Carbon::parse($member->time_out);
+                                            @endphp
+                                            <div class="row pe-0 text-wrap">
+                                                {{-- <div class="col-auto">
                                                 <span class="avatar">test</span>
                                             </div> --}}
-                                            <div class="col">
-                                                <div class="">
-                                                    <strong>Name: {{ $member->user->name }}</strong>
-                                                    <br>
-                                                    <strong>Date: {{ $member->timelog_date }}</strong>
+                                                <div class="col pe-0">
+                                                    <div class="text-truncate">
+                                                        <strong>Name: {{ $member->user->name }}</strong>
+                                                        <br>
+                                                        <strong>Date: {{ $member->timelog_date }}</strong>
+                                                    </div>
+                                                    <div class="text-secondary">
+                                                        @if ($member->time_in)
+                                                            <p class="mb-0">Time-In: {{ $time_in->format('h:i A') }}</p>
+                                                        @endif
+                                                        @if ($member->time_out)
+                                                            <p class="mb-0">Time-Out: {{ $time_out->format('h:i A') }}
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                    <hr class="mt-1">
                                                 </div>
-                                                <div class="text-secondary">
-                                                    @if ($member->time_in)
-                                                        <p class="mb-0">Time-In: {{ $time_in->format('h:i A') }}</p>
-                                                    @endif
-                                                    @if ($member->time_out)
-                                                        <p class="mb-0">Time-Out: {{ $time_out->format('h:i A') }}</p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            {{-- <div class="col-auto align-self-center">
+                                                {{-- <div class="col-auto align-self-center">
                                                 <div class="badge bg-primary"></div>
                                             </div> --}}
+                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             @endif
                         </div>
                     </div>
@@ -442,51 +446,51 @@
         // }
 
         function fetchAgeStatsForChart(chartId, url) {
-    var chartCanvas = document.getElementById(chartId).getContext('2d');
+            var chartCanvas = document.getElementById(chartId).getContext('2d');
 
-    // Use AJAX to fetch age stats data from the backend
-    $.ajax({
-        url: url, // The URL will be passed when calling the function
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            // Prepare the labels (age ranges) and data (user count in each range)
-            var ageRanges = Object.keys(data); // ['18-24', '25-34', ...]
-            var counts = Object.values(data); // [count in 18-24, count in 25-34, ...]
+            // Use AJAX to fetch age stats data from the backend
+            $.ajax({
+                url: url, // The URL will be passed when calling the function
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    // Prepare the labels (age ranges) and data (user count in each range)
+                    var ageRanges = Object.keys(data); // ['18-24', '25-34', ...]
+                    var counts = Object.values(data); // [count in 18-24, count in 25-34, ...]
 
-            // Define a color palette for different age ranges
-            var backgroundColors = [
-                'rgba(255, 99, 132, 0.3)',  // Red
-                'rgba(54, 162, 235, 0.3)',  // Blue
-                'rgba(255, 206, 86, 0.3)',  // Yellow
-                'rgba(75, 192, 192, 0.3)',  // Green
-                'rgba(153, 102, 255, 0.3)', // Purple
-                'rgba(255, 159, 64, 0.3)'   // Orange
-            ];
+                    // Define a color palette for different age ranges
+                    var backgroundColors = [
+                        'rgba(255, 99, 132, 0.3)', // Red
+                        'rgba(54, 162, 235, 0.3)', // Blue
+                        'rgba(255, 206, 86, 0.3)', // Yellow
+                        'rgba(75, 192, 192, 0.3)', // Green
+                        'rgba(153, 102, 255, 0.3)', // Purple
+                        'rgba(255, 159, 64, 0.3)' // Orange
+                    ];
 
-            var borderColors = [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ];
+                    var borderColors = [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ];
 
-            // Create the chart
-            new Chart(chartCanvas, {
-                type: 'pie',
-                data: {
-                    labels: ageRanges, // Age ranges as labels
-                    datasets: [{
-                        label: '# of Members',
-                        data: counts, // User count in each age range
-                        backgroundColor: backgroundColors.slice(0, ageRanges.length),
-                        borderColor: borderColors.slice(0, ageRanges.length),
-                        borderWidth: 1
-                    }]
-                },
-                options: {
+                    // Create the chart
+                    new Chart(chartCanvas, {
+                        type: 'pie',
+                        data: {
+                            labels: ageRanges, // Age ranges as labels
+                            datasets: [{
+                                label: '# of Members',
+                                data: counts, // User count in each age range
+                                backgroundColor: backgroundColors.slice(0, ageRanges.length),
+                                borderColor: borderColors.slice(0, ageRanges.length),
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
                             scales: {
                                 y: {
                                     beginAtZero: true
@@ -494,13 +498,13 @@
                             },
                             maintainAspectRatio: true,
                         }
+                    });
+                },
+                error: function() {
+                    console.error('Error fetching age data');
+                }
             });
-        },
-        error: function () {
-            console.error('Error fetching age data');
         }
-    });
-}
 
 
         function fetchServiceBookingStatsForChart(chartId, url) {

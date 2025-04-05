@@ -39,6 +39,7 @@ class AttendanceCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $this->crud->setDefaultPageLength(6);
         $this->crud->removeButtons(['create', 'update']);
 
         CRUD::addColumn([
@@ -63,14 +64,14 @@ class AttendanceCrudController extends CrudController
             'name' => 'time_in',
             'label' => 'Time In',
             'value' => function ($entry) {
-                return \Carbon\Carbon::parse($entry->time_in)->format('H:i A');
+                return \Carbon\Carbon::parse($entry->time_in)->format('h:i A');
             },
         ]);
         CRUD::addColumn([
             'name' => 'time_out',
             'label' => 'Time Out',
             'value' => function ($entry) {
-                return \Carbon\Carbon::parse($entry->time_in)->format('H:i A');
+                return \Carbon\Carbon::parse($entry->time_in)->format('h:i A');
             },
         ]);
         // CRUD::setFromDb(); // set columns from db columns.

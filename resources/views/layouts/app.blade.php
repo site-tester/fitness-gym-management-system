@@ -8,6 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <meta http-equiv="Content-Security-Policy">
+
     <title>AJ DIA - @yield('title')</title>
 
     <!-- Fonts -->
@@ -136,7 +138,7 @@
         @endif
 
         <main class="pb-4">
-            @if (session('workout_reminder'))
+            {{-- @if (session('workout_reminder'))
                 <div id="workout-banner"
                     style="background-color: #fce883; padding: 10px; text-align: center; position: sticky; top: 0; z-index: 1000;">
                     It's time to workout! Don't miss your workout today.
@@ -147,11 +149,11 @@
                             sessionStorage.removeItem('workoutBannerShown');
                         });
                     </script> --}}
-                </div>
-                {{-- @php
+                {{-- </div>
+                @php
                     session()->forget('workout_reminder');
-                @endphp --}}
-            @endif
+                @endphp
+            @endif  --}}
 
             @yield('content')
         </main>

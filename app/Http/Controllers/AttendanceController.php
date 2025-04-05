@@ -40,6 +40,7 @@ class AttendanceController extends Controller
             // Otherwise, register a new time-in record
             MemberVisit::create([
                 'client_rfid_id' => $user->rfid_number,
+                'client_name' => $user->name,
                 'timelog_date' => now(), // Assuming this is the time-in field
                 'time_in' => now(),
             ]);
