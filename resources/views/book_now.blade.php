@@ -313,7 +313,7 @@
                     <div id="qbox-container">
                         <form id="bookingForm" method="post" action="{{ 'book.now.post' }}">
                             @csrf
-                            <div id="steps-container">
+                            <div id="steps-container mb-5">
                                 {{-- Step 1 --}}
                                 <div class="step">
                                     <div class="border-bottom mb-3">
@@ -372,7 +372,7 @@
                                 </div>
 
                                 {{-- Step 2 --}}
-                                <div class="step">
+                                <div class="step" style="margin-bottom: 100px">
                                     <div class="border-bottom mb-3">
                                         <h5 class="ms-4 py-1" style="margin-bottom: 0px">Choose Date</h5>
                                     </div>
@@ -439,7 +439,7 @@
                                 </div>
 
                                 {{-- Step 4 --}}
-                                <div class="step">
+                                <div class="step" style="margin-bottom: 100px">
                                     <div class="border-bottom mb-3">
                                         <h5 class="ms-4 py-1" style="margin-bottom: 0px">Amount</h5>
                                     </div>
@@ -488,7 +488,7 @@
                                     </div>
                                 </div>
 
-                                <div class="step ">
+                                <div class="step" style="margin-bottom: 80px">
                                     <div class="mt-1 ">
                                         <div class="closing-text pt-1 px-5 text-center">
                                             <div class="">
@@ -509,7 +509,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="q-box__buttons" class="pb-sm-4">
+                            <div id="q-box__buttons" class="pb-sm-5">
                                 <button id="prev-btn" type="button">Previous</button>
                                 <button id="next-btn" type="button">Next</button>
                                 <button id="submit-btn" type="submit">
