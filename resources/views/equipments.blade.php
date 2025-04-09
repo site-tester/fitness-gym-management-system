@@ -149,7 +149,7 @@
                             let steps = JSON.parse(response.steps);
                             let stepsListHtml = "";
                             if (steps && steps.length > 0) {
-                                stepsListHtml += "<ol style='text-align: justify;'>";
+                                stepsListHtml += "<ol style='text-align: justify; padding-left: 1rem;'>";
                                 steps.forEach(function(step) {
                                     stepsListHtml +=
                                         "<li style='list-style: auto !important;'>" +
