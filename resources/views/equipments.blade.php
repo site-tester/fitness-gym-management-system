@@ -186,7 +186,7 @@
                                             ` : ''}
                                     <div class="${imageUrl ? 'col-md-6' : 'col-12'}">
                                         <div class="">
-                                            <div class="text-center">
+                                            <div class="text-center" style="font-size: .8em;">
                                                 <span class='badge text-bg-success'>${status}</span><br>
                                                 Quantity: ${quantity}
                                             </div>
