@@ -5,6 +5,25 @@
 @section('css')
     <link href="https://cdn.datatables.net/v/dt/dt-2.1.8/r-3.0.3/datatables.min.css" rel="stylesheet">
     <style>
+        body .workoutDesc p{
+            color: rgb(51, 51, 51) !important;
+            line-height: 1.5 !important;
+            text-align: justify !important;
+            text-indent: 1em !important;
+        }
+        body .workoutDesc ol li{
+            color: rgb(51, 51, 51) !important;
+            line-height: 1.5 !important;
+            text-align: justify !important;
+        }
+
+        body .workoutDesc p a {
+            text-decoration: none !important;
+            cursor: auto !important;
+            pointer-events: none !important;
+            color: rgb(51, 51, 51) !important;
+        }
+
         .iframe-container {
             position: relative;
             width: 100%;
@@ -104,7 +123,7 @@
 
                 <div class="px-5 pt-4 ">
                     <h3 class="text-uppercase fw-bold mb-3" style="font-size: 30px">Description</h3>
-                    <div style="text-align:justify !important;">{!! $workout->description !!}</div>
+                    <div class="workoutDesc">{!! $workout->description !!}</div>
                 </div>
 
             </div>

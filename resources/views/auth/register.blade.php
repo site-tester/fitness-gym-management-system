@@ -240,7 +240,7 @@
 
                                         <div class="row mb-3">
                                             <label for="name"
-                                                class="col-md-4 col-form-label ">{{ __('Full Name') }}</label>
+                                                class="col-md-5 col-form-label ">{{ __('Full Name') }}</label>
 
                                             <div class="col">
                                                 <input id="name" type="text"
@@ -258,7 +258,7 @@
 
                                         <div class="row mb-3">
                                             <label for="email"
-                                                class="col-md-4 col-form-label ">{{ __('Email Address') }}</label>
+                                                class="col-md-5 col-form-label ">{{ __('Email Address') }}</label>
 
                                             <div class="col">
                                                 <input id="email" type="email"
@@ -277,7 +277,7 @@
                                         <!-- Password Field -->
                                         <div class="row mb-3">
                                             <label for="password"
-                                                class="col-md-4 col-form-label">{{ __('Password') }}</label>
+                                                class="col-md-5 col-form-label">{{ __('Password') }}</label>
                                             <div class="col input-group">
                                                 <input id="password" type="password"
                                                     class="form-control @error('password') is-invalid @enderror"
@@ -321,7 +321,7 @@
                                         <!-- Confirm Password Field -->
                                         <div class="row mb-3">
                                             <label for="password-confirm"
-                                                class="col-md-4 col-form-label">{{ __('Confirm Password') }}</label>
+                                                class="col-md-5 col-form-label">{{ __('Confirm Password') }}</label>
                                             <div class="col input-group">
                                                 <input id="password-confirm" type="password"
                                                     class="form-control password_confirm" placeholder="Confirm Password"
