@@ -190,7 +190,7 @@
                                                 <span class='badge text-bg-success'>${status}</span><br>
                                                 Quantity: ${quantity}
                                             </div>
-                                            <h4>Description</h4>
+                                            <h4 class="mt-3">Description</h4>
                                             <p style="font-size: .7em; color: #545454; text-align: justify !important; line-height: 1.5;">
                                                 ${description}
                                             </p>
