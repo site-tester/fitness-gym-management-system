@@ -105,7 +105,7 @@ class MembershipDetailCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          */
         CRUD::addButtonFromView('line', 'delete', 'custom_delete_member', 'end');
-        CRUD::addButtonFromView('line', 'generate_card', 'generate_card_button', 'beginning');
+        CRUD::addButtonFromView('line', 'generate_card', 'vendor.backpack.crud.buttons.generate_card_button', 'beginning');
 
     }
 
