@@ -175,22 +175,22 @@
                         }
 
                         Swal.fire({
-                            title: equipmentName,
+                            title: `${equipmentName}
+                                    <div class="text-center" style="font-size: 20px;">
+                                        <span class='badge text-bg-success'>${status}</span>
+                                        Quantity: ${quantity}
+                                    </div>`,
                             html: `
                                 <div class="row align-items-start px-5">
                                     ${imageUrl ? `
-                                            <div class="col-md-6">
-                                                <img src="${imageUrl}" alt="Equipment Image" class="img-fluid" style="max-height: 500px; object-fit: contain;">
-                                            </div>
-                                        ` : ''}
+                                                <div class="col-md-6">
+                                                    <img src="${imageUrl}" alt="Equipment Image" class="img-fluid" style="max-height: 500px; object-fit: contain;">
+                                                </div>
+                                            ` : ''}
                                     <div class="${imageUrl ? 'col-md-6' : 'col-12'}">
-                                        <div>
-                                            <span class='badge text-bg-success'>${status}</span><br>
-                                            Quantity: ${quantity}<br><br>
-                                        </div>
-                                        <div>
+                                        <div class=" mt-3">
                                             <h4>Description</h4>
-                                            <p class="text-justify" style="font-size: 1.125em; color: #545454;">
+                                            <p class="text-justify" style="font-size: 1em; color: #545454;">
                                                 ${description}
                                             </p>
                                         </div>
