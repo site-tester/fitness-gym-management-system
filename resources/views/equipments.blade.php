@@ -72,6 +72,67 @@
             $(".card").on("click", function() {
                 let cardId = $(this).data("id");
 
+                // $.ajax({
+                //     url: "/get-equipment-details/" + cardId, // Your Laravel route
+                //     method: "GET",
+                //     success: function(response) {
+                //         console.log(response);
+                //         let stepsHtml = "";
+                //         let imageUrl = "";
+                //         let equipmentName = response.name || "No Equipment Name Found";
+                //         let status = response.status || "No Status Found";
+                //         let quantity = response.quantity ||
+                //             "No Quantity Found"; // Ensure quantity is set
+
+                //         if (response.steps) {
+                //             let steps = JSON.parse(response.steps);
+                //             stepsHtml = "<span class='badge text-bg-success'>" +
+                //                 status + "</span><br>";
+                //             stepsHtml += "Quantity: " + quantity +
+                //                 "<br><br>";
+                //             stepsHtml +=
+                //                 "<h4 style='text-align: center;'>Step-by-Step Instructions</h4>";
+                //             if (steps && steps.length > 0) {
+                //                 stepsHtml += "<ol style='text-align: justify;'>";
+                //                 steps.forEach(function(step) {
+                //                     stepsHtml +=
+                //                         "<li style='list-style: auto !important;'>" +
+                //                         step + "</li>";
+                //                 });
+                //                 stepsHtml += "</ol>";
+                //             } else {
+                //                 stepsHtml = "<p>No step-by-step instructions available.</p>";
+                //             }
+                //         } else {
+                //             stepsHtml = "<p>No step-by-step instructions available.</p>";
+                //         }
+
+                //         if (response.image) {
+                //             imageUrl = "https://ajdiafitnessgym.com/storage/" + response.image;
+                //         }
+
+                //         Swal.fire({
+                //             title: equipmentName,
+                //             imageUrl: imageUrl,
+                //             imageHeight: 200,
+                //             width: '80%',
+                //             imageAlt: "Equipment Image",
+                //             html: stepsHtml,
+                //             confirmButtonText: "Close",
+                //             customClass: {
+                //                 confirmButton: 'btn btn-danger'
+                //             },
+                //             didOpen: () => {
+                //                 if (!response.image) {
+                //                     $(".swal2-image").hide();
+                //                 }
+                //             }
+                //         });
+                //     },
+                //     error: function() {
+                //         Swal.fire("Error", "Failed to load equipment details", "error");
+                //     }
+                // });
                 $.ajax({
                     url: "/get-equipment-details/" + cardId, // Your Laravel route
                     method: "GET",
@@ -81,28 +142,30 @@
                         let imageUrl = "";
                         let equipmentName = response.name || "No Equipment Name Found";
                         let status = response.status || "No Status Found";
-                        let quantity = response.quantity ||
-                            "No Quantity Found"; // Ensure quantity is set
+                        let quantity = response.quantity || "No Quantity Found";
+                        let description = response.description || "No Description Found";
 
                         if (response.steps) {
                             let steps = JSON.parse(response.steps);
-                            stepsHtml = "<span class='badge text-bg-success'>" +
-                                status + "</span><br>";
-                            stepsHtml += "Quantity: " + quantity +
-                                "<br><br>";
-                            stepsHtml +=
-                                "<h4 style='text-align: center;'>Step-by-Step Instructions</h4>";
+                            let stepsListHtml = "";
                             if (steps && steps.length > 0) {
-                                stepsHtml += "<ol style='text-align: justify;'>";
+                                stepsListHtml += "<ol style='text-align: justify;'>";
                                 steps.forEach(function(step) {
-                                    stepsHtml +=
+                                    stepsListHtml +=
                                         "<li style='list-style: auto !important;'>" +
                                         step + "</li>";
                                 });
-                                stepsHtml += "</ol>";
+                                stepsListHtml += "</ol>";
                             } else {
-                                stepsHtml = "<p>No step-by-step instructions available.</p>";
+                                stepsListHtml =
+                                    "<p>No step-by-step instructions available.</p>";
                             }
+
+                            stepsHtml = `
+
+                                <h4 style='text-align: center;'>Step-by-Step Instructions</h4>
+                                ${stepsListHtml}
+                            `;
                         } else {
                             stepsHtml = "<p>No step-by-step instructions available.</p>";
                         }
@@ -113,18 +176,39 @@
 
                         Swal.fire({
                             title: equipmentName,
-                            imageUrl: imageUrl,
-                            imageHeight: 200,
-                            imageAlt: "Equipment Image",
-                            html: stepsHtml,
+                            html: `
+                                <div class="row align-items-start px-5">
+                                    ${imageUrl ? `
+                                            <div class="col-md-6">
+                                                <img src="${imageUrl}" alt="Equipment Image" class="img-fluid" style="max-height: 500px; object-fit: contain;">
+                                            </div>
+                                        ` : ''}
+                                    <div class="${imageUrl ? 'col-md-6' : 'col-12'}">
+                                        <div>
+                                            <span class='badge text-bg-success'>${status}</span><br>
+                                            Quantity: ${quantity}<br><br>
+                                        </div>
+                                        <div>
+                                            <h4>Description</h4>
+                                            <p class="text-justify" style="font-size: 1.125em; color: #545454;">
+                                                ${description}
+                                            </p>
+                                        </div>
+                                        <hr>
+                                        <div>
+                                            ${stepsHtml}
+                                        </div>
+                                    </div>
+                                </div>
+                            `,
+                            width: '70%',
                             confirmButtonText: "Close",
                             customClass: {
-                                confirmButton: 'btn btn-danger'
+                                confirmButton: 'btn btn-danger',
+                                htmlContainer: 'swal2-html-container-custom' // Optional custom class for styling
                             },
                             didOpen: () => {
-                                if (!response.image) {
-                                    $(".swal2-image").hide();
-                                }
+                                // No need to hide image here, we handle it in the HTML
                             }
                         });
                     },

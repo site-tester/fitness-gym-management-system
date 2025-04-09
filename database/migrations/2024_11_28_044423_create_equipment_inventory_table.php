@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('category')->nullable();
             $table->string('brand')->nullable();
             $table->string('model')->nullable();
-            $table->integer('quantity')->default(1)->nullable();
+            $table->string('quantity')->default(1)->nullable();
             // $table->string('location')->nullable();
             // $table->date('purchase_date')->nullable();
             // $table->date('warranty_expiry_date')->nullable();
@@ -30,6 +30,7 @@ return new class extends Migration {
             // $table->string('supplier_name')->nullable();
             $table->enum('usage_frequency', ['high', 'medium', 'low'])->default('medium')->nullable();
             $table->text('remarks')->nullable();
+            $table->text('description')->nullable();
             $table->text('steps')->nullable();
             // $table->string('image')->nullable();
             $table->string('added_by')->nullable();

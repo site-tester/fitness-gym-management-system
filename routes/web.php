@@ -58,6 +58,7 @@ Route::get('/get-equipment-details/{id}', function ($id) {
         'name' => $equipment->equipment_name ?? 'No Equipment Name Found',
         'status' => 'Ready to Use' ?? 'No Status Found',
         // 'status' => $equipment->condition ?? 'No Status Found',
+        'description' => $equipment->description ?? 'No Description Found',
         'quantity' => $equipment->quantity ?? 0,
     ]);
 });
