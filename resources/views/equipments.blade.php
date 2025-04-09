@@ -163,7 +163,7 @@
 
                             stepsHtml = `
 
-                                <h4 style='text-align: center;'>Step-by-Step Instructions</h4>
+                                <h6 style='text-align: center;'>Step-by-Step Instructions</h6>
                                 ${stepsListHtml}
                             `;
                         } else {
@@ -190,7 +190,7 @@
                                                 <span class='badge text-bg-success'>${status}</span><br>
                                                 Quantity: ${quantity}
                                             </div>
-                                            <h4 class="mt-3">Description</h4>
+                                            <h6 class="mt-2">Description</h6>
                                             <p style="font-size: .7em; color: #545454; text-align: justify !important; line-height: 1.5;">
                                                 ${description}
                                             </p>
