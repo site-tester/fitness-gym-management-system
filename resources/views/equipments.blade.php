@@ -175,27 +175,28 @@
                         }
 
                         Swal.fire({
-                            title: `${equipmentName}
-                                    <div class="text-center" style="font-size: 20px;">
-                                        <span class='badge text-bg-success'>${status}</span>
-                                        Quantity: ${quantity}
-                                    </div>`,
+                            title: equipmentName,
+
                             html: `
-                                <div class="row align-items-start px-5">
+                                <div class="row align-items-start px-3">
                                     ${imageUrl ? `
                                                 <div class="col-md-6">
-                                                    <img src="${imageUrl}" alt="Equipment Image" class="img-fluid" style="max-height: 500px; object-fit: contain;">
+                                                    <img src="${imageUrl}" alt="Equipment Image" class="img-fluid" style="max-height: 450px; object-fit: contain;">
                                                 </div>
                                             ` : ''}
                                     <div class="${imageUrl ? 'col-md-6' : 'col-12'}">
                                         <div class=" mt-3">
+                                            <div class="text-center">
+                                                <span class='badge text-bg-success'>${status}</span><br>
+                                                Quantity: ${quantity}
+                                            </div>
                                             <h4>Description</h4>
-                                            <p class="text-justify" style="font-size: 1em; color: #545454;">
+                                            <p style="font-size: .8em; color: #545454; text-align: justify !important;">
                                                 ${description}
                                             </p>
                                         </div>
                                         <hr>
-                                        <div>
+                                        <div style="font-size: .8em; color: #545454; text-align: justify !important;">
                                             ${stepsHtml}
                                         </div>
                                     </div>
