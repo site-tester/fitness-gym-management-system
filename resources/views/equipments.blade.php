@@ -178,7 +178,7 @@
                             title: equipmentName,
 
                             html: `
-                                <div class="row align-items-start px-3">
+                                <div class="row align-items-start px-5">
                                     ${imageUrl ? `
                                                 <div class="col-md-6">
                                                     <img src="${imageUrl}" alt="Equipment Image" class="img-fluid" style="max-height: 450px; object-fit: contain;">
@@ -191,12 +191,12 @@
                                                 Quantity: ${quantity}
                                             </div>
                                             <h4>Description</h4>
-                                            <p style="font-size: .8em; color: #545454; text-align: justify !important;">
+                                            <p style="font-size: .7em; color: #545454; text-align: justify !important; line-height: 1.5;">
                                                 ${description}
                                             </p>
                                         </div>
                                         <hr>
-                                        <div style="font-size: .8em; color: #545454; text-align: justify !important;">
+                                        <div style="font-size: .7em; color: #545454; text-align: justify !important;">
                                             ${stepsHtml}
                                         </div>
                                     </div>
