@@ -5,23 +5,41 @@
 @section('css')
     <link href="https://cdn.datatables.net/v/dt/dt-2.1.8/r-3.0.3/datatables.min.css" rel="stylesheet">
     <style>
-        body .workoutDesc p{
-            color: rgb(51, 51, 51) !important;
-            line-height: 1.5 !important;
+        body .workoutDesc {
+            /* color: #7a7a7a  !important; */
+            line-height: 1.6 !important;
             text-align: justify !important;
+            /* font-size: 18px !important; */
+            font-family: 'Poppins', sans-serif !important;
+        }
+        body .workoutDesc p{
+            /* color: rgb(51, 51, 51) !important; */
+            line-height: 1.6 !important;
+            text-align: justify !important;
+            margin-left: 1em !important;
             text-indent: 1em !important;
+            font-size: 18px !important;
         }
         body .workoutDesc ol li{
-            color: rgb(51, 51, 51) !important;
-            line-height: 1.5 !important;
+            color: #7a7a7a  !important;
+            line-height: 1.6 !important;
             text-align: justify !important;
+            font-size: 18px !important;
+        }
+
+        body .workoutDesc ul li{
+            color: #7a7a7a  !important;
+            line-height: 1.6 !important;
+            text-align: justify !important;
+            font-size: 18px !important;
         }
 
         body .workoutDesc p a {
             text-decoration: none !important;
             cursor: auto !important;
             pointer-events: none !important;
-            color: rgb(51, 51, 51) !important;
+            color: #7a7a7a  !important;
+            font-size: 18px !important;
         }
 
         .iframe-container {
