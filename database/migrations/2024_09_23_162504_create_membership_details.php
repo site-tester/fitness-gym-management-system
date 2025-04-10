@@ -21,7 +21,11 @@ return new class extends Migration
             $table->string('age')->nullable();
             $table->string('medical_info')->nullable();
             $table->string('height')->nullable();
+            $table->string('height_raw')->nullable();
+            $table->string('height_raw_unit')->nullable();
             $table->string('weight')->nullable();
+            $table->string('weight_raw')->nullable();
+            $table->string('weight_raw_unit')->nullable();
             $table->string('bmi')->nullable();
             $table->string('civil_status')->nullable();
             $table->string('gender')->nullable();

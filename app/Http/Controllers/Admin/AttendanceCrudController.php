@@ -63,16 +63,20 @@ class AttendanceCrudController extends CrudController
         CRUD::addColumn([
             'name' => 'time_in',
             'label' => 'Time In',
-            'value' => function ($entry) {
-                return \Carbon\Carbon::parse($entry->time_in)->format('h:i A');
-            },
+            'type' => 'time',
+            'format' => 'h:mm A',
+            // 'value' => function ($entry) {
+            //     return \Carbon\Carbon::parse($entry->time_in)->timezone('Asia/Manila')->format('h:i A');
+            // },
         ]);
         CRUD::addColumn([
             'name' => 'time_out',
             'label' => 'Time Out',
-            'value' => function ($entry) {
-                return \Carbon\Carbon::parse($entry->time_in)->format('h:i A');
-            },
+            'type' => 'time',
+            'format' => 'h:mm A',
+            // 'value' => function ($entry) {
+            //     return \Carbon\Carbon::parse($entry->time_out)->timezone('Asia/Manila')->format('h:i A')?? '-'; ;
+            // },
         ]);
         // CRUD::setFromDb(); // set columns from db columns.
 

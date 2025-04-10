@@ -62,19 +62,24 @@ class GymProgressCrudController extends CrudController
             'type' => 'date',
         ]);
         CRUD::addColumn([
-            'name' => 'weight',
-            'label' => 'Weight (kg)',
-            'type' => 'number',
-        ]);
-        CRUD::addColumn([
             'name' => 'height',
-            'label' => 'Height (cm)',
-            'type' => 'number',
+            'label' => 'Height',
+            // 'suffix' => function ($entry) {
+            //     return $entry->height_raw_unit;
+            // },
+            'value' => function ($entry) {
+                return $entry->height ? number_format($entry->height, 2) . ' ' . $entry->height_raw_unit : '-';
+            }
         ]);
         CRUD::addColumn([
-            'name' => 'reps',
-            'label' => 'Reps',
-            'type' => 'number',
+            'name' => 'weight',
+            'label' => 'Weight',
+            // 'suffix' => function ($entry) {
+            //     return $entry->weight_raw_unit;
+            // },
+            'value' => function ($entry) {
+                return $entry->weight ? number_format($entry->weight, 2) . ' ' . $entry->weight_raw_unit : '-';
+            }
         ]);
         CRUD::addColumn([
             'name' => 'bmi',
@@ -83,6 +88,12 @@ class GymProgressCrudController extends CrudController
                 return $entry->bmi ? number_format($entry->bmi, 2) : '-';
             }
         ]);
+        CRUD::addColumn([
+            'name' => 'reps',
+            'label' => 'Reps',
+            'type' => 'number',
+        ]);
+
         CRUD::addColumn([
             'name' => 'notes',
             'label' => 'Notes',
@@ -130,33 +141,80 @@ class GymProgressCrudController extends CrudController
             'label' => 'Progress Date',
             'type' => 'date',
         ]);
-        CRUD::addField([
-            'name' => 'weight',
-            'label' => 'Weight (kg)',
-            'type' => 'number',
-            'attributes' => [
-                'id' => 'weight',
-                'step' => '0.01', // Allows decimal values
-            ],
-        ]);
-
-        CRUD::addField([
-            'name' => 'height',
-            'label' => 'Height (cm)',
-            'type' => 'number',
-            'attributes' => [
-                'id' => 'height',
-                'step' => '0.1', // Allows decimal values
-            ],
-        ]);
-
-        // Button for calculating BMI
         // CRUD::addField([
-        //     'name' => 'calculate_bmi',
-        //     'type' => 'custom_html',
-        //     'value' => '<button type="button" id="calculateBmi" class="btn btn-primary">Calculate BMI</button>',
+        //     'name' => 'weight',
+        //     'label' => 'Weight (kg)',
+        //     'type' => 'number',
+        //     'attributes' => [
+        //         'id' => 'weight',
+        //         'step' => '0.01', // Allows decimal values
+        //     ],
         // ]);
 
+        // CRUD::addField([
+        //     'name' => 'height',
+        //     'label' => 'Height (cm)',
+        //     'type' => 'number',
+        //     'attributes' => [
+        //         'id' => 'height',
+        //         'step' => '0.1', // Allows decimal values
+        //     ],
+        // ]);
+
+        CRUD::addField([
+            'name' => 'height_value',
+            'label' => 'Height',
+            'type' => 'number',
+            'attributes' => [
+                'id' => 'height_value',
+                'min' => 0,
+                'step' => 'any',
+            ],
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10',
+            ],
+        ]);
+
+        CRUD::addField([
+            'name' => 'height_unit',
+            'label' => 'Height Unit',
+            'type' => 'radio',
+            'options' => ['cm' => 'cm', 'ft' => 'ft'],
+            'default' => 'cm',
+            'inline' => true, // Display radio buttons horizontally
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-2',
+            ],
+        ]);
+
+        CRUD::addField([
+            'name' => 'weight_value',
+            'label' => 'Weight',
+            'type' => 'number',
+            'attributes' => [
+                'id' => 'weight_value',
+                'min' => 0,
+                'step' => 'any',
+            ],
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10',
+            ],
+        ]);
+
+        CRUD::addField([
+            'name' => 'weight_unit',
+            'label' => 'Weight Unit',
+            'type' => 'radio',
+            'options' => ['kg' => 'kg', 'lbs' => 'lbs'],
+            'default' => 'kg',
+            'inline' => true,
+            'attributes' => [
+                'id' => 'weight_unit',
+            ],
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-2',
+            ],
+        ]);
         CRUD::addField([
             'name' => 'bmi',
             'label' => 'BMI <button type="button" id="calculateBmi" class="btn btn-primary btn-sm">Calculate</button>',
@@ -191,8 +249,6 @@ class GymProgressCrudController extends CrudController
      */
     protected function setupUpdateOperation()
     {
-
-
         $this->setupCreateOperation();
 
     }
@@ -205,8 +261,10 @@ class GymProgressCrudController extends CrudController
             'user_id' => 'required|exists:users,id',
             'workout_name' => 'required',
             'progress_date' => 'required|date',
-            'weight' => 'required|numeric',
-            'height' => 'required|numeric',
+            'weight_value' => 'required',
+            'height_value' => 'required',
+            'weight_unit' => 'required|in:kg,lbs',
+            'height_unit' => 'required|in:cm,ft',
             'reps' => 'required|numeric',
             'notes' => 'nullable',
         ];
@@ -217,10 +275,14 @@ class GymProgressCrudController extends CrudController
             'workout_name.required' => 'The workout name field is required.',
             'progress_date.required' => 'The progress date field is required.',
             'progress_date.date' => 'The progress date field must be a date.',
-            'weight.required' => 'The weight field is required.',
-            'weight.numeric' => 'The weight field must be a number.',
-            'height.required' => 'The height field is required.',
-            'height.numeric' => 'The height field must be a number.',
+            'weight_value.required' => 'The weight field is required.',
+            'weight_value.numeric' => 'The weight field must be a number.',
+            'height_value.required' => 'The height field is required.',
+            'height_value.numeric' => 'The height field must be a number.',
+            'weight_unit.required' => 'The weight unit field is required.',
+            'weight_unit.in' => 'The selected weight unit is invalid.',
+            'height_unit.required' => 'The height unit field is required.',
+            'height_unit.in' => 'The selected height unit is invalid.',
             'reps.required' => 'The reps field is required.',
             'reps.numeric' => 'The reps field must be a number.',
         ];
@@ -232,10 +294,41 @@ class GymProgressCrudController extends CrudController
             \Alert::error('Error', 'Client not found');
             return redirect()->back();
         }
-        $bmi = $request['weight'] / (($request['height'] / 100) ** 2);
+        // $bmi = $request['weight'] / (($request['height'] / 100) ** 2);
 
-        $user->weight = $request->weight;
-        $user->height = $request->height;
+        $heightValue = $request['height_value'];
+        $heightUnit = $request['height_unit'];
+        $weightValue = $request['weight_value'];
+        $weightUnit = $request['weight_unit'];
+
+        // Convert height and weight to cm and kg respectively
+        if ($heightUnit == 'inches') {
+            $heightCm = $heightValue * 2.54;
+            $heightMeters = $heightCm / 100;
+        } elseif ($heightUnit == 'ft') {
+            $heightCm = $heightValue * 30.48;
+            $heightMeters = $heightCm / 100;
+        } else {
+            $heightCm = $heightValue;
+            $heightMeters = $heightValue / 100;
+        }
+
+        if ($weightUnit == 'lbs') {
+            $weightKg = $weightValue * 0.453592;
+        } else {
+            $weightKg = $weightValue;
+        }
+
+        // Calculate BMI
+        $bmi = $heightMeters > 0 ? $weightKg / ($heightMeters * $heightMeters) : null;
+
+
+        $user->height = $heightCm;
+        $user->height_raw = $heightValue;
+        $user->height_raw_unit = $heightUnit;
+        $user->weight = $weightKg;
+        $user->weight_raw = $weightValue;
+        $user->weight_raw_unit = $weightUnit;
         $user->bmi = $bmi;
         $user->save();
 
@@ -243,8 +336,12 @@ class GymProgressCrudController extends CrudController
         $gymProgress->user_id = $request->user_id;
         $gymProgress->workout_name = $request->workout_name;
         $gymProgress->progress_date = $request->progress_date;
-        $gymProgress->weight = $request->weight;
-        $gymProgress->height = $request->height;
+        $gymProgress->height = $heightValue;
+        $gymProgress->height_raw = $heightValue;
+        $gymProgress->height_raw_unit = $heightUnit;
+        $gymProgress->weight = $weightKg;
+        $gymProgress->weight_raw = $weightValue;
+        $gymProgress->weight_raw_unit = $weightUnit;
         $gymProgress->reps = $request->reps;
         $gymProgress->bmi = $bmi;
         $gymProgress->notes = $request->notes;
@@ -262,8 +359,10 @@ class GymProgressCrudController extends CrudController
             'user_id' => 'required|exists:users,id',
             'workout_name' => 'required',
             'progress_date' => 'required|date',
-            'weight' => 'required|numeric',
-            'height' => 'required|numeric',
+            'weight_value' => 'required',
+            'height_value' => 'required',
+            'weight_unit' => 'required|in:kg,lbs',
+            'height_unit' => 'required|in:cm,ft',
             'reps' => 'required|numeric',
             'notes' => 'nullable',
         ];
@@ -279,10 +378,40 @@ class GymProgressCrudController extends CrudController
             \Alert::error('Error', 'Client not found');
             return redirect()->back();
         }
-        $bmi = $request['weight'] / (($request['height'] / 100) ** 2);
+        // $bmi = $request['weight'] / (($request['height'] / 100) ** 2);
+        $heightValue = $request['height_value'];
+        $heightUnit = $request['height_unit'];
+        $weightValue = $request['weight_value'];
+        $weightUnit = $request['weight_unit'];
 
-        $user->weight = $request->weight;
-        $user->height = $request->height;
+        // Convert height and weight to cm and kg respectively
+        if ($heightUnit == 'inches') {
+            $heightCm = $heightValue * 2.54;
+            $heightMeters = $heightCm / 100;
+        } elseif ($heightUnit == 'ft') {
+            $heightCm = $heightValue * 30.48;
+            $heightMeters = $heightCm / 100;
+        } else {
+            $heightCm = $heightValue;
+            $heightMeters = $heightValue / 100;
+        }
+
+        if ($weightUnit == 'lbs') {
+            $weightKg = $weightValue * 0.453592;
+        } else {
+            $weightKg = $weightValue;
+        }
+
+        // Calculate BMI
+        $bmi = $heightMeters > 0 ? $weightKg / ($heightMeters * $heightMeters) : null;
+
+        // Update the MembershipDetail entry
+        $user->weight = $weightValue;
+        $user->weight_raw = $weightValue;
+        $user->weight_raw_unit = $weightUnit;
+        $user->height = $heightValue;
+        $user->height_raw = $heightValue;
+        $user->height_raw_unit = $heightUnit;
         $user->bmi = $bmi;
         $user->save();
 
@@ -291,8 +420,12 @@ class GymProgressCrudController extends CrudController
         if ($gymProgress) {
             $gymProgress->workout_name = $request->workout_name;
             $gymProgress->progress_date = $request->progress_date;
-            $gymProgress->weight = $request->weight;
-            $gymProgress->height = $request->height;
+            $gymProgress->weight = $weightValue;
+            $gymProgress->weight_raw = $weightValue;
+            $gymProgress->weight_raw_unit = $weightUnit;
+            $gymProgress->height = $heightValue;
+            $gymProgress->height_raw = $heightValue;
+            $gymProgress->height_raw_unit = $heightUnit;
             $gymProgress->reps = $request->reps;
             $gymProgress->bmi = $bmi;
             $gymProgress->notes = $request->notes;

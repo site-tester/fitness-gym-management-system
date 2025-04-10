@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Log;
 
 class GoogleAuthController extends Controller
 {
@@ -79,6 +80,7 @@ class GoogleAuthController extends Controller
     public function sendWorkoutEmail($userId)
     {
         $user = User::find($userId);
+        \Log::info('Sending workout reminder email to user: ' . $user->email);
         if ($user) {
             Mail::send('emails.workout_reminder', ['user' => $user], function ($message) use ($user) {
                 $message->to($user->email)->subject('It\'s Time to Workout!');

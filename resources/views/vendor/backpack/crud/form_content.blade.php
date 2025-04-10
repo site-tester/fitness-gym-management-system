@@ -249,33 +249,64 @@
         });
     </script>
 
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             let rfidInput = document.getElementById('rfid-input');
 
-            rfidInput.addEventListener('input', function(e) {
-                e.preventDefault();
-            });
+            // rfidInput.addEventListener('input', function(e) {
+            //     e.preventDefault();
+            // });
 
-            rfidInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
+            // rfidInput.addEventListener('keypress', function(e) {
+            //     if (e.key === 'Enter') {
+            //         e.preventDefault();
+            //     }
+            // });
+            if (rfidInput) {
+                rfidInput.addEventListener('input', function(e) {
                     e.preventDefault();
-                }
-            });
+                });
+
+                rfidInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                    }
+                });
+            } else {
+                // The element doesn't exist on this page, so we do nothing
+                console.log("Element with ID 'rfid-input' not found on this page.");
+            }
         });
     </script>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("calculateBmi").addEventListener("click", function() {
-                let weight = parseFloat(document.getElementById("weight").value);
-                let height = parseFloat(document.getElementById("height").value) /
-                    100; // Convert cm to meters
+                let weightValue = parseFloat(document.getElementById("weight_value").value);
+                let weightUnit = document.querySelector('input[name="weight_unit"]').value;
+                let heightValue = parseFloat(document.getElementById("height_value").value);
+                let heightUnit = document.querySelector('input[name="height_unit"]').value;
+                let heightInMeters;
+                let weightInKg;
 
-                if (!isNaN(weight) && !isNaN(height) && height > 0) {
-                    let bmi = (weight / (height * height)).toFixed(2); // BMI formula
-                    document.getElementById("bmi").value = bmi; // Set BMI field value
+                if (heightUnit === "cm") {
+                    heightInMeters = heightValue / 100;
+                } else if (heightUnit === "ft") {
+                    heightInMeters = heightValue * 0.3048;
+                }
+
+                if (weightUnit === "lbs") {
+                    weightInKg = weightValue * 0.453592;
                 } else {
+                    weightInKg = weightValue;
+                }
+                if (!isNaN(weightInKg) && !isNaN(heightInMeters) && heightInMeters > 0) {
+                    let bmi = (weightInKg / (heightInMeters * heightInMeters)).toFixed(2) ;
+                    document.getElementById("bmi").value = bmi;
+                } else {
+                    console.log("Invalid input weight and height values.");
                     alert("Please enter valid weight and height values.");
                 }
             });

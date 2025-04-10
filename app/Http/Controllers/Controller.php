@@ -24,6 +24,14 @@ class Controller extends BaseController
     }
 
     public function sendContactUs(Request $request){
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|max:5000',
+        ]);
+
         ContactusInbox::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),

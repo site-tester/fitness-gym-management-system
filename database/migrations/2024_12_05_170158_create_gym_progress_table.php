@@ -17,7 +17,11 @@ return new class extends Migration
             $table->string('workout_name');
             $table->date('progress_date');
             $table->string('height')->nullable(); // Client's height
+            $table->string('height_raw')->nullable(); // Raw height value
+            $table->string('height_raw_unit')->nullable(); // Unit of height (e.g., cm, ft)
             $table->string('weight')->nullable(); // Client's weight
+            $table->string('weight_raw')->nullable(); // Raw weight value
+            $table->string('weight_raw_unit')->nullable(); // Unit of weight (e.g., kg, lb)
             $table->integer('reps')->nullable(); // Example: reps for a specific exercise
             $table->string('bmi')->nullable(); // BMI calculation
             $table->text('notes')->nullable(); // Additional notes about the session

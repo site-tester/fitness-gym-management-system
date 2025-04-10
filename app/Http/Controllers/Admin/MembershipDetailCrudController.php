@@ -105,7 +105,7 @@ class MembershipDetailCrudController extends CrudController
          * - CRUD::column('price')->type('number');
          */
         CRUD::addButtonFromView('line', 'delete', 'custom_delete_member', 'end');
-        CRUD::addButtonFromView('line', 'generate_card', 'vendor.backpack.crud.buttons.generate_card_button', 'beginning');
+        CRUD::addButtonFromView('line', 'generate_card', 'generate_card_button', 'beginning');
 
     }
 
@@ -174,22 +174,71 @@ class MembershipDetailCrudController extends CrudController
             'label' => 'Birthdate',
             'type' => 'date',
         ]);
+        // CRUD::addField([
+        //     'name' => 'height',
+        //     'label' => 'Height (cm)',
+        //     'type' => 'number',
+        //     'attributes' => [
+        //         'min' => 0, // Set the minimum value to 0
+        //     ],
+        // ]);
+        // CRUD::addField([
+        //     'name' => 'weight',
+        //     'label' => 'Weight (kg)',
+        //     'type' => 'number',
+        //     'attributes' => [
+        //         'min' => 0, // Set the minimum value to 0
+        //     ],
+        // ]);
+
         CRUD::addField([
-            'name' => 'height',
-            'label' => 'Height (cm)',
+            'name' => 'height_value',
+            'label' => 'Height',
             'type' => 'number',
             'attributes' => [
-                'min' => 0, // Set the minimum value to 0
+                'min' => 0,
+            ],
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10',
             ],
         ]);
+
         CRUD::addField([
-            'name' => 'weight',
-            'label' => 'Weight (kg)',
+            'name' => 'height_unit',
+            'label' => 'Height Unit',
+            'type' => 'radio',
+            'options' => ['cm' => 'cm', 'ft' => 'ft'],
+            'default' => 'cm',
+            'inline' => true, // Display radio buttons horizontally
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-2',
+            ],
+        ]);
+
+        CRUD::addField([
+            'name' => 'weight_value',
+            'label' => 'Weight',
             'type' => 'number',
             'attributes' => [
-                'min' => 0, // Set the minimum value to 0
+                'min' => 0,
+            ],
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10',
             ],
         ]);
+
+        CRUD::addField([
+            'name' => 'weight_unit',
+            'label' => 'Weight Unit',
+            'type' => 'radio',
+            'options' => ['kg' => 'kg', 'lbs' => 'lbs'],
+            'default' => 'kg',
+            'inline' => true,
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-2',
+            ],
+        ]);
+
         CRUD::addField([
             'name' => 'civil_status',
             'label' => 'Civil Status',
@@ -325,6 +374,33 @@ class MembershipDetailCrudController extends CrudController
             'rfid_number' => $request['rfid_number'],
         ]);
 
+
+        $heightValue = $request['height_value'];
+        $heightUnit = $request['height_unit'];
+        $weightValue = $request['weight_value'];
+        $weightUnit = $request['weight_unit'];
+
+        // Convert height and weight to cm and kg respectively
+        if ($heightUnit == 'inches') {
+            $heightCm = $heightValue * 2.54;
+            $heightMeters = $heightCm / 100;
+        } elseif ($heightUnit == 'ft') {
+            $heightCm = $heightValue * 30.48;
+            $heightMeters = $heightCm / 100;
+        } else {
+            $heightCm = $heightValue;
+            $heightMeters = $heightValue / 100;
+        }
+
+        if ($weightUnit == 'lbs') {
+            $weightKg = $weightValue * 0.453592;
+        } else {
+            $weightKg = $weightValue;
+        }
+
+        // Calculate BMI
+        $bmi = $heightMeters > 0 ? $weightKg / ($heightMeters * $heightMeters) : null;
+
         // Create the MemberDetails record and associate it with the User
         MembershipDetail::create([
             'client_id' => $user->id,
@@ -333,9 +409,16 @@ class MembershipDetailCrudController extends CrudController
             'address' => $request['address'],
             'birthdate' => $request['birthdate'],
             'age' => Carbon::parse($request['birthdate'])->age,
-            'height' => $request['height'],
-            'weight' => $request['weight'],
-            'bmi' => $request['height'] && $request['weight'] ? $request['weight'] / (($request['height'] / 100) ** 2) : null,
+            // 'height' => $request['height'],
+            // 'weight' => $request['weight'],
+            // 'bmi' => $request['height'] && $request['weight'] ? $request['weight'] / (($request['height'] / 100) ** 2) : null,
+            'height' => $heightCm, // Store in cm
+            'weight' => $weightKg, // Store in kg
+            'height_raw' => $heightValue, // store the raw input
+            'height_raw_unit' => $heightUnit, // store the unit
+            'weight_raw' => $weightValue,
+            'weight_raw_unit' => $weightUnit,
+            'bmi' => $bmi,
             'civil_status' => $request['civil_status'],
             'gender' => $request['gender'],
             'membership_type' => $request['membership_type'],
@@ -422,13 +505,53 @@ class MembershipDetailCrudController extends CrudController
             'type' => 'date',
         ]);
         CRUD::addField([
-            'name' => 'height',
-            'label' => 'Height (cm)',
+            'name' => 'height_raw',
+            'label' => 'Height',
+            'type' => 'number',
+            'attributes' => [
+                'min' => 0,
+            ],
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10',
+            ],
         ]);
+
         CRUD::addField([
-            'name' => 'weight',
-            'label' => 'Weight (kg)',
+            'name' => 'height_raw_unit',
+            'label' => 'Height Unit',
+            'type' => 'radio',
+            'options' => ['cm' => 'cm', 'ft' => 'ft'],
+            'default' => 'cm',
+            'inline' => true, // Display radio buttons horizontally
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-2',
+            ],
         ]);
+
+        CRUD::addField([
+            'name' => 'weight_raw',
+            'label' => 'Weight',
+            'type' => 'number',
+            'attributes' => [
+                'min' => 0,
+            ],
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-10',
+            ],
+        ]);
+
+        CRUD::addField([
+            'name' => 'weight_raw_unit',
+            'label' => 'Weight Unit',
+            'type' => 'radio',
+            'options' => ['kg' => 'kg', 'lbs' => 'lbs'],
+            'default' => 'kg',
+            'inline' => true,
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-2',
+            ],
+        ]);
+
         CRUD::addField([
             'name' => 'civil_status',
             'label' => 'Civil Status',
@@ -542,6 +665,31 @@ class MembershipDetailCrudController extends CrudController
             'password' => $request['password'] ? Hash::make($request['password']) : $user->password, // Retain old password if not updated
         ]);
 
+        $heightValue = $request['height_raw'];
+        $heightUnit = $request['height_raw_unit'];
+        $weightValue = $request['weight_raw'];
+        $weightUnit = $request['weight_raw_unit'];
+
+        // Convert height and weight to cm and kg respectively
+        if ($heightUnit == 'inches') {
+            $heightCm = $heightValue * 2.54;
+            $heightMeters = $heightCm / 100;
+        } elseif ($heightUnit == 'ft') {
+            $heightCm = $heightValue * 30.48;
+            $heightMeters = $heightCm / 100;
+        } else {
+            $heightCm = $heightValue;
+            $heightMeters = $heightValue / 100;
+        }
+
+        if ($weightUnit == 'lbs') {
+            $weightKg = $weightValue * 0.453592;
+        } else {
+            $weightKg = $weightValue;
+        }
+
+        $bmi = $heightMeters > 0 ? $weightKg / ($heightMeters * $heightMeters) : null;
+
         // Update the MembershipDetail record
         $membershipDetail->update([
             'rfid_number' => $request['rfid_number'],
@@ -549,9 +697,16 @@ class MembershipDetailCrudController extends CrudController
             'address' => $request['address'],
             'birthdate' => $request['birthdate'],
             'age' => Carbon::parse($request['birthdate'])->age,
-            'height' => $request['height'],
-            'weight' => $request['weight'],
-            'bmi' => $request['height'] && $request['weight'] ? $request['weight'] / (($request['height'] / 100) ** 2) : null,
+            // 'height' => $request['height'],
+            // 'weight' => $request['weight'],
+            // 'bmi' => $request['height'] && $request['weight'] ? $request['weight'] / (($request['height'] / 100) ** 2) : null,
+            'height' => $heightCm,  // Store in cm
+            'weight' => $weightKg, // Store in kg
+            'height_raw' => $heightValue, // store the raw input
+            'height_raw_unit' => $heightUnit, // store the unit
+            'weight_raw' => $weightValue,
+            'weight_raw_unit' => $weightUnit,
+            'bmi' => $bmi,
             'civil_status' => $request['civil_status'],
             'gender' => $request['gender'],
             'membership_type' => $request['membership_type'],
@@ -606,10 +761,17 @@ class MembershipDetailCrudController extends CrudController
         CRUD::addColumn([
             'name' => 'height',
             'label' => 'Height',
+            'value' => function ($entry) {
+                return $entry->height_raw . ' ' . $entry->height_raw_unit;
+            },
+
         ]);
         CRUD::addColumn([
             'name' => 'weight',
             'label' => 'Weight',
+            'value' => function ($entry) {
+                return $entry->weight_raw . ' ' . $entry->weight_raw_unit;
+            },
         ]);
         CRUD::addColumn([
             'name' => 'civil_status',
