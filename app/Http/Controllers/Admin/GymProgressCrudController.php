@@ -85,8 +85,21 @@ class GymProgressCrudController extends CrudController
             'name' => 'bmi',
             'label' => 'BMI',
             'value' => function ($entry) {
-                return $entry->bmi ? number_format($entry->bmi, 2) : '-';
-            }
+                $bmiCategory = '';
+                if (isset($entry->bmi)) {
+                    $bmi = $entry->bmi;
+                    if ($bmi < 18.5) {
+                        $bmiCategory = 'Underweight';
+                    } elseif ($bmi >= 18.5 && $bmi < 24.9) {
+                        $bmiCategory = 'Normal';
+                    } elseif ($bmi >= 25 && $bmi < 29.9) {
+                        $bmiCategory = 'Overweight';
+                    } else {
+                        $bmiCategory = 'Obese';
+                    }
+                }
+
+                return $entry->bmi ? number_format($entry->bmi, 2).' ('. $bmiCategory .') ' : '-';}
         ]);
         CRUD::addColumn([
             'name' => 'reps',

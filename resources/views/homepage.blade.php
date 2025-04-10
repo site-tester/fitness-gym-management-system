@@ -27,9 +27,9 @@
                 <h6>work <em class="text-accent">harder</em>, get <em class="text-accent">stronger</em></h6>
                 <h2>easy with <em
                         style="
-                    font-family: var(--bs-font-sans-serif) !important; font-weight: 900;
+                    /* font-family: var(--bs-font-sans-serif) !important; font-weight: 900;
                     font-style: normal; text-shadow:1px 1px 2px #fff, /* Light shadow for highlight */ -1px -1px
-                            2px #000; Dark shadow for depth
+                            2px #000; Dark shadow for depth */
                     ">AJ
                         DIA</em></h2>
                 <div class="main-button
@@ -395,10 +395,10 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-xs-12">
                     <div class="contact-form">
-                        <form 
-                            id="contactForm" 
+                        <form
+                            id="contactForm"
                         >
-                        <!-- action="{{ route('send.contact.us') }}" 
+                        <!-- action="{{ route('send.contact.us') }}"
                             method="post" -->
                             @csrf
                             <div class="row">
@@ -418,7 +418,7 @@
                                     <fieldset>
                                         <input name="subject" type="text" id="subject" placeholder="Subject">
                                     </fieldset>
-                                </div>   
+                                </div>
                                 <div class="col-lg-12">
                                     <fieldset>
                                         <textarea name="message" rows="6" id="message" placeholder="Message" required=""></textarea>

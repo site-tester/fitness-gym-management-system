@@ -85,7 +85,21 @@ class MembershipDetailCrudController extends CrudController
             'name' => 'bmi',
             'label' => 'BMI',
             'value' => function ($entry) {
-                return $entry->bmi ? number_format($entry->bmi, 2) : '-';
+                $bmiCategory = '';
+                if (isset($entry->bmi)) {
+                    $bmi = $entry->bmi;
+                    if ($bmi < 18.5) {
+                        $bmiCategory = 'Underweight';
+                    } elseif ($bmi >= 18.5 && $bmi < 24.9) {
+                        $bmiCategory = 'Normal';
+                    } elseif ($bmi >= 25 && $bmi < 29.9) {
+                        $bmiCategory = 'Overweight';
+                    } else {
+                        $bmiCategory = 'Obese';
+                    }
+                }
+
+                return $entry->bmi ? number_format($entry->bmi, 2).' ('. $bmiCategory .') ' : '-';
             }
         ]);
         CRUD::addColumn([
@@ -196,6 +210,8 @@ class MembershipDetailCrudController extends CrudController
             'label' => 'Height',
             'type' => 'number',
             'attributes' => [
+                'id' => 'height_value',
+                'step' => 'any', // Allow decimal values
                 'min' => 0,
             ],
             'wrapperAttributes' => [
@@ -220,6 +236,8 @@ class MembershipDetailCrudController extends CrudController
             'label' => 'Weight',
             'type' => 'number',
             'attributes' => [
+                'id' => 'weight_value',
+                'step' => 'any', // Allow decimal values
                 'min' => 0,
             ],
             'wrapperAttributes' => [
@@ -509,7 +527,9 @@ class MembershipDetailCrudController extends CrudController
             'label' => 'Height',
             'type' => 'number',
             'attributes' => [
+                'id' => 'height_raw',
                 'min' => 0,
+                'step' => 'any', // Allow decimal values
             ],
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-10',
@@ -533,6 +553,8 @@ class MembershipDetailCrudController extends CrudController
             'label' => 'Weight',
             'type' => 'number',
             'attributes' => [
+                'id' => 'weight_raw',
+                'step' => 'any', // Allow decimal values
                 'min' => 0,
             ],
             'wrapperAttributes' => [
@@ -671,10 +693,7 @@ class MembershipDetailCrudController extends CrudController
         $weightUnit = $request['weight_raw_unit'];
 
         // Convert height and weight to cm and kg respectively
-        if ($heightUnit == 'inches') {
-            $heightCm = $heightValue * 2.54;
-            $heightMeters = $heightCm / 100;
-        } elseif ($heightUnit == 'ft') {
+        if ($heightUnit == 'ft') {
             $heightCm = $heightValue * 30.48;
             $heightMeters = $heightCm / 100;
         } else {
