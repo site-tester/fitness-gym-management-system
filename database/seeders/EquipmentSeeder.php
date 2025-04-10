@@ -591,6 +591,105 @@ class EquipmentSeeder extends Seeder
                 ]),
                 'description' => 'The triceps press machine isolates the triceps muscles, located on the back of your upper arms.  It allows you to perform triceps extensions in a controlled manner.  Proper alignment and controlled movements are key to effectively targeting the triceps and avoiding strain on your elbows.',
             ],
+            [
+                'equipment_name' => 'Battle Rope',
+                'image' => 'battle rope.jpg',
+                'steps' => json_encode([
+                    "Stand with your feet shoulder-width apart, knees slightly bent.",
+                    "Hold one end of the battle rope in each hand.",
+                    "Initiate the desired wave or slam motion by rapidly moving your arms.",
+                    "Maintain a stable core and controlled movements.",
+                    "Vary the exercises like waves, slams, and circles for a full-body workout."
+                ]),
+                'description' => 'Battle ropes are thick ropes used for high-intensity interval training (HIIT) and strength training. They engage multiple muscle groups, including the arms, shoulders, core, back, and legs, providing a full-body workout. Exercises involve creating waves, slams, and other dynamic movements with the ropes to build strength, power, and endurance.',
+            ],
+            [
+                'equipment_name' => 'Cross Over Machine',
+                'image' => 'CROSS OVER MACHINE.jpg',
+                'steps' => json_encode([
+                    "Adjust the pulleys to the desired height for the exercise.",
+                    "Select the desired weight on each side.",
+                    "Grasp the handles with an overhand or underhand grip, depending on the exercise.",
+                    "Step forward into the center of the machine with a staggered stance for stability.",
+                    "Pull the handles together in front of your body, focusing on squeezing the targeted muscles.",
+                    "Slowly return to the starting position, controlling the resistance.",
+                    "Perform various exercises like cable crossovers for chest, face pulls for rear deltoids, and cable crunches for abs."
+                ]),
+                'description' => 'The cross over machine, also known as a cable crossover machine, is a versatile piece of equipment that uses a system of cables and pulleys to provide resistance for a wide range of exercises. It allows for movements across different planes of motion, targeting various muscle groups in the upper and lower body. It\'s particularly effective for isolating chest, back, shoulder, and core muscles.',
+            ],
+            [
+                'equipment_name' => 'Decline Bench Press Abdominal',
+                'image' => 'decline bench press abdominal.jpg',
+                'steps' => json_encode([
+                    "Set the decline bench to a 15-30 degree angle.",
+                    "Lie on the bench with your head lower than your hips, securing your feet.",
+                    "Grip the barbell slightly wider than shoulder-width apart with an overhand grip.",
+                    "Lift the barbell off the rack and position it over your lower chest.",
+                    "Lower the barbell slowly to your lower chest, keeping your elbows slightly tucked.",
+                    "Push the barbell back up to the starting position, squeezing your chest.",
+                    "For an abdominal focus, incorporate a slight crunch at the top of the press or perform leg raises while on the decline bench (often a separate feature or exercise).",
+                    "Ensure your core is engaged throughout the exercise for stability."
+                ]),
+                'description' => 'The decline bench press primarily targets the lower pectoral muscles due to the declined angle of the bench. Some decline benches may also be designed or used for abdominal exercises by allowing leg raises or torso crunches in the declined position, adding a core workout component to the chest press. This variation can provide a more comprehensive upper body and core workout.',
+            ],
+            [
+                'equipment_name' => 'Decline Bench Press',
+                'image' => 'decline bench press machine.jpg',
+                'quantity' => 2,
+                'steps' => json_encode([
+                    "Set the decline bench to a 15-30 degree angle.",
+                    "Lie on the bench with your head lower than your hips, securing your feet.",
+                    "Grip the barbell slightly wider than shoulder-width apart with an overhand grip.",
+                    "Lift the barbell off the rack and position it over your lower chest.",
+                    "Lower the barbell slowly to your lower chest, keeping your elbows slightly tucked.",
+                    "Push the barbell back up to the starting position, squeezing your chest.",
+                    "Maintain a stable back and engaged core throughout the exercise."
+                ]),
+                'description' => 'The decline bench press is a variation of the standard bench press performed on a bench angled downwards (typically 15-30 degrees). This angle emphasizes the lower portion of the pectoral muscles, contributing to a more defined and complete chest development. It can also be less stressful on the shoulders compared to the flat bench press for some individuals.',
+            ],
+            [
+                'equipment_name' => 'Decline Bench Press Station',
+                'image' => 'decline bench press station.jpg',
+                'steps' => json_encode([
+                    "Adjust the decline angle of the bench if possible.",
+                    "Lie on the decline bench with your head lower than your hips, securing your feet under the provided supports.",
+                    "Grip the barbell (if attached) or dumbbells with a slightly wider than shoulder-width grip.",
+                    "If using a separate rack, unrack the barbell and position it over your lower chest.",
+                    "Lower the weight slowly towards your lower chest, maintaining control.",
+                    "Push the weight back up to the starting position with a controlled motion, engaging your chest muscles.",
+                    "Ensure your body remains stable on the bench throughout the exercise."
+                ]),
+                'description' => 'A decline bench press station is a dedicated piece of equipment designed for performing decline bench presses. It typically includes a decline bench with leg supports and a built-in rack for a barbell. This setup provides a stable and safe environment for targeting the lower chest muscles effectively. Some stations may also accommodate dumbbell decline presses.',
+            ],
+            [
+                'equipment_name' => 'Hack Squat Machine',
+                'image' => 'hack squat machine.jpg',
+                'steps' => json_encode([
+                    "Load the desired weight onto the machine.",
+                    "Step onto the platform and position your shoulders and back against the pads.",
+                    "Place your feet shoulder-width apart on the platform.",
+                    "Release the safety handles.",
+                    "Lower your body by bending your knees until your thighs are parallel to the platform.",
+                    "Keep your back pressed against the pad throughout the movement.",
+                    "Push through your heels to return to the starting position, extending your legs.",
+                    "Engage the safety handles when finished."
+                ]),
+                'description' => 'The hack squat machine is a compound exercise machine that targets the quadriceps, glutes, hamstrings, and calves with less stress on the lower back compared to traditional barbell squats. The angled platform and supportive pads guide the movement, allowing for a deep and controlled squat. It\'s a popular choice for building lower body strength and muscle mass.',
+            ],
+            [
+                'equipment_name' => 'Prone Leg Curl',
+                'image' => 'PRONE LEG CURL.jpg',
+                'steps' => json_encode([
+                    "Lie face down on the leg curl machine with your legs extended and the pad positioned just above your ankles.",
+                    "Grasp the handles on the machine for stability.",
+                    "Curl your legs upward towards your glutes by contracting your hamstrings.",
+                    "Keep your hips pressed firmly against the pad throughout the movement.",
+                    "Squeeze your hamstrings at the top of the movement.",
+                    "Slowly lower the weight back to the starting position with control.",
+                    "Adjust the weight as needed."
+                ]),
+                'description' => 'The prone leg curl machine is an isolation exercise that primarily targets the hamstring muscles located on the back of the thighs. By lying face down, it helps to isolate the hamstrings and minimize the involvement of other muscle groups. It\'s an effective exercise for building hamstring strength and definition.',
+            ]
         ];
 
         foreach ($equipment as $equip) {
