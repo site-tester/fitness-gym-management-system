@@ -223,7 +223,7 @@ class MembershipDetailCrudController extends CrudController
             'name' => 'height_unit',
             'label' => 'Height Unit',
             'type' => 'radio',
-            'options' => ['cm' => 'cm', 'ft' => 'ft'],
+            'options' => ['cm' => 'cm', 'ft' => 'ft (eg. 5.8)'],
             'default' => 'cm',
             'inline' => true, // Display radio buttons horizontally
             'wrapperAttributes' => [
@@ -540,7 +540,7 @@ class MembershipDetailCrudController extends CrudController
             'name' => 'height_raw_unit',
             'label' => 'Height Unit',
             'type' => 'radio',
-            'options' => ['cm' => 'cm', 'ft' => 'ft'],
+            'options' => ['cm' => 'cm', 'ft' => 'ft (eg. 5.8)'],
             'default' => 'cm',
             'inline' => true, // Display radio buttons horizontally
             'wrapperAttributes' => [
