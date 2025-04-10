@@ -53,16 +53,14 @@ class WorkoutSeeder extends Seeder
                 <div>
                     <ol>
                         <li>
-                            <span>Experiment with foot and pelvis position. Depending upon the shape of your hip, you may need a slightly more internal or external starting position to fully maximize the contraction.
-                                <ol>
-                                    <li>
-                                        <span>Similarly, be mindful of your pelvic position - don’t allow the back to arch as this will tip the hips forward and place the adductors under excessive stretch before the contraction which can affect force output.</span>
-                                    </li>
-                                    <li>
-                                        <span>If you can’t seem to figure out how to change the position of your pelvis while seated, experiment with changing the position of the torso (i.e. lean forward or push your back into the pad).</span>
-                                    </li>
-                                </ol>
-                            </span>
+                            <span>Experiment with foot and pelvis position. Depending upon the shape of your hip, you may need a slightly more internal or external starting position to fully maximize the contraction.</span>
+                        </li>
+
+                        <li>
+                            <span>Similarly, be mindful of your pelvic position - don’t allow the back to arch as this will tip the hips forward and place the adductors under excessive stretch before the contraction which can affect force output.</span>
+                        </li>
+                        <li>
+                            <span>If you can’t seem to figure out how to change the position of your pelvis while seated, experiment with changing the position of the torso (i.e. lean forward or push your back into the pad).</span>
                         </li>
                     </ol>
                 </div>
