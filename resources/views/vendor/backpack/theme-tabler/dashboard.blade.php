@@ -4,24 +4,7 @@
     $widgets['before_content'][] = [
         'type' => 'jumbotron',
         'heading' => trans('backpack::base.welcome'),
-        // 'content' => [
-        //     ['type' => 'div','button_link' => backpack_url('#'),'button_text' => trans('backpack::base.logout')],
-        //     ['type' => 'div','button_link' => backpack_url('#'),'button_text' => 'Add New Member'],
-        // ],
-        // 'button_link' => backpack_url('#'),
-        // 'button_text' => trans('backpack::base.logout'),
     ];
-    // Widget::add()
-    //     ->to('before_content')
-    //     ->type('jumbotron')
-    //     ->heading(trans('backpack::base.welcome'))
-    //     ->content([
-    //         Widget::make()
-    //             ->type('progress')
-    //             ->class('card mb-3')
-    //             ->statusBorder('start')
-    //             ->accentColor('primary'),
-    //     ]);
 @endphp
 
 @section('content')

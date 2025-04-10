@@ -34,6 +34,7 @@ class Reservation extends Model
         'phone',
         'payment_method',
         'total_amount',
+        'status',
     ];
     // protected $hidden = [];
 

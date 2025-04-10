@@ -18,6 +18,7 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
     Route::get('dashboard', 'CustomDashboardController@dashboard')->name('backpack.dashboard');
+    Route::get('booking-calendar', 'CustomAdminController@calendarView')->name('booking.calendar');
     Route::crud('user', 'UserCrudController');
     // Route::post('attendance', 'AttendanceController@register');
     Route::crud('membership-detail', 'MembershipDetailCrudController');
@@ -41,6 +42,7 @@ Route::group([
     Route::crud('gym-progress', 'GymProgressCrudController');
     Route::crud('workout', 'WorkoutCrudController');
     Route::crud('attendance', 'AttendanceCrudController');
+    Route::crud('calendar', 'CalendarCrudController');
 }); // this should be the absolute last line of this file
 
 /**

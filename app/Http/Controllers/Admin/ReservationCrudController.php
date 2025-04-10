@@ -245,7 +245,7 @@ class ReservationCrudController extends CrudController
             'label' => 'Status',
             'type' => 'select_from_array',
             'options' => [
-                'Pending' => 'Pending Approval',
+                'Pending Approval' => 'Pending Approval',
                 'Approved' => 'Approved',
                 'Rejected' => 'Rejected',
             ],

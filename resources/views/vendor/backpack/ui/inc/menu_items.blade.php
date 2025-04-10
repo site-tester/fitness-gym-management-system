@@ -29,7 +29,10 @@
 @endcan
 
 @can('manage-bookings')
-    <x-backpack::menu-item title="Bookings" icon="la la-book" :link="backpack_url('reservation')" />
+    <x-backpack::menu-dropdown title="Bookings" icon="la la-book">
+        <x-backpack::menu-dropdown-item title="Calendar" icon="la la-calendar" :link="backpack_url('calendar')"/>
+        <x-backpack::menu-dropdown-item title="Bookings" icon="la la-clipboard-list" :link="backpack_url('reservation')"/>
+    </x-backpack::menu-dropdown>
 @endcan
 
 @can('manage-payments')
@@ -67,3 +70,5 @@
 @endcan
 
 {{-- <x-backpack::menu-item title="Attendances" icon="la la-question" :link="backpack_url('attendance')" /> --}}
+
+{{-- <x-backpack::menu-item title="Calendars" icon="la la-question" :link="backpack_url('calendar')" /> --}}
