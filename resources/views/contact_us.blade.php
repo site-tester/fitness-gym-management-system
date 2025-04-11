@@ -31,6 +31,7 @@
                         <div class="contact-form">
                             <form id="contactForm"
                             >
+                            @csrf
                             <!-- action="{{ route('send.contact.us') }}" method="post" -->
 
                                 @csrf

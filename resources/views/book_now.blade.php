@@ -285,7 +285,7 @@
             border: 1px solid #ccc;
             /* Optional: to indicate scrollable area */
             padding: 10px;
-            margin: 0 50px ;
+            margin: 0 50px;
             margin-bottom: 80px;
         }
     </style>
@@ -408,7 +408,8 @@
                                                     <input class="form-control" type="text" id="FormName" name="name"
                                                         placeholder="{{ $profile->name }}"
                                                         value="{{ $profile->name ?? '' }}">
-                                                    <input type="hidden" name="hidden_name" value="{{ $profile->name }}">
+                                                    <input type="hidden" name="hidden_name"
+                                                        value="{{ $profile->name }}">
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
@@ -671,6 +672,15 @@
                 spinner.removeClass("d-none");
                 button.addClass("disabled");
 
+                Swal.fire({
+                    title: 'Sending...',
+                    text: 'Please wait while we process your request.',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
                 if (paymentMethod == 2) {
                     // AJAX for PayPal (or other method)
                     $.ajax({
@@ -702,7 +712,6 @@
                         url: '/booking', // Change to your form action URL
                         method: 'POST',
                         data: formData,
-
                         success: function(response) {
                             if (response.redirect_url) {
                                 window.location.href = response
@@ -719,6 +728,31 @@
                                 error: error,
                                 response: xhr.responseText
                             });
+                            if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON
+                                .errors) {
+                                let errors = xhr.responseJSON.errors;
+                                let errorMessage = '';
+                                for (let key in errors) {
+                                    errorMessage += errors[key][0] +
+                                        '<br>'; // Display the first error for each field
+                                }
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Validation Error!',
+                                    html: errorMessage,
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                // Other server errors
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'Something went wrong. Please try again.',
+                                }).then(() => {
+                                    location.reload();
+                                });
+                            }
                         }
                     });
                 }

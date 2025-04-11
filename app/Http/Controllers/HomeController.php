@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use NotificationChannels\WebPush\PushSubscription;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -68,8 +69,7 @@ class HomeController extends Controller
         $labels = $progressData->pluck('progress_date'); // x-axis labels
         $weightData = $progressData->pluck('weight');    // y-axis: weight
         $repsData = $progressData->pluck('reps');        // y-axis: reps
-        $bmiData = $progressData->pluck('bmi');
-        // y-axis: BMI
+        $bmiData = $progressData->pluck('bmi');          // y-axis: BMI
         return view('dashboard', compact('timelog', 'workoutProgress', 'labels', 'weightData', 'repsData', 'bmiData'));
     }
 
@@ -156,12 +156,47 @@ class HomeController extends Controller
         \Log::info($request->all());
         try {  // Validate the incoming request
             DB::beginTransaction();
-            $request->validate([
+
+            $messages = [
+                'required' => 'The :attribute field is required.',
+                'string' => 'The :attribute must be a string.',
+                'max' => [
+                    'string' => 'The :attribute must not be greater than :max characters.',
+                ],
+                'date' => 'The :attribute must be a valid date.',
+                'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
+                'email' => 'The :attribute must be a valid email address.',
+                'regex' => 'The :attribute format is invalid. Please use formats like 09XXXXXXXXX, +639XXXXXXXXX, etc.',
+                'required_without' => 'The :attribute field is required when :values is not present.',
+            ];
+
+            $validator = Validator::make($request->all(), [
                 'service_duration' => 'required',
-                'service_name' => 'required',
-                // 'formTime' => 'required',
+                'service_name' => 'required|string|max:255',
+                'selected_date' => 'required|date|after_or_equal:today',
                 'payment_method' => 'required',
-            ]);
+                'name' => 'nullable|string|max:255',
+                'email' => 'nullable|email|max:255',
+                'phone' => ['nullable','regex:/^(09\d{9}|\+?639\d{9}|09\d{2}-\d{3}-?\d{4}|\+?639\d{2}-\d{3}-\d{4}|09\d{10}|\+?639\d{10})$/'],
+                'hidden_name' => 'nullable|required_without:name|string|max:255',
+                'hidden_email' => 'nullable|required_without:email|email|max:255',
+                'hidden_phone' => ['nullable','required_without:phone','regex:/^(09\d{9}|\+?639\d{9}|09\d{2}-\d{3}-?\d{4}|\+?639\d{2}-\d{3}-\d{4}|09\d{10}|\+?639\d{10})$/'],
+            ])->setAttributeNames([
+                'service_duration' => 'Service Duration',
+                'service_name' => 'Service Name',
+                'selected_date' => 'Selected Date',
+                'payment_method' => 'Payment Method',
+                'name' => 'Name',
+                'email' => 'Email',
+                'phone' => 'Phone Number',
+                'hidden_name' => 'Name',
+                'hidden_email' => 'Email',
+                'hidden_phone' => 'Phone Number',
+            ])->setCustomMessages($messages);
+
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 422); // 422 Unprocessable Entity
+            }
 
             // Create a new service reservation record
             $reservation = new Reservation();
@@ -194,8 +229,7 @@ class HomeController extends Controller
 
             // Calculate the total amount or handle payment-related logic
             // $service_price = $this->getServicePrice($request->input('service_name'));
-            $reservation->total_amount = $request->input('service_price');
-            ; // Example, adjust based on logic
+            $reservation->total_amount = $request->input('service_price'); // Example, adjust based on logic
             // $reservation->total_amount = 0; // Example, adjust based on logic
 
             // Save the reservation

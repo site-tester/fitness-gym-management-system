@@ -149,7 +149,7 @@
                             sessionStorage.removeItem('workoutBannerShown');
                         });
                     </script> --}}
-                {{-- </div>
+            {{-- </div>
                 @php
                     session()->forget('workout_reminder');
                 @endphp
@@ -203,21 +203,75 @@
 
     <script>
         $(document).ready(function() {
+            // $('#contactForm').submit(function(e) {
+            //     e.preventDefault();
+
+            //     // Show SweetAlert loading spinner
+            //     Swal.fire({
+            //         title: 'Sending...',
+            //         text: 'Please wait while we process your request.',
+            //         allowOutsideClick: false,
+            //         didOpen: () => {
+            //             Swal.showLoading(); // Show spinner
+            //         }
+            //     })
+
+            //     $.ajax({
+            //         url: "{{ route('send.contact.us') }}", // Ensure this route is correct
+            //         type: "POST",
+            //         data: $(this).serialize(),
+            //         success: function(response) {
+            //             Swal.fire({
+            //                 icon: 'success',
+            //                 title: 'Success!',
+            //                 text: response.success,
+            //                 confirmButtonColor: '#3085d6',
+            //                 confirmButtonText: 'OK'
+            //             }).then(() => {
+            //                 location
+            //                     .reload(); // Reload the page after closing the alert
+            //             });
+            //         },
+            //         error: function(xhr) {
+            //             if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON.errors) {
+            //                 // Validation errors
+            //                 let errors = xhr.responseJSON.errors;
+            //                 let errorMessage = '';
+            //                 for (let key in errors) {
+            //                     errorMessage += errors[key][0] +
+            //                     '<br>'; // Display the first error for each field
+            //                 }
+            //                 Swal.fire({
+            //                     icon: 'error',
+            //                     title: 'Validation Error!',
+            //                     html: errorMessage,
+            //                 });
+            //             } else {
+            //                 // Other server errors
+            //                 Swal.fire({
+            //                     icon: 'error',
+            //                     title: 'Error!',
+            //                     text: 'Something went wrong. Please try again.',
+            //                 });
+            //             }
+            //         }
+            //     });
+            // });
+
             $('#contactForm').submit(function(e) {
                 e.preventDefault();
 
-                // Show SweetAlert loading spinner
                 Swal.fire({
                     title: 'Sending...',
-                    text: 'Please wait while we process your request.',
+                    text: 'Please wait while we process your email validity.',
                     allowOutsideClick: false,
                     didOpen: () => {
-                        Swal.showLoading(); // Show spinner
+                        Swal.showLoading();
                     }
-                })
+                });
 
                 $.ajax({
-                    url: "{{ route('send.contact.us') }}", // Ensure this route is correct
+                    url: "{{ route('send.contact.us') }}",
                     type: "POST",
                     data: $(this).serialize(),
                     success: function(response) {
@@ -228,16 +282,39 @@
                             confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK'
                         }).then(() => {
-                            location
-                                .reload(); // Reload the page after closing the alert
+                            location.reload();
                         });
                     },
                     error: function(xhr) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error!',
-                            text: 'Something went wrong. Please try again.',
-                        });
+                        if (xhr.status === 422 && xhr.responseJSON && xhr.responseJSON.errors) {
+                            // Validation errors
+                            let errors = xhr.responseJSON.errors;
+                            let errorMessage = '';
+                            for (let key in errors) {
+                                errorMessage += errors[key][0] +
+                                '<br>'; // Display the first error for each field
+                            }
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Validation Error!',
+                                html: errorMessage,
+                            })then(() => {
+                                // Optionally, you can reload the page or perform other actions
+                                location.reload();
+                            })
+                            ;
+                        } else {
+                            // Other server errors
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: 'Something went wrong. Please try again.',
+                            })then(() => {
+                                // Optionally, you can reload the page or perform other actions
+                                location.reload();
+                            })
+                            ;
+                        }
                     }
                 });
             });
@@ -246,7 +323,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/service-worker.js')
-            // navigator.serviceWorker.register('/public/service-worker.js')
+                // navigator.serviceWorker.register('/public/service-worker.js')
                 .then(function(registration) {
                     console.log('Service Worker registered with scope:', registration.scope);
                 })

@@ -50,50 +50,50 @@
                                         <div class="col px-md-e">
                                             <h4 class=" mb-3"><i class="bi bi-clock-history text-danger"></i> Timelog</h4>
                                             <!-- <div class="row ">
-                                                    @if ($timelog->isEmpty() || $timelog->count() == 0 || $timelog == null)
-                                                        <div>
-                                                            <div class="col m-auto">
-                                                                <h5 class="text-center">No User Timed in</h5>
+                                                        @if ($timelog->isEmpty() || $timelog->count() == 0 || $timelog == null)
+                                                            <div>
+                                                                <div class="col m-auto">
+                                                                    <h5 class="text-center">No User Timed in</h5>
+                                                                </div>
                                                             </div>
-                                                        </div>
 @else
     <div class="row justify-content-center">
-                                                            @foreach ($timelog as $member)
+                                                                @foreach ($timelog as $member)
     @php
         $time_in = \Carbon\Carbon::parse($member->time_in);
         $time_out = \Carbon\Carbon::parse($member->time_out);
         $timelog_date = \Carbon\Carbon::parse($member->timelog_date);
     @endphp
-                                                                <div class="col-3">
-                                                                    <div class="card p-2 h-100">
-                                                                        <div class="">
-                                                                            <strong class="float-start text-start">
-                                                                                {{ $member->user->name }}
-                                                                            </strong>
-                                                                            <br class="d-block d-md-none">
-                                                                            <strong class="float-md-end text-end">
-                                                                                {{ $timelog_date->format('M-d-Y') }}
-                                                                            </strong>
-                                                                        </div>
-                                                                        <div class="text-secondary text-center row">
-                                                                            @if ($member->time_in)
+                                                                    <div class="col-3">
+                                                                        <div class="card p-2 h-100">
+                                                                            <div class="">
+                                                                                <strong class="float-start text-start">
+                                                                                    {{ $member->user->name }}
+                                                                                </strong>
+                                                                                <br class="d-block d-md-none">
+                                                                                <strong class="float-md-end text-end">
+                                                                                    {{ $timelog_date->format('M-d-Y') }}
+                                                                                </strong>
+                                                                            </div>
+                                                                            <div class="text-secondary text-center row">
+                                                                                @if ($member->time_in)
     <p class="mb-0 col-12 col-md-6 text-md-start">
-                                                                                    Time-In: <br>
-                                                                                    {{ $time_in->format('h:i A') }}</p>
+                                                                                        Time-In: <br>
+                                                                                        {{ $time_in->format('h:i A') }}</p>
     @endif
-                                                                            {{-- <br class="d-block d-md-none"> --}}
-                                                                            @if ($member->time_out)
+                                                                                {{-- <br class="d-block d-md-none"> --}}
+                                                                                @if ($member->time_out)
     <p class="mb-0 col-12 col-md-6 text-md-end">
-                                                                                    Time-Out: <br>
-                                                                                    {{ $time_out->format('h:i A') }}</p>
+                                                                                        Time-Out: <br>
+                                                                                        {{ $time_out->format('h:i A') }}</p>
     @endif
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
     @endforeach
-                                                        </div>
-                                                    @endif
-                                                </div> -->
+                                                            </div>
+                                                        @endif
+                                                    </div> -->
                                             <table id="attendanceTable" class="border rounded-table mt-0"
                                                 style="width:100%">
                                                 <thead>
@@ -263,6 +263,12 @@
                             title: {
                                 display: true,
                                 text: 'Date',
+                            },
+                            ticks: {
+                                autoSkip: true,
+                                maxTicksLimit: 10,
+                                maxRotation: 90,
+                                minRotation: 0 
                             },
                         },
                         y: {
