@@ -336,7 +336,7 @@ class GymProgressCrudController extends CrudController
         $bmi = $heightMeters > 0 ? $weightKg / ($heightMeters * $heightMeters) : null;
 
 
-        $user->height = $heightCm;
+        $user->height = $heightValue;
         $user->height_raw = $heightValue;
         $user->height_raw_unit = $heightUnit;
         $user->weight = $weightKg;

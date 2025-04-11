@@ -430,8 +430,8 @@ class MembershipDetailCrudController extends CrudController
             // 'height' => $request['height'],
             // 'weight' => $request['weight'],
             // 'bmi' => $request['height'] && $request['weight'] ? $request['weight'] / (($request['height'] / 100) ** 2) : null,
-            'height' => $heightCm, // Store in cm
-            'weight' => $weightKg, // Store in kg
+            'height' => $heightValue, // Store in cm
+            'weight' => $weightValue, // Store in kg
             'height_raw' => $heightValue, // store the raw input
             'height_raw_unit' => $heightUnit, // store the unit
             'weight_raw' => $weightValue,
@@ -523,11 +523,11 @@ class MembershipDetailCrudController extends CrudController
             'type' => 'date',
         ]);
         CRUD::addField([
-            'name' => 'height_raw',
+            'name' => 'height_value',
             'label' => 'Height',
             'type' => 'number',
             'attributes' => [
-                'id' => 'height_raw',
+                'id' => 'height_value',
                 'min' => 0,
                 'step' => 'any', // Allow decimal values
             ],
@@ -687,9 +687,9 @@ class MembershipDetailCrudController extends CrudController
             'password' => $request['password'] ? Hash::make($request['password']) : $user->password, // Retain old password if not updated
         ]);
 
-        $heightValue = $request['height_raw'];
+        $heightValue = $request['height_value'];
         $heightUnit = $request['height_raw_unit'];
-        $weightValue = $request['weight_raw'];
+        $weightValue = $request['weight_value'];
         $weightUnit = $request['weight_raw_unit'];
 
         // Convert height and weight to cm and kg respectively
@@ -719,8 +719,8 @@ class MembershipDetailCrudController extends CrudController
             // 'height' => $request['height'],
             // 'weight' => $request['weight'],
             // 'bmi' => $request['height'] && $request['weight'] ? $request['weight'] / (($request['height'] / 100) ** 2) : null,
-            'height' => $heightCm,  // Store in cm
-            'weight' => $weightKg, // Store in kg
+            'height' => $heightValue,
+            'weight' => $weightValue,
             'height_raw' => $heightValue, // store the raw input
             'height_raw_unit' => $heightUnit, // store the unit
             'weight_raw' => $weightValue,
