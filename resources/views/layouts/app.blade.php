@@ -292,28 +292,24 @@
                             let errorMessage = '';
                             for (let key in errors) {
                                 errorMessage += errors[key][0] +
-                                '<br>'; // Display the first error for each field
+                                    '<br>'; // Display the first error for each field
                             }
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Validation Error!',
                                 html: errorMessage,
-                            })then(() => {
-                                // Optionally, you can reload the page or perform other actions
+                            }).then(() => {
                                 location.reload();
-                            })
-                            ;
+                            });
                         } else {
                             // Other server errors
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error!',
                                 text: 'Something went wrong. Please try again.',
-                            })then(() => {
-                                // Optionally, you can reload the page or perform other actions
+                            }).then(() => {
                                 location.reload();
-                            })
-                            ;
+                            });
                         }
                     }
                 });

@@ -151,118 +151,118 @@ class HomeController extends Controller
         return view('book_now', compact('profile', 'serviceCategories', 'paymentMethods'));
     }
 
-    public function bookNowPost(Request $request)
-    {
-        \Log::info($request->all());
-        try {  // Validate the incoming request
-            DB::beginTransaction();
+        public function bookNowPost(Request $request)
+        {
+            \Log::info($request->all());
+            try {  // Validate the incoming request
+                DB::beginTransaction();
 
-            $messages = [
-                'required' => 'The :attribute field is required.',
-                'string' => 'The :attribute must be a string.',
-                'max' => [
-                    'string' => 'The :attribute must not be greater than :max characters.',
-                ],
-                'date' => 'The :attribute must be a valid date.',
-                'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
-                'email' => 'The :attribute must be a valid email address.',
-                'regex' => 'The :attribute format is invalid. Please use formats like 09XXXXXXXXX, +639XXXXXXXXX, etc.',
-                'required_without' => 'The :attribute field is required when :values is not present.',
-            ];
+                $messages = [
+                    'required' => 'The :attribute field is required.',
+                    'string' => 'The :attribute must be a string.',
+                    'max' => [
+                        'string' => 'The :attribute must not be greater than :max characters.',
+                    ],
+                    'date' => 'The :attribute must be a valid date.',
+                    'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
+                    'email' => 'The :attribute must be a valid email address.',
+                    'regex' => 'The :attribute format is invalid. Please use formats like 09XXXXXXXXX, +639XXXXXXXXX, etc.',
+                    'required_without' => 'The :attribute field is required when :values is not present.',
+                ];
 
-            $validator = Validator::make($request->all(), [
-                'service_duration' => 'required',
-                'service_name' => 'required|string|max:255',
-                'selected_date' => 'required|date|after_or_equal:today',
-                'payment_method' => 'required',
-                'name' => 'nullable|string|max:255',
-                'email' => 'nullable|email|max:255',
-                'phone' => ['nullable','regex:/^(09\d{9}|\+?639\d{9}|09\d{2}-\d{3}-?\d{4}|\+?639\d{2}-\d{3}-\d{4}|09\d{10}|\+?639\d{10})$/'],
-                'hidden_name' => 'nullable|required_without:name|string|max:255',
-                'hidden_email' => 'nullable|required_without:email|email|max:255',
-                'hidden_phone' => ['nullable','required_without:phone','regex:/^(09\d{9}|\+?639\d{9}|09\d{2}-\d{3}-?\d{4}|\+?639\d{2}-\d{3}-\d{4}|09\d{10}|\+?639\d{10})$/'],
-            ])->setAttributeNames([
-                'service_duration' => 'Service Duration',
-                'service_name' => 'Service Name',
-                'selected_date' => 'Selected Date',
-                'payment_method' => 'Payment Method',
-                'name' => 'Name',
-                'email' => 'Email',
-                'phone' => 'Phone Number',
-                'hidden_name' => 'Name',
-                'hidden_email' => 'Email',
-                'hidden_phone' => 'Phone Number',
-            ])->setCustomMessages($messages);
+                $validator = Validator::make($request->all(), [
+                    'service_duration' => 'required',
+                    'service_name' => 'required|string|max:255',
+                    'selected_date' => 'required|date|after_or_equal:today',
+                    'payment_method' => 'required',
+                    'name' => 'nullable|string|max:255',
+                    'email' => 'nullable|email|max:255',
+                    'phone' => ['nullable','regex:/^(09\d{9}|\+?639\d{9}|09\d{2}-\d{3}-?\d{4}|\+?639\d{2}-\d{3}-\d{4}|09\d{10}|\+?639\d{10})$/'],
+                    'hidden_name' => 'nullable|required_without:name|string|max:255',
+                    'hidden_email' => 'nullable|required_without:email|email|max:255',
+                    'hidden_phone' => ['nullable','required_without:phone','regex:/^(09\d{9}|\+?639\d{9}|09\d{2}-\d{3}-?\d{4}|\+?639\d{2}-\d{3}-\d{4}|09\d{10}|\+?639\d{10})$/'],
+                ])->setAttributeNames([
+                    'service_duration' => 'Service Duration',
+                    'service_name' => 'Service Name',
+                    'selected_date' => 'Selected Date',
+                    'payment_method' => 'Payment Method',
+                    'name' => 'Name',
+                    'email' => 'Email',
+                    'phone' => 'Phone Number',
+                    'hidden_name' => 'Name',
+                    'hidden_email' => 'Email',
+                    'hidden_phone' => 'Phone Number',
+                ])->setCustomMessages($messages);
 
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 422); // 422 Unprocessable Entity
+                if ($validator->fails()) {
+                    return response()->json(['errors' => $validator->errors()], 422); // 422 Unprocessable Entity
+                }
+
+                // Create a new service reservation record
+                $reservation = new Reservation();
+                $reservation->user_id = Auth::id();
+                $reservation->service_duration = $request->input('service_duration');
+                $reservation->service_name = $request->input('service_name');
+                $reservation->reservation_date = \Carbon\Carbon::parse($request->input('selected_date'))->format('Y-m-d');
+                // $reservation->reservation_time = $request->input('formTime');
+                $reservation->payment_method = $request->input('payment_method');
+
+                // You can also add hidden fields if needed
+                if ($request->filled('name')) {
+                    $reservation->name = $request->input('name');
+                } else {
+                    $reservation->name = $request->input('hidden_name');
+                }
+
+                if ($request->filled('email')) {
+                    $reservation->email = $request->input('email');
+                } else {
+                    $reservation->email = $request->input('hidden_email');
+                }
+
+                if ($request->filled('phone')) {
+                    $reservation->phone = $request->input('phone');
+                } else {
+                    $reservation->phone = $request->input('hidden_phone');
+                }
+
+
+                // Calculate the total amount or handle payment-related logic
+                // $service_price = $this->getServicePrice($request->input('service_name'));
+                $reservation->total_amount = $request->input('service_price'); // Example, adjust based on logic
+                // $reservation->total_amount = 0; // Example, adjust based on logic
+
+                // Save the reservation
+                $reservation->save();
+
+                // Create a payment invoice
+                Payment::create([
+                    'user_id' => Auth::id(),
+                    'reservation_id' => $reservation->id,
+                    'payment_method' => $reservation->payment_method,
+                    'amount' => $reservation->total_amount,
+                    'payment_status' => 'Pending',
+                ]);
+
+                $payment_details = PaymentMethod::where('id', $reservation->payment_method)->first();
+
+                if ($payment_details->id == 1) {
+                    Mail::to(Auth::user()->email)->send(new BookingPaymentDetailsWalkIn($reservation, $payment_details));
+                } else {
+                    Mail::to(Auth::user()->email)->send(new BookingPaymentDetails($reservation, $payment_details));
+                }
+
+                DB::commit(); // Commit transaction
+
+                return response()->json(['success' => true, 'redirect_url' => route('booked.now')]);
+
+            } catch (\Exception $e) {
+                DB::rollBack(); // Rollback transaction
+                Log::error('Donation error: ' . $e->getMessage());
+                Log::error('Booking error: ' . $e->getMessage() . ' on line ' . $e->getLine());
+                return response()->json(['error' => $e->getMessage()], 500);
             }
-
-            // Create a new service reservation record
-            $reservation = new Reservation();
-            $reservation->user_id = Auth::id();
-            $reservation->service_duration = $request->input('service_duration');
-            $reservation->service_name = $request->input('service_name');
-            $reservation->reservation_date = \Carbon\Carbon::parse($request->input('selected_date'))->format('Y-m-d');
-            // $reservation->reservation_time = $request->input('formTime');
-            $reservation->payment_method = $request->input('payment_method');
-
-            // You can also add hidden fields if needed
-            if ($request->filled('name')) {
-                $reservation->name = $request->input('name');
-            } else {
-                $reservation->name = $request->input('hidden_name');
-            }
-
-            if ($request->filled('email')) {
-                $reservation->email = $request->input('email');
-            } else {
-                $reservation->email = $request->input('hidden_email');
-            }
-
-            if ($request->filled('phone')) {
-                $reservation->phone = $request->input('phone');
-            } else {
-                $reservation->phone = $request->input('hidden_phone');
-            }
-
-
-            // Calculate the total amount or handle payment-related logic
-            // $service_price = $this->getServicePrice($request->input('service_name'));
-            $reservation->total_amount = $request->input('service_price'); // Example, adjust based on logic
-            // $reservation->total_amount = 0; // Example, adjust based on logic
-
-            // Save the reservation
-            $reservation->save();
-
-            // Create a payment invoice
-            Payment::create([
-                'user_id' => Auth::id(),
-                'reservation_id' => $reservation->id,
-                'payment_method' => $reservation->payment_method,
-                'amount' => $reservation->total_amount,
-                'payment_status' => 'Pending',
-            ]);
-
-            $payment_details = PaymentMethod::where('id', $reservation->payment_method)->first();
-
-            if ($payment_details->id == 1) {
-                Mail::to(Auth::user()->email)->send(new BookingPaymentDetailsWalkIn($reservation, $payment_details));
-            } else {
-                Mail::to(Auth::user()->email)->send(new BookingPaymentDetails($reservation, $payment_details));
-            }
-
-            DB::commit(); // Commit transaction
-
-            return response()->json(['success' => true, 'redirect_url' => route('booked.now')]);
-
-        } catch (\Exception $e) {
-            DB::rollBack(); // Rollback transaction
-            Log::error('Donation error: ' . $e->getMessage());
-            Log::error('Booking error: ' . $e->getMessage() . ' on line ' . $e->getLine());
-            return response()->json(['error' => $e->getMessage()], 500);
         }
-    }
 
     public function bookedNow()
     {

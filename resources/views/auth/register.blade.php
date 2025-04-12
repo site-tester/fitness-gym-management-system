@@ -579,6 +579,84 @@
         //     });
         // });
 
+        // $(document).ready(function() {
+        //     // Initially hide the password requirements and confirmation check
+        //     $(".password-requirements, .password-confirm-check").hide();
+
+        //     function validatePassword() {
+        //         const password = $("#password").val();
+
+        //         // Password strength regex
+        //         const hasLowercase = /[a-z]/.test(password);
+        //         const hasUppercase = /[A-Z]/.test(password);
+        //         const hasNumber = /\d/.test(password);
+        //         const hasSpecialChar = /[@$!%*?&]/.test(password);
+        //         const hasMinLength = password.length >= 8;
+
+        //         updateValidationIcon(".password-requirements .char-length", hasMinLength);
+        //         updateValidationIcon(".password-requirements .uppercase", hasUppercase);
+        //         updateValidationIcon(".password-requirements .lowercase", hasLowercase);
+        //         updateValidationIcon(".password-requirements .number", hasNumber);
+        //         updateValidationIcon(".password-requirements .special-char", hasSpecialChar);
+
+        //         return hasLowercase && hasUppercase && hasNumber && hasSpecialChar && hasMinLength;
+        //     }
+
+        //     function validatePasswordMatch() {
+        //         const password = $("#password").val();
+        //         const confirmPassword = $("#password-confirm").val();
+
+        //         const isMatch = password === confirmPassword && password !== "";
+        //         updateValidationIcon(".password-confirm-check", isMatch);
+        //         return isMatch;
+        //     }
+
+        //     function updateValidationIcon(selector, isValid) {
+        //         const icon = $(selector).find("i");
+        //         if (isValid) {
+        //             icon.removeClass("bi-x-square-fill text-danger").addClass("bi-check-square-fill text-success");
+        //         } else {
+        //             icon.removeClass("bi-check-square-fill text-success").addClass("bi-x-square-fill text-danger");
+        //         }
+        //     }
+
+        //     // Show password requirements when typing in the password field
+        //     $("#password").on("input", function() {
+        //         if ($(this).val().length > 0) {
+        //             $(".password-requirements").fadeIn();
+        //         } else {
+        //             $(".password-requirements").fadeOut();
+        //         }
+        //         validatePassword();
+        //         validatePasswordMatch();
+        //     });
+
+        //     // Show password confirmation check only when typing in confirm password field
+        //     $("#password-confirm").on("input", function() {
+        //         if ($(this).val().length > 0) {
+        //             $(".password-confirm-check").fadeIn();
+        //         } else {
+        //             $(".password-confirm-check").fadeOut();
+        //         }
+        //         validatePasswordMatch();
+        //     });
+
+        //     // Toggle Password Visibility
+        //     $("#togglePassword").click(function() {
+        //         const passwordInput = $("#password");
+        //         const type = passwordInput.attr("type") === "password" ? "text" : "password";
+        //         passwordInput.attr("type", type);
+        //         $(this).toggleClass("bi-eye bi-eye-slash");
+        //     });
+
+        //     $("#togglePasswordConfirmation").click(function() {
+        //         const confirmPasswordInput = $("#password-confirm");
+        //         const type = confirmPasswordInput.attr("type") === "password" ? "text" : "password";
+        //         confirmPasswordInput.attr("type", type);
+        //         $(this).toggleClass("bi-eye bi-eye-slash");
+        //     });
+        // });
+
         $(document).ready(function() {
             // Initially hide the password requirements and confirmation check
             $(".password-requirements, .password-confirm-check").hide();
@@ -613,33 +691,37 @@
 
             function updateValidationIcon(selector, isValid) {
                 const icon = $(selector).find("i");
+                icon.removeClass("bi-check-square-fill text-success bi-x-square-fill text-danger");
                 if (isValid) {
-                    icon.removeClass("bi-x-square-fill text-danger").addClass("bi-check-square-fill text-success");
+                    icon.addClass("bi-check-square-fill text-success");
                 } else {
-                    icon.removeClass("bi-check-square-fill text-success").addClass("bi-x-square-fill text-danger");
+                    icon.addClass("bi-x-square-fill text-danger");
                 }
             }
 
-            // Show password requirements when typing in the password field
-            $("#password").on("input", function() {
-                if ($(this).val().length > 0) {
-                    $(".password-requirements").fadeIn();
-                } else {
+            // Show/hide password requirements on focus/blur of password field
+            $("#password").on("focus", function() {
+                $(".password-requirements").fadeIn();
+                validatePassword(); // Initial validation on focus
+            }).on("blur", function() {
+                // Only hide if the password field is empty or all requirements are met
+                if ($(this).val().length === 0 || validatePassword()) {
                     $(".password-requirements").fadeOut();
                 }
-                validatePassword();
-                validatePasswordMatch();
-            });
+            }).on("input", validatePassword).on("input", validatePasswordMatch); // Validate on input as well
 
-            // Show password confirmation check only when typing in confirm password field
-            $("#password-confirm").on("input", function() {
-                if ($(this).val().length > 0) {
+            // Show/hide password confirmation check on focus/blur of confirm password field
+            $("#password-confirm").on("focus", function() {
+                if ($("#password").val().length > 0) {
                     $(".password-confirm-check").fadeIn();
-                } else {
+                }
+                validatePasswordMatch(); // Initial validation on focus
+            }).on("blur", function() {
+                // Only hide if the confirm password field is empty or it matches the password
+                if ($(this).val().length === 0 || validatePasswordMatch()) {
                     $(".password-confirm-check").fadeOut();
                 }
-                validatePasswordMatch();
-            });
+            }).on("input", validatePasswordMatch);
 
             // Toggle Password Visibility
             $("#togglePassword").click(function() {
