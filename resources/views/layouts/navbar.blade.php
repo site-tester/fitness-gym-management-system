@@ -50,20 +50,20 @@
                         </li>
                     </div>
                 @else
-                    <div class="dropdown">
-                        <button class="dropbtn btn rounded fw-bold dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><img
-                                src="{{ asset('/resources/img/profile_red.png') }} " alt=""
+                    <div class="dropdown d-sm-none d-md-block">
+                        <button class="dropbtn btn rounded fw-bold dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false"><img src="{{ asset('/resources/img/profile_red.png') }} " alt=""
                                 style="width:33px; pointer-events: none;"></button>
                         {{-- <button onclick="myFunction()" class="dropbtn rounded fw-bold"><img src="{{ asset('/img/profile_red.png') }} " alt="" style="width:33px; pointer-events: none;"></button> --}}
                         <!-- <ul id="myDropdown" class="dropdown-content dropdown-menu rounded border border-danger" data-bs-popper="static"> -->
 
-                        <ul id="myDropdown" class="dropdown-content dropdown-menu dropdown-menu-start rounded border border-danger">
-                            {{-- <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('booking') }}">
-                                        <i class="bi bi-journal-text"></i>
-                                        Bookings</a> --}}
-                            @php
-                                $userDetails = Auth::user()->rfid_number;
-                            @endphp
+                        @php
+                            $userDetails = Auth::user()->rfid_number;
+                        @endphp
+
+                        <ul id="myDropdown"
+                            class="dropdown-content dropdown-menu dropdown-menu-start rounded border border-danger">
+
                             @hasrole('member')
                                 <li>
                                     <a class=" m-1 link-body-emphasis fw-bold" href="{{ route('dashboard') }}">
@@ -100,6 +100,46 @@
                                 @csrf
                             </form>
                         </ul>
+                    </div>
+
+                    <div class="d-sm-block d-md-none">
+                        <hr class="my-0 py-0 border border-danger">
+                        <div class="row">
+                            @hasrole('member')
+                                <div class="col-12">
+                                    <a class=" m-1 link-body-emphasis fw-bold btn" href="{{ route('dashboard') }}">
+                                        <i class="bi bi-speedometer2"></i>
+                                        Dashboard</a>
+                                </div>
+                                <div class="col-12">
+                                    <a class=" m-1 link-body-emphasis fw-bold btn" href="{{ route('profile') }}">
+                                        <i class="bi bi-person-badge"></i>
+                                        Profile</a>
+                                </div>
+                                <div class="col-12">
+                                    <a class=" m-1 link-body-emphasis fw-bold btn" href="{{ route('book.now') }}">
+                                        <i class="bi bi-journal-arrow-down"></i>
+                                        Book Now
+                                    </a>
+                                </div>
+                            @endhasrole
+                            @hasanyrole('admin|superadmin')
+                                <div class="col-6">
+                                    <a class=" m-1 link-body-emphasis fw-bold" href="/admin">
+                                        Dashboard
+                                    </a>
+                                </div>
+                            @endhasanyrole
+
+
+                        </div>
+                        <hr class="my-0 py-0 border border-danger">
+                        <div class="col-12">
+                            <a class="m-1 link-body-emphasis fw-bold btn" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="bi bi-escape"></i>
+                                Logout</a>
+                        </div>
                     </div>
                 @endguest
             </div>

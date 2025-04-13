@@ -25,11 +25,11 @@
                 <div class=" mx-0 px-0 ">
                     <div class="nav nav-pills" id="pills-tab" role="tablist">
                         <a class="nav-link border text-danger text-nowrap" href="{{ route('dashboard') }}" role="tab"
-                            aria-selected="true"><i class="bi bi-speedometer2"></i> Dashboard</a>
+                            aria-selected="true"><i class="bi bi-speedometer2"></i> <span class="d-none d-md-inline-block">Dashboard</span></a>
                         <a class="nav-link border text-danger text-nowrap" href="{{ route('booking') }}" role="tab"
-                            aria-selected="false"><i class="bi bi-journal-text"></i> Bookings</a>
+                            aria-selected="false"><i class="bi bi-journal-text"></i> <span class="d-none d-md-inline-block">Bookings</span></a>
                         <a class="nav-link border bg-danger active text-nowrap" href="{{ route('gym.progress') }}"
-                            role="tab" aria-selected="false"><i class="bi bi-clipboard2-data"></i> My Progress</a>
+                            role="tab" aria-selected="false"><i class="bi bi-clipboard2-data"></i> <span class="d-none d-md-inline-block">My Progress</span></a>
                     </div>
 
 
