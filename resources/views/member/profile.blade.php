@@ -214,7 +214,7 @@
                                             value="{{ $profile->membershipDetails->height ?? old('heigth') }}"
                                             @if (Auth::user()->rfid_number == null) title="Please visit the gym to update this detail." @endif
                                             disabled>
-                                        <label class="small mb-1" for="heigth">Height {{$profile->membershipDetails->height_raw_unit ? '('. $profile->membershipDetails->height_raw_unit .')' : ''}}</label>
+                                        <label class="small mb-1" for="heigth">Height ({{$profile->membershipDetails->height_raw_unit ?? ''}})</label>
                                         @if (Auth::user()->rfid_number == null)
                                             <p class="help-block fst-italic"><span class="text-danger">*</span>Please
                                                 visit the gym to update this detail.</p>
@@ -228,7 +228,7 @@
                                             value="{{ $profile->membershipDetails->weight ?? old('weigth') }}"
                                             @if (Auth::user()->rfid_number == null) title="Please visit the gym to update this detail." @endif
                                             disabled>
-                                        <label class="small mb-1" for="heigth">Weight {{$profile->membershipDetails->weight_raw_unit ? '('. $profile->membershipDetails->weight_raw_unit .')' : ''}}</label>
+                                        <label class="small mb-1" for="heigth">Weight ({{$profile->membershipDetails->weight_raw_unit ?? ''}})</label>
                                         @if (Auth::user()->rfid_number == null)
                                             <p class="help-block fst-italic"><span class="text-danger">*</span>Please
                                                 visit the gym to update this detail.</p>
