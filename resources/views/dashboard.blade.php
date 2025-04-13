@@ -265,10 +265,10 @@
                                 text: 'Date',
                             },
                             ticks: {
-                                autoSkip: true,
-                                maxTicksLimit: 10,
+                                // autoSkip: true,
+                                // maxTicksLimit: 10,
                                 maxRotation: 90,
-                                minRotation: 0 
+                                minRotation: 0
                             },
                         },
                         y: {

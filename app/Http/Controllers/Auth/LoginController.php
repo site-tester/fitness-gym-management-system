@@ -35,7 +35,7 @@ class LoginController extends Controller
         } elseif ($user->hasRole('trainer')) {
             return redirect()->route('trainer.dashboard'); // Redirect to trainer dashboard
         } elseif ($user->hasRole('member')) {
-            $this->checkWorkoutReminder(Auth::id()); // Call the reminder function
+            // $this->checkWorkoutReminder(Auth::id()); // Call the reminder function
             return redirect()->route('landing'); // Redirect to member dashboard
         }
 

@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             WorkoutSeeder::class,
             EquipmentSeeder::class,
+            // GymProgressSeeder::class,
         ]);
 
     }

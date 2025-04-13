@@ -61,8 +61,8 @@ class GymWorkoutNotification extends Notification
             ->title("Hey {$userName}, Let's Get Moving!")
             ->body("You haven't crushed your workout today! Don't let your progress slip. 💪")
             ->action('Start Workout Now!', 'https://ajdiafitnessgym.com') // Direct to workouts page
-            ->icon(asset('{{ asset("public/img/Logo.jpg") }}')) // Assuming your logo is in public/img/Logo.jpg
-            ->badge(asset('{{ asset("public/img/Logo.jpg") }}')); // Optional: Add a badge for visual appeal
+            ->icon(asset('{{ asset("public/img/Logo.jpg") }}')) ;// Assuming your logo is in public/img/Logo.jpg
+            // ->badge(asset('{{ asset("public/img/Logo.jpg") }}')); // Optional: Add a badge for visual appeal
 
     }
 

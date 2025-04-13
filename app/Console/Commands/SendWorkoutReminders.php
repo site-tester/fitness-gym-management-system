@@ -44,29 +44,32 @@ class SendWorkoutReminders extends Command
                 ->whereDate('time_in', $now->toDateString())
                 ->exists();
 
+            \Log::info('Checking attendance for client: ' . $client->client_id);
+            \Log::info('Attendance status: ' . ($attendedToday ? 'Attended' : 'Not Attended'));
+
             // Send reminder if not attended and it's past the gym start time
             if (!$attendedToday && $now->greaterThanOrEqualTo($gymStartTime)) {
                 try {
-                    $user = User::find($clients->client_id);
+                    $user = User::find($client->user->id);
                     \Log::info('Sending workout reminder email to user: ' . $user->email);
                     if ($user) {
                         Mail::send('emails.workout_reminder', ['user' => $user], function ($message) use ($user) {
                             $message->to($user->email)->subject('It\'s Time to Workout!');
                         });
                     }
-                    $this->info("Reminder sent to {$client->name} ({$client->email})");
+                    $this->info("Reminder sent to {$user->name} ({$user->email})");
 
 
                     // Send a web push notification
                     \Log::info('Sending workout reminder notification to user: ' . $user->email);
                     $user->notify(new GymWorkoutNotification());
-                    $this->info("Web push notification sent to {$client->name} ({$client->email})");
+                    $this->info("Web push notification sent to {$user->name} ({$user->email})");
 
-                    
+
                 } catch (\Exception $e) {
-                    $this->error("Failed to send reminder to {$client->name} ({$client->email}): {$e->getMessage()}");
+                    $this->error("Failed to send reminder to {$user->name} ({$user->email}): {$e->getMessage()}");
                     // Optionally log the error in more detail
-                    \Log::error("Workout reminder failed for user {$client->id}: {$e->getMessage()}");
+                    \Log::error("Workout reminder failed for user {$user->id}: {$e->getMessage()}");
                 }
             }
         }

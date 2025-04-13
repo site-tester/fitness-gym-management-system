@@ -27,8 +27,8 @@ class GoogleAuthController extends Controller
             // $this->checkWorkoutReminder($user->id); // Call the reminder function
             if ($user) {
                 Auth::login($user);
-                $user->notify(new GymWorkoutNotification());
-                $this->checkWorkoutReminder($user->id);
+                // $user->notify(new GymWorkoutNotification());
+                // $this->checkWorkoutReminder($user->id);
                 session()->flash('login_success', 'Welcome back, ' . $user->name . '!');
                 return redirect()->route('dashboard'); // Change this to your dashboard route
             } else {
@@ -43,8 +43,8 @@ class GoogleAuthController extends Controller
                 $user->assignRole('member'); // Assign the member role to the user
 
                 Auth::login($user);
-                $user->notify(new GymWorkoutNotification());
-                $this->checkWorkoutReminder($user->id);
+                // $user->notify(new GymWorkoutNotification());
+                // $this->checkWorkoutReminder($user->id);
                 session()->flash('login_success', 'Welcome, ' . $user->name . '!');
                 // $this->checkWorkoutReminder($Auth::id()); // Call the reminder function
                 return redirect()->route('dashboard'); // Change this to your dashboard route
