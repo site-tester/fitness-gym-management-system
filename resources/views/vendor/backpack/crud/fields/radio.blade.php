@@ -18,7 +18,6 @@
 
 @include('crud::fields.inc.wrapper_start')
 
-
         <label class="d-block">{!! $field['label'] !!}</label>
         @include('crud::fields.inc.translatable_icon')
 

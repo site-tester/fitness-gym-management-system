@@ -25,11 +25,15 @@
                 <div class=" mx-0 px-0 ">
                     <div class="nav nav-pills" id="pills-tab" role="tablist">
                         <a class="nav-link border bg-danger active text-nowrap" href="{{ route('dashboard') }}"
-                            role="tab" aria-selected="true"><i class="bi bi-speedometer2"></i> <span class="d-none d-md-inline-block">Dashboard</span></a>
+                            data-bs-toggle="tooltip" data-bs-title="Dashboard" role="tab" aria-selected="true"><i
+                                class="bi bi-speedometer2"></i> <span class="d-none d-md-inline-block">Dashboard</span></a>
                         <a class="nav-link border text-danger text-nowrap" href="{{ route('booking') }}" role="tab"
-                            aria-selected="false"><i class="bi bi-journal-text"></i> <span class="d-none d-md-inline-block">Bookings</span></a>
+                            data-bs-toggle="tooltip" data-bs-title="Bookings" aria-selected="false"><i
+                                class="bi bi-journal-text"></i> <span class="d-none d-md-inline-block">Bookings</span></a>
                         <a class="nav-link border text-danger text-nowrap" href="{{ route('gym.progress') }}" role="tab"
-                            aria-selected="false"><i class="bi bi-clipboard2-data"></i> <span class="d-none d-md-inline-block">My Progress</span></a>
+                            data-bs-toggle="tooltip" data-bs-title="My Progress" aria-selected="false"><i
+                                class="bi bi-clipboard2-data"></i> <span class="d-none d-md-inline-block">My
+                                Progress</span></a>
                     </div>
 
 
@@ -50,50 +54,50 @@
                                         <div class="col px-md-e">
                                             <h4 class=" mb-3"><i class="bi bi-clock-history text-danger"></i> Timelog</h4>
                                             <!-- <div class="row ">
-                                                        @if ($timelog->isEmpty() || $timelog->count() == 0 || $timelog == null)
-                                                            <div>
-                                                                <div class="col m-auto">
-                                                                    <h5 class="text-center">No User Timed in</h5>
+                                                            @if ($timelog->isEmpty() || $timelog->count() == 0 || $timelog == null)
+                                                                <div>
+                                                                    <div class="col m-auto">
+                                                                        <h5 class="text-center">No User Timed in</h5>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
 @else
     <div class="row justify-content-center">
-                                                                @foreach ($timelog as $member)
+                                                                    @foreach ($timelog as $member)
     @php
         $time_in = \Carbon\Carbon::parse($member->time_in);
         $time_out = \Carbon\Carbon::parse($member->time_out);
         $timelog_date = \Carbon\Carbon::parse($member->timelog_date);
     @endphp
-                                                                    <div class="col-3">
-                                                                        <div class="card p-2 h-100">
-                                                                            <div class="">
-                                                                                <strong class="float-start text-start">
-                                                                                    {{ $member->user->name }}
-                                                                                </strong>
-                                                                                <br class="d-block d-md-none">
-                                                                                <strong class="float-md-end text-end">
-                                                                                    {{ $timelog_date->format('M-d-Y') }}
-                                                                                </strong>
-                                                                            </div>
-                                                                            <div class="text-secondary text-center row">
-                                                                                @if ($member->time_in)
+                                                                        <div class="col-3">
+                                                                            <div class="card p-2 h-100">
+                                                                                <div class="">
+                                                                                    <strong class="float-start text-start">
+                                                                                        {{ $member->user->name }}
+                                                                                    </strong>
+                                                                                    <br class="d-block d-md-none">
+                                                                                    <strong class="float-md-end text-end">
+                                                                                        {{ $timelog_date->format('M-d-Y') }}
+                                                                                    </strong>
+                                                                                </div>
+                                                                                <div class="text-secondary text-center row">
+                                                                                    @if ($member->time_in)
     <p class="mb-0 col-12 col-md-6 text-md-start">
-                                                                                        Time-In: <br>
-                                                                                        {{ $time_in->format('h:i A') }}</p>
+                                                                                            Time-In: <br>
+                                                                                            {{ $time_in->format('h:i A') }}</p>
     @endif
-                                                                                {{-- <br class="d-block d-md-none"> --}}
-                                                                                @if ($member->time_out)
+                                                                                    {{-- <br class="d-block d-md-none"> --}}
+                                                                                    @if ($member->time_out)
     <p class="mb-0 col-12 col-md-6 text-md-end">
-                                                                                        Time-Out: <br>
-                                                                                        {{ $time_out->format('h:i A') }}</p>
+                                                                                            Time-Out: <br>
+                                                                                            {{ $time_out->format('h:i A') }}</p>
     @endif
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
     @endforeach
-                                                            </div>
-                                                        @endif
-                                                    </div> -->
+                                                                </div>
+                                                            @endif
+                                                        </div> -->
                                             <table id="attendanceTable" class="border rounded-table mt-0"
                                                 style="width:100%">
                                                 <thead>
@@ -179,6 +183,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(document).ready(function() {
+
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(
+                tooltipTriggerEl))
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

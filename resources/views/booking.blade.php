@@ -23,12 +23,15 @@
             <div class="row m-0">
                 <div class=" mx-0 px-0 ">
                     <div class="nav nav-pills" id="pills-tab" role="tablist">
-                        <a class="nav-link border  text-danger text-nowrap" href="{{ route('dashboard') }}" role="tab"
-                            aria-selected="true"><i class="bi bi-speedometer2"></i> <span class="d-none d-md-inline-block">Dashboard</span></a>
-                        <a class="nav-link border bg-danger active text-nowrap" href="{{ route('booking') }}" role="tab"
-                            aria-selected="false"><i class="bi bi-journal-text"></i> <span class="d-none d-md-inline-block">Bookings</span></a>
-                        <a class="nav-link border text-danger text-nowrap" href="{{ route('gym.progress') }}" role="tab"
-                            aria-selected="false"><i class="bi bi-clipboard2-data"></i> <span class="d-none d-md-inline-block">My Progress</span></a>
+                        <a class="nav-link border  text-danger text-nowrap" href="{{ route('dashboard') }}" role="tab" data-bs-toggle="tooltip" data-bs-title="Dashboard"
+                            aria-selected="true"><i class="bi bi-speedometer2"></i> <span
+                                class="d-none d-md-inline-block">Dashboard</span></a>
+                        <a class="nav-link border bg-danger active text-nowrap" href="{{ route('booking') }}" role="tab" data-bs-toggle="tooltip" data-bs-title="Bookings"
+                            aria-selected="false"><i class="bi bi-journal-text"></i> <span
+                                class="d-none d-md-inline-block">Bookings</span></a>
+                        <a class="nav-link border text-danger text-nowrap" href="{{ route('gym.progress') }}" role="tab" data-bs-toggle="tooltip" data-bs-title="My Progress"
+                            aria-selected="false"><i class="bi bi-clipboard2-data"></i> <span
+                                class="d-none d-md-inline-block">My Progress</span></a>
                     </div>
 
                     <div class="tab-content w-100 h-100" id="v-pills-tabContent">
@@ -149,6 +152,11 @@
     <script src="https://cdn.datatables.net/v/dt/dt-2.1.8/r-3.0.3/datatables.min.js"></script>
     <script>
         $(document).ready(function() {
+
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(
+                tooltipTriggerEl))
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

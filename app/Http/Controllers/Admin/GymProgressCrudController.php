@@ -177,57 +177,51 @@ class GymProgressCrudController extends CrudController
         CRUD::addField([
             'name' => 'height_value',
             'label' => 'Height',
-            'type' => 'number',
+            'type' => 'height_with_unit',
             'attributes' => [
                 'id' => 'height_value',
                 'min' => 0,
                 'step' => 'any',
             ],
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-10',
-            ],
         ]);
 
-        CRUD::addField([
-            'name' => 'height_unit',
-            'label' => 'Height Unit',
-            'type' => 'radio',
-            'options' => ['cm' => 'cm', 'ft' => 'ft (eg. 5.8)'],
-            'default' => 'cm',
-            'inline' => true, // Display radio buttons horizontally
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-2',
-            ],
-        ]);
+        // CRUD::addField([
+        //     'name' => 'height_unit',
+        //     'label' => 'Height Unit',
+        //     'type' => 'radio',
+        //     'options' => ['cm' => 'cm', 'ft' => 'ft (eg. 5.8)'],
+        //     'default' => 'cm',
+        //     'inline' => true, // Display radio buttons horizontally
+        //     'wrapperAttributes' => [
+        //         'class' => 'form-group col-md-2',
+        //     ],
+        // ]);
 
         CRUD::addField([
             'name' => 'weight_value',
             'label' => 'Weight',
-            'type' => 'number',
+            'type' => 'weight_with_unit',
             'attributes' => [
                 'id' => 'weight_value',
                 'min' => 0,
                 'step' => 'any',
             ],
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-10',
-            ],
         ]);
 
-        CRUD::addField([
-            'name' => 'weight_unit',
-            'label' => 'Weight Unit',
-            'type' => 'radio',
-            'options' => ['kg' => 'kg', 'lbs' => 'lbs'],
-            'default' => 'kg',
-            'inline' => true,
-            'attributes' => [
-                'id' => 'weight_unit',
-            ],
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-2',
-            ],
-        ]);
+        // CRUD::addField([
+        //     'name' => 'weight_unit',
+        //     'label' => 'Weight Unit',
+        //     'type' => 'radio',
+        //     'options' => ['kg' => 'kg', 'lbs' => 'lbs'],
+        //     'default' => 'kg',
+        //     'inline' => true,
+        //     'attributes' => [
+        //         'id' => 'weight_unit',
+        //     ],
+        //     'wrapperAttributes' => [
+        //         'class' => 'form-group col-md-2',
+        //     ],
+        // ]);
         CRUD::addField([
             'name' => 'bmi',
             'label' => 'BMI <button type="button" id="calculateBmi" class="btn btn-primary btn-sm">Calculate</button>',

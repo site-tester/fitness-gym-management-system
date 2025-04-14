@@ -99,7 +99,7 @@ class MembershipDetailCrudController extends CrudController
                     }
                 }
 
-                return $entry->bmi ? number_format($entry->bmi, 2).' ('. $bmiCategory .') ' : '-';
+                return $entry->bmi ? number_format($entry->bmi, 2) . ' (' . $bmiCategory . ') ' : '-';
             }
         ]);
         CRUD::addColumn([
@@ -208,54 +208,54 @@ class MembershipDetailCrudController extends CrudController
         CRUD::addField([
             'name' => 'height_value',
             'label' => 'Height',
-            'type' => 'number',
+            'type' => 'height_with_unit',
             'attributes' => [
                 'id' => 'height_value',
                 'step' => 'any', // Allow decimal values
                 'min' => 0,
             ],
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-10',
-            ],
+            // 'wrapperAttributes' => [
+            //     'class' => 'form-group col-md-10',
+            // ],
         ]);
 
-        CRUD::addField([
-            'name' => 'height_unit',
-            'label' => 'Height Unit',
-            'type' => 'radio',
-            'options' => ['cm' => 'cm', 'ft' => 'ft (eg. 5.8)'],
-            'default' => 'cm',
-            'inline' => true, // Display radio buttons horizontally
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-2',
-            ],
-        ]);
+        // CRUD::addField([
+        //     'name' => 'height_unit',
+        //     'label' => 'Height Unit',
+        //     'type' => 'radio',
+        //     'options' => ['cm' => 'cm', 'ft' => 'ft (eg. 5.8)'],
+        //     'default' => 'cm',
+        //     'inline' => true, // Display radio buttons horizontally
+        //     'wrapperAttributes' => [
+        //         'class' => 'form-group col-md-2',
+        //     ],
+        // ]);
 
         CRUD::addField([
             'name' => 'weight_value',
             'label' => 'Weight',
-            'type' => 'number',
+            'type' => 'weight_with_unit',
             'attributes' => [
                 'id' => 'weight_value',
                 'step' => 'any', // Allow decimal values
                 'min' => 0,
             ],
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-10',
-            ],
+            // 'wrapperAttributes' => [
+            //     'class' => 'form-group col-md-10',
+            // ],
         ]);
 
-        CRUD::addField([
-            'name' => 'weight_unit',
-            'label' => 'Weight Unit',
-            'type' => 'radio',
-            'options' => ['kg' => 'kg', 'lbs' => 'lbs'],
-            'default' => 'kg',
-            'inline' => true,
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-2',
-            ],
-        ]);
+        // CRUD::addField([
+        //     'name' => 'weight_unit',
+        //     'label' => 'Weight Unit',
+        //     'type' => 'radio',
+        //     'options' => ['kg' => 'kg', 'lbs' => 'lbs'],
+        //     'default' => 'kg',
+        //     'inline' => true,
+        //     'wrapperAttributes' => [
+        //         'class' => 'form-group col-md-2',
+        //     ],
+        // ]);
 
         CRUD::addField([
             'name' => 'civil_status',
@@ -525,54 +525,49 @@ class MembershipDetailCrudController extends CrudController
         CRUD::addField([
             'name' => 'height_value',
             'label' => 'Height',
-            'type' => 'number',
+            'type' => 'height_with_unit',
             'attributes' => [
                 'id' => 'height_value',
                 'min' => 0,
                 'step' => 'any', // Allow decimal values
             ],
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-10',
-            ],
+
         ]);
 
-        CRUD::addField([
-            'name' => 'height_raw_unit',
-            'label' => 'Height Unit',
-            'type' => 'radio',
-            'options' => ['cm' => 'cm', 'ft' => 'ft (eg. 5.8)'],
-            'default' => 'cm',
-            'inline' => true, // Display radio buttons horizontally
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-2',
-            ],
-        ]);
+        // CRUD::addField([
+        //     'name' => 'height_raw_unit',
+        //     'label' => 'Height Unit',
+        //     'type' => 'radio',
+        //     'options' => ['cm' => 'cm', 'ft' => 'ft (eg. 5.8)'],
+        //     'default' => 'cm',
+        //     'inline' => true, // Display radio buttons horizontally
+        //     'wrapperAttributes' => [
+        //         'class' => 'form-group col-md-2',
+        //     ],
+        // ]);
 
         CRUD::addField([
             'name' => 'weight_raw',
             'label' => 'Weight',
-            'type' => 'number',
+            'type' => 'weight_with_unit',
             'attributes' => [
                 'id' => 'weight_raw',
                 'step' => 'any', // Allow decimal values
                 'min' => 0,
             ],
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-10',
-            ],
         ]);
 
-        CRUD::addField([
-            'name' => 'weight_raw_unit',
-            'label' => 'Weight Unit',
-            'type' => 'radio',
-            'options' => ['kg' => 'kg', 'lbs' => 'lbs'],
-            'default' => 'kg',
-            'inline' => true,
-            'wrapperAttributes' => [
-                'class' => 'form-group col-md-2',
-            ],
-        ]);
+        // CRUD::addField([
+        //     'name' => 'weight_raw_unit',
+        //     'label' => 'Weight Unit',
+        //     'type' => 'radio',
+        //     'options' => ['kg' => 'kg', 'lbs' => 'lbs'],
+        //     'default' => 'kg',
+        //     'inline' => true,
+        //     'wrapperAttributes' => [
+        //         'class' => 'form-group col-md-2',
+        //     ],
+        // ]);
 
         CRUD::addField([
             'name' => 'civil_status',
@@ -917,3 +912,35 @@ class MembershipDetailCrudController extends CrudController
 
 
 }
+
+
+
+// <div class="form-group col-md-2" data-init-function="bpFieldInitRadioElement" element="div" bp-field-wrapper="true" bp-field-name="height_unit" bp-field-type="radio" bp-section="crud-field" data-initialized="true">
+
+//         <label class="d-block">Height Unit</label>
+
+//     <input type="hidden" value="cm" name="height_unit">
+
+//             <div class="form-check form-check-inline">
+//                 <input type="radio" class="form-check-input" value="cm" id="radio_7649250">
+//                 <label class="radio-inline form-check-label font-weight-normal p-0" for="radio_7649250">cm</label>
+//             </div>
+
+//             <div class="form-check form-check-inline">
+//                 <input type="radio" class="form-check-input" value="ft" id="radio_7649251">
+//                 <label class="radio-inline form-check-label font-weight-normal p-0" for="radio_7649251">ft (eg. 5.8)</label>
+//             </div>
+
+// </div>
+
+// <div class="form-group" data-init-function="bpFieldInitRadioElement" element="div" bp-field-wrapper="true" bp-field-name="height_unit" bp-field-type="radio" bp-section="crud-field" data-initialized="true">
+//                         Height <input type="hidden" value="cm" name="height_unit">
+//                         <div class="form-check form-check-inline" style="margin-bottom: 0px; margin-right: 0px; margin-left: 1rem">
+//                             <input type="radio" class="form-check-input" value="cm" id="radio_2012970">
+//                             <label class="radio-inline form-check-label font-weight-normal p-0" for="radio_7649250">cm</label>
+//                         </div>
+//                         <div class="form-check form-check-inline" style="margin-bottom: 0px; margin-right: 0px">
+//                             <input type="radio" class="form-check-input" value="ft" id="radio_2012971">
+//                             <label class="radio-inline form-check-label font-weight-normal p-0" for="radio_7649251">ft (eg. 5.8)</label>
+//                         </div>
+//             </div>
