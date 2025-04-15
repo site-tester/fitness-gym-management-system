@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-    <div class="container  pt-3">
+    <div class="container-fluid container-md pt-3">
         @if (session('success'))
             <div class="alert alert-success alert-dismissible fade show mx-5 mb-0" role="alert">
                 {{ session('success') }}

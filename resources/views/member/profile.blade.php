@@ -15,9 +15,9 @@
             background-color: var(--accent) !important;
         }
 
-        .nav-link {
-            color: var(--accent) !important;
-        }
+        /* .nav-link {
+            color: var(--accent);
+        } */
     </style>
 @endsection
 
@@ -65,23 +65,23 @@
                             <ul id="myProfileTab" class="nav nav-underline flex-column " role="tablist"
                                 aria-orientation="vertical">
                                 <li class="nav-item ">
-                                    <h5><a class="nav-link w-100 float-end text-start active " href="#profile-details-tab"
+                                    <h5><a class="nav-link w-100 float-end text-start active link-danger" href="#profile-details-tab"
                                             role="tab" data-bs-toggle="tab">Personal
                                             Details</a></h5>
                                 </li>
                                 <li class="nav-item ">
-                                    <h5><a class="nav-link w-100 float-end text-start " href="#gym-details-tab"
+                                    <h5><a class="nav-link w-100 float-end text-start link-danger" href="#gym-details-tab"
                                             role="tab" data-bs-toggle="tab">Gym
                                             Details</a>
                                     </h5>
                                 </li>
                                 <li class="nav-item ">
-                                    <h5><a class="nav-link w-100 float-end text-start " href="#profile-notification-tab"
+                                    <h5><a class="nav-link w-100 float-end text-start link-danger" href="#profile-notification-tab"
                                             role="tab" data-bs-toggle="tab">Notifications</a>
                                     </h5>
                                 </li>
                                 <li class="nav-item ">
-                                    <h5><a class="nav-link w-100 float-end text-start " href="#profile-security-tab"
+                                    <h5><a class="nav-link w-100 float-end text-start link-danger" href="#profile-security-tab"
                                             role="tab" data-bs-toggle="tab">Security</a>
                                     </h5>
                                 </li>
