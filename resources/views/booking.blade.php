@@ -231,7 +231,7 @@
                                 </div>
                                 <div class="row text-center">
                                     <span class="" style="font-size: 20px;">Status</span>
-                                    <p class="badge text-bg-dark w-25 py-1 m-auto" style="font-size: 15px;">${data.status}</p>
+                                    <p class="badge text-bg-dark w-25 py-1 m-auto text-capitalize" style="font-size: 15px;">${data.status}</p>
                                 </div>
                         `;
                 })
