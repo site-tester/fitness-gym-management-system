@@ -19,7 +19,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-        <div class="card border-0 m-5">
+        <div class="card border-0 m-0 m-md-5">
             <div class="row m-0">
                 <div class=" mx-0 px-0 ">
                     <div class="nav nav-pills" id="pills-tab" role="tablist">

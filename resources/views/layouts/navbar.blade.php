@@ -266,7 +266,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="offcanvas offcanvas-end " id="navbarSupportedContentOffcanvas"
-            style="background-color: #F3F6F6  ;" aria-labelledby="offcanvasNavbarLabel">
+            style="background-color: #F3F6F6  ; width: 270px !important;" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
                 {{-- <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5> --}}
                 <a href="/" class="logo offcanvas-title">
@@ -279,10 +279,10 @@
 
                     @guest
                         <div class="guest ms-1 row mb-2">
-                            <li class="main-button col-6 ms-auto my-1 ps-0 text-end">
+                            <li class="main-button col-6 ms-auto my-1 ps-0 text-end px-1">
                                 <a href="{{ route('register') }}" class="w-100">Register</a>
                             </li>
-                            <li class="main-button col-6 ms-auto my-1 ps-0 text-end">
+                            <li class="main-button col-6 ms-auto my-1 ps-0 text-end px-1">
                                 <a href="{{ route('login') }}" class="w-100">Login</a>
                             </li>
                         </div>
@@ -292,7 +292,7 @@
                         @endphp
                         <li class="nav-item dropdown mb-2">
                             <a class="nav-link dropdown-toggle text-center text-bg-danger rounded" href="#"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: smaller;">
                                 {{ Auth::user()->name }}
                             </a>
                             <ul class="dropdown-menu">
@@ -310,7 +310,7 @@
                                         </a>
                                     </li>
                                     <li class="dropdown-item">
-                                        <a class="nav-link m-1 link-body-emphasis fw-bold disabled {{ Route::currentRouteName() === 'book.now' ? 'active' : '' }}"
+                                        <a class="nav-link m-1 link-body-emphasis fw-bold {{ Route::currentRouteName() === 'book.now' ? 'active' : '' }}"
                                             href="{{ route('profile') }}" href="{{ route('book.now') }}">
                                             <i class="bi bi-journal-arrow-down"></i> Book Now
                                         </a>
