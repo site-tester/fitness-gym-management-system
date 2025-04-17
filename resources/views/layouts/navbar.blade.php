@@ -311,7 +311,7 @@
                                     </li>
                                     <li class="dropdown-item">
                                         <a class="nav-link m-1 link-body-emphasis fw-bold {{ Route::currentRouteName() === 'book.now' ? 'active' : '' }}"
-                                            href="{{ route('profile') }}" href="{{ route('book.now') }}">
+                                            href="{{ route('book.now') }}">
                                             <i class="bi bi-journal-arrow-down"></i> Book Now
                                         </a>
                                     </li>
