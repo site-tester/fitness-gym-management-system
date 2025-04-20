@@ -353,7 +353,7 @@
 
 @section('scripts')
 
-    <script>
+    {{-- <script>
         const subscribeButton = document.getElementById("subscribeNotificationButton");
         const applicationServerKey =
             'BHobm4neAHKzOXazDwe8YKOB4TdSijuCLmj6R3sFXLXH7daMmXXW39S-GCbS7MxydAWxSvyz40PXKhVktTtCZNA';
@@ -456,5 +456,113 @@
         } else {
             alert('Push notifications are not supported by your browser.');
         }
+    </script> --}}
+
+    <script>
+        const subscribeButton = document.getElementById("subscribeNotificationButton");
+        const applicationServerKey =
+            'BHobm4neAHKzOXazDwe8YKOB4TdSijuCLmj6R3sFXLXH7daMmXXW39S-GCbS7MxydAWxSvyz40PXKhVktTtCZNA';
+
+        function updateButtonState(isSubscribed) {
+            subscribeButton.textContent = isSubscribed ? "{{ __('Disable Device Notifications') }}" :
+                "{{ __('Enable Device Notifications') }}";
+        }
+
+        function sendSubscriptionToServer(subscription, isNewSubscription = true) {
+            fetch(isNewSubscription ? '/notification-subscribe' : '/notification-unsubscribe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify(subscription),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Server response:', data);
+                    updateButtonState(!isNewSubscription);
+                    window.location.reload(); // Refresh the page to reflect status
+                })
+                .catch(error => {
+                    console.error('Error sending subscription to server:', error);
+                });
+        }
+
+        function unsubscribeDevice(subscription) {
+            subscription.unsubscribe()
+                .then(successful => {
+                    console.log('User unsubscribed:', successful);
+                    sendSubscriptionToServer(subscription, false);
+                })
+                .catch(error => {
+                    console.error('Error unsubscribing:', error);
+                });
+        }
+
+        function urlBase64ToUint8Array(base64String) {
+            const padding = '='.repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding)
+                .replace(/-/g, '+')
+                .replace(/_/g, '/');
+
+            const rawData = window.atob(base64);
+            const outputArray = new Uint8Array(rawData.length);
+
+            for (let i = 0; i < rawData.length; ++i) {
+                outputArray[i] = rawData.charCodeAt(i);
+            }
+            return outputArray;
+        }
+
+        function initializePushSubscription() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                        return registration.pushManager.getSubscription();
+                    })
+                    .then(subscription => {
+                        if (subscription) {
+                            console.log('Already subscribed on this device:', subscription.endpoint);
+                            updateButtonState(true);
+                        } else {
+                            console.log('Not subscribed on this device.');
+                            updateButtonState(false);
+                        }
+
+                        subscribeButton.addEventListener("click", () => {
+                            navigator.serviceWorker.ready.then(registration => {
+                                registration.pushManager.getSubscription()
+                                    .then(currentSubscription => {
+                                        if (currentSubscription) {
+                                            unsubscribeDevice(currentSubscription);
+                                        } else {
+                                            const convertedVapidKey = urlBase64ToUint8Array(
+                                                applicationServerKey);
+                                            registration.pushManager.subscribe({
+                                                    userVisibleOnly: true,
+                                                    applicationServerKey: convertedVapidKey,
+                                                })
+                                                .then(newSubscription => {
+                                                    console.log('Subscribed on this device:', newSubscription.endpoint);
+                                                    sendSubscriptionToServer(newSubscription, true);
+                                                })
+                                                .catch(error => {
+                                                    console.error('Subscribe error:', error);
+                                                });
+                                        }
+                                    });
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            } else {
+                alert('Push notifications are not supported by your browser.');
+            }
+        }
+
+        window.addEventListener('load', initializePushSubscription);
     </script>
 @endsection

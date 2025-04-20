@@ -368,66 +368,47 @@ class HomeController extends Controller
 
     public function subscribeNotif(Request $request)
     {
-        Log::info('Subscription data:', $request->all()); // Log the entire request
-        try {
-            $user = auth()->user();
-            if (!$user) {
-                Log::error('User not authenticated');
-                return response()->json(['success' => false, 'message' => 'User not authenticated'], 401);
-            }
+        $this->validate($request, [
+            'endpoint' => 'required|url',
+            'keys.p256dh' => 'required|string',
+            'keys.auth' => 'required|string',
+        ]);
 
-            $user->updatePushSubscription(
-                $request->endpoint,
-                $request->keys['p256dh'],
-                $request->keys['auth']
-            );
-            Log::info('Subscription saved for user: ' . $user->id);
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            Log::error('Error saving subscription: ' . $e->getMessage()); // Log any errors
-            return response()->json(['success' => false, 'message' => 'Failed to save subscription: ' . $e->getMessage()], 500);
+        $user = Auth::user();
+        $endpoint = $request->input('endpoint');
+
+        // Check if a subscription with this endpoint already exists for the user
+        $existingSubscription = PushSubscription::where('user_id', $user->id)
+            ->where('endpoint', $endpoint)
+            ->first();
+
+        if (!$existingSubscription) {
+            $user->pushSubscriptions()->create([
+                'endpoint' => $endpoint,
+                'public_key' => $request->input('keys.p256dh'),
+                'auth_token' => $request->input('keys.auth'),
+            ]);
+
+            return response()->json(['success' => true, 'message' => 'Subscribed successfully on this device.']);
         }
+
+        return response()->json(['success' => true, 'message' => 'Already subscribed on this device.']);
     }
 
     public function unsubscribeNotif(Request $request)
     {
-        Log::info('Unsubscription request received:', $request->all());
+        $this->validate($request, [
+            'endpoint' => 'required|url',
+        ]);
 
-        try {
-            $user = Auth::user();
-            if (!$user) {
-                Log::warning('Unauthorized attempt to unsubscribe.');
-                return response()->json(['success' => false, 'message' => 'User not authenticated'], 401);
-            }
+        $user = Auth::user();
+        $endpoint = $request->input('endpoint');
 
-            $endpoint = $request->input('endpoint');
-            if (!$endpoint) {
-                Log::error('Endpoint missing in unsubscription request.');
-                return response()->json(['success' => false, 'message' => 'Endpoint is required'], 400);
-            }
+        PushSubscription::where('user_id', $user->id)
+            ->where('endpoint', $endpoint)
+            ->delete();
 
-            // $user->deletePushSubscription($endpoint);
-
-            // Optionally, you can also delete the subscription from the database
-            PushSubscription::where('endpoint', $endpoint)
-                ->where('subscribable_id', $user->id)
-                ->where('subscribable_type', User::class)
-                ->delete();
-            // $user->subscriptions()->where('endpoint', $endpoint)->delete();
-
-
-            Log::info("Subscription deleted for user: {$user->id}, endpoint: {$endpoint}");
-            return response()->json(['success' => true]);
-        } catch (\Exception $exception) {
-            Log::error('Error deleting subscription: ' . $exception->getMessage(), [
-                'exception' => $exception,
-                'request_data' => $request->all(),
-            ]);
-            return response()->json(
-                ['success' => false, 'message' => 'Failed to unsubscribe: ' . $exception->getMessage()],
-                500
-            );
-        }
+        return response()->json(['success' => true, 'message' => 'Unsubscribed successfully from this device.']);
     }
 
     public function testNotification()
