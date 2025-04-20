@@ -378,7 +378,7 @@ class HomeController extends Controller
         $endpoint = $request->input('endpoint');
 
         // Check if a subscription with this endpoint already exists for the user
-        $existingSubscription = PushSubscription::where('user_id', $user->id)
+        $existingSubscription = PushSubscription::where('subscribable_id', $user->id)
             ->where('endpoint', $endpoint)
             ->first();
 
@@ -404,7 +404,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $endpoint = $request->input('endpoint');
 
-        PushSubscription::where('user_id', $user->id)
+        PushSubscription::where('subscribable_id', $user->id)
             ->where('endpoint', $endpoint)
             ->delete();
 
