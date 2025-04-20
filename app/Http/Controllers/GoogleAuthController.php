@@ -55,38 +55,38 @@ class GoogleAuthController extends Controller
         }
     }
 
-    public function checkWorkoutReminder($userId)
-    {
+    // public function checkWorkoutReminder($userId)
+    // {
 
-        $userId = MembershipDetail::where('client_id', $userId)->first();
-        $today = now()->toDateString();
-        $attendance = MemberVisit::where('client_rfid_id', $userId->rfid_number)
-            ->whereDate('time_in', $today)
-            ->exists();
+    //     $userId = MembershipDetail::where('client_id', $userId)->first();
+    //     $today = now()->toDateString();
+    //     $attendance = MemberVisit::where('client_rfid_id', $userId->rfid_number)
+    //         ->whereDate('time_in', $today)
+    //         ->exists();
 
-        if (!$attendance) {
-            // Trigger banner display and email sending
-            // $this->displayWorkoutBanner($userId);
-            $this->sendWorkoutEmail($userId->client_id);
-        }
-    }
+    //     if (!$attendance) {
+    //         // Trigger banner display and email sending
+    //         // $this->displayWorkoutBanner($userId);
+    //         $this->sendWorkoutEmail($userId->client_id);
+    //     }
+    // }
 
-    public function displayWorkoutBanner($userId)
-    {
-        // Logic to store a session variable or database flag to trigger banner display on the frontend
-        session(['workout_reminder' => true]); // Using session for simplicity
-    }
+    // public function displayWorkoutBanner($userId)
+    // {
+    //     // Logic to store a session variable or database flag to trigger banner display on the frontend
+    //     session(['workout_reminder' => true]); // Using session for simplicity
+    // }
 
-    public function sendWorkoutEmail($userId)
-    {
-        $user = User::find($userId);
-        \Log::info('Sending workout reminder email to user: ' . $user->email);
-        if ($user) {
-            Mail::send('emails.workout_reminder', ['user' => $user], function ($message) use ($user) {
-                $message->to($user->email)->subject('It\'s Time to Workout!');
-            });
-        }
-    }
+    // public function sendWorkoutEmail($userId)
+    // {
+    //     $user = User::find($userId);
+    //     \Log::info('Sending workout reminder email to user: ' . $user->email);
+    //     if ($user) {
+    //         Mail::send('emails.workout_reminder', ['user' => $user], function ($message) use ($user) {
+    //             $message->to($user->email)->subject('It\'s Time to Workout!');
+    //         });
+    //     }
+    // }
 
 }
 

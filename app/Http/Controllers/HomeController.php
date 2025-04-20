@@ -14,6 +14,7 @@ use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Models\User;
 use App\Models\Workout;
+use App\Notifications\GymBookingNotification;
 use App\Notifications\GymWorkoutNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -99,8 +100,7 @@ class HomeController extends Controller
     {
         // dd($request->all());
         // Fetch the user profile
-        $memberDetail = MembershipDetail::firstOrCreate(['client_id' => Auth::id()]);
-        $user = User::where('id', Auth::id())->firstOrFail();
+
 
         // Validate input fields
         $validated = $request->validate([
@@ -115,6 +115,13 @@ class HomeController extends Controller
             'medical_info' => ['nullable', 'string', 'max:255'],
             'guardian' => ['nullable', 'string', 'max:255'],
         ]);
+
+        if($validated->fails()){
+            return redirect()->back()->withErrors($validated)->withInput();
+        }
+
+        $memberDetail = MembershipDetail::firstOrCreate(['client_id' => Auth::id()]);
+        $user = User::where('id', Auth::id())->firstOrFail();
 
         // Update Client Profile Fields
         $user->name = $request->name;
@@ -254,6 +261,9 @@ class HomeController extends Controller
 
             DB::commit(); // Commit transaction
 
+            // Optionally, you can send a notification to the user
+            Auth::user()->notify(new GymBookingNotification());
+
             return response()->json(['success' => true, 'redirect_url' => route('booked.now')]);
 
         } catch (\Exception $e) {
@@ -325,36 +335,36 @@ class HomeController extends Controller
     //     return view('workouts_page', compact('workout'));
     // }
 
-    public function checkWorkoutReminder($userId)
-    {
-        $userId = MembershipDetail::where('client_id', $userId)->first();
-        $today = now()->toDateString();
-        $attendance = MemberVisit::where('client_rfid_id', $userId->rfid_number)
-            ->whereDate('time_in', $today)
-            ->exists();
+    // public function checkWorkoutReminder($userId)
+    // {
+    //     $userId = MembershipDetail::where('client_id', $userId)->first();
+    //     $today = now()->toDateString();
+    //     $attendance = MemberVisit::where('client_rfid_id', $userId->rfid_number)
+    //         ->whereDate('time_in', $today)
+    //         ->exists();
 
-        if (!$attendance) {
-            // Trigger banner display and email sending
-            // $this->displayWorkoutBanner($userId);
-            $this->sendWorkoutEmail($userId->client_id);
-        }
-    }
+    //     if (!$attendance) {
+    //         // Trigger banner display and email sending
+    //         // $this->displayWorkoutBanner($userId);
+    //         $this->sendWorkoutEmail($userId->client_id);
+    //     }
+    // }
 
-    public function displayWorkoutBanner($userId)
-    {
-        // Logic to store a session variable or database flag to trigger banner display on the frontend
-        session(['workout_reminder' => true]); // Using session for simplicity
-    }
+    // public function displayWorkoutBanner($userId)
+    // {
+    //     // Logic to store a session variable or database flag to trigger banner display on the frontend
+    //     session(['workout_reminder' => true]); // Using session for simplicity
+    // }
 
-    public function sendWorkoutEmail($userId)
-    {
-        $user = User::find($userId);
-        if ($user) {
-            Mail::send('emails.workout_reminder', ['user' => $user], function ($message) use ($user) {
-                $message->to($user->email)->subject('It\'s Time to Workout!');
-            });
-        }
-    }
+    // public function sendWorkoutEmail($userId)
+    // {
+    //     $user = User::find($userId);
+    //     if ($user) {
+    //         Mail::send('emails.workout_reminder', ['user' => $user], function ($message) use ($user) {
+    //             $message->to($user->email)->subject('It\'s Time to Workout!');
+    //         });
+    //     }
+    // }
 
     public function subscribeNotif(Request $request)
     {

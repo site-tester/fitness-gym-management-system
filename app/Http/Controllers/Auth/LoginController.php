@@ -43,41 +43,41 @@ class LoginController extends Controller
         return redirect()->route('home'); // Or wherever you want to send them
     }
 
-    public function checkWorkoutReminder($userId)
-    {
+    // public function checkWorkoutReminder($userId)
+    // {
 
-        $userId = MembershipDetail::where('client_id', $userId)->first();
-        // dd($userId);
-        $today = now()->toDateString();
-        $attendance = MemberVisit::where('client_rfid_id', $userId->rfid_number)
-            ->whereDate('time_in', $today)
-            ->exists();
-        // Check if the user has not attended a workout today
+    //     $userId = MembershipDetail::where('client_id', $userId)->first();
+    //     // dd($userId);
+    //     $today = now()->toDateString();
+    //     $attendance = MemberVisit::where('client_rfid_id', $userId->rfid_number)
+    //         ->whereDate('time_in', $today)
+    //         ->exists();
+    //     // Check if the user has not attended a workout today
 
-        if (!$attendance) {
-            // Trigger banner display and email sending
-            // $this->displayWorkoutBanner($userId);
-            $this->sendWorkoutEmail($userId->client_id);
-        }
-    }
+    //     if (!$attendance) {
+    //         // Trigger banner display and email sending
+    //         // $this->displayWorkoutBanner($userId);
+    //         $this->sendWorkoutEmail($userId->client_id);
+    //     }
+    // }
 
-    public function displayWorkoutBanner($userId)
-    {
-        // Logic to store a session variable or database flag to trigger banner display on the frontend
-        session(['workout_reminder' => true]); // Using session for simplicity
-    }
+    // public function displayWorkoutBanner($userId)
+    // {
+    //     // Logic to store a session variable or database flag to trigger banner display on the frontend
+    //     session(['workout_reminder' => true]); // Using session for simplicity
+    // }
 
-    public function sendWorkoutEmail($userId)
-    {
-        $user = User::find($userId);
-        $user->notify(new GymWorkoutNotification());
-        dd($user);
-        if ($user) {
-            Mail::send('emails.workout_reminder', ['user' => $user], function ($message) use ($user) {
-                $message->to($user->email)->subject('It\'s Time to Workout!');
-            });
-        }
-    }
+    // public function sendWorkoutEmail($userId)
+    // {
+    //     $user = User::find($userId);
+    //     $user->notify(new GymWorkoutNotification());
+    //     dd($user);
+    //     if ($user) {
+    //         Mail::send('emails.workout_reminder', ['user' => $user], function ($message) use ($user) {
+    //             $message->to($user->email)->subject('It\'s Time to Workout!');
+    //         });
+    //     }
+    // }
 
     /**
      * Create a new controller instance.

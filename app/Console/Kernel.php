@@ -24,9 +24,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('gym:send-workout-reminders')
-            // ->everyMinute();
-            ->hourly()
-            ->between('10:00', '21:00');
+            ->everyMinute();
+            // ->hourly()
+            // ->between('10:00', '21:00');
     }
 
     /**

@@ -288,18 +288,28 @@
             margin: 0 50px;
             margin-bottom: 80px;
         }
+
+        .heightSetter {
+            min-height: 90vh !important;
+        }
+
+        @media (min-width: 768px) {
+            .heightSetter {
+                min-height: 60vh !important;
+            }
+        }
     </style>
 
 @endsection
 
 @section('content')
-    <div class="container-fluid pt-1" style=" min-height: 60vh;">
-        <div class="row shadow mx-auto w-75 p-0  border border-danger" style="min-height: 60vh;">
-            <div class="col-3 px-0 overflow-hidden d-sm-none d-md-block" style="min-height: 60vh;">
+    <div class="container-fluid pt-1 heightSetter" >
+        <div class="row shadow mx-auto container container-md-fluid p-0  border border-danger heightSetter">
+            <div class="col-3 px-0 overflow-hidden d-none d-md-block heightSetter">
                 <img src="{{ asset('/resources/img/Logo.jpg') }}" alt=""
                     style="width:100% ; height: 100%; object-fit: contain;">
             </div>
-            <div class="col-12 col-md-9 px-0 border-start border-danger border-2" style="min-height: 60vh;">
+            <div class="col-12 col-md-9 px-0 border-start border-danger border-2 heightSetter">
                 <div class="rounded-0 h-100">
                     <div class="progress">
                         <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50"
@@ -321,20 +331,10 @@
                                     </div>
                                     <div class="form-check ps-0 q-box">
                                         <div class="q-box__question">
-                                            {{-- <div class="mb-3">
-                                                <label for="ServCategory" class="form-label">Service Category <span
-                                                        class="text-danger">*</span></label>
-                                                <select class="form-select" name="service_category" id="ServCategory">
-                                                    <option selected>--Select Category--</option>
-                                                    @foreach ($serviceCategories as $category)
-                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div> --}}
 
                                             <div class="row">
                                                 <!-- Service Name -->
-                                                <div class="col mb-3">
+                                                <div class="col-12 col-md-6 mb-3">
                                                     <label for="service_name" class="form-label">Service Name <span
                                                             class="text-danger">*</span></label>
                                                     <select class="form-select" name="service_name" id="service_name">
@@ -345,7 +345,7 @@
                                                 </div>
 
                                                 <!-- Service Duration -->
-                                                <div class="col mb-3">
+                                                <div class="col-12 col-md-6 mb-3">
                                                     <label for="service_duration" class="form-label">Service Duration <span
                                                             class="text-danger">*</span></label>
                                                     <select class="form-select" name="service_duration"
@@ -408,12 +408,11 @@
                                                     <input class="form-control" type="text" id="FormName" name="name"
                                                         placeholder="{{ $profile->name }}"
                                                         value="{{ $profile->name ?? '' }}">
-                                                    <input type="hidden" name="hidden_name"
-                                                        value="{{ $profile->name }}">
+                                                    <input type="hidden" name="hidden_name" value="{{ $profile->name }}">
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <label for="FormEmail" class="form-label">Email <span
                                                             class="text-danger">*</span></label>
                                                     <input class="form-control" type="text" id="FormEmail"
@@ -422,7 +421,7 @@
                                                     <input type="hidden" name="hidden_email"
                                                         value="{{ $profile->email }}">
                                                 </div>
-                                                <div class="col">
+                                                <div class="col-12 col-md-6">
                                                     <label for="contact_number" class="form-label">Contact Number <span
                                                             class="text-danger">*</span></label>
                                                     <input class="form-control" type="text" id="phone"
@@ -470,7 +469,7 @@
                                     </div>
                                     <div class="payment-methods-container">
                                         @foreach ($paymentMethods as $paymentMethod)
-                                            <div class="q-box__question">
+                                            <div class="q-box__question px-1">
                                                 <input checked class="form-check-input question__input"
                                                     id="q_1_no_{{ $paymentMethod->id }}" name="payment_method"
                                                     type="radio" value="{{ $paymentMethod->id }}">

@@ -24,16 +24,34 @@ class SendWorkoutReminders extends Command
      *
      * @var string
      */
-    protected $description = 'Sends workout reminders to clients who haven\'t attended the gym today.';
+    protected $description = 'Sends workout reminders to clients who haven\'t attended the gym at 6 AM and 6 PM.';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        //
         $now = Carbon::now();
-        $gymStartTime = Carbon::today()->setHour(10)->setMinute(0)->setSecond(0); // 10:00 AM today
+        $reminderTimes = [
+            Carbon::today()->setHour(6)->setMinute(0)->setSecond(0),   // 6:00 AM today
+            Carbon::today()->setHour(18)->setMinute(0)->setSecond(0),  // 6:00 PM today
+        ];
+
+        // Check if the current time matches one of the reminder times
+        foreach ($reminderTimes as $reminderTime) {
+            if ($now->isSameMinute($reminderTime)) {
+                $this->sendReminders();
+                break; // Only send reminders once per scheduled time
+            }
+        }
+
+        $this->info('Workout reminder process checked at ' . $now->toTimeString() . '.');
+        return Command::SUCCESS;
+    }
+
+    protected function sendReminders()
+    {
+        $now = Carbon::now();
 
         // Get all active gym clients
         $clients = MembershipDetail::get(); // Adjust the condition as needed
@@ -47,8 +65,8 @@ class SendWorkoutReminders extends Command
             \Log::info('Checking attendance for client: ' . $client->client_id);
             \Log::info('Attendance status: ' . ($attendedToday ? 'Attended' : 'Not Attended'));
 
-            // Send reminder if not attended and it's past the gym start time
-            if (!$attendedToday && $now->greaterThanOrEqualTo($gymStartTime)) {
+            // Send reminder if not attended
+            if (!$attendedToday) {
                 try {
                     $user = User::find($client->user->id);
                     \Log::info('Sending workout reminder email to user: ' . $user->email);
@@ -74,7 +92,6 @@ class SendWorkoutReminders extends Command
             }
         }
 
-        $this->info('Workout reminder process completed.');
-        return Command::SUCCESS;
+        $this->info('Workout reminder process completed at ' . Carbon::now()->toTimeString() . '.');
     }
 }
